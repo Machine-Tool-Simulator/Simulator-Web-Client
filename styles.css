@@ -1,0 +1,47 @@
+.control {
+  background: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.readout {
+  width: 300px;
+  background: lightblue;
+}
+
+.xzinput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100px;
+  height: 200px;
+}
+
+.numbers {
+  width: 100px;
+}
+
+.xbutton {
+  background: darkgrey;
+  width: 50px;
+}
+
+.zbutton {
+  background: darkgrey;
+  width: 50px;
+}
+
+.keyboard-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.keyboard{
+  display: flex;
+  background: darkgrey;
+  width: 50px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 10px;
+}
