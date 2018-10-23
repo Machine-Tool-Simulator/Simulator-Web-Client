@@ -29,12 +29,24 @@
           </div>
         </div>
 
+  <div class = "xz-input">
+    <button class = "XZbutton" id = "Xbutton">X</button>
+    <button class = "XZbutton" id = "Zbutton">Z</button>
+    <button class = "XZbutton" id = "mode">MODE</button>
+
+  </div>
+
         <div class = "xz-input">
           <button class = "Xbutton" id = "Xbutton">X</button>
           <button class = "Zbutton" id = "Zbutton">Z</button>
         </div>
 
         <div class = 'keyboard'>
+          <div class = "row">
+            <input type="button" class="sbutton" name="FC" value="F/C" id="FC" />
+            <input type="button" class="sbutton" name="IncSet" value="INC SET" id="IncSet" />
+            <input type="button" class="sbutton" name="AbsSet" value="ABS SET" id="AbsSet" />
+          </div>
           <div class = "row">
             <input type="button" class="fbutton" name="7" value="7" id="7" onClick=addNumber(this); />
             <input type="button" class="fbutton" name="8" value="8" id="8" onClick=addNumber(this); />
@@ -60,11 +72,12 @@
             <input type="button" class="buttonr" name="resotre" value="RESTORE" id="restore" onClick=addNumber(this); />
           </div>
         </div>
+
       </section>
       <p>Some text here too.</p>
-    </div>
 
-</section>
+
+
 
 <script src="myscripts.js"></script>
 </body>
