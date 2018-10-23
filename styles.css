@@ -12,8 +12,10 @@ section{
 }
 .control-panel {
   display: flex;
-  background: #231f1c;
-  height: 600px;
+  width: 100%;
+  height: 100%;
+  background: grey;
+  /* height: 600px; */
 }
 
 
@@ -22,14 +24,15 @@ section{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  flex: 3;
-  padding: 100px;
+  /* flex: 3; */
+  width: 50%
+  /* padding: 100px;
   padding-right: 50px;
   padding-left: 50px;
-  margin: 10px;
-  background: #f8f7f5;
+  margin: 10px; */
+  background: green;
   text-align: center;
-  flex-grow: 6;
+  /* flex-grow: 6; */
   border-radius: 5px;
   position: relative;
 }
@@ -38,35 +41,35 @@ input#xvar {
     border: 1px solid #978484!important;
     border-radius: 5px;
     height: 50px;
-    width: 230px;
+    width:80px;
 }
 
 input#zvar {
     border: 1px solid #978484!important;
     border-radius: 5px;
     height: 50px;
-    width: 230px;
+    width: 80px;
 }
 label{
-    font-size: 35px;
+    font-size: 20px;
 }
 
 input {
     font-family:Helvetica, Arial, sans-serif;
-    font-size:25pt;
+    font-size:15pt;
     border: 5px solid white;
     -webkit-box-shadow:
-      inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 16px rgba(0,0,0,0.1);
+      inset 0 0 5px  rgba(0,0,0,0.1),
+            0 0 8px rgba(0,0,0,0.1);
     -moz-box-shadow:
       inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 16px rgba(0,0,0,0.1);
+            0 0 12px rgba(0,0,0,0.1);
     box-shadow:
       inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 16px rgba(0,0,0,0.1);
-    padding: 15px;
+            0 0 12px rgba(0,0,0,0.1);
+    /* padding: 15px; */
     background: rgba(255,255,255,0.5);
-    margin: 0 0 10px 0;
+    /* margin: 0 0 10px 0; */
 }
 
 input#coord-buffer {
@@ -81,13 +84,15 @@ input#coord-buffer {
 
 /* This is the XZ input section */
 .xz-input{
+  font-size: 14px;
   display: flex;
-  align-items: center;
-  flex: 1;
-  height: 180px;
-  margin-top: 150px;
-  border-radius: 10px;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* flex: 1; */
+  height: 20%;
+  /* margin-top: 150px; */
+  border-radius: 10px;
   /* margin: auto; */
   background: #3a3732;
 }
@@ -127,10 +132,11 @@ input#coord-buffer {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  width: 50%;
   flex: 2;
   background: #3a3732;
   border-radius: 5px;
-  margin: 150px 5px;
+  /* margin: 150px 5px; */
 }
 
 .row{
@@ -253,8 +259,58 @@ input#coord-buffer {
   font-size: 16px;
   margin: 4px 5px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: bo
 }
 .buttond:hover{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.video{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  order-radius: 7px;
+  background-color: #657a8f;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Split the screen in half */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: white;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color: black;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 500px;
+  border-radius: 50%;
+}
+
+.h2 {
+  color: white;
 }
