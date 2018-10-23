@@ -11,39 +11,43 @@
 <body>
 <section class="control-panel">
   <div class = "readout">
-  <div class = "x-coord"><strong>X 3.2044 ABS</strong></div>
-  <div class = "z-coord"><strong>Z 0.6430 ABS</strong></div>
+    <div class = "x-coord">
+      <p> <label>X: </label> <input id=xvar type="text" value="" name="xvar" disabled/><br /></p>
+    </div>
+    <div class = "z-coord">
+      <p> <label>Z: </label> <input id=zvar type="text" value="" name="zvar" disabled/><br /></p>
+    </div>
   </div>
 
   <div class = "xz-input">
     <button class = "Xbutton" id = "Xbutton">X</button>
-    <button class = "Zbutton">Z</button>
+    <button class = "Zbutton" id = "Zbutton">Z</button>
   </div>
 
   <div class = 'keyboard'>
     <div class = "row">
-      <button class= "button">7</button>
-      <button class= "button">8</button>
-      <button class= "button">9</button>
+      <input type="button" class="fbutton" name="7" value="7" id="7" onClick=addNumber(this); />
+      <input type="button" class="fbutton" name="8" value="8" id="8" onClick=addNumber(this); />
+      <input type="button" class="fbutton" name="9" value="9" id="9" onClick=addNumber(this); />
     </div>
     <div class = "row">
-      <button class = "button">4</button>
-      <button class = "button">5</button>
-      <button class = "button">6</button>
+      <input type="button" class="fbutton" name="4" value="4" id="4" onClick=addNumber(this); />
+      <input type="button" class="fbutton" name="5" value="5" id="5" onClick=addNumber(this); />
+      <input type="button" class="fbutton" name="6" value="6" id="6" onClick=addNumber(this); />
     </div>
     <div class = "row">
-      <button class = "button">1</button>
-      <button class = "button">2</button>
-      <button class = "button">3</button>
+      <input type="button" class="fbutton" name="1" value="1" id="1" onClick=addNumber(this); />
+      <input type="button" class="fbutton" name="2" value="2" id="2" onClick=addNumber(this); />
+      <input type="button" class="fbutton" name="3" value="3" id="3" onClick=addNumber(this); />
     </div>
     <div class = "row">
       <button class = "buttonp">+/-</button>
-      <button class = "button">0</button>
-      <button class= "buttond">.</button>
+      <input type="button" class="fbutton" name="0" value="0" id="0" onClick=addNumber(this); />
+      <input type="button" class="buttond" name="dot" value="." id="dot" onClick=addNumber(this); />
     </div>
     <div class = "row">
       <button class = "buttona">*</button>
-      <button class = "buttonr">RESTORE</button>
+      <input type="button" class="buttonr" name="resotre" value="RESTORE" id="restore" onClick=addNumber(this); />
     </div>
   </div>
 </section>
