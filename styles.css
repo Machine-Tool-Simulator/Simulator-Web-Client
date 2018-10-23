@@ -73,13 +73,11 @@ input {
 }
 
 input#coord-buffer {
-  font-size: 1em;
-  width: 50%;
-  height: 2%;
+  width: 65%;
+  height: 10%;
   position: absolute;
   bottom: 0;
   right: 0;
-  margin-right: 1em;
 }
 
 /* This is the XZ input section */
