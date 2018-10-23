@@ -87,7 +87,7 @@ input {
   background: #3a3732;
 }
 
-.Xbutton{
+.XZbutton{
   background: #ecd2af;
       border: none;
       color: white;
@@ -102,26 +102,16 @@ input {
       margin: 7px 5px;
       cursor: pointer;
 }
-.Xbutton:hover{
+.XZbutton:hover{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-.Zbutton{
+
+#Zbutton{
   background: #55504a;
-  border: none;
-  height: 48px;
-  color: white;
-  padding: 0px 15px;
-  width: 98px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 7px;
-  font-size: 16px;
-  margin-top: 63px;
-  cursor: pointer;
 }
-.Zbutton:hover{
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+#mode{
+  background-color: #657a8f;
 }
 
 
@@ -142,6 +132,39 @@ input {
 .row{
   display: flex;
   flex-direction: row;
+}
+
+.sbutton {
+  background-color: #657a8f;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 7px;
+  font-size: 16px;
+  margin: 4px 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.sbutton:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#FC {
+  padding: 12px 36px;
+
+}
+
+#IncSet{
+  padding: 12px 18px;
+  background-color: #ecd2af;
+
+}
+
+#AbsSet{
+background-color: #ecd2af;
+
 }
 
 .fbutton {
