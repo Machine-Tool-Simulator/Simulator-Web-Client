@@ -2,38 +2,54 @@
 
 var xbutton = document.getElementById("Xbutton");
 var zbutton = document.getElementById("Zbutton");
-var buttonClickedv = 0;
+var selectedCoord = 0;
 xbutton.addEventListener("click", function() {
-	buttonClicked = 1;
-  xbutton.style.backgroundColor = "rgb(0,0,0)";
+	selectedCoord = 1;
+	xbutton.style.backgroundColor = "rgb(0,0,0)";
 	zbutton.style.backgroundColor = "rgb(85,80,74)";
-	console.log(buttonClicked);
+	console.log("X coord");
 });
 
 zbutton.addEventListener("click", function() {
-	buttonClicked = 2;
+	selectedCoord = 2;
 	zbutton.style.backgroundColor = "rgb(0,0,0)";
 	xbutton.style.backgroundColor = "rgb(236,210,175)";
-	console.log(buttonClicked);
+	console.log("Y coord");
 });
 
 
 
-function addNumber(element){
-	if (buttonClicked == 1){
+function numberPressed(element){
+	let buffer = document.getElementById('coord-buffer');
+	buffer.value = addNumber(buffer.value, element.value);
+}
+
+function addNumber(current, digit) {
+	// TODO: actually add the calculator function
+	return current + digit;
+}
+
+function setAbsPos(element) {
+	let buffer = document.getElementById('coord-buffer');
+	if (buffer.value.length <= 0) return;
+	if (selectedCoord == 1) {
+		let xvar = document.getElementById('xvar');
 		if (element.value == "RESTORE"){
-			document.getElementById('xvar').value = "";
+			xvar.value = "";
 		}
 		else{
-			document.getElementById('xvar').value = document.getElementById('xvar').value+element.value;
+			xvar.value = buffer.value;
+			buffer.value = "";
 		}
 	}
-	else if (buttonClicked == 2) {
+	else if (selectedCoord == 2) {
+		let zvar = document.getElementById('zvar');
 		if (element.value == "RESTORE"){
-			document.getElementById('zvar').value = "";
+			zvar.value = "";
 		}
 		else{
-			document.getElementById('zvar').value = document.getElementById('zvar').value+element.value;
+			zvar.value = buffer.value;
+			buffer.value = "";
 		}
 	}
 }
