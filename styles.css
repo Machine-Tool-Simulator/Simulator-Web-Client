@@ -34,7 +34,7 @@ section{
   text-align: center;
   /* flex-grow: 6; */
   border-radius: 5px;
-
+  position: relative;
 }
 
 input#xvar {
@@ -70,6 +70,16 @@ input {
     /* padding: 15px; */
     background: rgba(255,255,255,0.5);
     /* margin: 0 0 10px 0; */
+}
+
+input#coord-buffer {
+  font-size: 1em;
+  width: 50%;
+  height: 2%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 1em;
 }
 
 /* This is the XZ input section */
@@ -159,12 +169,11 @@ input {
 #IncSet{
   padding: 12px 18px;
   background-color: #ecd2af;
-
 }
 
-#AbsSet{
-background-color: #ecd2af;
-
+#AbsSet {
+  padding: 12px 18px;
+  background-color: #ecd2af;
 }
 
 .fbutton {
