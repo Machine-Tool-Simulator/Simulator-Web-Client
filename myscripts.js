@@ -31,23 +31,25 @@ function addNumber(current, digit) {
 
 function setAbsPos(element) {
 	let buffer = document.getElementById('coord-buffer');
-	if (buffer.value.length <= 0) return;
 	if (selectedCoord == 1) {
 		let xvar = document.getElementById('xvar');
-		if (element.value == "RESTORE"){
+		console.log(xvar);
+		if (element.value === "RESTORE"){
 			xvar.value = "";
 		}
 		else{
+			if (buffer.value.length <= 0) return;
 			xvar.value = buffer.value;
 			buffer.value = "";
 		}
 	}
 	else if (selectedCoord == 2) {
 		let zvar = document.getElementById('zvar');
-		if (element.value == "RESTORE"){
+		if (element.value === "RESTORE"){
 			zvar.value = "";
 		}
 		else{
+			if (buffer.value.length <= 0) return;
 			zvar.value = buffer.value;
 			buffer.value = "";
 		}
