@@ -1,8 +1,6 @@
-
-
-var xbutton = document.getElementById("Xbutton");
-var zbutton = document.getElementById("Zbutton");
-var selectedCoord = 0;
+let xbutton = document.getElementById("Xbutton");
+let zbutton = document.getElementById("Zbutton");
+let selectedCoord = 0;
 xbutton.addEventListener("click", function() {
 	selectedCoord = 1;
 	xbutton.style.backgroundColor = "rgb(0,0,0)";
@@ -33,11 +31,9 @@ function setAbsPos(element) {
 	let buffer = document.getElementById('coord-buffer');
 	if (selectedCoord == 1) {
 		let xvar = document.getElementById('xvar');
-		console.log(xvar);
-		if (element.value === "RESTORE"){
+		if (element.value === "RESTORE") {
 			xvar.value = "";
-		}
-		else{
+		} else {
 			if (buffer.value.length <= 0) return;
 			xvar.value = buffer.value;
 			buffer.value = "";
@@ -45,10 +41,9 @@ function setAbsPos(element) {
 	}
 	else if (selectedCoord == 2) {
 		let zvar = document.getElementById('zvar');
-		if (element.value === "RESTORE"){
+		if (element.value === "RESTORE") {
 			zvar.value = "";
-		}
-		else{
+		} else {
 			if (buffer.value.length <= 0) return;
 			zvar.value = buffer.value;
 			buffer.value = "";
