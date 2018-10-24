@@ -1,13 +1,12 @@
-html{
+html {
   height: 70%;
-
 }
 
-body{
+body {
   height:100%;
 }
 
-section{
+section {
   border-radius: 5px;
 }
 .control-panel {
@@ -25,7 +24,7 @@ section{
   flex-direction: column;
   justify-content: space-evenly;
   /* flex: 3; */
-  width: 50%
+  width: 50%;
   /* padding: 100px;
   padding-right: 50px;
   padding-left: 50px;
@@ -38,38 +37,39 @@ section{
 }
 
 input#xvar {
-    border: 1px solid #978484!important;
-    border-radius: 5px;
-    height: 50px;
-    width:80px;
+  border: 1px solid #978484!important;
+  border-radius: 5px;
+  height: 50px;
+  width:80px;
 }
 
 input#zvar {
-    border: 1px solid #978484!important;
-    border-radius: 5px;
-    height: 50px;
-    width: 80px;
+  border: 1px solid #978484!important;
+  border-radius: 5px;
+  height: 50px;
+  width: 80px;
 }
-label{
-    font-size: 20px;
+
+label {
+  font-size: 20px;
 }
 
 input {
-    font-family:Helvetica, Arial, sans-serif;
-    font-size:15pt;
-    border: 5px solid white;
-    -webkit-box-shadow:
-      inset 0 0 5px  rgba(0,0,0,0.1),
-            0 0 8px rgba(0,0,0,0.1);
-    -moz-box-shadow:
-      inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 12px rgba(0,0,0,0.1);
-    box-shadow:
-      inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 12px rgba(0,0,0,0.1);
-    /* padding: 15px; */
-    background: rgba(255,255,255,0.5);
-    /* margin: 0 0 10px 0; */
+  font-family:Helvetica, Arial, sans-serif;
+  font-size:15pt;
+  border: 5px solid white;
+  -webkit-box-shadow:
+    inset 0 0 5px  rgba(0,0,0,0.1),
+          0 0 8px rgba(0,0,0,0.1);
+  -moz-box-shadow:
+    inset 0 0 8px  rgba(0,0,0,0.1),
+          0 0 12px rgba(0,0,0,0.1);
+  box-shadow:
+    inset 0 0 8px  rgba(0,0,0,0.1),
+          0 0 12px rgba(0,0,0,0.1);
+  /* padding: 15px; */
+  background: rgba(255,255,255,0.5);
+  /* margin: 0 0 10px 0; */
 }
 
 input#coord-buffer {
@@ -81,7 +81,7 @@ input#coord-buffer {
 }
 
 /* This is the XZ input section */
-.xz-input{
+.xz-input {
   font-size: 14px;
   display: flex;
   flex-direction: column;
@@ -95,37 +95,38 @@ input#coord-buffer {
   background: #3a3732;
 }
 
-.XZbutton{
+.XZbutton {
   background: #ecd2af;
-      border: none;
-      color: white;
-      height: 48px;
-      width: 98px;
-      padding: 0px 15px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      border-radius: 7px;
-      font-size: 16px;
-      margin: 7px 5px;
-      cursor: pointer;
+  border: none;
+  color: white;
+  height: 48px;
+  width: 98px;
+  padding: 0px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 7px;
+  font-size: 16px;
+  margin: 7px 5px;
+  cursor: pointer;
 }
-.XZbutton:hover{
+
+.XZbutton:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-#Zbutton{
+#Zbutton {
   background: #55504a;
 }
 
-#mode{
+#mode {
   background-color: #657a8f;
 }
 
 
 /* This is the button-control seciton*/
 
-.keyboard{
+.keyboard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +138,7 @@ input#coord-buffer {
   /* margin: 150px 5px; */
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
 }
@@ -155,7 +156,7 @@ input#coord-buffer {
   font-weight: bold;
   cursor: pointer;
 }
-.sbutton:hover{
+.sbutton:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -164,7 +165,7 @@ input#coord-buffer {
 
 }
 
-#IncSet{
+#IncSet {
   padding: 12px 18px;
   background-color: #ecd2af;
 }
@@ -188,7 +189,7 @@ input#coord-buffer {
   font-weight: bold;
   cursor: pointer;
 }
-.fbutton:hover{
+.fbutton:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -206,9 +207,11 @@ input#coord-buffer {
   cursor: pointer;
   font-weight: bold;
 }
-.buttonp:hover{
+
+.buttonp:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
 .buttonr {
   border-radius: 7px;
   background-color: #657a8f;
@@ -223,7 +226,7 @@ input#coord-buffer {
   cursor: pointer;
   font-weight: bold;
 }
-.buttonr:hover{
+.buttonr:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -241,7 +244,8 @@ input#coord-buffer {
   cursor: pointer;
   font-weight: bold;
 }
-.buttona:hover{
+
+.buttona:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -259,7 +263,8 @@ input#coord-buffer {
   cursor: pointer;
   font-weight: bo
 }
-.buttond:hover{
+
+.buttond:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
