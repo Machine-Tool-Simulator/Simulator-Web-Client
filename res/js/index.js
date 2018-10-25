@@ -50,3 +50,22 @@ function setAbsPos(element) {
 		}
 	}
 }
+
+function switchVideo(element) {
+	switch (elment.value)
+            {
+               case 0:
+               break;
+
+               case 1: document.write("Pretty good<br />");
+               break;
+
+               case 2: document.write("Passed<br />");
+               break;
+
+               case 4: document.write("Not so good<br />");
+               break;
+
+               default:  document.write("Unknown grade<br />")
+            }
+}
