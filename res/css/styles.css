@@ -13,10 +13,7 @@ section {
   display: flex;
   width: 100%;
   height: 100%;
-  background: #515151;
-  text-align: center;
-  align-items:center;
-  height:550px;
+  background: grey;
   /* height: 600px; */
 }
 
@@ -27,18 +24,16 @@ section {
   flex-direction: column;
   justify-content: space-evenly;
   /* flex: 3; */
-  width: 60%;
-  height: 70%;
+  width: 50%;
   /* padding: 100px;
   padding-right: 50px;
   padding-left: 50px;
   margin: 10px; */
-  background: #95abc5;
+  background: green;
   text-align: center;
   /* flex-grow: 6; */
   border-radius: 5px;
   position: relative;
-  margin: 4px;
 }
 
 input#xvar {
@@ -98,7 +93,6 @@ input#coord-buffer {
   border-radius: 10px;
   /* margin: auto; */
   background: #3a3732;
-  margin: 4px;
 }
 
 .XZbutton {
@@ -106,8 +100,8 @@ input#coord-buffer {
   border: none;
   color: white;
   height: 48px;
-  width: 80px;
-  padding: 0px 10px;
+  width: 98px;
+  padding: 0px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -138,11 +132,9 @@ input#coord-buffer {
   align-items: center;
   justify-content: space-evenly;
   width: 50%;
-  height: 50%;
   flex: 2;
   background: #3a3732;
   border-radius: 5px;
-  margin: 4px;
   /* margin: 150px 5px; */
 }
 
@@ -159,7 +151,7 @@ input#coord-buffer {
   text-decoration: none;
   display: inline-block;
   border-radius: 7px;
-  font-size: 12px;
+  font-size: 16px;
   margin: 4px 5px;
   font-weight: bold;
   cursor: pointer;
@@ -185,17 +177,17 @@ input#coord-buffer {
 }
 
 #FC {
-  padding: 10px 22px;
+  padding: 12px 36px;
 
 }
 
 #IncSet {
-  padding: 10px 8px;
+  padding: 12px 18px;
   background-color: #ecd2af;
 }
 
 #AbsSet {
-  padding: 10px 8px;
+  padding: 12px 18px;
   background-color: #ecd2af;
 }
 
@@ -203,13 +195,13 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 10px 28px;
+  padding: 15px 45px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 7px;
   font-size: 16px;
-  margin: 2px 5px;
+  margin: 4px 5px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -222,12 +214,12 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 10px 25px;
+  padding: 15px 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 2px 5px;
+  margin: 4px 5px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -241,11 +233,11 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 5px 44px;
+  padding: 15px 65px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
+  font-size: 16px;
   margin: 4px 5px;
   cursor: pointer;
   font-weight: bold;
@@ -259,7 +251,7 @@ input#coord-buffer {
   background-color: #ecd2af;
   border: none;
   color: white;
-  padding: 10px 25px;
+  padding: 15px 47px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -278,14 +270,14 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 10px 25px;
+  padding: 15px 47px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 2px 5px;
+  margin: 4px 5px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: bo
 }
 
 .buttond:hover {
@@ -303,11 +295,11 @@ input#coord-buffer {
 /* Split the screen in half */
 .split {
   height: 100%;
-  width: 60%;
+  width: 50%;
   position: fixed;
   z-index: 1;
   top: 0;
-  overflow-x: scroll;
+  overflow-x: hidden;
   padding-top: 20px;
 }
 
@@ -321,9 +313,6 @@ input#coord-buffer {
 .right {
   right: 0;
   background-color: black;
-  display:flex;
-  justify-content:center;
-  flex-direction:column;
 }
 
 /* If you want the content centered horizontally and vertically */
@@ -345,7 +334,6 @@ input#coord-buffer {
   color: white;
 }
 
-#myContainer{
-  zoom: 0.5;
-  -moz-transform: scale(0.5);
+.videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
+  display: none;
 }
