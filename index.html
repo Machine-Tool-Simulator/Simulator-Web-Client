@@ -12,19 +12,52 @@
 
   <div class="split left">
 
-    <h2>Turning on the Control</h2>
-    <p>This video demonstrates the steps to turn on the control for the lathe.</p>
-    <iframe src="https://drive.google.com/file/d/1g8lYeIiSqh-hWx0Eyt6y50B61f1h8qq7/preview" width="500" height="280"></iframe>
-    <p>To proceed, touch any of the buttons on the control to the right to active the control.</p>
+    <div class = "videoList_1" id="videoList_1">
+      <h2>Welcome to Thayer Machine Shop</h2>
+      <h2>Watch the videos and learn how to use a lathe!</h2>
+      <img src="res/imgs/img_test1.jpg" alt="Avatar woman">
+    </div>
 
-      <div align="right">
-          <input type="button" class="subbutton" value="Submit" id="Submit" onclick="" />
-      </div>
+    <div class = "videoList_2" id="videoList_2">
+      <h2>Turning on the Control</h2>
+      <p>This video demonstrates the steps to turn on the control for the lathe.</p>
+      <iframe src="https://drive.google.com/file/d/1g8lYeIiSqh-hWx0Eyt6y50B61f1h8qq7/preview" width="640" height="360"></iframe>
+      <p>To proceed, touch any of the buttons on the control to the right to active the control.</p>
+    </div>
+
+    <div class = "videoList_3" id="videoList_3">
+      <h2>Setting the RPM</h2>
+      <p>This video demonstrates the steps to set the RPM for the lathe to a desired number.</p>
+      <iframe src="https://drive.google.com/file/d/19tY-3DmH20ShwV7V0q-RuM-qfvJnk8pY/preview" id="videoList_2" width="640" height="360"></iframe>
+      <p>To proceed, set the spindle RPM to 1000 by pressing "Spin Speed," typing in a number (1000), and selecting "Inc Set" by following the steps from the video.</p>
+    </div>
+
+    <div class = "videoList_4" id="videoList_4">
+      <h2>Turning on the Spindle</h2>
+      <p>This video demonstrates the steps to turn the spindle on for the lathe.</p>
+      <iframe src="https://drive.google.com/file/d/1VAmjVUxRakeIks8dVvq07crNPy_ipybc/preview" id="videoList_3" width="640" height="360"></iframe>
+      <p>To proceed, turn the the spindle on by selected the "FWD" button on the control to the right.</p>
+    </div>
+
+    <div class = "videoList_5" id="videoList_5">
+      <h2>Turning off the Spindle</h2>
+      <p>This video demonstrates the steps to turn the spindle off for the lathe.</p>
+      <iframe src="https://drive.google.com/file/d/1VlrODLhJs58CG8h2B63Zaw4xADj4LTcb/preview" id="videoList_4" width="640" height="360"></iframe>
+      <p>To proceed, turn the spindle off by selecting the "OFF" button on the control to the right.</p>
+    </div>
+
+    <div class = "videoList_end" id="videoList_end">
+      <h2>Congrats! You have completed the tutorial!</h2>
+    </div>
+
+    <div align="right">
+      <input type="button" class="subbutton" value="Submit" id="Submit" onclick="switchVideo()" />
+    </div>
 
   </div>
 
   <div class="split right">
-    <section class="control-panel" style="">
+    <section class="control-panel">
       <div class = "readout">
         <div class = "x-coord">
           <p> <label>X: </label> <input id=xvar type="text" value="" name="xvar" disabled/><br /></p>

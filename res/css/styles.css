@@ -349,3 +349,6 @@ input#coord-buffer {
   zoom: 0.5;
   -moz-transform: scale(0.5);
 }
+.videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
+  display: none;
+}
