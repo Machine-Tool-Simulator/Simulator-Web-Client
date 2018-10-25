@@ -1,7 +1,9 @@
-let xbutton = document.getElementById("Xbutton");
-let zbutton = document.getElementById("Zbutton");
+let videoCounter = 0;
 let selectedCoord = 0;
+
 xbutton.addEventListener("click", function() {
+	let xbutton = document.getElementById("Xbutton");
+	let zbutton = document.getElementById("Zbutton");
 	selectedCoord = 1;
 	xbutton.style.backgroundColor = "rgb(0,0,0)";
 	zbutton.style.backgroundColor = "rgb(85,80,74)";
@@ -9,20 +11,13 @@ xbutton.addEventListener("click", function() {
 });
 
 zbutton.addEventListener("click", function() {
+	let xbutton = document.getElementById("Xbutton");
+	let zbutton = document.getElementById("Zbutton");
 	selectedCoord = 2;
 	zbutton.style.backgroundColor = "rgb(0,0,0)";
 	xbutton.style.backgroundColor = "rgb(236,210,175)";
 	console.log("Y coord");
 });
-
-zbutton.addEventListener("click", function() {
-	selectedCoord = 2;
-	zbutton.style.backgroundColor = "rgb(0,0,0)";
-	xbutton.style.backgroundColor = "rgb(236,210,175)";
-	console.log("Y coord");
-});
-
-
 
 function numberPressed(element){
 	let buffer = document.getElementById('coord-buffer');
@@ -45,8 +40,7 @@ function setAbsPos(element) {
 			xvar.value = buffer.value;
 			buffer.value = "";
 		}
-	}
-	else if (selectedCoord == 2) {
+	} else if (selectedCoord == 2) {
 		let zvar = document.getElementById('zvar');
 		if (element.value === "RESTORE") {
 			zvar.value = "";
@@ -58,48 +52,32 @@ function setAbsPos(element) {
 	}
 }
 
-
-let videoCounter = 0;
-
 function switchVideo(element) {
 	videoCounter += 1;
-	console.log(videoCounter);
-	let video_1= document.getElementById("videoList_1");
-	let video_2= document.getElementById("videoList_2");
-	let video_3= document.getElementById("videoList_3");
-	let video_4= document.getElementById("videoList_4");
-	let video_5= document.getElementById("videoList_5");
-	let video_end= document.getElementById("videoList_end");
+	let video_1 = document.getElementById("videoList_1");
+	let video_2 = document.getElementById("videoList_2");
+	let video_3 = document.getElementById("videoList_3");
+	let video_4 = document.getElementById("videoList_4");
+	let video_5 = document.getElementById("videoList_5");
+	let video_end = document.getElementById("videoList_end");
 
 	if (videoCounter == 1) {
 		video_1.style.display = "block";
-	}
-	else if (videoCounter == 2){
+	} else if (videoCounter == 2) {
 		video_2.style.display = "block";
 		video_1.style.display = "none"
-	}
-	else if (videoCounter == 3){
+	} else if (videoCounter == 3) {
 		video_3.style.display = "block";
 		video_2.style.display = "none"
-	}
-
-	else if (videoCounter == 4){
+	} else if (videoCounter == 4) {
 		video_4.style.display = "block";
-		video_3.style.display = "none"
-
-	}
-
-	else if (videoCounter == 5){
+		video_3.style.display = "none";
+	} else if (videoCounter == 5) {
 		video_5.style.display = "block";
-		video_4.style.display = "none"
+		video_4.style.display = "none";
 
-	}
-
-	else if (videoCounter == 6){
+	} else if (videoCounter == 6) {
 		video_end.style.display = "block";
-		video_5.style.display = "none"
-
+		video_5.style.display = "none";
 	}
-
-
 }
