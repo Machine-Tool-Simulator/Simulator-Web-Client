@@ -1,3 +1,6 @@
+# Simulator-Web-Client
+Frontend interactive client for the simulator
+
 # Team
 
-GROUP 15
+John Sullivan, Junfei Yu, Tao Wang, Yuteng Mei
