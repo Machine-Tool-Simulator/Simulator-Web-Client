@@ -333,37 +333,7 @@ input#coord-buffer {
 .h2 {
   color: white;
 }
-<<<<<<< HEAD
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-
-#myContainer{
-  zoom: 0.5;
-  -moz-transform: scale(0.5);
-}
-||||||||| merged common ancestors
-=========
-=======
-
 
 .videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
   display: none;
 }
-
-#myContainer{
-  zoom: 0.5;
-  -moz-transform: scale(0.5);
-}
->>>>>>> 9e283bada8b1e44580467445832a045ca3e0e504
-
-<<<<<<< HEAD
-.videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
-  display: none;
-}
-||||||| merged common ancestors
-.videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
-  display: none;
-}
->>>>>>>>> Temporary merge branch 2
-=======
->>>>>>> 9e283bada8b1e44580467445832a045ca3e0e504
