@@ -66,8 +66,11 @@ function switchVideo(element) {
 	console.log(videoCounter);
 	let video_1= document.getElementById("videoList_1");
 	let video_2= document.getElementById("videoList_2");
-	// let video_3= document.getElementById("videoList_3");
-	// let video_4= document.getElementById("videoList_4");
+	let video_3= document.getElementById("videoList_3");
+	let video_4= document.getElementById("videoList_4");
+	let video_5= document.getElementById("videoList_5");
+	let video_end= document.getElementById("videoList_end");
+
 	if (videoCounter == 1) {
 		video_1.style.display = "block";
 	}
@@ -75,29 +78,28 @@ function switchVideo(element) {
 		video_2.style.display = "block";
 		video_1.style.display = "none"
 	}
-	// else if (videoCounter == 3){
-	// 	video_3.style.display = "block";
-	// 	video_2.style.display = "none"
-	// }
+	else if (videoCounter == 3){
+		video_3.style.display = "block";
+		video_2.style.display = "none"
+	}
 
-	// else if (videoCounter == 4){
-	// 	video_4.style.display = "none";
-	// }
+	else if (videoCounter == 4){
+		video_4.style.display = "block";
+		video_3.style.display = "none"
 
-	// switch (elment.value)
-  //           {
-  //              case 0:
-  //              break;
-	//
-  //              case 1: document.write("Pretty good<br />");
-  //              break;
-	//
-  //              case 2: document.write("Passed<br />");
-  //              break;
-	//
-  //              case 4: document.write("Not so good<br />");
-  //              break;
-	//
-  //              default:  document.write("Unknown grade<br />")
-  //           }
+	}
+
+	else if (videoCounter == 5){
+		video_5.style.display = "block";
+		video_4.style.display = "none"
+
+	}
+
+	else if (videoCounter == 6){
+		video_end.style.display = "block";
+		video_5.style.display = "none"
+
+	}
+
+
 }

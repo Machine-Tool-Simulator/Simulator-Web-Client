@@ -334,6 +334,6 @@ input#coord-buffer {
   color: white;
 }
 
-.videoList_1, .videoList_2, .video_3, .video_4{
+.videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
   display: none;
 }
