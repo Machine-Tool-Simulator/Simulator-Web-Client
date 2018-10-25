@@ -333,3 +333,7 @@ input#coord-buffer {
 .h2 {
   color: white;
 }
+
+.videoList_1, .videoList_2, .video_3, .video_4{
+  display: none;
+}
