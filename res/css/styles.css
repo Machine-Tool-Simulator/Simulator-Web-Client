@@ -13,7 +13,10 @@ section {
   display: flex;
   width: 100%;
   height: 100%;
-  background: grey;
+  background: #515151;
+  text-align: center;
+  align-items:center;
+  height:550px;
   /* height: 600px; */
 }
 
@@ -24,16 +27,18 @@ section {
   flex-direction: column;
   justify-content: space-evenly;
   /* flex: 3; */
-  width: 50%;
+  width: 60%;
+  height: 70%;
   /* padding: 100px;
   padding-right: 50px;
   padding-left: 50px;
   margin: 10px; */
-  background: green;
+  background: #95abc5;
   text-align: center;
   /* flex-grow: 6; */
   border-radius: 5px;
   position: relative;
+  margin: 4px;
 }
 
 input#xvar {
@@ -93,6 +98,7 @@ input#coord-buffer {
   border-radius: 10px;
   /* margin: auto; */
   background: #3a3732;
+  margin: 4px;
 }
 
 .XZbutton {
@@ -100,8 +106,8 @@ input#coord-buffer {
   border: none;
   color: white;
   height: 48px;
-  width: 98px;
-  padding: 0px 15px;
+  width: 80px;
+  padding: 0px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -132,9 +138,11 @@ input#coord-buffer {
   align-items: center;
   justify-content: space-evenly;
   width: 50%;
+  height: 50%;
   flex: 2;
   background: #3a3732;
   border-radius: 5px;
+  margin: 4px;
   /* margin: 150px 5px; */
 }
 
@@ -151,7 +159,7 @@ input#coord-buffer {
   text-decoration: none;
   display: inline-block;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 12px;
   margin: 4px 5px;
   font-weight: bold;
   cursor: pointer;
@@ -177,17 +185,17 @@ input#coord-buffer {
 }
 
 #FC {
-  padding: 12px 36px;
+  padding: 10px 22px;
 
 }
 
 #IncSet {
-  padding: 12px 18px;
+  padding: 10px 8px;
   background-color: #ecd2af;
 }
 
 #AbsSet {
-  padding: 12px 18px;
+  padding: 10px 8px;
   background-color: #ecd2af;
 }
 
@@ -195,13 +203,13 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 15px 45px;
+  padding: 10px 28px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 7px;
   font-size: 16px;
-  margin: 4px 5px;
+  margin: 2px 5px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -214,12 +222,12 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 15px 40px;
+  padding: 10px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 5px;
+  margin: 2px 5px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -233,11 +241,11 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 15px 65px;
+  padding: 5px 44px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 12px;
   margin: 4px 5px;
   cursor: pointer;
   font-weight: bold;
@@ -251,7 +259,7 @@ input#coord-buffer {
   background-color: #ecd2af;
   border: none;
   color: white;
-  padding: 15px 47px;
+  padding: 10px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -270,14 +278,14 @@ input#coord-buffer {
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 15px 47px;
+  padding: 10px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 5px;
+  margin: 2px 5px;
   cursor: pointer;
-  font-weight: bo
+  font-weight: bold;
 }
 
 .buttond:hover {
@@ -286,7 +294,7 @@ input#coord-buffer {
 
 .video{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  order-radius: 7px;
+  border-radius: 7px;
   background-color: #657a8f;
   display: flex;
   flex-direction: column;
@@ -295,24 +303,28 @@ input#coord-buffer {
 /* Split the screen in half */
 .split {
   height: 100%;
-  width: 50%;
   position: fixed;
   z-index: 1;
   top: 0;
-  overflow-x: hidden;
+  overflow-x: scroll;
   padding-top: 20px;
 }
 
 /* Control the left side */
 .left {
   left: 0;
+  width: 40%;
   background-color: white;
 }
 
 /* Control the right side */
 .right {
   right: 0;
+  width: 60%;
   background-color: black;
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
 }
 
 /* If you want the content centered horizontally and vertically */
@@ -334,6 +346,10 @@ input#coord-buffer {
   color: white;
 }
 
+#myContainer{
+  zoom: 0.5;
+  -moz-transform: scale(0.5);
+}
 .videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
   display: none;
 }
