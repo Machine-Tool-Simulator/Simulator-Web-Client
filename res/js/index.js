@@ -1,9 +1,9 @@
 let videoCounter = 0;
 let selectedCoord = 0;
 
+let xbutton = document.getElementById("Xbutton");
+let zbutton = document.getElementById("Zbutton");
 xbutton.addEventListener("click", function() {
-	let xbutton = document.getElementById("Xbutton");
-	let zbutton = document.getElementById("Zbutton");
 	selectedCoord = 1;
 	xbutton.style.backgroundColor = "rgb(0,0,0)";
 	zbutton.style.backgroundColor = "rgb(85,80,74)";
@@ -11,8 +11,6 @@ xbutton.addEventListener("click", function() {
 });
 
 zbutton.addEventListener("click", function() {
-	let xbutton = document.getElementById("Xbutton");
-	let zbutton = document.getElementById("Zbutton");
 	selectedCoord = 2;
 	zbutton.style.backgroundColor = "rgb(0,0,0)";
 	xbutton.style.backgroundColor = "rgb(236,210,175)";
