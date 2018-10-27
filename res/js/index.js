@@ -1,8 +1,8 @@
 let videoCounter = 0;
 let selectedCoord = 0;
-
 let xbutton = document.getElementById("Xbutton");
 let zbutton = document.getElementById("Zbutton");
+
 xbutton.addEventListener("click", function() {
 	selectedCoord = 1;
 	xbutton.style.backgroundColor = "rgb(0,0,0)";
@@ -18,7 +18,7 @@ zbutton.addEventListener("click", function() {
 });
 
 function numberPressed(element){
-	let buffer = document.getElementById('coord-buffer');
+	let buffer = document.getElementById('buffer');
 	buffer.value = addNumber(buffer.value, element.value);
 }
 
@@ -28,7 +28,7 @@ function addNumber(current, digit) {
 }
 
 function setAbsPos(element) {
-	let buffer = document.getElementById('coord-buffer');
+	let buffer = document.getElementById('buffer');
 	if (selectedCoord == 1) {
 		let xvar = document.getElementById('xvar');
 		if (element.value === "RESTORE") {

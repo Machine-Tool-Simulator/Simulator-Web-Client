@@ -77,7 +77,7 @@ input {
   /* margin: 0 0 10px 0; */
 }
 
-input#coord-buffer {
+input#buffer {
   width: 65%;
   height: 10%;
   position: absolute;
@@ -349,6 +349,7 @@ input#coord-buffer {
 #myContainer{
   zoom: 0.5;
   -moz-transform: scale(0.5);
+  transform: scale(0.5);
 }
 .videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
   display: none;
