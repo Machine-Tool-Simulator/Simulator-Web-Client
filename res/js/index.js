@@ -73,34 +73,38 @@ function restore() {
 	targetVar.value = '';
 }
 
+/** TODO: move essence to server */
 function switchVideo(element) {
-	videoCounter += 1;
-	let video_1 = getById('videoList_1');
-	let video_2 = getById('videoList_2');
-	let video_3 = getById('videoList_3');
-	let video_4 = getById('videoList_4');
-	let video_5 = getById('videoList_5');
-	let video_end = getById('videoList_end');
+	$.getJSON('lathe.json', function(data) {
+		console.log(data);
+	});
+	// videoCounter += 1;
+	// let video_1 = getById('videoList_1');
+	// let video_2 = getById('videoList_2');
+	// let video_3 = getById('videoList_3');
+	// let video_4 = getById('videoList_4');
+	// let video_5 = getById('videoList_5');
+	// let video_end = getById('videoList_end');
 
-	if (videoCounter == 1) {
-		video_1.style.display = 'block';
-	} else if (videoCounter == 2) {
-		video_2.style.display = 'block';
-		video_1.style.display = 'none';
-	} else if (videoCounter == 3) {
-		video_3.style.display = 'block';
-		video_2.style.display = 'none';
-	} else if (videoCounter == 4) {
-		video_4.style.display = 'block';
-		video_3.style.display = 'none';
-	} else if (videoCounter == 5) {
-		video_5.style.display = 'block';
-		video_4.style.display = 'none';
+	// if (videoCounter == 1) {
+	// 	video_1.style.display = 'block';
+	// } else if (videoCounter == 2) {
+	// 	video_2.style.display = 'block';
+	// 	video_1.style.display = 'none';
+	// } else if (videoCounter == 3) {
+	// 	video_3.style.display = 'block';
+	// 	video_2.style.display = 'none';
+	// } else if (videoCounter == 4) {
+	// 	video_4.style.display = 'block';
+	// 	video_3.style.display = 'none';
+	// } else if (videoCounter == 5) {
+	// 	video_5.style.display = 'block';
+	// 	video_4.style.display = 'none';
 
-	} else if (videoCounter == 6) {
-		video_end.style.display = 'block';
-		video_5.style.display = 'none';
-	}
+	// } else if (videoCounter == 6) {
+	// 	video_end.style.display = 'block';
+	// 	video_5.style.display = 'none';
+	// }
 }
 
 /** Helpers */
