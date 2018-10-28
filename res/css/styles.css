@@ -9,6 +9,11 @@ body {
 section {
   border-radius: 5px;
 }
+
+p {
+  text-align: left;
+}
+
 .control-panel {
   display: flex;
   width: 100%;
@@ -168,22 +173,6 @@ input#buffer {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-
-.subbutton {
-  background-color: #657a8f;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 7px;
-  font-size: 14px;
-  margin: 4px 5px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 6px 8px;
-}
-
 #FC {
   padding: 10px 22px;
 
@@ -307,14 +296,6 @@ input#buffer {
   z-index: 1;
   top: 0;
   overflow-x: scroll;
-  padding-top: 20px;
-}
-
-/* Control the left side */
-.left {
-  left: 0;
-  width: 40%;
-  background-color: white;
 }
 
 /* Control the right side */
@@ -327,30 +308,51 @@ input#buffer {
   flex-direction:column;
 }
 
-/* If you want the content centered horizontally and vertically */
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* Control the left side */
+.left {
+  width: 40%;
+  background-color: white;
   text-align: center;
+  overflow-y: scroll;
 }
 
-/* Style the image inside the centered container, if needed */
-.centered img {
-  width: 500px;
-  border-radius: 50%;
+#title {
+  font-size: 1.5em;
+  font-family: Helvetica, Arial, sans-serif;
+  margin-top: 3%;
 }
 
-.h2 {
+#cover {
+  display: block;
+  margin: auto;
+  width: 80%;
+  height: 50%;
+}
+
+#player {
+  /* display property set programmatically */
+  margin: auto;
+  width: 30em;
+  height: 20em;
+}
+
+#description {
+  font-size: 1em;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#btn-submit {
+  display: table-cell;
+  background-color: #657a8f;
+  border: none;
   color: white;
-}
-
-#myContainer{
-  zoom: 0.5;
-  -moz-transform: scale(0.5);
-  transform: scale(0.5);
-}
-.videoList_1, .videoList_2, .videoList_3, .videoList_4, .videoList_5, .videoList_end{
-  display: none;
+  padding: 0.9% 1.2%;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
 }

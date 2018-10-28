@@ -3,6 +3,10 @@ let selectedCoord = 0;
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
 
+let canSubmit = true;
+let currentTasks = null;
+let taskIndex = 0;
+
 /** Initialization */
 window.onload = function() {
 	xbutton.addEventListener('click', function() {
@@ -20,6 +24,7 @@ window.onload = function() {
 
 /** Console controls */
 function numberPressed(element){
+	completeTask(element.value);
 	getById('buffer').value = addNumber(buffer.value, element.value);
 }
 
@@ -41,24 +46,31 @@ function addNumber(current, digit) {
 }
 
 function setAbsPos() {
+	completeTask('ABS_SET');
+
+	let buffer = getById('buffer');
+	if (buffer.value.length <= 0) return;
+
 	if (selectedCoord == 0) return;
 	let targetVar;
 	if (selectedCoord == 1) targetVar = getById('xvar');
 	else if (selectedCoord == 2) targetVar = getById('zvar');
 
-	let buffer = getById('buffer');
 	targetVar.value = buffer.value;
 	buffer.value = '';
 }
 
 function setIncPos() {
+	completeTask('INC_SET');
+
+	let buffer = getById('buffer');
+	if (buffer.value.length <= 0) return;
+
 	if (selectedCoord == 0) return;
 	let targetVar;
 	if (selectedCoord == 1) targetVar = getById('xvar');
 	else if (selectedCoord == 2) targetVar = getById('zvar');	// not using else here in case of other weird values
 
-	let buffer = getById('buffer');
-	if (buffer.value.length <= 0) return;
 	if (targetVar.value.length <= 0) targetVar.value = 0;
 	targetVar.value = parseFloat(targetVar.value) + parseFloat(buffer.value);
 	buffer.value = '';
@@ -74,37 +86,48 @@ function restore() {
 }
 
 /** TODO: move essence to server */
-function switchVideo(element) {
-	$.getJSON('lathe.json', function(data) {
-		console.log(data);
-	});
-	// videoCounter += 1;
-	// let video_1 = getById('videoList_1');
-	// let video_2 = getById('videoList_2');
-	// let video_3 = getById('videoList_3');
-	// let video_4 = getById('videoList_4');
-	// let video_5 = getById('videoList_5');
-	// let video_end = getById('videoList_end');
+function switchVideo() {
+	if (videoCounter >= videos.length) return;	// end of videos
+	// TODO: if end of videos, submit a feedback to server
 
-	// if (videoCounter == 1) {
-	// 	video_1.style.display = 'block';
-	// } else if (videoCounter == 2) {
-	// 	video_2.style.display = 'block';
-	// 	video_1.style.display = 'none';
-	// } else if (videoCounter == 3) {
-	// 	video_3.style.display = 'block';
-	// 	video_2.style.display = 'none';
-	// } else if (videoCounter == 4) {
-	// 	video_4.style.display = 'block';
-	// 	video_3.style.display = 'none';
-	// } else if (videoCounter == 5) {
-	// 	video_5.style.display = 'block';
-	// 	video_4.style.display = 'none';
+	if (currentTasks) {
+		alert('Have uncompleted tasks');	// bad practice
+		return;	// task not finished
+	}
 
-	// } else if (videoCounter == 6) {
-	// 	video_end.style.display = 'block';
-	// 	video_5.style.display = 'none';
-	// }
+	let title = getById('title');
+	let player = getById('player');
+	let description = getById('description');
+	if (videoCounter++ == 0) {
+		getById('cover').style.display = 'none';
+		player.style.display = 'block';
+	}
+
+	let video = videos[videoCounter];
+	title.innerHTML = video.title;
+	player.src = video.src;
+	description.innerHTML = video.text;
+
+	if (video.tasks) {
+		currentTasks = video.tasks;
+	}
+}
+
+function nextTask() {
+	taskIndex++;
+	if (taskIndex >= currentTask.length) {
+		taskIndex = 0;
+		currentTasks = null;		// meaning can submit
+	}
+}
+
+function completeTask(value) {
+	if (!currentTasks) return;	// no current tasks
+
+	let task = currentTasks[taskIndex];
+	if (task.press) {
+		if (task.press === value) nextTask();
+	}
 }
 
 /** Helpers */
