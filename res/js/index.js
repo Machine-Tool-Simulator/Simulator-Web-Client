@@ -23,8 +23,8 @@ window.onload = function() {
 }
 
 /** Console controls */
-function controlPressed(element) {
-	completeTask(element.value);
+function controlPressed(value) {
+	completeTask(value);
 }
 
 function numberPressed(element){
@@ -95,7 +95,16 @@ function spindle(element) {
 
 /** TODO: move essence to server */
 function switchVideo() {
-	if (videoCounter >= videos.length) return;	// end of videos
+	let title = getById('title');
+	let player = getById('player');
+	let description = getById('description');
+
+	if (videoCounter >= videos.length) {	// end of videos
+		title.innerHTML = "You are done!";
+		player.style.display = "none";
+		description.innerHTML = "";
+		return;
+	}
 	// TODO: if end of videos, submit a feedback to server
 
 	if (currentTasks) {
@@ -103,9 +112,6 @@ function switchVideo() {
 		return;	// task not finished
 	}
 
-	let title = getById('title');
-	let player = getById('player');
-	let description = getById('description');
 	if (videoCounter++ == 0) {
 		getById('cover').style.display = 'none';
 		player.style.display = 'block';
@@ -135,8 +141,16 @@ function completeTask(value) {
 	let task = currentTasks[taskIndex];
 	if (task.press) {
 		if (task.press === value) {
+			if (task.conditions) {
+				if (task.conditions.buffer) {
+					if (task.conditions.buffer != getById('buffer').value) return;
+				}
+				// if (more task.conditions...)
+			}
 			console.log("Step completed!");
 			nextTask();
+			console.log(currentTasks);
+			console.log(taskIndex);
 		}
 	}
 }
