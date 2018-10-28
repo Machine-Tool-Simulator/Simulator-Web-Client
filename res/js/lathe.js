@@ -1,4 +1,5 @@
-[
+// TODO: remove this file
+let videos = [
 	{
 	   "index":1,
 	   "title":"Lathe Introduction and Safety",
@@ -52,4 +53,4 @@
 		  }
 	   ]
 	}
- ]
+ ];
