@@ -41,7 +41,7 @@ let videos = [
 	   "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.<br>-----<br>Your turn. On the console to the right:<br>Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>Enter \"500\" as the value using the numeric keypad.<br>Press the \"INC SET\" button to set constant RPM.",
 	   "tasks":[
 		  {
-			 "select":"RPM",
+			 "press":"RPM",
 			 "highlight":true
 		  },
 		  {

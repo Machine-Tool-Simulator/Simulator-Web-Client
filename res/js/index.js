@@ -23,6 +23,10 @@ window.onload = function() {
 }
 
 /** Console controls */
+function controlPressed(element) {
+	completeTask(element.value);
+}
+
 function numberPressed(element){
 	completeTask(element.value);
 	getById('buffer').value = addNumber(buffer.value, element.value);
@@ -85,6 +89,10 @@ function restore() {
 	targetVar.value = '';
 }
 
+function spindle(element) {
+	completeTask(element.value);
+}
+
 /** TODO: move essence to server */
 function switchVideo() {
 	if (videoCounter >= videos.length) return;	// end of videos
@@ -115,7 +123,7 @@ function switchVideo() {
 
 function nextTask() {
 	taskIndex++;
-	if (taskIndex >= currentTask.length) {
+	if (taskIndex >= currentTasks.length) {
 		taskIndex = 0;
 		currentTasks = null;		// meaning can submit
 	}
@@ -126,7 +134,10 @@ function completeTask(value) {
 
 	let task = currentTasks[taskIndex];
 	if (task.press) {
-		if (task.press === value) nextTask();
+		if (task.press === value) {
+			console.log("Step completed!");
+			nextTask();
+		}
 	}
 }
 
