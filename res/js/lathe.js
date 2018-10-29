@@ -76,7 +76,7 @@ let videos = [
         "index":7,
         "title":"Fine/Coarse Feed Options",
         "src":"https://drive.google.com/file/d/10MDHe6ZNo-oa9aeP8XWQec9a2LAXoJRV/preview",
-        "text":"You can also adjust the speed of the carriage moves with a fine and coarse speed button. When the core speed option is selected, every turn of the handle will adjust the position by 0.8 inches. Selecting fine feed will reduce the feed to point to 0.2 inches.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Switch the lathe from fine to coarse control by selecting \"F/C\" on the keypad.</br>2. Switch the lathe back from coarse to fine control by selecting \"F/C\" on the keypad.",
+        "text":"You can also adjust the speed of the carriage moves with a fine and coarse speed button. When the core speed option is selected, every turn of the handle will adjust the position by 0.8 inches. Selecting fine feed will reduce the feed to point to 0.2 inches.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Switch the lathe from fine to coarse control by selecting \"F/C\" on the keypad.</br>Switch the lathe back from coarse to fine control by selecting \"F\" on the keypad.",
         "tasks":[
             {
                 "press":"FC",
@@ -151,7 +151,7 @@ let videos = [
         "index":10,
         "title":"Power feed",
         "src":"https://drive.google.com/file/d/1tWIUTssDx2n-iAmm5j608SQRxRY96Ii6/preview",
-        "text":"Power feed can be used to move the carriage at a constant rate in one direction. The direction and distance of motion is specified with the inc key while the speed can be set in inches per minute or inches per revolution with the feed speed arrows. Note that the machine door must be closed to engage the power feed, as it must be during any operation where the carriage will be moved under computer control.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"POWER FEED\" using the button below the control screen.</br>3. Select the \"Z\" button to indicate that the power feed will be in the z-direction.</br>4. Enter \"-1\" as the value for the power feed (use the \"+/-\" button to enter a negative value).</br>5. Select \"ABS SET\" to set the power feed.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
+        "text":"Power feed can be used to move the carriage at a constant rate in one direction. The direction and distance of motion is specified with the inc key while the speed can be set in inches per minute or inches per revolution with the feed speed arrows. Note that the machine door must be closed to engage the power feed, as it must be during any operation where the carriage will be moved under computer control.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"POWER FEED\" using the button below the control screen.</br>3. Select the \"Z\" button to indicate that the power feed will be in the z-direction.</br>4. Enter \"-1\" as the value for the power feed (click the number 1 and then use the \"+/-\" button to enter a negative value).</br>5. Select \"ABS SET\" to set the power feed.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
         "tasks":[
             {
                 "press":"FWD",
