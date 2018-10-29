@@ -425,6 +425,7 @@ button#Xbutton, #Zbutton {
   background-color: #657a8f;
   border: none;
   color: white;
+  width:33%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -504,11 +505,13 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 
 #GO {
     padding: 10px 23px;
+    width: 50%;
 }
 
 #STOP {
     padding: 10px 16px;
     background: #fc494a;
+    width: 50%;
 }
 #row1{
   width:20%
