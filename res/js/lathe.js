@@ -76,7 +76,7 @@ let videos = [
         "index":7,
         "title":"Fine/Coarse Feed Options",
         "src":"https://drive.google.com/file/d/10MDHe6ZNo-oa9aeP8XWQec9a2LAXoJRV/preview",
-        "text":"You can also adjust the speed of the carriage moves with a fine and coarse speed button. When the core speed option is selected, every turn of the handle will adjust the position by 0.8 inches. Selecting fine feed will reduce the feed to point to 0.2 inches.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Switch the lathe from fine to coarse control by selecting \"F/C\" on the keypad.</br>2. Switch the lathe back from coarse to fine control by selecting \"F/C\" on the keypad.",
+        "text":"You can also adjust the speed of the carriage moves with a fine and coarse speed button. When the core speed option is selected, every turn of the handle will adjust the position by 0.8 inches. Selecting fine feed will reduce the feed to point to 0.2 inches.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Switch the lathe from fine to coarse control by selecting \"F/C\" on the keypad.</br>Switch the lathe back from coarse to fine control by selecting \"F\" on the keypad.",
         "tasks":[
             {
                 "press":"FC",
