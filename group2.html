@@ -91,7 +91,7 @@
                     </div>
                     <div class = "fnumber">
                         <label id = "h1">F7</label>
-                        <textarea id=f7" disabled>SPIN SPEED</textarea>
+                        <textarea id="f7" disabled>SPIN SPEED</textarea>
                     </div>
                     <div class = "fnumber">
                         <label id = "h1">F8</label>
@@ -195,13 +195,13 @@
                     <input type="button" class="fbutton" value="3" onclick="numberPressed(this)"; />
                 </div>
                 <div class = "row">
-                    <button class = "buttonp" onclick="negBuffer();">+/-</button>
-                    <input type="button" class="fbutton" value="0" onclick="numberPressed(this)"; />
-                    <input type="button" class="buttond" value="." onclick="numberPressed(this)"; />
+                  <input type="button" class="fbutton" value="+/-" onclick="negBuffer()"; />
+                  <input type="button" class="fbutton" value="0" onclick="numberPressed(this)"; />
+                  <input type="button" class="fbutton" value="." onclick="numberPressed(this)"; />
                 </div>
                 <div class = "row">
-                    <button class = "buttona">*</button>
-                    <input type="button" class="buttonr" value="RESTORE" onclick="restore()"; />
+                  <input type="button" class="fbutton" id="abtn" value="*" />
+                  <input type="button" class="fbutton" id="restorebtn" value="RESTORE" onclick="restore()"; />
                 </div>
             </div>
             <div class = "buttomlogo">
