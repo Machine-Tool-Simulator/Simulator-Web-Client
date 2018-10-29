@@ -179,7 +179,7 @@ function setAbsPos() {
 
 	// Resetting button colors
     resetColors();
-		if (gotoSelected!=1 || dooneSelected!=1 || powerfeedSelected !=1){
+		if (gotoSelected!=1 && dooneSelected!=1 && powerfeedSelected !=1){
 			resetfunctionbutton();
 		}
 
