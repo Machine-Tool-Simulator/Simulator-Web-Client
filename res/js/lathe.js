@@ -56,7 +56,7 @@ let videos = [
     {
         "index":6,
         "title":"Constant SFM",
-        "src":"https://drive.google.com/file/d/1ZF2dHnq0NpgBNq0NZqUyYM3SWh4oEMje/preview",
+        "src":"https://drive.google.com/file/d/1jnq_N92G--HP1bjzjdfzLLCaSHbjOfe3/preview",
         "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Select \"Spin Speed\" using the button below the control screen to set RPM </br>2. Enter \"250\" as the value using the numeric keypad.</br>3. Press the \"ABS SET\" button to set constant SFM.",
         "tasks":[
             {
