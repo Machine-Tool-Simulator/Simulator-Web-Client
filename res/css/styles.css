@@ -149,18 +149,26 @@ input#xvar {
   border: 1px solid #978484!important;
   border-radius: 5px;
   height: 50px;
-  width:80px;
+  width:120px;
+    margin:40% 0 0 0;
 }
 
 input#zvar {
   border: 1px solid #978484!important;
   border-radius: 5px;
   height: 50px;
-  width: 80px;
+  width: 120px;
+    margin:0 0 10% 0;
 }
 
 label {
   font-size: 20px;
+}
+
+.XZ-coord {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .text_row1 {
@@ -169,6 +177,7 @@ label {
   height: 50%;
   align-items: flex-start;
   justify-content: space-between;
+    margin: 0 10% 0;
 }
 
 p#p1 {
@@ -177,7 +186,7 @@ p#p1 {
 label#tx1 {
     font-size: 10px;
 }
-input#rmp {
+input#rpm {
     width: 30%;
 }
 input#overrite {
