@@ -57,7 +57,8 @@
                 <p id="p2"> <label id='tx1'>Feed Rate </label> <input id=frate type="text" value="" name="frate" disabled/><br /></p>
                 <p id="p1"> <label id='tx1'>Override </label> <input id=overrite type="text" value="" name="overrite" disabled/><br /></p>
               </div>
-            </div>
+
+          </div>
 
           <input type="text" value="" id="buffer" readonly>
 
@@ -192,13 +193,13 @@
             <input type="button" class="fbutton" value="3" onclick="numberPressed(this)"; />
           </div>
           <div class = "row">
-            <button class = "buttonp" onclick="negBuffer();">+/-</button>
+            <input type="button" class="fbutton" value="+/-" onclick="negBuffer()"; />
             <input type="button" class="fbutton" value="0" onclick="numberPressed(this)"; />
-            <input type="button" class="buttond" value="." onclick="numberPressed(this)"; />
+            <input type="button" class="fbutton" value="." onclick="numberPressed(this)"; />
           </div>
           <div class = "row">
-            <button class = "buttona">*</button>
-            <input type="button" class="buttonr" value="RESTORE" onclick="restore()"; />
+            <input type="button" class="fbutton" id="abtn" value="*" />
+            <input type="button" class="fbutton" id="restorebtn" value="RESTORE" onclick="restore()"; />
           </div>
         </div>
         <div class = "buttomlogo">
