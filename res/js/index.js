@@ -1,5 +1,8 @@
 let videoCounter = 0;
 let selectedCoord = 0;
+let gotoSelected = 0;
+let dooneSelected = 0;
+let powerfeedSelected = 0;
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
 
@@ -9,6 +12,7 @@ let gotobutton = getById('f4btn');
 let restorebutton = getById('f6btn');
 let rpmbutton = getById('f7btn');
 let toolretbutton = getById('f8btn');
+let coarsespeedbutton = getById('FC');
 
 let canSubmit = true;
 let currentTasks = null;
@@ -22,7 +26,7 @@ window.onload = function() {
         selectedCoord = 1;
         controlPressed("X");
 	});
-	
+
 	zbutton.addEventListener('click', function() {
         resetColors();
 		zbutton.style.backgroundColor = 'rgb(0,0,0)';
@@ -34,16 +38,29 @@ window.onload = function() {
         resetColors();
         powerfeedbutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
+				powerfeedSelected =1;
+				setfuncitonbutton();
     });
 
     doonebutton.addEventListener('click', function() {
         resetColors();
         doonebutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
+				document.getElementById('f1').value = 'TAPER';
+				document.getElementById('f2').value = 'RADIUS';
+				document.getElementById('f3').value = 'FILLET';
+				document.getElementById('f4').value = '';
+				document.getElementById('f5').value = 'THREAD REPAIR';
+				document.getElementById('f6').value = '';
+				document.getElementById('f7').value = '';
+				document.getElementById('f8').value = 'RETURN';
+				dooneSelected = 1;
     });
 
     gotobutton.addEventListener('click', function() {
         resetColors();
+				setfuncitonbutton();
+				gotoSelected = 1;
         gotobutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
     });
@@ -52,6 +69,7 @@ window.onload = function() {
         resetColors();
         rpmbutton.style.backgroundColor = 'rgb(135,206,250)';
 		selectedCoord = 3;
+				setfuncitonbutton();
 	});
 
     toolretbutton.addEventListener('click', function() {
@@ -59,14 +77,64 @@ window.onload = function() {
             resetColors();
             toolretbutton.style.backgroundColor = 'rgb(135,206,250)';
             selectedCoord = 0;
-		}
+					}
+
+
+			if (document.getElementById('f8').value == 'RETURN'){
+					resetfunctionbutton();
+			}
+			else{
+					setfuncitonbutton();
+			}
+
+
     });
 
 	// When value entered, want to exit that button's mode
     restorebutton.addEventListener('click', function() {
         resetColors();
     });
+
+		coarsespeedbutton.addEventListener('click', function() {
+				if (coarsespeedbutton.value == 'F'){
+						coarsespeedbutton.value = 'C'
+				}
+				else if (coarsespeedbutton.value == 'C') {
+						coarsespeedbutton.value = 'F'
+
+				}
+				else{
+						coarsespeedbutton.value = 'F'
+				}
+		});
+
 }
+
+function setfuncitonbutton(){
+	document.getElementById('f1').value = '';
+	document.getElementById('f2').value = '';
+	document.getElementById('f3').value = '';
+	document.getElementById('f4').value = '';
+	document.getElementById('f5').value = '';
+	document.getElementById('f6').value = '';
+	document.getElementById('f7').value = '';
+	document.getElementById('f8').value = 'RETURN';
+}
+
+function resetfunctionbutton(){
+	document.getElementById('f1').value = '';
+	document.getElementById('f2').value = 'POWER FEED';
+	document.getElementById('f3').value = 'DO ONE';
+	document.getElementById('f4').value = 'GO TO';
+	document.getElementById('f5').value = 'MAX RPM';
+	document.getElementById('f6').value = 'RETURN HOME';
+	document.getElementById('f7').value = 'SPIN SPEED';
+	document.getElementById('f8').value = 'TOOL #';
+	gotoSelected = 0;
+	dooneSelected = 0;
+	powerfeedSelected = 0;
+}
+
 
 function resetColors() {
     xbutton.style.backgroundColor = 'rgb(236,210,175)';
@@ -76,6 +144,7 @@ function resetColors() {
     gotobutton.style.backgroundColor = '';
     rpmbutton.style.backgroundColor = '';
     toolretbutton.style.backgroundColor = '';
+
 }
 
 /** Console controls */
@@ -110,6 +179,9 @@ function setAbsPos() {
 
 	// Resetting button colors
     resetColors();
+		if (gotoSelected!=1 || dooneSelected!=1 || powerfeedSelected !=1){
+			resetfunctionbutton();
+		}
 
 	let buffer = getById('buffer');
 	if (buffer.value.length <= 0) return;
@@ -134,6 +206,7 @@ function setIncPos() {
 
 	// Resetting button colors
     resetColors();
+		resetfunctionbutton();
 
 	let buffer = getById('buffer');
 	if (buffer.value.length <= 0) return;
@@ -247,4 +320,28 @@ function negBuffer() {
 /** Helpers */
 function getById(id) {
 	return document.getElementById(id);
+}
+
+ // ** For the timer */
+
+document.getElementById('timer').innerHTML = 20 + ":" + 05;
+startTimer();
+
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  //if(m<0){alert('timer completed')}
+
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
 }
