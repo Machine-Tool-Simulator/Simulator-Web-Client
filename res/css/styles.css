@@ -636,3 +636,14 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
   font-weight: bold;
   cursor: pointer;
 }
+
+#Timer {
+  background-color:#419D78;
+  color:#EFD0CA;
+  font-size:20px;
+  text-align:center;
+}
+
+#group3 {
+  background-color: #black;
+}
