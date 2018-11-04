@@ -98,17 +98,17 @@ let videos = [
                 "press":"GOTO",
                 "highlight":true
             },
-			{
-				"press":"X",
-				"highlight":true
-			},
-			{
+            {
+                "press":"X",
+                "highlight":true
+            },
+            {
                 "press":"ABS_SET",
                 "conditions":{
                     "buffer":3
                 },
                 "highlight":true
-			},
+            },
             {
                 "press":"TOOLRET",
                 "highlight":true
@@ -146,7 +146,7 @@ let videos = [
                 "highlight":true
             }
         ]
-	},
+    },
     {
         "index":10,
         "title":"Power feed",
@@ -166,7 +166,7 @@ let videos = [
                 "highlight":true
             },
             {
-                "press":"ABS_SET",
+                "press":"INC_SET",
                 "conditions":{
                     "buffer":-1
                 },
@@ -225,7 +225,7 @@ let videos = [
         "src":"https://drive.google.com/file/d/1vP4tao9LjsF_8KSq-y5N5Iv5cLZq4cRu/preview",
         "text":"A quick way to zero the tool in either direction is to bring the tool near the part and then use a piece of paper to detect when the tool comes in contact. You can then set the X or Z position by pressing X or Z and entering the known value. This is a useful technique because it does not require any material to be removed from the part. However, if a truly accurate position is required, you will need to make a new cut in the component and measure its true dimensions.</br>To do this turn the machine on and remove a small amount of material. Then back the tool off the part without changing the dimensions you were trying to measure. Turn the spindle off and measure the true size of the cut which you have just made with a pair of micrometers. Enter the measured value of the new cut into the computer.",
     },
-	{
+    {
         "index":15,
         "title":"End",
         "src":"https://drive.google.com/file/d/1x1V_azN_2QspTQOpdeY2PmlUX2QXsQ1h/preview",
