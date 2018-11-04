@@ -165,7 +165,7 @@
 				"highlight":true
 			},
 			{
-				"press":"ABS_SET",
+				"press":"INC_SET",
 				"conditions":{
 					"buffer":-1
 				},
