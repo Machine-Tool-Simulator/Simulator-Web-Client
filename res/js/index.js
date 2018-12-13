@@ -57,7 +57,7 @@ window.onload = function () {
         powerfeedbutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
         powerfeedSelected = 1;
-        setfuncitonbutton();
+        setfunctionbutton();
     });
 
     doonebutton.addEventListener('click', function () {
@@ -77,7 +77,7 @@ window.onload = function () {
 
     gotobutton.addEventListener('click', function () {
         resetColors();
-        setfuncitonbutton();
+        setfunctionbutton();
         gotoSelected = 1;
         gotobutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
@@ -87,7 +87,7 @@ window.onload = function () {
         resetColors();
         rpmbutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 3;
-        setfuncitonbutton();
+        setfunctionbutton();
     });
 
     toolretbutton.addEventListener('click', function () {
@@ -103,7 +103,7 @@ window.onload = function () {
             resetfunctionbutton();
             console.log("F8 return clicked")
         } else {
-            setfuncitonbutton();
+            setfunctionbutton();
         }
 
 
@@ -127,7 +127,7 @@ window.onload = function () {
 
 }
 
-function setfuncitonbutton() {
+function setfunctionbutton() {
     document.getElementById('f1').value = '';
     document.getElementById('f2').value = '';
     document.getElementById('f3').value = '';
@@ -428,8 +428,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var camera = new BABYLON.ArcRotateCamera("arcCam",
             0,
-            BABYLON.Tools.ToRadians(45),
-            60, box.position, scene);
+            BABYLON.Tools.ToRadians(55),
+            50, box.position, scene);
         camera.attachControl(canvas, true);
 
         // Keyboard events
@@ -472,7 +472,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/untitled.babylon",
             scene, function (newMeshes) {
                 wheel2 = newMeshes[0];
-                wheel2.position = new BABYLON.Vector3(12, 1, -2.5);
+                wheel2.position = new BABYLON.Vector3(20, 1, 2.5);
                 wheel2.rotation.y = Math.PI;
             });
 
@@ -484,7 +484,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dragInit;
                 var dragDiff;
                 var rotationInit;
-                wheel.position = new BABYLON.Vector3(12, 1, 2.5);
+                wheel.position = new BABYLON.Vector3(20, 1, 7.5);
                 wheel.rotation.y = Math.PI;
                 var getGroundPosition = function () {
                     // Use a predicate to get position on the ground
