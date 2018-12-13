@@ -1,3 +1,10 @@
+
+canvas#canvas {
+    width: 98%;
+    height: 400px;
+    margin-top: 5px;
+}
+
 html {
   height: 70%;
 }
@@ -6,10 +13,6 @@ body {
   height:100%;
 }
 
-
-.split.right {
-    background: #515151;
-}
 
 section {
   border-radius: 5px;
@@ -578,72 +581,94 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
   overflow-x: scroll;
 }
 
-/* Control the right side */
-.right {
-  right: 0;
-  width: 60%;
-  background-color: black;
-  display:flex;
-  justify-content:center;
-  flex-direction:column;
-}
-
 /* Control the left side */
 .left {
-  width: 40%;
-  background-color: white;
-  text-align: center;
-  overflow-y: scroll;
+    width: 33.3%;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+/* Control the middle */
+.mid {
+    left: 33.3%;
+    width: 33.3%;
+    text-align: center;
+}
+
+/* Control the right side */
+.right {
+    left: 66.6%;
+    width: 33.3%;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    background: #515151;
 }
 
 #title {
-  font-size: 1.5em;
-  font-family: Helvetica, Arial, sans-serif;
-  margin-top: 3%;
+    font-size: 1.5em;
+    font-family: Helvetica, Arial, sans-serif;
+    margin-top: 3%;
 }
 
 #cover {
-  display: block;
-  margin: auto;
-  width: 80%;
-  height: 50%;
+    display: block;
+    margin: auto;
+    width: 80%;
+    height: 50%;
 }
 
 #player {
-  /* display property set programmatically */
-  margin: auto;
-  width: 30em;
-  height: 20em;
+    /* display property set programmatically */
+    margin: auto;
+    width: 30em;
+    height: 20em;
 }
 
 #description {
-  font-size: 1em;
-  padding-left: 5%;
-  padding-right: 5%;
-  font-family: Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-#btn-submit {
-  display: table-cell;
-  background-color: #657a8f;
-  border: none;
-  color: white;
-  padding: 0.9% 1.2%;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 7px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
+.button {
+    display: table-cell;
+    background-color: #657a8f;
+    border: none;
+    color: white;
+    padding: 0.9% 1.2%;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #Timer {
-  background-color:#419D78;
-  color:#EFD0CA;
-  font-size:20px;
-  text-align:center;
+    background-color:#419D78;
+    color:#EFD0CA;
+    font-size:20px;
+    text-align:center;
 }
 
-#group3 {
-  background-color: #black;
+.outer1 {
+    fill: black;
+}
+
+.outer2 {
+    fill: #5D5D5D;
+}
+
+.rotatable1 {
+    fill: #5D5D5D;
+}
+
+.rotatable2 {
+    fill: black;
+}
+
+.cutting_tool {
+    fill: #323232;
 }
