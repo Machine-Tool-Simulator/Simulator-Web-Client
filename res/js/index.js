@@ -139,7 +139,7 @@ function setfunctionbutton() {
 }
 
 function resetfunctionbutton() {
-    console.log("resef called")
+    console.log("reset called")
     document.getElementById('f1').value = '';
     document.getElementById('f2').value = 'POWER FEED';
     document.getElementById('f3').value = 'DO ONE';
@@ -774,12 +774,15 @@ function lathe_engine(delta_x, delta_z) {
             lathe.rotation.x = -Math.PI / 2;
 
             // TODO: When move the x coordinate back, do not want to spew z points
-            console.log(lathe_pts);
+            // console.log(lathe_pts);
         }
     }
 
-    if (x + delta_x > 0) box.position.x += delta_x;
-    if (z + delta_z > -16) box.position.z += delta_z;
+    // These are set nicely to keep the box within a desired range
+    if (x + delta_x >=-0.05) box.position.x += delta_x;
+    if (z + delta_z >=-15.6) box.position.z += delta_z;
+
+    console.log(box.position.x + " | " + box.position.z);
 }
 
 
@@ -911,12 +914,9 @@ function dragOne() {
 
     var calc = (rot_one * Math.PI + rad_adj);
 
-    //console.log(box.position.z + "|" + rect_xfr + "|" + (box.position.z-rect_xfr));
-    //var currentPosistionx = box.position.z;
-    lathe_engine(0, -(box.position.z - rect_xfr));
-    //console.log(box.position);
+    lathe_engine(0, -(box.position.z - rect_xfr)+5);
 
-    console.log(box.position.z);
+    // Updating value on control
     xCoordinate.value = parseFloat(box.position.z);
 
 }
@@ -962,11 +962,8 @@ function dragTwo() {
 
     var calc = (rot_two * Math.PI + rad_adj);
 
-    //console.log(box.position.x + "|" + rect_xfr + "|" + (box.position.x-rect_xfr));
-    //var currentPosistionx = box.position.x;
-    lathe_engine(-(box.position.x - rect_xfr), 0);
+    lathe_engine(-(box.position.x - rect_xfr)+6, 0);
+
+    // Updating value on control
     zCoordinate.value = parseFloat(box.position.x);
-
-
 }
-
