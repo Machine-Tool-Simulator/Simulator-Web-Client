@@ -11,6 +11,7 @@ html {
 
 body {
   height:100%;
+    margin:0px;
 }
 
 
@@ -586,6 +587,7 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
     width: 33.3%;
     text-align: center;
     overflow-y: scroll;
+    background: #b5b5b5;
 }
 
 /* Control the middle */
@@ -621,8 +623,8 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 #player {
     /* display property set programmatically */
     margin: auto;
-    width: 30em;
-    height: 20em;
+    width: 24em;
+    height: 16em;
 }
 
 #description {
