@@ -606,9 +606,10 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 }
 
 #title {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-family: Helvetica, Arial, sans-serif;
     margin-top: 3%;
+    font-weight: bold;
 }
 
 #cover {
