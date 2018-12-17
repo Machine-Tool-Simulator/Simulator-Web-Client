@@ -2,7 +2,7 @@
  * Code for the control
  */
 
-let videoCounter = 0;
+let videoCounter = -1;
 let selectedCoord = 0;
 let gotoSelected = 0;
 let dooneSelected = 0;
@@ -274,6 +274,8 @@ function spindle(element) {
 
 /** TODO: move essence to server */
 function switchVideo() {
+    // console.log(videoCounter);
+
     let title = getById('title');
     let player = getById('player');
     let description = getById('description');
@@ -291,7 +293,7 @@ function switchVideo() {
         return;	// task not finished
     }
 
-    if (videoCounter++ == 0) {
+    if (videoCounter++ == -1) {
         getById('cover').style.display = 'none';
         player.style.display = 'block';
     }
