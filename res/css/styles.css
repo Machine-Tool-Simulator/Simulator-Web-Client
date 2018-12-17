@@ -634,6 +634,11 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
     font-family: Helvetica, Arial, sans-serif;
 }
 
+/* Setting space for a break element for the description text */
+br {
+    line-height: 170%;
+}
+
 .button {
     display: table-cell;
     background-color: #657a8f;
