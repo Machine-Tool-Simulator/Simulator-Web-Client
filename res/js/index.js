@@ -334,6 +334,12 @@ function completeTask(value) {
             console.log(taskIndex);
         }
     }
+    else if (task.shape) { // If shape
+
+    }
+    else if (task.click) { // If want to check certain shapes clicked
+
+    }
 }
 
 function negBuffer() {
