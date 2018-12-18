@@ -335,11 +335,44 @@ function completeTask(value) {
         }
     }
     else if (task.shape) { // If shape
+        console.log("in here");
 
-    }
-    else if (task.click) { // If want to check certain shapes clicked
+        let i = 0;
+        let j = 0;
 
+        // console.log(lathe_pts);
+        // console.log(task.shape);
+
+        while (j < lathe_pts.length) {
+            // console.log(lathe_pts[j].x);
+            // console.log(task.shape[i].x);
+
+            // Calls function to check each of points to determine if right shape cut out
+            if (compareCoords(lathe_pts[j], task.shape[i])) { // If pts match, continue
+                i++;
+            }
+            j++;
+        }
+
+        console.log("i: " + i + " | j: " + j);
+
+        // Determines if right shape has been cut out
+        if (i === task.shape.length) {
+            console.log("Step completed!");
+            nextTask();
+            console.log(currentTasks);
+            console.log(taskIndex);
+        }
     }
+    // else if (task.click) { // If want to check certain shapes clicked
+    //
+    // }
+}
+
+// Function to check points between lathe object and true shape from lathe.js file
+// to determine if the user has cut out the right file
+function compareCoords(obj1, obj2) {
+    return obj1.x === obj2.x && obj1.y === obj2.y && obj1.z === obj2.z;
 }
 
 function negBuffer() {
@@ -800,6 +833,8 @@ function lathe_engine(delta_x, delta_z) {
     // These are set nicely to keep the box within a desired range
     if (x + delta_x >=-0.05) box.position.x += delta_x;
     if (z + delta_z >=-15.6) box.position.z += delta_z;
+
+    completeTask(null); // Need to check shape cut out
 
     // console.log(box.position.x + " | " + box.position.z);
 }

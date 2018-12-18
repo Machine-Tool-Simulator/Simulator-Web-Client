@@ -4,7 +4,25 @@ let videos = [
         "index":1,
         "title":"Introduction",
         "src":"https://drive.google.com/file/d/170xPqHaD2Rx57sdlq5Stm0qS5uytzwKI/preview",
-        "text":"Welcome to the lathe. The lathe is a machine that we can use to make metal parts that have a cylindrical shape. It works by spinning around a piece of metal and cutting away material from it.<br>For example, a lathe was used to make several of the parts of this model sterling engine, such as this part called a flywheel, this part called an axel, and this part called a bushing.<br>Let's look at the process for making a bushing."
+        "text":"Welcome to the lathe. The lathe is a machine that we can use to make metal parts that have a cylindrical shape. It works by spinning around a piece of metal and cutting away material from it.<br>For example, a lathe was used to make several of the parts of this model sterling engine, such as this part called a flywheel, this part called an axel, and this part called a bushing.<br>Let's look at the process for making a bushing.",
+        "tasks":[
+            {
+                "shape":[
+                    {
+                        "x":2,"y":0,"z":0
+                    },
+                    {
+                        "x":2,"y":8,"z":0
+                    },
+                    {
+                        "x":4,"y":8,"z":0
+                    },
+                    {
+                        "x":4,"y":16,"z":0
+                    }
+                ]
+            }
+        ]
     },
     {
         "index":2,
