@@ -582,6 +582,17 @@ window.addEventListener('DOMContentLoaded', function () {
             });
 
 
+        BABYLON.SceneLoader.ImportMesh("", "", "res/models/Tailstock.STL",
+            scene, function (newMeshes) {
+                tailstock = newMeshes[0];
+                tailstock.position = new BABYLON.Vector3(-6,-7,29);
+                tailstock.rotation.x = -Math.PI/2;
+                var tailstock_scale = .05;
+                tailstock.scaling.x = tailstock_scale;
+                tailstock.scaling.y = tailstock_scale;
+                tailstock.scaling.z = tailstock_scale;
+            });
+
         var frameRate = 10;
 
 
