@@ -838,6 +838,9 @@ function lathe_engine(delta_x, delta_z) {
     if (x + delta_x >=-0.05) box.position.x += delta_x;
     if (z + delta_z >=-15.6) box.position.z += delta_z;
 
+    console.log(box.position.x);
+    console.log(box.position.z);
+
     completeTask(null); // Need to check shape cut out
 
     // console.log(box.position.x + " | " + box.position.z);
