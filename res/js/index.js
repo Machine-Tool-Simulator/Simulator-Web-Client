@@ -693,14 +693,14 @@ window.addEventListener('DOMContentLoaded', function () {
               // tailstock.animations.push(yRot);
               // var chuckAnim = scene.beginAnimation(tailstock,0,2*frameRate,true,0.1);
               // scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true, 0.001);
-            //  music.play();
+              music.play();
               fwdOn = 1;
             }
         });
 
         document.getElementById("off").addEventListener("click", function () {
             scene.stopAnimation(Chuck1);
-          //  music.stop();
+            music.stop();
             fwdOn = 0;
         });
 
