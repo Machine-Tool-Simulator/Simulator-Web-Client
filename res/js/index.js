@@ -13,7 +13,7 @@ let sequenceIdx = 0;
 let gotoLimitx = 1000;
 let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
-let gotoLmitiNz = -1000;
+let gotoLimitNz = -1000;
 let finecoarse = 0.0025;
 
 let xbutton = getById('Xbutton');
@@ -36,8 +36,7 @@ let zCoordinate = getById('zvar');
 let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #AbsSet, #Zbutton"), i;
 /** Initialization */
 window.onload = function () {
-    xCoordinate.value = parseFloat(5);
-    zCoordinate.value = parseFloat(5);
+
 
     xbutton.addEventListener('click', function () {
         resetColors();
@@ -160,8 +159,8 @@ function resetfunctionbutton() {
     pressed = "";
     gotoLimitx = 1000;
     gotoLimitz = 1000;
-    gotoLmitiNx = -1000;
-    gotoLmitiNz = -1000;
+    gotoLimitNx = -1000;
+    gotoLimitNz = -1000;
 }
 
 
@@ -422,6 +421,9 @@ window.addEventListener('DOMContentLoaded', function () {
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
         box.position = new BABYLON.Vector3(6, -3, 5);
 
+        xCoordinate.value = parseFloat(box.position.x);
+        zCoordinate.value = parseFloat(box.position.z);
+
         lathe_pts = [
             // new BABYLON.Vector3(4, 0, 0),
             new BABYLON.Vector3(2, 0, 0),
@@ -607,12 +609,11 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMesh.rotation.x = newRotation;
                     console.log(box.position);
                     console.log('box------------limitx')
-                    console.log(gotoLimitx);
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && box.position.x < gotoLimitx) {
                               box.position.x += finecoarse;
                               xCoordinate.value = parseFloat(box.position.x);
-                          } else if (currentMesh == wheel2 && box.position.z > gotoLmitiNz) {
+                          } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
                               box.position.z -= finecoarse;
                               zCoordinate.value = parseFloat(box.position.z);
                           }
@@ -722,20 +723,19 @@ window.addEventListener('DOMContentLoaded', function () {
                     var GoToXPosition = parseFloat(xCoordinate.value);
                     var GoToZPosition = parseFloat(zCoordinate.value);
 
-                    if(GoToZPosition>box.position.x){
-                      gotoLimitz = GoToXPosition;
+                    if(GoToZPosition>box.position.z){
+                      gotoLimitz = GoToZPosition;
                     }
                     else{
-                      gotoLmitiNz = GoToXPosition;
+                      gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition>box.position.z){
-                      gotoLimitx = GoToZPosition;
+                    if(GoToXPosition>box.position.x){
+                      gotoLimitx = GoToXPosition;
                     }
                     else{
-                      gotoLimitNx = GoToZPosition;
+                      gotoLimitNx = GoToXPosition;
                     }
-
                 }
             }, false);
 
