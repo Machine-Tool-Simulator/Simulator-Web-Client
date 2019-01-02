@@ -867,7 +867,7 @@ function lathe_engine(delta_x, delta_z) {
     console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
 
     // These are set nicely to keep the box within a desired range
-    if (x + delta_x >=-0.05 &&
+    if (x + delta_x >=-0.025 &&
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
