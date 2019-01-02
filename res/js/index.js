@@ -15,6 +15,8 @@ let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
 let delta = 0.025;
+let home_position_x = 6;
+let home_position_z = 5;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -739,18 +741,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames.push({
                     frame: 2 * frameRate1,
-                    value: 0
+                    value: home_position_z
                 });
 
                 var itHasStopped = function () {
                     //alert('itHasStopped func reports the animation stopped');
-                    box.position.z = 0;
-                    xCoordinate.value = parseFloat(box.position.z);
+                    box.position.z = home_position_z;
+                    zCoordinate.value = parseFloat(box.position.z);
                 }
 
                 GoToAnimationX.setKeys(keyFrames);
 
-                var GoToAnimationZ = new BABYLON.Animation('GotoAnimationZ', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+                var GoToAnimationZ = new BABYLON.Animation('GotoAnimation', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
                 console.log(box.position.x);
                 var keyFrames2 = [];
                 keyFrames2.push({
@@ -760,12 +762,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames2.push({
                     frame: 2 * frameRate1,
-                    value: 0
+                    value: home_position_x
                 });
 
                 var itHasStopped2 = function () {
-                    box.position.x = 0;
-                    zCoordinate.value = parseFloat(box.position.x);
+                    box.position.x = home_position_x;
+                    xCoordinate.value = parseFloat(box.position.x);
                     scene.beginDirectAnimation(box, [GoToAnimationX], 0, 2 * frameRate, false, 1, itHasStopped);
                 }
 
