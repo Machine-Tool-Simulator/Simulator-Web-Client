@@ -419,7 +419,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
-        box.position = new BABYLON.Vector3(6, -3, 5);
+        box.position = new BABYLON.Vector3(home_position_x, -3, home_position_z);
 
         xCoordinate.value = parseFloat(box.position.x);
         zCoordinate.value = parseFloat(box.position.z);
