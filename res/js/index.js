@@ -107,8 +107,6 @@ window.onload = function () {
         } else {
             setfunctionbutton();
         }
-
-
     });
 
     // When value entered, want to exit that button's mode
@@ -419,7 +417,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
-        box.position = new BABYLON.Vector3(6, -3, 4);
+        box.position = new BABYLON.Vector3(6, -3, 5);
 
         xCoordinate.value = parseFloat(box.position.x);
         zCoordinate.value = parseFloat(box.position.z);
@@ -519,7 +517,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/untitled.babylon",
             scene, function (newMeshes) {
                 wheel2 = newMeshes[0];
-                wheel2.position = new BABYLON.Vector3(20, 1, 1.5);
+                wheel2.position = new BABYLON.Vector3(20, 1, 2.5);
                 wheel2.rotation.y = Math.PI;
             });
 
@@ -531,7 +529,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dragInit;
                 var dragDiff;
                 var rotationInit;
-                wheel.position = new BABYLON.Vector3(20, 1, 6.5);
+                wheel.position = new BABYLON.Vector3(20, 1, 7.5);
                 wheel.rotation.y = Math.PI;
                 var getGroundPosition = function () {
                     // Use a predicate to get position on the ground
@@ -599,6 +597,8 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
+
+
                     console.log(box.position);
                     console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
@@ -633,7 +633,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/Tailstock.STL",
             scene, function (newMeshes) {
                 tailstock = newMeshes[0];
-                tailstock.position = new BABYLON.Vector3(-6,-7,27);
+                tailstock.position = new BABYLON.Vector3(-6,-7,29);
                 tailstock.rotation.x = -Math.PI/2;
                 var tailstock_scale = .05;
                 tailstock.scaling.x = tailstock_scale;
@@ -864,16 +864,29 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
-    // These are set nicely to keep the box within a desired range
-    if (x + delta_x >=-0.05) box.position.x += delta_x;
-    if (z + delta_z >=-15.6) box.position.z += delta_z;
+    var tmp1 = x + delta_x;
+    var tmp2 = z + delta_z;
 
-    console.log(box.position.x);
-    console.log(box.position.z);
+    console.log(tmp1 + " | " + tmp2);
+    console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
+
+    // These are set nicely to keep the box within a desired range
+    if (x + delta_x >=-0.05 &&
+        box.position.x + delta_x >= gotoLimitNx &&
+        box.position.x + delta_x <= gotoLimitx) {
+        box.position.x += delta_x;
+    }
+
+    if (z + delta_z >=-15.6 &&
+        box.position.z + delta_z >= gotoLimitNz &&
+        box.position.z + delta_z <= gotoLimitz) {
+        box.position.z += delta_z;
+    }
+
+    xCoordinate.value = parseFloat(box.position.x);
+    zCoordinate.value = parseFloat(box.position.z);
 
     completeTask(null); // Need to check shape cut out
-
-    // console.log(box.position.x + " | " + box.position.z);
 }
 
 
@@ -1006,10 +1019,6 @@ function dragOne() {
     var calc = (rot_one * Math.PI + rad_adj);
 
     lathe_engine(0, -(box.position.z - rect_xfr)+5);
-
-    // Updating value on control
-    xCoordinate.value = parseFloat(box.position.z);
-
 }
 
 var rot_two = 0;
@@ -1054,7 +1063,4 @@ function dragTwo() {
     var calc = (rot_two * Math.PI + rad_adj);
 
     lathe_engine(-(box.position.x - rect_xfr)+6, 0);
-
-    // Updating value on control
-    zCoordinate.value = parseFloat(box.position.x);
 }
