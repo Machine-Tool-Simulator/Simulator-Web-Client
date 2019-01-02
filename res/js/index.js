@@ -419,7 +419,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
-        box.position = new BABYLON.Vector3(6, -3, 5);
+        box.position = new BABYLON.Vector3(6, -3, 4);
 
         xCoordinate.value = parseFloat(box.position.x);
         zCoordinate.value = parseFloat(box.position.z);
@@ -432,8 +432,6 @@ window.addEventListener('DOMContentLoaded', function () {
             new BABYLON.Vector3(4, 16, 0),
         ];
 
-// console.log(lathe_pts);
-
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
             shape: lathe_pts,
             cap: Mesh.CAP_ALL,
@@ -441,15 +439,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        // var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
-        // chuck.position = new BABYLON.Vector3(0, 0, -17);
-        // // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
-        // chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
-        //
-        // // Setting chuck material
-        // var metal = new BABYLON.StandardMaterial("grass0", scene);
-        // metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
-        // chuck.material = metal;
+        cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 7, diameter: 8}, scene);
+        cyl.position=new BABYLON.Vector3(0,0,-19.5);
+        cyl.rotation.x=Math.PI/2;
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
@@ -527,7 +519,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/untitled.babylon",
             scene, function (newMeshes) {
                 wheel2 = newMeshes[0];
-                wheel2.position = new BABYLON.Vector3(20, 1, 2.5);
+                wheel2.position = new BABYLON.Vector3(20, 1, 1.5);
                 wheel2.rotation.y = Math.PI;
             });
 
@@ -539,7 +531,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dragInit;
                 var dragDiff;
                 var rotationInit;
-                wheel.position = new BABYLON.Vector3(20, 1, 7.5);
+                wheel.position = new BABYLON.Vector3(20, 1, 6.5);
                 wheel.rotation.y = Math.PI;
                 var getGroundPosition = function () {
                     // Use a predicate to get position on the ground
@@ -641,7 +633,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/Tailstock.STL",
             scene, function (newMeshes) {
                 tailstock = newMeshes[0];
-                tailstock.position = new BABYLON.Vector3(-6,-7,29);
+                tailstock.position = new BABYLON.Vector3(-6,-7,27);
                 tailstock.rotation.x = -Math.PI/2;
                 var tailstock_scale = .05;
                 tailstock.scaling.x = tailstock_scale;
@@ -652,7 +644,7 @@ window.addEventListener('DOMContentLoaded', function () {
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.STL",
                 scene, function (newMeshes) {
                     Chuck1 = newMeshes[0];
-                    Chuck1.position = new BABYLON.Vector3(0, 0, -17);
+                    Chuck1.position = new BABYLON.Vector3(0, 0, -23);
                     Chuck1.rotation.y = Math.PI/2;
                     var Chuck1_scale = .025;
                     Chuck1.scaling.x = Chuck1_scale;
