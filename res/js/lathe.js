@@ -24,6 +24,11 @@ let videos = [
         //         ]
         //     }
         // ]
+        "tasks":[
+            {
+                "click": "box"
+            }
+        ]
     },
     {
         "index":2,
@@ -41,7 +46,12 @@ let videos = [
         "index":4,
         "title":"Parts of the Lathe",
         "src":"https://drive.google.com/file/d/11ap4hcucbOaNVDCbi0sh59OPCUD9Yr6o/preview",
-        "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The chuck holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.<br>-----<br><strong>Your turn. On the simulation to the right:</strong><br>In order, select the following parts:<br>1. The tailstock<br>2. The carriage and cutting tool<br>3. The chuck"
+        "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The chuck holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.<br>-----<br><strong>Your turn. On the simulation to the right:</strong><br>In order, select the following parts:<br>1. The tailstock<br>2. The carriage and cutting tool<br>3. The chuck",
+        // "tasks":[
+        //     {
+        //         "click": "box"
+        //     }
+        // ]
     },
     {
         "index":5,
@@ -54,7 +64,7 @@ let videos = [
         "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br>-----<br><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -63,14 +73,14 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":7,
         "title":"Constant RPM",
         "src":"https://drive.google.com/file/d/1SmuPAJPo4dQPUxLYRslcIwyyc7k5JbUD/preview",
         "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.<br>-----<br><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>2. Enter \"500\" as the value using the numeric keypad.<br>3. Press the \"INC SET\" button to set constant RPM.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"RPM",
                 "highlight":true
@@ -82,14 +92,14 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":8,
         "title":"Constant SFM",
         "src":"https://drive.google.com/file/d/1jnq_N92G--HP1bjzjdfzLLCaSHbjOfe3/preview",
         "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.</br>-----</br><strong>Your turn. On the simulation to the right:</strong></br>1. Select \"Spin Speed\" using the button below the control screen to set RPM </br>2. Enter \"250\" as the value using the numeric keypad.</br>3. Press the \"ABS SET\" button to set constant SFM.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"RPM",
                 "highlight":true
@@ -101,7 +111,7 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":9,
@@ -150,7 +160,7 @@ let videos = [
         "title":"Do One (Taper)",
         "src":"https://drive.google.com/file/d/1hsq86aOGg1iudqzyXNDVVQl6JtBGRhrB/preview",
         "text":"Do one allows features like tapered angles and corner radii to be machined. When one of the do one options is selected and specified the Z&amp;X wheels are disabled and instead made to control the coarse and fine feed of the path specified by the do one feature.<br>-----<br><strong>Your turn. On the simulation to the right:</strong></br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"DO ONE\" using the button below the control screen.</br>3. Select \"(TAPER)\" using the button below the control screen.</br>4. Select \"ABS SET\" to execute the \"DO ONE\" feature.</br>5. Exit \"DO ONE\" mode by selecting \"TOOL # (RETURN)\" using the button below the control screen.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -175,14 +185,14 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":17,
         "title":"Power Feed",
         "src":"https://drive.google.com/file/d/1tWIUTssDx2n-iAmm5j608SQRxRY96Ii6/preview",
         "text":"Power feed can be used to move the carriage at a constant rate in one direction. The direction and distance of motion is specified with the inc key while the speed can be set in inches per minute or inches per revolution with the feed speed arrows. Note that the machine door must be closed to engage the power feed, as it must be during any operation where the carriage will be moved under computer control.<br>-----<br><strong>Your turn. On the simulation to the right:</strong></br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"POWER FEED\" using the button below the control screen.</br>3. Select the \"Z\" button to indicate that the power feed will be in the z-direction.</br>4. Enter \"-1\" as the value for the power feed (click the number 1 and then use the \"+/-\" button to enter a negative value).</br>5. Select \"INC SET\" to set the power feed.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -206,14 +216,14 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":18,
         "title":"Return Home",
         "src":"https://drive.google.com/file/d/1zP_OjZrycEvLBUMsyqBJ3aP8Rr2RzORD/preview",
         "text":"Go home returns the machine to the home position, which can be set in the setup menu. Again, the machine door must be closed in order for this feature to function.<br>-----<br><strong>Your turn. On the simulation to the right:</strong></br>1. Select \"RETURN HOME\" using the button below the control screen.</br>2. Select \"GO\" under feed to return the tool to the home position.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"RETURNHOME",
                 "highlight":true
@@ -222,14 +232,14 @@ let videos = [
                 "press":"GO",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":19,
         "title":"Set Tool Number",
         "src":"https://drive.google.com/file/d/1DSntmr1vDUYpFi8cDyWbpc2DSOLgIKiw/preview",
         "text":"Tool number allows you to switch between the various tools that you have programmed into the tool table. Since each tool has a different size you will have different x and z values for a given carriage position.<br>-----<br><strong>Your turn. On the simulation to the right:</strong></br>1. Select \"TOOL\" using the button below the control screen.</br>2. Select tool 1 by entering \"1\" on the keypad.</br>Select \"ABS SET\" to enter the tool.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"TOOLRET",
                 "highlight":true
@@ -241,7 +251,7 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":20,
