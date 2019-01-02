@@ -680,3 +680,7 @@ br {
 .cutting_tool {
     fill: #323232;
 }
+
+hr {
+    margin-bottom: 15px;
+}
