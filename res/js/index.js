@@ -14,7 +14,7 @@ let gotoLimitx = 1000;
 let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
-let finecoarse = 0.0025;
+let delta = 0.025;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -117,10 +117,10 @@ window.onload = function () {
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
-            finecoarse = 0.0025*4;
+            delta = 0.025*4;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
-            finecoarse = 0.0025;
+            delta = 0.025;
         } else {
             coarsespeedbutton.value = 'F'
         }
@@ -496,8 +496,6 @@ window.addEventListener('DOMContentLoaded', function () {
             inputMap[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
         }));
 
-        var delta = .1;
-
 // Game/Render loop
         scene.onBeforeRenderObservable.add(() => {
             if (inputMap["d"] || inputMap["ArrowRight"]) {
@@ -603,20 +601,16 @@ window.addEventListener('DOMContentLoaded', function () {
                     console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && box.position.x < gotoLimitx) {
-                              box.position.x += finecoarse;
-                              xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(delta,0);
                           } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
-                              box.position.z -= finecoarse;
-                              zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,-delta);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
                           if (currentMesh == wheel && box.position.x > gotoLimitNx) {
-                              box.position.x -= finecoarse;
-                              xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(-delta,0);
                           } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
-                              box.position.z += finecoarse;
-                              zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,delta);
                           }
                       }
 
