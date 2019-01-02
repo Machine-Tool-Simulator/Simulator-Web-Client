@@ -12,6 +12,9 @@ let sequence = [];
 let sequenceIdx = 0;
 let gotoLimitx = 1000;
 let gotoLimitz = 1000;
+let gotoLimitNx = -1000;
+let gotoLimitNz = -1000;
+let finecoarse = 0.0025;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -33,8 +36,7 @@ let zCoordinate = getById('zvar');
 let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #AbsSet, #Zbutton"), i;
 /** Initialization */
 window.onload = function () {
-    xCoordinate.value = parseFloat(0);
-    zCoordinate.value = parseFloat(0);
+
 
     xbutton.addEventListener('click', function () {
         resetColors();
@@ -117,9 +119,10 @@ window.onload = function () {
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
+            finecoarse = 0.0025*4;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
-
+            finecoarse = 0.0025;
         } else {
             coarsespeedbutton.value = 'F'
         }
@@ -156,6 +159,8 @@ function resetfunctionbutton() {
     pressed = "";
     gotoLimitx = 1000;
     gotoLimitz = 1000;
+    gotoLimitNx = -1000;
+    gotoLimitNz = -1000;
 }
 
 
@@ -398,6 +403,8 @@ var box;
 var lathe;
 var scene;
 var lathe_pts;
+var tailstock;
+var Chuck1;
 
 var Mesh = BABYLON.Mesh; // Shortform for BABYLON.Mesh
 
@@ -413,6 +420,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
         box.position = new BABYLON.Vector3(6, -3, 5);
+
+        xCoordinate.value = parseFloat(box.position.x);
+        zCoordinate.value = parseFloat(box.position.z);
 
         lathe_pts = [
             // new BABYLON.Vector3(4, 0, 0),
@@ -431,15 +441,15 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
-        chuck.position = new BABYLON.Vector3(0, 0, -17);
-        // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
-        chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
-
-        // Setting chuck material
-        var metal = new BABYLON.StandardMaterial("grass0", scene);
-        metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
-        chuck.material = metal;
+        // var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
+        // chuck.position = new BABYLON.Vector3(0, 0, -17);
+        // // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
+        // chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
+        //
+        // // Setting chuck material
+        // var metal = new BABYLON.StandardMaterial("grass0", scene);
+        // metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
+        // chuck.material = metal;
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
@@ -599,21 +609,24 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMesh.rotation.x = newRotation;
                     console.log(box.position);
                     console.log('box------------limitx')
-                    console.log(gotoLimitx);
                     if (currentMesh.rotation.x > currentMeshX) {
-                        if (currentMesh == wheel && box.position.x < gotoLimitx) {
-                            box.position.x += 0.1;
-                        } else if (currentMesh == wheel2) {
-                            box.position.z -= 0.1;
-                        }
+                          if (currentMesh == wheel && box.position.x < gotoLimitx) {
+                              box.position.x += finecoarse;
+                              xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
+                              box.position.z -= finecoarse;
+                              zCoordinate.value = parseFloat(box.position.z);
+                          }
 
-                    } else if (currentMesh.rotation.x < currentMeshX) {
-                        if (currentMesh == wheel) {
-                            box.position.x -= 0.1;
-                        } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
-                            box.position.z += 0.1;
-                        }
-                    }
+                      } else if (currentMesh.rotation.x < currentMeshX) {
+                          if (currentMesh == wheel && box.position.x > gotoLimitNx) {
+                              box.position.x -= finecoarse;
+                              xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
+                              box.position.z += finecoarse;
+                              zCoordinate.value = parseFloat(box.position.z);
+                          }
+                      }
 
                     return true;
                 }
@@ -636,10 +649,23 @@ window.addEventListener('DOMContentLoaded', function () {
                 tailstock.scaling.z = tailstock_scale;
             });
 
+            BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.STL",
+                scene, function (newMeshes) {
+                    Chuck1 = newMeshes[0];
+                    Chuck1.position = new BABYLON.Vector3(0, 0, -17);
+                    Chuck1.rotation.y = Math.PI/2;
+                    var Chuck1_scale = .025;
+                    Chuck1.scaling.x = Chuck1_scale;
+                    Chuck1.scaling.y = Chuck1_scale;
+                    Chuck1.scaling.z = Chuck1_scale;
+
+                });
+          //  0, 0, -17
+
         var frameRate = 10;
 
 
-        var yRot = new BABYLON.Animation("zRot", "rotation.y", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+        var yRot = new BABYLON.Animation("zRot", "rotation.x", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
 
         var keyFramesR = [];
 
@@ -659,18 +685,22 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         yRot.setKeys(keyFramesR);
 
-        // TODO: Note there is a bug here where the sound keeps playing when press off if FWD is pressed twice
         var fwdOn = 0;
         var music = new BABYLON.Sound("FWDSound", "res/sounds/5959.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
-            scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true);
-            music.play();
-            fwdOn = 1;
-
+            if (fwdOn == 0){
+              Chuck1.animations.push(yRot);
+              var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,0.5);
+              // tailstock.animations.push(yRot);
+              // var chuckAnim = scene.beginAnimation(tailstock,0,2*frameRate,true,0.1);
+              // scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true, 0.001);
+              music.play();
+              fwdOn = 1;
+            }
         });
 
         document.getElementById("off").addEventListener("click", function () {
-            scene.stopAnimation(chuck);
+            scene.stopAnimation(Chuck1);
             music.stop();
             fwdOn = 0;
         });
@@ -678,9 +708,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // Implement GOTO;
         for (i = 0; i < GoTofunction.length; i++) {
             GoTofunction[i].addEventListener('click', function () {
-                console.log('---------------');
-                console.log(sequenceIdx - 1);
-                console.log(sequence[sequenceIdx - 1]);
+
                 if (this.id != sequence[sequenceIdx - 1]) {
                     sequence.push(this.id);
                     pressed += this.id;
@@ -694,11 +722,21 @@ window.addEventListener('DOMContentLoaded', function () {
                     sequenceIdx = 0;
                     var GoToXPosition = parseFloat(xCoordinate.value);
                     var GoToZPosition = parseFloat(zCoordinate.value);
-                    gotoLimitx = GoToZPosition;
-                    gotoLimitz = GoToXPosition;
+
+                    if(GoToZPosition>box.position.z){
+                      gotoLimitz = GoToZPosition;
+                    }
+                    else{
+                      gotoLimitNz = GoToZPosition;
+                    }
+
+                    if(GoToXPosition>box.position.x){
+                      gotoLimitx = GoToXPosition;
+                    }
+                    else{
+                      gotoLimitNx = GoToXPosition;
+                    }
                 }
-                console.log(pressed);
-                // console.log(abSetPressed)
             }, false);
 
             //Implementation of Return Home funciton.
