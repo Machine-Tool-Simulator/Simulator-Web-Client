@@ -309,7 +309,7 @@ function switchVideo(action) {
             currentTasks = video.tasks;
         }
     } else if (action === 'back') {
-        if (videoCounter >= 0) {        // defaulted to -1
+        if (videoCounter > 0) {        // defaulted to -1
             videoCounter--;
             let video = videos[videoCounter];
             title.innerHTML = video.title;
