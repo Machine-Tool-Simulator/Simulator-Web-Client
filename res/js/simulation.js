@@ -1,4 +1,3 @@
-
 /**
  * BabylonJS code
  */
@@ -24,9 +23,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
         box.position = new BABYLON.Vector3(6, -3, 5);
-
-        xCoordinate.value = parseFloat(box.position.x);
-        zCoordinate.value = parseFloat(box.position.z);
+        zOrigin = box.position.z;
+        xOrigin = box.position.x;
+        xCoordinate.value = parseFloat(xOrigin);
+        zCoordinate.value = parseFloat(zOrigin);
 
         lathe_pts = [
             // new BABYLON.Vector3(4, 0, 0),
@@ -36,8 +36,6 @@ window.addEventListener('DOMContentLoaded', function () {
             new BABYLON.Vector3(4, 16, 0),
         ];
 
-// console.log(lathe_pts);
-
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
             shape: lathe_pts,
             cap: Mesh.CAP_ALL,
@@ -45,15 +43,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        // var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
-        // chuck.position = new BABYLON.Vector3(0, 0, -17);
-        // // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
-        // chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
-        //
-        // // Setting chuck material
-        // var metal = new BABYLON.StandardMaterial("grass0", scene);
-        // metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
-        // chuck.material = metal;
+        cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 7, diameter: 8}, scene);
+        cyl.position=new BABYLON.Vector3(0,0,-19.5);
+        cyl.rotation.x=Math.PI/2;
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
@@ -109,8 +101,6 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
             inputMap[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
         }));
-
-        var delta = .1;
 
 // Game/Render loop
         scene.onBeforeRenderObservable.add(() => {
@@ -211,24 +201,28 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
-                    console.log(box.position);
-                    console.log('box------------limitx')
+                    // console.log(box.position);
+                    // console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
-                          if (currentMesh == wheel && box.position.x < gotoLimitx) {
+                          if (currentMesh == wheel && xOrigin < gotoLimitx) {
                               box.position.x += finecoarse;
-                              xCoordinate.value = parseFloat(box.position.x);
-                          } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
+                              xCoordinate.value = parseFloat(xOrigin += finecoarse);
+                              //xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
                               box.position.z -= finecoarse;
-                              zCoordinate.value = parseFloat(box.position.z);
+                              zCoordinate.value = parseFloat(zOrigin -= finecoarse);
+                              //zCoordinate.value = parseFloat(box.position.z);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
-                          if (currentMesh == wheel && box.position.x > gotoLimitNx) {
+                          if (currentMesh == wheel && xOrigin > gotoLimitNx) {
                               box.position.x -= finecoarse;
-                              xCoordinate.value = parseFloat(box.position.x);
-                          } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
+                              xCoordinate.value = parseFloat(xOrigin -= finecoarse);
+                              //xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
                               box.position.z += finecoarse;
-                              zCoordinate.value = parseFloat(box.position.z);
+                              zCoordinate.value = parseFloat(zOrigin += finecoarse);
+                              //zCoordinate.value = parseFloat(box.position.z);
                           }
                       }
 
@@ -256,7 +250,7 @@ window.addEventListener('DOMContentLoaded', function () {
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.STL",
                 scene, function (newMeshes) {
                     Chuck1 = newMeshes[0];
-                    Chuck1.position = new BABYLON.Vector3(0, 0, -17);
+                    Chuck1.position = new BABYLON.Vector3(0, 0, -23);
                     Chuck1.rotation.y = Math.PI/2;
                     var Chuck1_scale = .025;
                     Chuck1.scaling.x = Chuck1_scale;
@@ -290,14 +284,11 @@ window.addEventListener('DOMContentLoaded', function () {
         yRot.setKeys(keyFramesR);
 
         var fwdOn = 0;
-        var music = new BABYLON.Sound("FWDSound", "res/sounds/5959.mp3", scene, null, {loop: true, autoplay: false});
+        var music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
             if (fwdOn == 0){
               Chuck1.animations.push(yRot);
-              var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,0.5);
-              // tailstock.animations.push(yRot);
-              // var chuckAnim = scene.beginAnimation(tailstock,0,2*frameRate,true,0.1);
-              // scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true, 0.001);
+              var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
               music.play();
               fwdOn = 1;
             }
@@ -319,7 +310,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     sequenceIdx += 1;
                     console.log(sequence);
                 }
-
+                //gotofucntion
                 if (pressed == "f4btnXbuttonnumButtonAbsSetZbuttonnumButtonAbsSet"
                     || pressed == "f4btnZbuttonnumButtonAbsSetXbuttonnumButtonAbsSet") {
                     sequence = [];
@@ -327,19 +318,45 @@ window.addEventListener('DOMContentLoaded', function () {
                     var GoToXPosition = parseFloat(xCoordinate.value);
                     var GoToZPosition = parseFloat(zCoordinate.value);
 
-                    if(GoToZPosition>box.position.z){
+                    if(GoToZPosition>zOrigin){
                       gotoLimitz = GoToZPosition;
                     }
                     else{
                       gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition>box.position.x){
+                    if(GoToXPosition>xOrigin){
                       gotoLimitx = GoToXPosition;
                     }
                     else{
                       gotoLimitNx = GoToXPosition;
                     }
+                }
+                //spindle speed: constant rpm
+                else if(pressed == "f7btnnumButtonIncSet"){
+                  scene.stopAnimation(Chuck1);
+                  scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
+                  resetfunctionbutton();
+                }
+
+                else if(pressed == "XbuttonnumButtonAbsSet"){
+                  xOrigin =  parseFloat(xCoordinate.value);
+                  console.log("xorigin: ");
+                  console.log(xOrigin);
+                  xzButtonSelected = 0;
+                  sequence = [];
+                  sequenceIdx = 0;
+                  pressed = "";
+                }
+
+                else if(pressed == "ZbuttonnumButtonAbsSet"){
+                  zOrigin = parseFloat(zCoordinate.value);
+                  console.log("zorigin: ");
+                  console.log(zOrigin);
+                  xzButtonSelected = 0;
+                  sequence = [];
+                  sequenceIdx = 0;
+                  pressed = "";
                 }
             }, false);
 
@@ -357,18 +374,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames.push({
                     frame: 2 * frameRate1,
-                    value: 0
+                    value: home_position_z
                 });
 
                 var itHasStopped = function () {
                     //alert('itHasStopped func reports the animation stopped');
-                    box.position.z = 0;
-                    xCoordinate.value = parseFloat(box.position.z);
+                    box.position.z = home_position_z;
+                    zCoordinate.value = parseFloat(box.position.z);
                 }
 
                 GoToAnimationX.setKeys(keyFrames);
 
-                var GoToAnimationZ = new BABYLON.Animation('GotoAnimationZ', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+                var GoToAnimationZ = new BABYLON.Animation('GotoAnimation', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
                 console.log(box.position.x);
                 var keyFrames2 = [];
                 keyFrames2.push({
@@ -378,12 +395,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames2.push({
                     frame: 2 * frameRate1,
-                    value: 0
+                    value: home_position_x
                 });
 
                 var itHasStopped2 = function () {
-                    box.position.x = 0;
-                    zCoordinate.value = parseFloat(box.position.x);
+                    box.position.x = home_position_x;
+                    xCoordinate.value = parseFloat(box.position.x);
                     scene.beginDirectAnimation(box, [GoToAnimationX], 0, 2 * frameRate, false, 1, itHasStopped);
                 }
 
@@ -476,16 +493,29 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
-    // These are set nicely to keep the box within a desired range
-    if (x + delta_x >=-0.05) box.position.x += delta_x;
-    if (z + delta_z >=-15.6) box.position.z += delta_z;
+    var tmp1 = x + delta_x;
+    var tmp2 = z + delta_z;
 
-    console.log(box.position.x);
-    console.log(box.position.z);
+    console.log(tmp1 + " | " + tmp2);
+    console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
+
+    // These are set nicely to keep the box within a desired range
+    if (x + delta_x >=-0.025 &&
+        box.position.x + delta_x >= gotoLimitNx &&
+        box.position.x + delta_x <= gotoLimitx) {
+        box.position.x += delta_x;
+    }
+
+    if (z + delta_z >=-15.6 &&
+        box.position.z + delta_z >= gotoLimitNz &&
+        box.position.z + delta_z <= gotoLimitz) {
+        box.position.z += delta_z;
+    }
+
+    xCoordinate.value = parseFloat(box.position.x);
+    zCoordinate.value = parseFloat(box.position.z);
 
     completeTask(null); // Need to check shape cut out
-
-    // console.log(box.position.x + " | " + box.position.z);
 }
 
 
@@ -618,10 +648,6 @@ function dragOne() {
     var calc = (rot_one * Math.PI + rad_adj);
 
     lathe_engine(0, -(box.position.z - rect_xfr)+5);
-
-    // Updating value on control
-    xCoordinate.value = parseFloat(box.position.z);
-
 }
 
 var rot_two = 0;
@@ -666,9 +692,6 @@ function dragTwo() {
     var calc = (rot_two * Math.PI + rad_adj);
 
     lathe_engine(-(box.position.x - rect_xfr)+6, 0);
-
-    // Updating value on control
-    zCoordinate.value = parseFloat(box.position.x);
 }
 
 // function for playlist og

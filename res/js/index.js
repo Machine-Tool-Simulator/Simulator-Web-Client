@@ -15,6 +15,13 @@ let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
 let finecoarse = 0.0025;
+let spindleSpeed = 100;
+let zOrigin = 0;
+let xOrigin = 0;
+let xzButtonsSelected = 0;
+let delta = 0.025;
+let home_position_x = 6;
+let home_position_z = 5;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -32,19 +39,8 @@ let currentTasks = null;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
-let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #AbsSet, #Zbutton"), i;
 
-// for the playlist's hamburger bar
-// let hamburger = {
-//   navToggle: document.querySelector('.nav-toggle'),
-//   nav: document.querySelector('nav'),
-//
-//   doToggle: function(e) {
-//     e.preventDefault();
-//     this.navToggle.classList.toggle('expanded');
-//     this.nav.classList.toggle('expanded');
-//   }
-// };
+let GoTofunction = document.querySelectorAll("#f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
 
 /** Initialization */
 window.onload = function () {
@@ -54,6 +50,7 @@ window.onload = function () {
         resetColors();
         xbutton.style.backgroundColor = 'rgb(0,0,0)';
         selectedCoord = 1;
+        xzButtonsSelected = 1;
         controlPressed("X");
 
 
@@ -63,6 +60,7 @@ window.onload = function () {
         resetColors();
         zbutton.style.backgroundColor = 'rgb(0,0,0)';
         selectedCoord = 2;
+        xzButtonsSelected = 1;
         controlPressed("Z");
     });
 
@@ -95,6 +93,7 @@ window.onload = function () {
         gotoSelected = 1;
         gotobutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
+
     });
 
     rpmbutton.addEventListener('click', function () {
@@ -119,22 +118,21 @@ window.onload = function () {
         } else {
             setfunctionbutton();
         }
-
-
     });
 
     // When value entered, want to exit that button's mode
     restorebutton.addEventListener('click', function () {
         resetColors();
+
     });
 
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
-            finecoarse = 0.0025*4;
+            delta = 0.025*4;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
-            finecoarse = 0.0025;
+            delta = 0.025;
         } else {
             coarsespeedbutton.value = 'F'
         }
@@ -177,6 +175,7 @@ function resetfunctionbutton() {
     gotoLimitz = 1000;
     gotoLimitNx = -1000;
     gotoLimitNz = -1000;
+
 }
 
 
@@ -223,7 +222,8 @@ function setAbsPos() {
 
     // Resetting button colors
     resetColors();
-    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1) {
+    //gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1
+    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1 && xzButtonsSelected != 1) {
         resetfunctionbutton();
     }
 
@@ -250,7 +250,7 @@ function setIncPos() {
 
     // Resetting button colors
     resetColors();
-    resetfunctionbutton();
+    //resetfunctionbutton();
 
     let buffer = getById('buffer');
     if (buffer.value.length <= 0) return;
@@ -262,7 +262,10 @@ function setIncPos() {
     let targetVar;
     if (selectedCoord == 1) targetVar = getById('xvar');
     else if (selectedCoord == 2) targetVar = getById('zvar');	// not using else here in case of other weird values
-    else if (selectedCoord == 3) targetVar = getById('rpm');
+    else if (selectedCoord == 3){
+      targetVar = getById('rpm');
+      spindleSpeed = parseFloat(buffer.value);
+    }
 
     if (targetVar.value.length <= 0) targetVar.value = 0;
     targetVar.value = parseFloat(buffer.value); // Do not want to add these, but if did: parseFloat(targetVar.value) +
@@ -502,17 +505,17 @@ function switchVideo(action) {
             alert('Have uncompleted tasks');	// bad practice
             return;	// task not finished
         }
-    
+
         if (videoCounter++ == -1) {
             getById('cover').style.display = 'none';
             player.style.display = 'block';
         }
-    
+
         let video = videos[videoCounter];
         title.innerHTML = video.title;
         player.src = video.src;
         description.innerHTML = video.text;
-    
+
         if (video.tasks) {
             currentTasks = video.tasks;
         }
