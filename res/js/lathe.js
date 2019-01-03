@@ -1,29 +1,60 @@
-// TODO: remove this file
+// TODO: organize this file with the other (the other is the original)
 let videos = [
     {
         "index":1,
-        "title":"Lathe Introduction and Safety",
+        "title":"Introduction",
+        "src":"https://drive.google.com/file/d/170xPqHaD2Rx57sdlq5Stm0qS5uytzwKI/preview",
+        "text":"Welcome to the lathe. The lathe is a machine that we can use to make metal parts that have a cylindrical shape. It works by spinning around a piece of metal and cutting away material from it.<br>For example, a lathe was used to make several of the parts of this model sterling engine, such as this part called a flywheel, this part called an axel, and this part called a bushing.<br>Let's look at the process for making a bushing.",
+        // Uncomment for shape checking
+        // "tasks":[
+        //     {
+        //         "shape":[
+        //             {
+        //                 "x":2,"y":0,"z":0
+        //             },
+        //             {
+        //                 "x":2,"y":8,"z":0
+        //             },
+        //             {
+        //                 "x":4,"y":8,"z":0
+        //             },
+        //             {
+        //                 "x":4,"y":16,"z":0
+        //             }
+        //         ]
+        //     }
+        // ]
+    },
+    {
+        "index":2,
+        "title":"Timelapse",
+        "src":"https://drive.google.com/file/d/17_yJl_WwA8M96-jbezJe4RkUmAfHhblS/preview",
+        "text":"[Insert text for timelapse once voiceover]"
+    },  // TODO: Insert text for timelapse when have Nicks'
+    {
+        "index":3,
+        "title":"Safety",
         "src":"https://drive.google.com/file/d/1q-yXx55mwrmt6_tKPmrwYlV8GqNoNNRa/preview",
         "text":"Hello. This tutorial is meant to provide you with basic instruction on the six CNC lathes that we have here in the shop. If your component is cylindrically symmetric, a lathe is probably the machine that you will use to manufacture it.<br>The safety rules for the rest of the shop apply to the lathes as well.<br>1. Always wear safety glasses and a hat when operating any machinery in the shop.<br>2. However there are a few additional precautions that need to be taken when operating a lathe. First, make sure there are no loose items on your body that can get caught in the machine this includes items like watches bracelets necklaces and especially hair<br>3. The lathe will be spinning very fast during manufacturing and there are several protrusions on the lathe which can catch on hair and clothing. Never reach or lean into the work area when the machine is running.<br>4. In addition loading and unloading parts in the Chuck requires using a small square wrench to tighten the jaws. Never under any circumstances leave this wrench in the Chuck, not even for a moment. If the lane has accidentally started while the wrench is in the Chuck, the wrench will be flung out of the machine and could cause serious injury.<br>These are just some of the main safety concerns with the lathe there are others. Before using the lathe on your own, you will need to be trained by one of the shop staff."
     },
     {
-        "index":2,
-        "title":"Main Lathe Features",
-        "src":"https://drive.google.com/file/d/1IHgYYpeR5K5eisdGgXx3MwMpbn-xiD0Y/preview",
-        "text":"There are three main features located inside the lathes workspace:<br>1. The chuck<br>2. The carriage<br>3. And the tailstock<br>The Chuck is used to hold the components in place during manufacturing.<br>The carriage pulls a single point tool and is moved around the component to achieve the desired shape.<br>Lastly, the tailstock is used for drilling holes in the center of the part and for stabilizing long thin parts during machining."
-    },
-    {
-        "index":3,
-        "title":"Digital Readout",
-        "src":"https://drive.google.com/file/d/1ZF2dHnq0NpgBNq0NZqUyYM3SWh4oEMje/preview",
-        "text":"The control panel for the lathe has six options, which can be accessed by pressing the mode button:<br>1. digital readout or DRO<br>2. program<br>3. edit<br>4. setup<br>5. run<br>6. and program in out<br>For basic operation, the only mode you will need is DRO. The last five functions are used for programming the CNC functions of the lathe and will be covered in later tutorials.<br>In DRO mode, the carriage can be moved with the control wheels on the front of the lathe. The left wheel controls the axial motion the z-axis, while the right wheel controls the radial motion the x-axis. Note that the value of the x position is always given as a diameter, not at a radius, so for every inch the carriage moves in the X direction, the value of the x-position will change by two inches. This might seem counterintuitive, but since the diameter is much easier to measure than a radius, it will make the manufacturing process much easier.<br>The carriage can also be moved rapidly with a jog handle between the wheels, but be careful not to run the tool into the Chuck while jogging, and never jog when the tool is in contact with the work piece."
-    },
-    {
         "index":4,
-        "title":"Turning on Spindle",
+        "title":"Parts of the Lathe",
+        "src":"https://drive.google.com/file/d/11ap4hcucbOaNVDCbi0sh59OPCUD9Yr6o/preview",
+        "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The chuck holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>In order, select the following parts:<br>1. The tailstock<br>2. The carriage and cutting tool<br>3. The chuck"
+    },
+    {
+        "index":5,
+        "title":"Loading the Chuck",
+        "src":"https://drive.google.com/file/d/1HrxZ9SqB2KShmBVlPgYjOfM85qTbjMZv/preview",
+        "text":"The area of the spindle where you attach a part into is called the chuck. This particular chuck has six jaws. In order to load a part into the chuck, place it at least one inch into the jaws. You can use a tool called a chuck key to fasten the jaws and tighten them. Press the chuck key into the square hole and twist it clockwise. Tighten it as much as you can. The part is now fastened into the chuck."
+    },
+    {
+        "index":6,
+        "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
-        "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br>-----<br><strong>Your turn. On the console to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.",
-        "tasks":[
+        "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.",
+        /*"tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -32,14 +63,14 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]
+        ]*/
     },
     {
-        "index":5,
+        "index":7,
         "title":"Constant RPM",
         "src":"https://drive.google.com/file/d/1SmuPAJPo4dQPUxLYRslcIwyyc7k5JbUD/preview",
-        "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.<br>-----<br><strong>Your turn. On the console to the right:</strong><br>1. Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>2. Enter \"500\" as the value using the numeric keypad.<br>3. Press the \"INC SET\" button to set constant RPM.",
-        "tasks":[
+        "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>2. Enter \"500\" as the value using the numeric keypad.<br>3. Press the \"INC SET\" button to set constant RPM.",
+        /*"tasks":[
             {
                 "press":"RPM",
                 "highlight":true
@@ -51,14 +82,14 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]
+        ]*/
     },
     {
-        "index":6,
+        "index":8,
         "title":"Constant SFM",
         "src":"https://drive.google.com/file/d/1jnq_N92G--HP1bjzjdfzLLCaSHbjOfe3/preview",
-        "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Select \"Spin Speed\" using the button below the control screen to set RPM </br>2. Enter \"250\" as the value using the numeric keypad.</br>3. Press the \"ABS SET\" button to set constant SFM.",
-        "tasks":[
+        "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"Spin Speed\" using the button below the control screen to set RPM <br>2. Enter \"250\" as the value using the numeric keypad.<br>3. Press the \"ABS SET\" button to set constant SFM.",
+        /*"tasks":[
             {
                 "press":"RPM",
                 "highlight":true
@@ -70,57 +101,56 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]
-    },
-    {
-        "index":7,
-        "title":"Fine/Coarse Feed Options",
-        "src":"https://drive.google.com/file/d/10MDHe6ZNo-oa9aeP8XWQec9a2LAXoJRV/preview",
-        "text":"You can also adjust the speed of the carriage moves with a fine and coarse speed button. When the core speed option is selected, every turn of the handle will adjust the position by 0.8 inches. Selecting fine feed will reduce the feed to point to 0.2 inches.</br>-----</br><strong>Your turn. On the console to the right:</strong></br>1. Switch the lathe from fine to coarse control by selecting \"F/C\" on the keypad.</br>Switch the lathe back from coarse to fine control by selecting \"F\" on the keypad.",
-        "tasks":[
-            {
-                "press":"FC",
-                "highlight":true
-            },
-            {
-                "press":"FC",
-                "highlight":true
-            }
-        ]
-    },
-    {
-        "index":8,
-        "title":"Goto",
-        "src":"https://drive.google.com/file/d/1fdcB7Q7nfVFgnMmRiMPyPNK9acDC8Gq0/preview",
-        "text":"In DRO mode, there are some options to assist manual machining. The go-to lets you move rapidly from one position to another. Set the position by entering go to load, selecting the coordinate of interest, entering the desired value, and pressing \"ABS SET.\" Now when the wheel or jog handle is engaged the carriage will move up to but not beyond the set positions. Exiting out of this mode will negate this feature.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Select \"GO TO\" using the button below the control screen.</br>2. Select the \"X\" button to indicate that the go to coordinate will be in the x-direction.</br>3. Enter \"3\" as the desired x-value.</br>4. Select \"ABS SET\" to set the go to value.</br>5. Exit \"GO TO\" mode by selecting \"TOOL # (RETURN)\" using the button below the control screen.",
-        "tasks":[
-            {
-                "press":"GOTO",
-                "highlight":true
-            },
-            {
-                "press":"X",
-                "highlight":true
-            },
-            {
-                "press":"ABS_SET",
-                "conditions":{
-                    "buffer":3
-                },
-                "highlight":true
-            },
-            {
-                "press":"TOOLRET",
-                "highlight":true
-            }
-        ]
+        ]*/
     },
     {
         "index":9,
-        "title":"Do one",
+        "title":"X and Z Coordinate System",
+        "src":"https://drive.google.com/file/d/16Rsc90nUyvINQ9UJZ2UkgVNnxIpS3HgM/preview",
+        "text":"The lathe measures the cutting tool's position with x and z coordinates. X represents the diameter about the spindle axis. The x coordinate value is twice the distance of the cutting tool from the spindle axis. A smaller x position represents a smaller diameter. A larger x position represents a larger diameter. Z represents the linear direction from left to right. Plus z direction is to the right, minus z direction is to the left."
+    },
+    {
+        "index":10,
+        "title":"X and Z Wheels",
+        "src":"https://drive.google.com/file/d/1FEJn5YMX92adnGUo_1J9pwTq7wtuexuF/preview",
+        "text":"You can manually move the cutting tool by rotating the z wheel and the x wheel.<br>When you rotate the x wheel clockwise, the cutting tool moves closer to the spindle axis, resulting in a smaller x position for a smaller diameter. When you rotate the x wheel counter-clockwise, the cutting tool moves away from the spindle axis resulting in a larger x position or larger diameter.<br>When you rotate the z wheel clockwise, the cutting tool moves to the right, resulting in a greater z position. When you rotate the z wheel counter-clockwise, the cutting tool moves to the left resulting in a lesser z position.<br>You can also move a joystick to move the cutting tool. This is not recommended, since the joystick makes the cutting tool moves so fast that it can be difficult to react if you accidently move the cutting tool into the chuck or into the part.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Using the x and z wheels, move the cutting tool to a position of x = 3 in, z = -4 in."
+    },
+    {
+        "index":11,
+        "title":"Fine and Coarse Control",
+        "src":"https://drive.google.com/file/d/1TZXP9VHU0nqVB3r-EOS4hV4QHJY348zE/preview",
+        "text":"Let's talk about the difference between fine mode and coarse mode. We will use the term fine mode for moving slowly and the term coarse mode for moving quickly. Take a look at how fast the cutting tool moves when the control is set to fine mode and you turn the wheel.<br>Now switch to coarse mode and see how quickly the cutting tool moves when you turn the wheel at the same speed. The cutting tool moves much faster when in coarse mode. This is good when you want to quickly move the tool to a certain position. However, coarse mode moves the cutting tool too quickly for actual cutting. When you are cutting metal, be sure to use fine mode so that the cutting tool moves through the metal slowly. Using fine mode during cutting gives you more control over what you are doing and reduces the chance of breaking tools.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Practice switching between fine and coarse control and adjusting the position of the cutting tool using the x and z wheels."
+    },
+    {
+        "index":12,
+        "title":"Cutting and Setting Z Coordinate System",
+        "src":"https://drive.google.com/file/d/1dDJ7XO4W8aN-Pj1l3LGL1pc-x0nCljBI/preview",
+        "text":"You are now ready to cut some metal. We will start by doing a process called facing off the part. This is how you assemble where z equals 0. Position the cutting tool slightly towards you from the diameter of the part and slightly to the left of the edge of the part.<br>Turn on the spindle.<br>Use the x wheel to move the cutting wheel into the part. Keep moving x wheel until it is no longer making chips, this should be towards the center of the part.<br>Turn the x wheel the other way to move the cutting tool back outside the diameter of the part.<br>Establish this position as the z origin by pressing z, 0, ABS SET.<br>Turn off the spindle.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Face off the part to set the z coordinate system by:<br>1. Positioning the cutting tool slightly towards you from the diameter of teh part and slightly to hte left of the edge of the part.<br>2. Turning on the spindle to cut out a piece of the material.<br>3. Using the x wheel to move the x wheel through to the center of the part (so that you completely remove a section of the material).<br>4. Using the x wheel to move the cutting tool outside the diameter of the wheel.<br>5. Establishing a new z = 0 coordinate system by pressing z, 0, ABS SET.<br>6. Turn off the spindle.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system."
+    },
+    {
+        "index":13,
+        "title":"Setting X Coordinate System",
+        "src":"https://drive.google.com/file/d/1mQvL8J2SCZp_3jK0jatF4MdY9ZFBpCGV/preview",
+        "text":"To measure the dimensions of the part that you have been working on, you can use a tool called calipers. Calipers represent the distance between two points with a very high level of precision. When you move the calipers apart, the distance increases. When you move the calipers closer together, the distance decreases.<br>You are now ready to establish the x coordinate system. Position the cutting tool slightly to the right of z 0 and slightly to the inside of the part's diameter.<br>Turn on the spindle.<br>Use the z wheel to move the cutting tool into the part, making a smaller outside diameter than the rest of the raw material.<br>Reverse the z wheel to bring the cutting tool off of the part.<br>Turn off the spindle.<br>Now you will use the calipers to measure the diameter that you just cut. Open up the calipers and press them onto the outside diameter. Press them together and try to find the smallest number that you can find. In this case, the diameter is reading at about 0.412 inches.<br>To complete the process of establishing the x coordinate system, type in the number that you measured into the control. Press x, then type in the diameter, and then press ABS SET.<br>Now that the coordinate system is established, z 0 represents that far right edge of the part and the x coordinate represents the actual diameter at the position of the cutting tool.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter.<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material.<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the sipndle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system."
+    },
+    {
+        "index":14,
+        "title":"Making an Aggressive Cut",
+        "src":"https://drive.google.com/file/d/1Kl8mL5F-WPkJprA1jA3pvK8afVBku-50/preview",
+        "text":"The previous section demonstrated a few conservative cuts using a depth of cut of 0.03 inches. If you need to remove a lot of material, it can go faster if you use a more aggressive depth of cut, like 0.1 inches. Let's take a look at a depth of cut of 0.1 inches to see what it looks like.<br>It seemed to work fine without any problems. However, keep in mind that if you use a depth of cut that is too deep, there is a risk of breaking the cutting tool. For this reason, the largest depth of cut that you should ever use is 0.1 inches of diameter at once.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Make an aggressive cut by making a depth of cut of approximately 0.1 inches (as opposed to about 0.03 inches)."
+    },
+    {
+        "index":15,
+        "title":"Setting a GoTo Position",
+        "src":"https://drive.google.com/file/d/11gcfT-G8VW5DYYKOnr7Gkb_U9WXfTPDL/preview",
+        "text":"Now you can work on cutting the part to a particular diameter. Let's say for example that the part is supposed to have 0.41 inches diameter and 0.5 inches long. You can use the GoTo function to prepare the lathe for making this.<br>Press GoTo. Press z -0.5 ABS SET. Press x 0.41 ABS SET.<br>The cutting tool now won't move any further than the points you have programmed using GoTo. You will make several small cuts in order to reduce the diameter until it reaches the desired diameter. The amount of diameter that you cut off at once is called a depth of cut. A relatively conservative depth of cut is something like 0.03 inches of diameter at a time, whereas a relatively aggressive depth of cut is something like 0.1 inches of diameter at a time.<br>The steps for making a cut are position the cutting tool to the right of z 0 and one depth of cut inside the part. In this case, the diameter of the raw material is 0.5 inches. In order to make a cut with a depth of 0.03 inches, you will position the cutting tool at an x value of 0.47.<br>Verify that the machine is in fine mode. This is necessary for when you are cutting material.<br>Turn on the spindle.<br>Turn the z wheel counter-clockwise until the tool reaches the programmed GoTo position.<br>Turn the x wheel the same way to move the cutting tool to move the cutting tool away from the spindle axis.<br>Turn the z wheel clockwise until the cutting tool is to the right of z 0 again.<br>Turn the x wheel clockwise until the cutting tool is at a position of 0.03 inches smaller than the existing diameter.<br>Repeat this process, cutting of 0.03 inches of diameter at a time, until the final diameter is reached.<br>The part now has the desired geometry.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Set a GoTo position of x = 1 in. and z = -4 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool. Use the x and z wheels to make the cuts and do not cut out too much material at a time (use a conservative depth of cut, ex. .05 in at a time).<br>4. Position the cutting tool at the proper depth in the x direction and slightly outside the material in the z direction.<br>5. When ready, move the cutting tool into the material using the z wheel.<br>6. Move the cutting tool out of the material in the x direction.<br>7. Move the cutting tool back to a z position to the right of the material<br>8. Move the cutting tool a little further depth of cut in (about .05 more than the previous time).<br>9. Repeat this process until the material has been cut off until the final desired diameter is reached (you have reached the GoTo position and cannot go any further).<br>10. The part should now have the desired geometry. The webpage checks to see that the material is cut with the correct dimensions before you can proceed. If you make a mistake, use the reset button to reset the material and start again."
+    },
+    {
+        "index":16,
+        "title":"Do One (Taper)",
         "src":"https://drive.google.com/file/d/1hsq86aOGg1iudqzyXNDVVQl6JtBGRhrB/preview",
-        "text":"Do one allows features like tapered angles and corner radii to be machined. When one of the do one options is selected and specified the Z&amp;X wheels are disabled and instead made to control the coarse and fine feed of the path specified by the do one feature.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"DO ONE\" using the button below the control screen.</br>3. Select \"(TAPER)\" using the button below the control screen.</br>4. Select \"ABS SET\" to execute the \"DO ONE\" feature.</br>5. Exit \"DO ONE\" mode by selecting \"TOOL # (RETURN)\" using the button below the control screen.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
-        "tasks":[
+        "text":"Do one allows features like tapered angles and corner radii to be machined. When one of the do one options is selected and specified the Z&amp;X wheels are disabled and instead made to control the coarse and fine feed of the path specified by the do one feature.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Select \"DO ONE\" using the button below the control screen.</br>3. Select \"(TAPER)\" using the button below the control screen.</br>4. Select \"ABS SET\" to execute the \"DO ONE\" feature.</br>5. Exit \"DO ONE\" mode by selecting \"TOOL # (RETURN)\" using the button below the control screen.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
+        /*"tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -145,14 +175,14 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]
+        ]*/
     },
     {
-        "index":10,
-        "title":"Power feed",
+        "index":17,
+        "title":"Power Feed",
         "src":"https://drive.google.com/file/d/1tWIUTssDx2n-iAmm5j608SQRxRY96Ii6/preview",
-        "text":"Power feed can be used to move the carriage at a constant rate in one direction. The direction and distance of motion is specified with the inc key while the speed can be set in inches per minute or inches per revolution with the feed speed arrows. Note that the machine door must be closed to engage the power feed, as it must be during any operation where the carriage will be moved under computer control.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"POWER FEED\" using the button below the control screen.</br>3. Select the \"Z\" button to indicate that the power feed will be in the z-direction.</br>4. Enter \"-1\" as the value for the power feed (click the number 1 and then use the \"+/-\" button to enter a negative value).</br>5. Select \"INC SET\" to set the power feed.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
-        "tasks":[
+        "text":"Power feed can be used to move the carriage at a constant rate in one direction. The direction and distance of motion is specified with the inc key while the speed can be set in inches per minute or inches per revolution with the feed speed arrows. Note that the machine door must be closed to engage the power feed, as it must be during any operation where the carriage will be moved under computer control.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"POWER FEED\" using the button below the control screen.</br>3. Select the \"Z\" button to indicate that the power feed will be in the z-direction.</br>4. Enter \"-1\" as the value for the power feed (click the number 1 and then use the \"+/-\" button to enter a negative value).</br>5. Select \"INC SET\" to set the power feed.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
+        /*"tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -176,14 +206,14 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]
+        ]*/
     },
     {
-        "index":11,
-        "title":"Return home",
+        "index":18,
+        "title":"Return Home",
         "src":"https://drive.google.com/file/d/1zP_OjZrycEvLBUMsyqBJ3aP8Rr2RzORD/preview",
-        "text":"Go home returns the machine to the home position, which can be set in the setup menu. Again, the machine door must be closed in order for this feature to function.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Select \"RETURN HOME\" using the button below the control screen.</br>2. Select \"GO\" under feed to return the tool to the home position.",
-        "tasks":[
+        "text":"Go home returns the machine to the home position, which can be set in the setup menu. Again, the machine door must be closed in order for this feature to function.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"RETURN HOME\" using the button below the control screen.</br>2. Select \"GO\" under feed to return the tool to the home position.",
+        /*"tasks":[
             {
                 "press":"RETURNHOME",
                 "highlight":true
@@ -192,14 +222,14 @@ let videos = [
                 "press":"GO",
                 "highlight":true
             }
-        ]
+        ]*/
     },
     {
-        "index":12,
-        "title":"Tool number",
+        "index":19,
+        "title":"Set Tool Number",
         "src":"https://drive.google.com/file/d/1DSntmr1vDUYpFi8cDyWbpc2DSOLgIKiw/preview",
-        "text":"Tool number allows you to switch between the various tools that you have programmed into the tool table. Since each tool has a different size you will have different x and z values for a given carriage position.</br></br><strong>Your turn. On the console to the right:</strong></br>1. Select \"TOOL\" using the button below the control screen.</br>2. Select tool 1 by entering \"1\" on the keypad.</br>Select \"ABS SET\" to enter the tool.",
-        "tasks":[
+        "text":"Tool number allows you to switch between the various tools that you have programmed into the tool table. Since each tool has a different size you will have different x and z values for a given carriage position.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"TOOL\" using the button below the control screen.</br>2. Select tool 1 by entering \"1\" on the keypad.</br>Select \"ABS SET\" to enter the tool.",
+        /*"tasks":[
             {
                 "press":"TOOLRET",
                 "highlight":true
@@ -211,24 +241,16 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]
+        ]*/
     },
     {
-        "index":13,
-        "title":"Chuck",
-        "src":"https://drive.google.com/file/d/1bNr31I9RFK3Ch8rOG_SIuMF6Ggi9QyJk/preview",
-        "text":"To load a component in the machine open the jaws with the Chuck wrench and place the component in the Chuck. Then tighten the jaws about the part. If you are working with a small diameter component, you can use a collet to secure the part instead. Collets are available in standard sizes up to one inch in the drawers next to each lathe.</br>To load a collet align the groove in the collet threads with the alignment screw in the Chuck. Then while applying pressure to the collet, tighten the wrench until the threads catch. Insert your part into the collet and then tighten the Chuck until the collet is secure.",
+        "index":20,
+        "title":"Conclusion",
+        "text":"[Insert conclusion]",
     },
     {
-        "index":14,
-        "title":"X Zero Demo",
-        "src":"https://drive.google.com/file/d/1vP4tao9LjsF_8KSq-y5N5Iv5cLZq4cRu/preview",
-        "text":"A quick way to zero the tool in either direction is to bring the tool near the part and then use a piece of paper to detect when the tool comes in contact. You can then set the X or Z position by pressing X or Z and entering the known value. This is a useful technique because it does not require any material to be removed from the part. However, if a truly accurate position is required, you will need to make a new cut in the component and measure its true dimensions.</br>To do this turn the machine on and remove a small amount of material. Then back the tool off the part without changing the dimensions you were trying to measure. Turn the spindle off and measure the true size of the cut which you have just made with a pair of micrometers. Enter the measured value of the new cut into the computer.",
-    },
-    {
-        "index":15,
-        "title":"End",
-        "src":"https://drive.google.com/file/d/1x1V_azN_2QspTQOpdeY2PmlUX2QXsQ1h/preview",
-        "text":"Once you have zeroed your tool, you can use the control wheels, power feed, and the do one feature to machine a wide variety of shapes. For complicated shapes, however, it'll be easier to program the machine to run a cycle.",
+        "index":21,
+        "title":"Advanced Practice",
+        "text":"[Insert instructions]",
     }
 ];
