@@ -2,7 +2,7 @@
  * Code for the control
  */
 
-let videoCounter = 0;
+let videoCounter = -1;
 let selectedCoord = 0;
 let gotoSelected = 0;
 let dooneSelected = 0;
@@ -12,6 +12,9 @@ let sequence = [];
 let sequenceIdx = 0;
 let gotoLimitx = 1000;
 let gotoLimitz = 1000;
+let gotoLimitNx = -1000;
+let gotoLimitNz = -1000;
+let finecoarse = 0.0025;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -45,8 +48,7 @@ let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #Abs
 
 /** Initialization */
 window.onload = function () {
-    xCoordinate.value = parseFloat(0);
-    zCoordinate.value = parseFloat(0);
+
 
     xbutton.addEventListener('click', function () {
         resetColors();
@@ -129,9 +131,10 @@ window.onload = function () {
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
+            finecoarse = 0.0025*4;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
-
+            finecoarse = 0.0025;
         } else {
             coarsespeedbutton.value = 'F'
         }
@@ -172,6 +175,8 @@ function resetfunctionbutton() {
     pressed = "";
     gotoLimitx = 1000;
     gotoLimitz = 1000;
+    gotoLimitNx = -1000;
+    gotoLimitNz = -1000;
 }
 
 
@@ -489,6 +494,8 @@ function ChangeConstantSFM() {
 
 /** TODO: move essence to server */
 function switchVideo() {
+    // console.log(videoCounter);
+
     let title = getById('title');
     let player = getById('player');
     let description = getById('description');
@@ -506,7 +513,7 @@ function switchVideo() {
         return;	// task not finished
     }
 
-    if (videoCounter++ == 0) {
+    if (videoCounter++ == -1) {
         getById('cover').style.display = 'none';
         player.style.display = 'block';
     }
@@ -624,6 +631,49 @@ function completeTask(value) {
             console.log(taskIndex);
         }
     }
+    else if (task.shape) { // If shape
+        console.log("in here");
+
+        let i = 0;
+        let j = 0;
+
+        // console.log(lathe_pts);
+        // console.log(task.shape);
+
+        while (j < lathe_pts.length) {
+            // console.log(lathe_pts[j].x);
+            // console.log(task.shape[i].x);
+
+            // Calls function to check each of points to determine if right shape cut out
+            if (compareCoords(lathe_pts[j], task.shape[i])) { // If pts match, continue
+                i++;
+            }
+            j++;
+        }
+
+        console.log("i: " + i + " | j: " + j);
+
+        // Determines if right shape has been cut out
+        if (i === task.shape.length) {
+            console.log("Step completed!");
+            nextTask();
+            console.log(currentTasks);
+            console.log(taskIndex);
+        }
+    }
+    // else if (task.click) { // If want to check certain shapes clicked
+    //
+    // }
+}
+
+// Function to check points between lathe object and true shape from lathe.js file
+// to determine if the user has cut out the right file
+// function compareCoords(obj1, obj2) {
+//     return obj1.x === obj2.x && obj1.y === obj2.y && obj1.z === obj2.z;
+// }
+var tolerance = .2; // Tolerance for how different the cut out shape can be from the true version (in lathe.js)
+function compareCoords(obj1, obj2) {
+    return Math.abs(obj1.x - obj2.x) < tolerance && Math.abs(obj1.y - obj2.y) < tolerance && Math.abs(obj1.z - obj2.z) < tolerance;
 }
 
 function negBuffer() {
@@ -645,6 +695,8 @@ var box;
 var lathe;
 var scene;
 var lathe_pts;
+var tailstock;
+var Chuck1;
 
 var Mesh = BABYLON.Mesh; // Shortform for BABYLON.Mesh
 
@@ -660,6 +712,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
         box.position = new BABYLON.Vector3(6, -3, 5);
+
+        xCoordinate.value = parseFloat(box.position.x);
+        zCoordinate.value = parseFloat(box.position.z);
 
         lathe_pts = [
             // new BABYLON.Vector3(4, 0, 0),
@@ -678,15 +733,15 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
-        chuck.position = new BABYLON.Vector3(0, 0, -17);
-        // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
-        chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
-
-        // Setting chuck material
-        var metal = new BABYLON.StandardMaterial("grass0", scene);
-        metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
-        chuck.material = metal;
+        // var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
+        // chuck.position = new BABYLON.Vector3(0, 0, -17);
+        // // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
+        // chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
+        //
+        // // Setting chuck material
+        // var metal = new BABYLON.StandardMaterial("grass0", scene);
+        // metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
+        // chuck.material = metal;
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
@@ -846,21 +901,24 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMesh.rotation.x = newRotation;
                     console.log(box.position);
                     console.log('box------------limitx')
-                    console.log(gotoLimitx);
                     if (currentMesh.rotation.x > currentMeshX) {
-                        if (currentMesh == wheel && box.position.x < gotoLimitx) {
-                            box.position.x += 0.1;
-                        } else if (currentMesh == wheel2) {
-                            box.position.z -= 0.1;
-                        }
+                          if (currentMesh == wheel && box.position.x < gotoLimitx) {
+                              box.position.x += finecoarse;
+                              xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
+                              box.position.z -= finecoarse;
+                              zCoordinate.value = parseFloat(box.position.z);
+                          }
 
-                    } else if (currentMesh.rotation.x < currentMeshX) {
-                        if (currentMesh == wheel) {
-                            box.position.x -= 0.1;
-                        } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
-                            box.position.z += 0.1;
-                        }
-                    }
+                      } else if (currentMesh.rotation.x < currentMeshX) {
+                          if (currentMesh == wheel && box.position.x > gotoLimitNx) {
+                              box.position.x -= finecoarse;
+                              xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
+                              box.position.z += finecoarse;
+                              zCoordinate.value = parseFloat(box.position.z);
+                          }
+                      }
 
                     return true;
                 }
@@ -872,10 +930,34 @@ window.addEventListener('DOMContentLoaded', function () {
             });
 
 
+        BABYLON.SceneLoader.ImportMesh("", "", "res/models/Tailstock.STL",
+            scene, function (newMeshes) {
+                tailstock = newMeshes[0];
+                tailstock.position = new BABYLON.Vector3(-6,-7,29);
+                tailstock.rotation.x = -Math.PI/2;
+                var tailstock_scale = .05;
+                tailstock.scaling.x = tailstock_scale;
+                tailstock.scaling.y = tailstock_scale;
+                tailstock.scaling.z = tailstock_scale;
+            });
+
+            BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.STL",
+                scene, function (newMeshes) {
+                    Chuck1 = newMeshes[0];
+                    Chuck1.position = new BABYLON.Vector3(0, 0, -17);
+                    Chuck1.rotation.y = Math.PI/2;
+                    var Chuck1_scale = .025;
+                    Chuck1.scaling.x = Chuck1_scale;
+                    Chuck1.scaling.y = Chuck1_scale;
+                    Chuck1.scaling.z = Chuck1_scale;
+
+                });
+          //  0, 0, -17
+
         var frameRate = 10;
 
 
-        var yRot = new BABYLON.Animation("zRot", "rotation.y", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+        var yRot = new BABYLON.Animation("zRot", "rotation.x", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
 
         var keyFramesR = [];
 
@@ -895,18 +977,22 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         yRot.setKeys(keyFramesR);
 
-        // TODO: Note there is a bug here where the sound keeps playing when press off if FWD is pressed twice
         var fwdOn = 0;
         var music = new BABYLON.Sound("FWDSound", "res/sounds/5959.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
-            scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true);
-            music.play();
-            fwdOn = 1;
-
+            if (fwdOn == 0){
+              Chuck1.animations.push(yRot);
+              var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,0.5);
+              // tailstock.animations.push(yRot);
+              // var chuckAnim = scene.beginAnimation(tailstock,0,2*frameRate,true,0.1);
+              // scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true, 0.001);
+              music.play();
+              fwdOn = 1;
+            }
         });
 
         document.getElementById("off").addEventListener("click", function () {
-            scene.stopAnimation(chuck);
+            scene.stopAnimation(Chuck1);
             music.stop();
             fwdOn = 0;
         });
@@ -914,9 +1000,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // Implement GOTO;
         for (i = 0; i < GoTofunction.length; i++) {
             GoTofunction[i].addEventListener('click', function () {
-                console.log('---------------');
-                console.log(sequenceIdx - 1);
-                console.log(sequence[sequenceIdx - 1]);
+
                 if (this.id != sequence[sequenceIdx - 1]) {
                     sequence.push(this.id);
                     pressed += this.id;
@@ -930,11 +1014,21 @@ window.addEventListener('DOMContentLoaded', function () {
                     sequenceIdx = 0;
                     var GoToXPosition = parseFloat(xCoordinate.value);
                     var GoToZPosition = parseFloat(zCoordinate.value);
-                    gotoLimitx = GoToZPosition;
-                    gotoLimitz = GoToXPosition;
+
+                    if(GoToZPosition>box.position.z){
+                      gotoLimitz = GoToZPosition;
+                    }
+                    else{
+                      gotoLimitNz = GoToZPosition;
+                    }
+
+                    if(GoToXPosition>box.position.x){
+                      gotoLimitx = GoToXPosition;
+                    }
+                    else{
+                      gotoLimitNx = GoToXPosition;
+                    }
                 }
-                console.log(pressed);
-                // console.log(abSetPressed)
             }, false);
 
             //Implementation of Return Home funciton.
@@ -1073,6 +1167,11 @@ function lathe_engine(delta_x, delta_z) {
     // These are set nicely to keep the box within a desired range
     if (x + delta_x >=-0.05) box.position.x += delta_x;
     if (z + delta_z >=-15.6) box.position.z += delta_z;
+
+    console.log(box.position.x);
+    console.log(box.position.z);
+
+    completeTask(null); // Need to check shape cut out
 
     // console.log(box.position.x + " | " + box.position.z);
 }

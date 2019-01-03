@@ -321,7 +321,6 @@ label#button-header {
 
 label#button-header1 {
     color: white;
-    font: 10px;
     font-size: 14px;
 }
 
@@ -443,7 +442,6 @@ button#Xbutton, #Zbutton {
   margin: 4px 5px;
   font-weight: bold;
   cursor: pointer;
-  background-image: url("res/imgs/UA.png");
   background-repeat:no-repeat;
 }
 .sbutton:hover, .rbtn:hover, .rbtn:hover, .accbutton:hover, .fbutton:hover, .subbutton:hover, .XZbutton:hover,
@@ -608,9 +606,11 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 }
 
 #title {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-family: Helvetica, Arial, sans-serif;
     margin-top: 3%;
+    margin-bottom: 3%;
+    font-weight: bold;
 }
 
 #cover {
@@ -634,6 +634,11 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
     font-family: Helvetica, Arial, sans-serif;
 }
 
+/* Setting space for a break element for the description text */
+br {
+    line-height: 170%;
+}
+
 .button {
     display: table-cell;
     background-color: #657a8f;
@@ -646,6 +651,7 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 3%;
 }
 
 #Timer {
