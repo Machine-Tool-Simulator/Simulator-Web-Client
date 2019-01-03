@@ -293,14 +293,6 @@ function spindle(element) {
     completeTask(element.value);
 }
 
-
-// function ChangeVideoMainLatheFeatures() {
-//     let player = getById('player');
-//     videoCounter = 1;
-//     player.src = video.src;
-// }
-
-
 function ChangeVideoMainLatheFeatures() {
     let title = getById('title');
     let player = getById('player');
@@ -492,77 +484,47 @@ function ChangeConstantSFM() {
 }
 
 
-/** TODO: move essence to server */
-function switchVideo() {
-    // console.log(videoCounter);
-
+function switchVideo(action) {
     let title = getById('title');
     let player = getById('player');
     let description = getById('description');
 
-    if (videoCounter >= videos.length) {	// end of videos
-        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
-        player.style.display = "none";
-        description.innerHTML = "";
-        return;
-    }
-    // TODO: if end of videos, submit a feedback to server
+    if (action === 'next') {
+        if (videoCounter >= videos.length) {	// end of videos
+            title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+            player.style.display = "none";
+            description.innerHTML = "";
+            return;
+        }
+        // TODO: end of videos stuff
 
-    if (currentTasks) {
-        alert('Have uncompleted tasks');	// bad practice
-        return;	// task not finished
-    }
-
-    if (videoCounter++ == -1) {
-        getById('cover').style.display = 'none';
-        player.style.display = 'block';
-    }
-
-    let video = videos[videoCounter];
-    title.innerHTML = video.title;
-    player.src = video.src;
-    description.innerHTML = video.text;
-
-    if (video.tasks) {
-        currentTasks = video.tasks;
-    }
-}
-
-function backVideo() {
-    let title = getById('title');
-    let player = getById('player');
-    let description = getById('description');
-
-    if (videoCounter >= videos.length) {	// end of videos
-        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
-        player.style.display = "none";
-        description.innerHTML = "";
-        return;
-    }
-    // TODO: if end of videos, submit a feedback to server
-    currentTasks = null
-    // if (currentTasks) {
-    //     alert('Have uncompleted tasks');	// bad practice
-    //     return;	// task not finished
-    // }
-    if (videoCounter > 0) {
-        videoCounter -= 1
-    }
-
-    console.log("Now the videoCounter is: ", videoCounter)
-    if (videoCounter == 0) {
-        getById('cover').style.display = 'flex';
-        player.style.display = 'block';
-    } else {
-      let video = videos[videoCounter];
-      console.log("Now the video is: ", video)
-      title.innerHTML = video.title;
-      player.src = video.src;
-      description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
+        if (currentTasks) {
+            alert('Have uncompleted tasks');	// bad practice
+            return;	// task not finished
+        }
+    
+        if (videoCounter++ == -1) {
+            getById('cover').style.display = 'none';
+            player.style.display = 'block';
+        }
+    
+        let video = videos[videoCounter];
+        title.innerHTML = video.title;
+        player.src = video.src;
+        description.innerHTML = video.text;
+    
+        if (video.tasks) {
+            currentTasks = video.tasks;
+        }
+    } else if (action === 'back') {
+        if (videoCounter >= 0) {        // defaulted to -1
+            videoCounter--;
+            let video = videos[videoCounter];
+            title.innerHTML = video.title;
+            player.src = video.src;
+            description.innerHTML = video.text;
+            currentTasks = null;
+        }
     }
 }
 
