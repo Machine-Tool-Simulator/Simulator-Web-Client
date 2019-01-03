@@ -236,7 +236,7 @@ window.addEventListener('DOMContentLoaded', function () {
             });
 
 
-        BABYLON.SceneLoader.ImportMesh("", "", "res/models/Tailstock.STL",
+        BABYLON.SceneLoader.ImportMesh("", "", "res/models/Tailstock.stl",
             scene, function (newMeshes) {
                 tailstock = newMeshes[0];
                 tailstock.position = new BABYLON.Vector3(-6,-7,29);
@@ -247,7 +247,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 tailstock.scaling.z = tailstock_scale;
             });
 
-            BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.STL",
+            BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.stl",
                 scene, function (newMeshes) {
                     Chuck1 = newMeshes[0];
                     Chuck1.position = new BABYLON.Vector3(0, 0, -23);
