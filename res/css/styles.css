@@ -571,7 +571,7 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
   flex-direction: column;
 }
 
-/* Split the screen in half */
+/* Split the screen into three columns */
 .split {
   height: 100%;
   position: fixed;
@@ -679,4 +679,30 @@ br {
 
 .cutting_tool {
     fill: #323232;
+}
+
+.w3-sidebar, .w3-bar-block, .w3-card, .w3-animate-left, .w3-teal {
+    /* left: 66.6%;
+    width: 33.3%; */
+    position: absolute;
+    z-index: 999;
+}
+
+.btn-group button {
+  background-color: black; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 100%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+}
+
+.btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
 }
