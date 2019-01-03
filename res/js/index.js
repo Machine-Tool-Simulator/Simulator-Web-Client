@@ -29,13 +29,25 @@ let rpmbutton = getById('f7btn');
 let toolretbutton = getById('f8btn');
 let coarsespeedbutton = getById('FC');
 
-
 let canSubmit = true;
 let currentTasks = null;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
 let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #AbsSet, #Zbutton"), i;
+
+// for the playlist's hamburger bar
+// let hamburger = {
+//   navToggle: document.querySelector('.nav-toggle'),
+//   nav: document.querySelector('nav'),
+//
+//   doToggle: function(e) {
+//     e.preventDefault();
+//     this.navToggle.classList.toggle('expanded');
+//     this.nav.classList.toggle('expanded');
+//   }
+// };
+
 /** Initialization */
 window.onload = function () {
 
@@ -127,6 +139,10 @@ window.onload = function () {
             coarsespeedbutton.value = 'F'
         }
     });
+
+    // for the hamburger bar implementation
+
+  	// hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
 
 }
 
@@ -277,10 +293,7 @@ function spindle(element) {
     completeTask(element.value);
 }
 
-/** TODO: move essence to server */
-function switchVideo() {
-    // console.log(videoCounter);
-
+function ChangeVideoMainLatheFeatures() {
     let title = getById('title');
     let player = getById('player');
     let description = getById('description');
@@ -292,25 +305,266 @@ function switchVideo() {
         return;
     }
     // TODO: if end of videos, submit a feedback to server
-
-    if (currentTasks) {
-        alert('Have uncompleted tasks');	// bad practice
-        return;	// task not finished
+    currentTasks = null
+    // if (currentTasks) {
+    //     alert('Have uncompleted tasks');	// bad practice
+    //     return;	// task not finished
+    // }
+    if (videoCounter > 0) {
+        videoCounter = 1;
     }
 
-    if (videoCounter++ == -1) {
-        getById('cover').style.display = 'none';
+    console.log("Now the videoCounter is: ", videoCounter)
+    if (videoCounter == 0) {
+        getById('cover').style.display = 'flex';
         player.style.display = 'block';
+    } else {
+      let video = videos[videoCounter];
+      console.log("Now the video is: ", video)
+      title.innerHTML = video.title;
+      player.src = video.src;
+      description.innerHTML = video.text;
+
+      // if (video.tasks) {
+      //     currentTasks = video.tasks;
+      // }
+    }
+}
+
+function ChangeDigitalReadout() {
+    let title = getById('title');
+    let player = getById('player');
+    let description = getById('description');
+
+    if (videoCounter >= videos.length) {	// end of videos
+        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+        player.style.display = "none";
+        description.innerHTML = "";
+        return;
+    }
+    // TODO: if end of videos, submit a feedback to server
+    currentTasks = null
+    // if (currentTasks) {
+    //     alert('Have uncompleted tasks');	// bad practice
+    //     return;	// task not finished
+    // }
+    if (videoCounter > 0) {
+        videoCounter = 2;
     }
 
-    let video = videos[videoCounter];
-    title.innerHTML = video.title;
-    player.src = video.src;
-    description.innerHTML = video.text;
+    console.log("Now the videoCounter is: ", videoCounter)
+    if (videoCounter == 0) {
+        getById('cover').style.display = 'flex';
+        player.style.display = 'block';
+    } else {
+      let video = videos[videoCounter];
+      console.log("Now the video is: ", video)
+      title.innerHTML = video.title;
+      player.src = video.src;
+      description.innerHTML = video.text;
 
-    if (video.tasks) {
-        currentTasks = video.tasks;
+      // if (video.tasks) {
+      //     currentTasks = video.tasks;
+      // }
     }
+}
+
+function ChangeSpindle() {
+    let title = getById('title');
+    let player = getById('player');
+    let description = getById('description');
+
+    if (videoCounter >= videos.length) {	// end of videos
+        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+        player.style.display = "none";
+        description.innerHTML = "";
+        return;
+    }
+    // TODO: if end of videos, submit a feedback to server
+    currentTasks = null
+    // if (currentTasks) {
+    //     alert('Have uncompleted tasks');	// bad practice
+    //     return;	// task not finished
+    // }
+    if (videoCounter > 0) {
+        videoCounter = 3;
+    }
+
+    console.log("Now the videoCounter is: ", videoCounter)
+    if (videoCounter == 0) {
+        getById('cover').style.display = 'flex';
+        player.style.display = 'block';
+    } else {
+      let video = videos[videoCounter];
+      console.log("Now the video is: ", video)
+      title.innerHTML = video.title;
+      player.src = video.src;
+      description.innerHTML = video.text;
+
+      // if (video.tasks) {
+      //     currentTasks = video.tasks;
+      // }
+    }
+}
+
+function ChangeConstantRPM() {
+    let title = getById('title');
+    let player = getById('player');
+    let description = getById('description');
+
+    if (videoCounter >= videos.length) {	// end of videos
+        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+        player.style.display = "none";
+        description.innerHTML = "";
+        return;
+    }
+    // TODO: if end of videos, submit a feedback to server
+    currentTasks = null
+    // if (currentTasks) {
+    //     alert('Have uncompleted tasks');	// bad practice
+    //     return;	// task not finished
+    // }
+    if (videoCounter > 0) {
+        videoCounter = 4;
+    }
+
+    console.log("Now the videoCounter is: ", videoCounter)
+    if (videoCounter == 0) {
+        getById('cover').style.display = 'flex';
+        player.style.display = 'block';
+    } else {
+      let video = videos[videoCounter];
+      console.log("Now the video is: ", video)
+      title.innerHTML = video.title;
+      player.src = video.src;
+      description.innerHTML = video.text;
+
+      // if (video.tasks) {
+      //     currentTasks = video.tasks;
+      // }
+    }
+}
+
+function ChangeConstantSFM() {
+    let title = getById('title');
+    let player = getById('player');
+    let description = getById('description');
+
+    if (videoCounter >= videos.length) {	// end of videos
+        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+        player.style.display = "none";
+        description.innerHTML = "";
+        return;
+    }
+    // TODO: if end of videos, submit a feedback to server
+    currentTasks = null
+    // if (currentTasks) {
+    //     alert('Have uncompleted tasks');	// bad practice
+    //     return;	// task not finished
+    // }
+    if (videoCounter > 0) {
+        videoCounter = 5;
+    }
+
+    console.log("Now the videoCounter is: ", videoCounter)
+    if (videoCounter == 0) {
+        getById('cover').style.display = 'flex';
+        player.style.display = 'block';
+    } else {
+      let video = videos[videoCounter];
+      console.log("Now the video is: ", video)
+      title.innerHTML = video.title;
+      player.src = video.src;
+      description.innerHTML = video.text;
+
+      // if (video.tasks) {
+      //     currentTasks = video.tasks;
+      // }
+    }
+}
+
+
+function switchVideo(action) {
+    let title = getById('title');
+    let player = getById('player');
+    let description = getById('description');
+
+    if (action === 'next') {
+        if (videoCounter >= videos.length) {	// end of videos
+            title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+            player.style.display = "none";
+            description.innerHTML = "";
+            return;
+        }
+        // TODO: end of videos stuff
+
+        if (currentTasks) {
+            alert('Have uncompleted tasks');	// bad practice
+            return;	// task not finished
+        }
+    
+        if (videoCounter++ == -1) {
+            getById('cover').style.display = 'none';
+            player.style.display = 'block';
+        }
+    
+        let video = videos[videoCounter];
+        title.innerHTML = video.title;
+        player.src = video.src;
+        description.innerHTML = video.text;
+    
+        if (video.tasks) {
+            currentTasks = video.tasks;
+        }
+    } else if (action === 'back') {
+        if (videoCounter >= 0) {        // defaulted to -1
+            videoCounter--;
+            let video = videos[videoCounter];
+            title.innerHTML = video.title;
+            player.src = video.src;
+            description.innerHTML = video.text;
+            currentTasks = null;
+        }
+    }
+}
+
+function backCoverPage() {
+    let title = getById('title');
+    let player = getById('player');
+    let description = getById('description');
+
+    if (videoCounter >= videos.length) {	// end of videos
+        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
+        player.style.display = "none";
+        description.innerHTML = "";
+        return;
+    }
+    // TODO: if end of videos, submit a feedback to server
+    currentTasks = null
+    // if (currentTasks) {
+    //     alert('Have uncompleted tasks');	// bad practice
+    //     return;	// task not finished
+    // }
+    if (videoCounter > 0) {
+        videoCounter -= 1
+    }
+
+    console.log("Now the videoCounter is: ", videoCounter)
+    if (videoCounter == 0) {
+        getById('cover').style.display = 'flex';
+        player.style.display = 'block';
+    } else {
+      let video = videos[videoCounter];
+      console.log("Now the video is: ", video)
+      title.innerHTML = video.title;
+      player.src = video.src;
+      description.innerHTML = video.text;
+
+      // if (video.tasks) {
+      //     currentTasks = video.tasks;
+      // }
+    }
+
 }
 
 function nextTask() {
@@ -1060,3 +1314,21 @@ function dragTwo() {
 
     lathe_engine(-(box.position.x - rect_xfr)+6, 0);
 }
+
+// function for playlist og
+// (function() {
+//
+// 	var hamburger = {
+// 		navToggle: document.querySelector('.nav-toggle'),
+// 		nav: document.querySelector('nav'),
+//
+// 		doToggle: function(e) {
+// 			e.preventDefault();
+// 			this.navToggle.classList.toggle('expanded');
+// 			this.nav.classList.toggle('expanded');
+// 		}
+// 	};
+//
+// 	hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
+//
+// }());
