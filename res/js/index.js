@@ -502,17 +502,17 @@ function switchVideo(action) {
             alert('Have uncompleted tasks');	// bad practice
             return;	// task not finished
         }
-    
+
         if (videoCounter++ == -1) {
             getById('cover').style.display = 'none';
             player.style.display = 'block';
         }
-    
+
         let video = videos[videoCounter];
         title.innerHTML = video.title;
         player.src = video.src;
         description.innerHTML = video.text;
-    
+
         if (video.tasks) {
             currentTasks = video.tasks;
         }
