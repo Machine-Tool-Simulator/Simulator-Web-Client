@@ -14,6 +14,11 @@ let gotoLimitx = 1000;
 let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
+let finecoarse = 0.0025;
+let spindleSpeed = 100;
+let zOrigin = 0;
+let xOrigin = 0;
+let xzButtonsSelected = 0;
 let delta = 0.025;
 let home_position_x = 6;
 let home_position_z = 5;
@@ -34,19 +39,8 @@ let currentTasks = null;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
-let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #AbsSet, #Zbutton"), i;
 
-// for the playlist's hamburger bar
-// let hamburger = {
-//   navToggle: document.querySelector('.nav-toggle'),
-//   nav: document.querySelector('nav'),
-//
-//   doToggle: function(e) {
-//     e.preventDefault();
-//     this.navToggle.classList.toggle('expanded');
-//     this.nav.classList.toggle('expanded');
-//   }
-// };
+let GoTofunction = document.querySelectorAll("#f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
 
 /** Initialization */
 window.onload = function () {
@@ -56,6 +50,7 @@ window.onload = function () {
         resetColors();
         xbutton.style.backgroundColor = 'rgb(0,0,0)';
         selectedCoord = 1;
+        xzButtonsSelected = 1;
         controlPressed("X");
 
 
@@ -65,6 +60,7 @@ window.onload = function () {
         resetColors();
         zbutton.style.backgroundColor = 'rgb(0,0,0)';
         selectedCoord = 2;
+        xzButtonsSelected = 1;
         controlPressed("Z");
     });
 
@@ -97,6 +93,7 @@ window.onload = function () {
         gotoSelected = 1;
         gotobutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 0;
+
     });
 
     rpmbutton.addEventListener('click', function () {
@@ -126,6 +123,7 @@ window.onload = function () {
     // When value entered, want to exit that button's mode
     restorebutton.addEventListener('click', function () {
         resetColors();
+
     });
 
     coarsespeedbutton.addEventListener('click', function () {
@@ -177,6 +175,7 @@ function resetfunctionbutton() {
     gotoLimitz = 1000;
     gotoLimitNx = -1000;
     gotoLimitNz = -1000;
+
 }
 
 
@@ -223,7 +222,8 @@ function setAbsPos() {
 
     // Resetting button colors
     resetColors();
-    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1) {
+    //gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1
+    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1 && xzButtonsSelected != 1) {
         resetfunctionbutton();
     }
 
@@ -250,7 +250,7 @@ function setIncPos() {
 
     // Resetting button colors
     resetColors();
-    resetfunctionbutton();
+    //resetfunctionbutton();
 
     let buffer = getById('buffer');
     if (buffer.value.length <= 0) return;
@@ -262,7 +262,10 @@ function setIncPos() {
     let targetVar;
     if (selectedCoord == 1) targetVar = getById('xvar');
     else if (selectedCoord == 2) targetVar = getById('zvar');	// not using else here in case of other weird values
-    else if (selectedCoord == 3) targetVar = getById('rpm');
+    else if (selectedCoord == 3){
+      targetVar = getById('rpm');
+      spindleSpeed = parseFloat(buffer.value);
+    }
 
     if (targetVar.value.length <= 0) targetVar.value = 0;
     targetVar.value = parseFloat(buffer.value); // Do not want to add these, but if did: parseFloat(targetVar.value) +
@@ -673,10 +676,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
-        box.position = new BABYLON.Vector3(home_position_x, -3, home_position_z);
-
-        xCoordinate.value = parseFloat(box.position.x);
-        zCoordinate.value = parseFloat(box.position.z);
+        box.position = new BABYLON.Vector3(6, -3, 5);
+        zOrigin = box.position.z;
+        xOrigin = box.position.x;
+        xCoordinate.value = parseFloat(xOrigin);
+        zCoordinate.value = parseFloat(zOrigin);
 
         lathe_pts = [
             // new BABYLON.Vector3(4, 0, 0),
@@ -851,22 +855,28 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
-
-
-                    console.log(box.position);
-                    console.log('box------------limitx')
+                    // console.log(box.position);
+                    // console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
-                          if (currentMesh == wheel && box.position.x < gotoLimitx) {
-                              lathe_engine(delta,0);
-                          } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
-                              lathe_engine(0,-delta);
+                          if (currentMesh == wheel && xOrigin < gotoLimitx) {
+                              box.position.x += finecoarse;
+                              xCoordinate.value = parseFloat(xOrigin += finecoarse);
+                              //xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
+                              box.position.z -= finecoarse;
+                              zCoordinate.value = parseFloat(zOrigin -= finecoarse);
+                              //zCoordinate.value = parseFloat(box.position.z);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
-                          if (currentMesh == wheel && box.position.x > gotoLimitNx) {
-                              lathe_engine(-delta,0);
-                          } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
-                              lathe_engine(0,delta);
+                          if (currentMesh == wheel && xOrigin > gotoLimitNx) {
+                              box.position.x -= finecoarse;
+                              xCoordinate.value = parseFloat(xOrigin -= finecoarse);
+                              //xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
+                              box.position.z += finecoarse;
+                              zCoordinate.value = parseFloat(zOrigin += finecoarse);
+                              //zCoordinate.value = parseFloat(box.position.z);
                           }
                       }
 
@@ -928,14 +938,11 @@ window.addEventListener('DOMContentLoaded', function () {
         yRot.setKeys(keyFramesR);
 
         var fwdOn = 0;
-        var music = new BABYLON.Sound("FWDSound", "res/sounds/5959.mp3", scene, null, {loop: true, autoplay: false});
+        var music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
             if (fwdOn == 0){
               Chuck1.animations.push(yRot);
-              var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,0.5);
-              // tailstock.animations.push(yRot);
-              // var chuckAnim = scene.beginAnimation(tailstock,0,2*frameRate,true,0.1);
-              // scene.beginDirectAnimation(chuck, [yRot], 0, 2 * frameRate, true, 0.001);
+              var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
               music.play();
               fwdOn = 1;
             }
@@ -957,7 +964,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     sequenceIdx += 1;
                     console.log(sequence);
                 }
-
+                //gotofucntion
                 if (pressed == "f4btnXbuttonnumButtonAbsSetZbuttonnumButtonAbsSet"
                     || pressed == "f4btnZbuttonnumButtonAbsSetXbuttonnumButtonAbsSet") {
                     sequence = [];
@@ -965,19 +972,45 @@ window.addEventListener('DOMContentLoaded', function () {
                     var GoToXPosition = parseFloat(xCoordinate.value);
                     var GoToZPosition = parseFloat(zCoordinate.value);
 
-                    if(GoToZPosition>box.position.z){
+                    if(GoToZPosition>zOrigin){
                       gotoLimitz = GoToZPosition;
                     }
                     else{
                       gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition>box.position.x){
+                    if(GoToXPosition>xOrigin){
                       gotoLimitx = GoToXPosition;
                     }
                     else{
                       gotoLimitNx = GoToXPosition;
                     }
+                }
+                //spindle speed: constant rpm
+                else if(pressed == "f7btnnumButtonIncSet"){
+                  scene.stopAnimation(Chuck1);
+                  scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
+                  resetfunctionbutton();
+                }
+
+                else if(pressed == "XbuttonnumButtonAbsSet"){
+                  xOrigin =  parseFloat(xCoordinate.value);
+                  console.log("xorigin: ");
+                  console.log(xOrigin);
+                  xzButtonSelected = 0;
+                  sequence = [];
+                  sequenceIdx = 0;
+                  pressed = "";
+                }
+
+                else if(pressed == "ZbuttonnumButtonAbsSet"){
+                  zOrigin = parseFloat(zCoordinate.value);
+                  console.log("zorigin: ");
+                  console.log(zOrigin);
+                  xzButtonSelected = 0;
+                  sequence = [];
+                  sequenceIdx = 0;
+                  pressed = "";
                 }
             }, false);
 
