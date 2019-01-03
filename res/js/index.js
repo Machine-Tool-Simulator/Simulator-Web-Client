@@ -35,19 +35,6 @@ let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
 let GoTofunction = document.querySelectorAll("#f4btn, #Xbutton, #numButton, #AbsSet, #Zbutton"), i;
-
-// for the playlist's hamburger bar
-// let hamburger = {
-//   navToggle: document.querySelector('.nav-toggle'),
-//   nav: document.querySelector('nav'),
-//
-//   doToggle: function(e) {
-//     e.preventDefault();
-//     this.navToggle.classList.toggle('expanded');
-//     this.nav.classList.toggle('expanded');
-//   }
-// };
-
 /** Initialization */
 window.onload = function () {
 
@@ -121,6 +108,8 @@ window.onload = function () {
         } else {
             setfunctionbutton();
         }
+
+
     });
 
     // When value entered, want to exit that button's mode
@@ -139,10 +128,6 @@ window.onload = function () {
             coarsespeedbutton.value = 'F'
         }
     });
-
-    // for the hamburger bar implementation
-
-  	// hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
 
 }
 
@@ -502,17 +487,17 @@ function switchVideo(action) {
             alert('Have uncompleted tasks');	// bad practice
             return;	// task not finished
         }
-    
+
         if (videoCounter++ == -1) {
             getById('cover').style.display = 'none';
             player.style.display = 'block';
         }
-    
+
         let video = videos[videoCounter];
         title.innerHTML = video.title;
         player.src = video.src;
         description.innerHTML = video.text;
-    
+
         if (video.tasks) {
             currentTasks = video.tasks;
         }
@@ -526,45 +511,6 @@ function switchVideo(action) {
             currentTasks = null;
         }
     }
-}
-
-function backCoverPage() {
-    let title = getById('title');
-    let player = getById('player');
-    let description = getById('description');
-
-    if (videoCounter >= videos.length) {	// end of videos
-        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
-        player.style.display = "none";
-        description.innerHTML = "";
-        return;
-    }
-    // TODO: if end of videos, submit a feedback to server
-    currentTasks = null
-    // if (currentTasks) {
-    //     alert('Have uncompleted tasks');	// bad practice
-    //     return;	// task not finished
-    // }
-    if (videoCounter > 0) {
-        videoCounter -= 1
-    }
-
-    console.log("Now the videoCounter is: ", videoCounter)
-    if (videoCounter == 0) {
-        getById('cover').style.display = 'flex';
-        player.style.display = 'block';
-    } else {
-      let video = videos[videoCounter];
-      console.log("Now the video is: ", video)
-      title.innerHTML = video.title;
-      player.src = video.src;
-      description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
-    }
-
 }
 
 function nextTask() {
@@ -1314,21 +1260,3 @@ function dragTwo() {
 
     lathe_engine(-(box.position.x - rect_xfr)+6, 0);
 }
-
-// function for playlist og
-// (function() {
-//
-// 	var hamburger = {
-// 		navToggle: document.querySelector('.nav-toggle'),
-// 		nav: document.querySelector('nav'),
-//
-// 		doToggle: function(e) {
-// 			e.preventDefault();
-// 			this.navToggle.classList.toggle('expanded');
-// 			this.nav.classList.toggle('expanded');
-// 		}
-// 	};
-//
-// 	hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
-//
-// }());
