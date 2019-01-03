@@ -14,7 +14,9 @@ let gotoLimitx = 1000;
 let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
-let finecoarse = 0.0025;
+let delta = 0.025;
+let home_position_x = 6;
+let home_position_z = 5;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -119,8 +121,6 @@ window.onload = function () {
         } else {
             setfunctionbutton();
         }
-
-
     });
 
     // When value entered, want to exit that button's mode
@@ -131,10 +131,10 @@ window.onload = function () {
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
-            finecoarse = 0.0025*4;
+            delta = 0.025*4;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
-            finecoarse = 0.0025;
+            delta = 0.025;
         } else {
             coarsespeedbutton.value = 'F'
         }
@@ -502,17 +502,17 @@ function switchVideo(action) {
             alert('Have uncompleted tasks');	// bad practice
             return;	// task not finished
         }
-    
+
         if (videoCounter++ == -1) {
             getById('cover').style.display = 'none';
             player.style.display = 'block';
         }
-    
+
         let video = videos[videoCounter];
         title.innerHTML = video.title;
         player.src = video.src;
         description.innerHTML = video.text;
-    
+
         if (video.tasks) {
             currentTasks = video.tasks;
         }
@@ -673,7 +673,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
         box = BABYLON.Mesh.CreateBox("Box", 6, scene);
-        box.position = new BABYLON.Vector3(6, -3, 5);
+        box.position = new BABYLON.Vector3(home_position_x, -3, home_position_z);
 
         xCoordinate.value = parseFloat(box.position.x);
         zCoordinate.value = parseFloat(box.position.z);
@@ -686,8 +686,6 @@ window.addEventListener('DOMContentLoaded', function () {
             new BABYLON.Vector3(4, 16, 0),
         ];
 
-// console.log(lathe_pts);
-
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
             shape: lathe_pts,
             cap: Mesh.CAP_ALL,
@@ -695,15 +693,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        // var chuck = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 3, diameter: 30}, scene);
-        // chuck.position = new BABYLON.Vector3(0, 0, -17);
-        // // chuck.setPivotPoint(new BABYLON.Vector3(0,-6,0));
-        // chuck.rotate(BABYLON.Axis.X, Math.PI / 2, BABYLON.Space.WORLD);
-        //
-        // // Setting chuck material
-        // var metal = new BABYLON.StandardMaterial("grass0", scene);
-        // metal.diffuseTexture = new BABYLON.Texture("res/textures/metal.jpg", scene);
-        // chuck.material = metal;
+        cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 7, diameter: 8}, scene);
+        cyl.position=new BABYLON.Vector3(0,0,-19.5);
+        cyl.rotation.x=Math.PI/2;
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
@@ -759,8 +751,6 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
             inputMap[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
         }));
-
-        var delta = .1;
 
 // Game/Render loop
         scene.onBeforeRenderObservable.add(() => {
@@ -861,24 +851,22 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
+
+
                     console.log(box.position);
                     console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && box.position.x < gotoLimitx) {
-                              box.position.x += finecoarse;
-                              xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(delta,0);
                           } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
-                              box.position.z -= finecoarse;
-                              zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,-delta);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
                           if (currentMesh == wheel && box.position.x > gotoLimitNx) {
-                              box.position.x -= finecoarse;
-                              xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(-delta,0);
                           } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
-                              box.position.z += finecoarse;
-                              zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,delta);
                           }
                       }
 
@@ -906,7 +894,7 @@ window.addEventListener('DOMContentLoaded', function () {
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.STL",
                 scene, function (newMeshes) {
                     Chuck1 = newMeshes[0];
-                    Chuck1.position = new BABYLON.Vector3(0, 0, -17);
+                    Chuck1.position = new BABYLON.Vector3(0, 0, -23);
                     Chuck1.rotation.y = Math.PI/2;
                     var Chuck1_scale = .025;
                     Chuck1.scaling.x = Chuck1_scale;
@@ -1007,18 +995,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames.push({
                     frame: 2 * frameRate1,
-                    value: 0
+                    value: home_position_z
                 });
 
                 var itHasStopped = function () {
                     //alert('itHasStopped func reports the animation stopped');
-                    box.position.z = 0;
-                    xCoordinate.value = parseFloat(box.position.z);
+                    box.position.z = home_position_z;
+                    zCoordinate.value = parseFloat(box.position.z);
                 }
 
                 GoToAnimationX.setKeys(keyFrames);
 
-                var GoToAnimationZ = new BABYLON.Animation('GotoAnimationZ', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+                var GoToAnimationZ = new BABYLON.Animation('GotoAnimation', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
                 console.log(box.position.x);
                 var keyFrames2 = [];
                 keyFrames2.push({
@@ -1028,12 +1016,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames2.push({
                     frame: 2 * frameRate1,
-                    value: 0
+                    value: home_position_x
                 });
 
                 var itHasStopped2 = function () {
-                    box.position.x = 0;
-                    zCoordinate.value = parseFloat(box.position.x);
+                    box.position.x = home_position_x;
+                    xCoordinate.value = parseFloat(box.position.x);
                     scene.beginDirectAnimation(box, [GoToAnimationX], 0, 2 * frameRate, false, 1, itHasStopped);
                 }
 
@@ -1126,16 +1114,29 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
-    // These are set nicely to keep the box within a desired range
-    if (x + delta_x >=-0.05) box.position.x += delta_x;
-    if (z + delta_z >=-15.6) box.position.z += delta_z;
+    var tmp1 = x + delta_x;
+    var tmp2 = z + delta_z;
 
-    console.log(box.position.x);
-    console.log(box.position.z);
+    console.log(tmp1 + " | " + tmp2);
+    console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
+
+    // These are set nicely to keep the box within a desired range
+    if (x + delta_x >=-0.025 &&
+        box.position.x + delta_x >= gotoLimitNx &&
+        box.position.x + delta_x <= gotoLimitx) {
+        box.position.x += delta_x;
+    }
+
+    if (z + delta_z >=-15.6 &&
+        box.position.z + delta_z >= gotoLimitNz &&
+        box.position.z + delta_z <= gotoLimitz) {
+        box.position.z += delta_z;
+    }
+
+    xCoordinate.value = parseFloat(box.position.x);
+    zCoordinate.value = parseFloat(box.position.z);
 
     completeTask(null); // Need to check shape cut out
-
-    // console.log(box.position.x + " | " + box.position.z);
 }
 
 
@@ -1268,10 +1269,6 @@ function dragOne() {
     var calc = (rot_one * Math.PI + rad_adj);
 
     lathe_engine(0, -(box.position.z - rect_xfr)+5);
-
-    // Updating value on control
-    xCoordinate.value = parseFloat(box.position.z);
-
 }
 
 var rot_two = 0;
@@ -1316,9 +1313,6 @@ function dragTwo() {
     var calc = (rot_two * Math.PI + rad_adj);
 
     lathe_engine(-(box.position.x - rect_xfr)+6, 0);
-
-    // Updating value on control
-    zCoordinate.value = parseFloat(box.position.x);
 }
 
 // function for playlist og
