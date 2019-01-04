@@ -272,6 +272,7 @@ input#buffer {
     position: absolute;
     bottom: 11%;
     right: 0;
+    font-size: 8pt;
 }
 
 .fnumber {
@@ -308,15 +309,12 @@ textarea {
   margin-left: 0.3%;
   flex-direction: column;
   align-items: flex-start;
-  width: 11%;
+  width: 10%;
   justify-content: space-between;
-  /* flex: 1; */
-  height: 55%;
-  /* margin-top: 150px; */
+  height: 37%;
   border-radius: 10px;
-  /* margin: auto; */
   background: #3a3732;
-
+  margin-top: 15%;
 }
 
 .XZbutton {
@@ -325,7 +323,6 @@ textarea {
   color: white;
   height: 40px;
   width: 51%;
-  padding: 0px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -362,12 +359,12 @@ label#button-header1 {
 }
 
 button#mode {
-    clip-path: polygon(0 42%, 100% 10%, 100% 90%, 0 69%);
-    border-radius: 0px;
-    width: 67%;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 39px;
+  clip-path: polygon(0 41%, 100% 19%, 100% 84%, 0 68%);
+  width: 67%;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 39px;
+  font-size: 4pt;
   }
 
 .accbutton {
@@ -420,26 +417,27 @@ button#Xbutton, #Zbutton {
 
 .leftKeybord {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 90%;
-  flex: 2;
-  border-radius: 5px;
-  margin-left: 0.3%;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      width: 100%;
+      height: 81%;
+      flex: 2;
+      border-radius: 5px;
+      margin-left: 0.3%;
+      margin-bottom: 10%;
 }
 
 
 .row3{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 5px;
-    background: #3a3732;
-    width: 100%;
-    margin-top: 7px;
-    clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 5px;
+  background: #3a3732;
+  width: 97%;
+  margin-top: 7px;
+  clip-path: polygon(40% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0);
 }
 
 .row4{
@@ -450,13 +448,14 @@ button#Xbutton, #Zbutton {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
+    height: 6%;
 
 }
 
 .btn{
   display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
 }
 
 .row {
@@ -480,6 +479,8 @@ button#Xbutton, #Zbutton {
   font-weight: bold;
   cursor: pointer;
   background-repeat:no-repeat;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .sbutton:hover, .rbtn:hover, .rbtn:hover, .accbutton:hover, .fbutton:hover, .subbutton:hover, .XZbutton:hover,
 .rbtn1:hover {
@@ -507,69 +508,74 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 }
 
 #FC {
-  padding: 10px 22px;
-
+  font-size: 10pt;
 }
 
 #IncSet {
-  padding: 10px 8px;
   background-color: #ecd2af;
+  font-size: 5pt;
 }
 
 #AbsSet {
-  padding: 10px 8px;
   background-color: #ecd2af;
+  font-size: 5pt;
 }
 
 #rev {
-    padding: 10px 19px;
+  font-size: 10pt;
 }
 
 #off {
-    padding: 10px 19px;
-    background: #fc494a;
+  font-size: 10pt;
+  background: #fc494a;
 }
 
 #FWD {
-    padding: 6px 21px;
+  font-size: 10pt;
 }
 
 #FS {
-    padding: 6px 21px;
+    font-size: 10pt;
+    width: 33%;
 }
 
 #UP {
-  padding: 6px 12px;
+  width: 33%;
   background-color: #ecd2af;
 }
 
 #DOWN {
-        padding: 6px 16px;
+  width: 33%;
 }
 
+.sbutton img{
+  width: 96%;
+  height: 96%;
+}
 #GO {
-    padding: 10px 23px;
-    width: 50%;
+  width: 48%;
+  font-size: 10pt;
+  height: 100%;
+  text-align: center;
 }
 
 #STOP {
-    padding: 10px 16px;
-    background: #fc494a;
-    width: 50%;
+  background: #fc494a;
+  width: 48%;
+  font-size: 10pt;
+  height: 100%;
 }
 #row1{
   width:20%
 }
 
 #firstrow {
-    width: 60%;
-    margin-right: 72px;
+    width: 65%;
 }
 #SPINDLE{
   font-size: 14px;
   color: white;
   padding-left: 5px;
-  padding-top: 3px;
 }
 
 
@@ -577,13 +583,12 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 10px 28px;
   width: 33.3%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 10pt;
   margin: 2px 5px;
   font-weight: bold;
   cursor: pointer;
