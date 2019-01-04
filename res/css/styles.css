@@ -23,6 +23,10 @@ p {
   text-align: left;
 }
 
+strong {
+    font-size: 5pt;
+}
+
 .leftControlBtn {
   justify-content: center;
   display: flex;
@@ -33,29 +37,41 @@ p {
 }
 
 .rbtn1 {
-    background: black;
-    border: none;
-    margin-top: 30px;
-    height: 30px;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 7px;
-    cursor: pointer;
+  background: black;
+  border: none;
+  margin-top: 158%;
+  height: 3%;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 7px;
+  cursor: pointer;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+
 }
 
-button#sys {
-    color: white;
-    background: transparent;
 
+.rbtn1 img{
+  width:100%;
+  height: 98%;
 }
+
+button#sys,button#help,button#back {
+  font-size: 6pt;
+  color: white;
+  text-align: center;
+  background: transparent;
+}
+
 
 button#help {
-    color: white;
+
     background-color: #657a8f;
 }
 
 button#back {
-    color: white;
     background-color: #ecd2af;
 }
 button#upbtn,button#downbtn {
