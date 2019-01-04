@@ -23,38 +23,55 @@ p {
   text-align: left;
 }
 
+strong {
+    font-size: 5pt;
+}
+
 .leftControlBtn {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding-left: 5px;
+  padding-left: 0.5%;
   height: 75%;
+  width: 6%;
 }
 
 .rbtn1 {
-    background: black;
-    border: none;
-    margin-top: 30px;
-    height: 30px;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 7px;
-    cursor: pointer;
+  background: black;
+  border: none;
+  margin-top: 158%;
+  height: 3%;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 7px;
+  cursor: pointer;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+
 }
 
-button#sys {
-    color: white;
-    background: transparent;
 
+.rbtn1 img{
+  width:100%;
+  height: 98%;
 }
+
+button#sys,button#help,button#back {
+  font-size: 6pt;
+  color: white;
+  text-align: center;
+  background: transparent;
+}
+
 
 button#help {
-    color: white;
+
     background-color: #657a8f;
 }
 
 button#back {
-    color: white;
     background-color: #ecd2af;
 }
 button#upbtn,button#downbtn {
@@ -78,13 +95,13 @@ img#blogo {
 
 .readout-full{
   display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-around;
-      width: 55%;
-      height: 80%;
-      background: black;
-      border-radius: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 56%;
+  height: 63%;
+  background: black;
+  border-radius: 5px;
 }
 
 img#readout-logo {
@@ -111,11 +128,11 @@ img#redbtn {
 
 /* This is the readout section */
 .readout {
-  display: flex;
+    display: flex;
       flex-direction: column;
       /* flex: 3; */
       width: 98%;
-      margin-left: 5px;
+      margin-left: 1%;
       height: 88%;
       background: #cececf;
       text-align: center;
@@ -124,8 +141,8 @@ img#redbtn {
       position: relative;
       justify-content: space-between;
       /* margin: 4px; */
+      margin-bottom: 6%;
 }
-
 .readou-button {
   height: 8%;
   width: 100%;
@@ -184,27 +201,44 @@ label {
       /* margin: 0 10% 0; */
 }
 
+p#p0 {
+    width: 40%;
+    margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+}
+
 p#p1 {
     width: 30%;
     margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 
 p#p2 {
-    width: 30%;
-    margin-left: 29px;
+    width: 40%;
+    margin-left: 6.5%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 
 label#tx1 {
-    font-size: 10px;
+    font-size: 7px;
 }
 input#rpm {
-    width: 30%;
+  width: 30%;
+  height: 80%;
 }
 input#overrite {
-    width: 30%;
+    width: 44%;
+    height: 80%;
 }
 input#frate {
   width: 30%;
+  height: 80%;
 }
 .text-field {
   display: flex;
@@ -236,8 +270,9 @@ input#buffer {
     width: 35%;
     height: 4%;
     position: absolute;
-    bottom: 58px;
+    bottom: 11%;
     right: 0;
+    font-size: 8pt;
 }
 
 .fnumber {
@@ -258,28 +293,28 @@ label#h1 {
 }
 
 textarea {
-  resize: none;
-  /* text-align: center; */
-  font-size: 10pt;
-  background-color: #e7e7e7;
+    resize: none;
+    text-align: center;
+    font-size: 5pt;
+    background-color: #e7e7e7;
+    width: 100%;
+    height: 68%;
+    padding-top: 16%;
 }
 
 /* This is the XZ input section */
 .xz-input {
   font-size: 14px;
   display: flex;
-  margin-left: 6px;
+  margin-left: 0.3%;
   flex-direction: column;
   align-items: flex-start;
-  width: 11%;
+  width: 10%;
   justify-content: space-between;
-  /* flex: 1; */
-  height: 55%;
-  /* margin-top: 150px; */
+  height: 37%;
   border-radius: 10px;
-  /* margin: auto; */
   background: #3a3732;
-
+  margin-top: 15%;
 }
 
 .XZbutton {
@@ -288,7 +323,6 @@ textarea {
   color: white;
   height: 40px;
   width: 51%;
-  padding: 0px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -325,12 +359,12 @@ label#button-header1 {
 }
 
 button#mode {
-    clip-path: polygon(0 42%, 100% 10%, 100% 90%, 0 69%);
-    border-radius: 0px;
-    width: 67%;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 39px;
+  clip-path: polygon(0 41%, 100% 19%, 100% 84%, 0 68%);
+  width: 67%;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 39px;
+  font-size: 4pt;
   }
 
 .accbutton {
@@ -383,26 +417,27 @@ button#Xbutton, #Zbutton {
 
 .leftKeybord {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 90%;
-  flex: 2;
-  border-radius: 5px;
-  margin-left: 5px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      width: 100%;
+      height: 81%;
+      flex: 2;
+      border-radius: 5px;
+      margin-left: 0.3%;
+      margin-bottom: 10%;
 }
 
 
 .row3{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 5px;
-    background: #3a3732;
-    width: 100%;
-    margin-top: 7px;
-    clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 5px;
+  background: #3a3732;
+  width: 97%;
+  margin-top: 7px;
+  clip-path: polygon(40% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0);
 }
 
 .row4{
@@ -413,13 +448,14 @@ button#Xbutton, #Zbutton {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
+    height: 6%;
 
 }
 
 .btn{
   display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
 }
 
 .row {
@@ -443,6 +479,8 @@ button#Xbutton, #Zbutton {
   font-weight: bold;
   cursor: pointer;
   background-repeat:no-repeat;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .sbutton:hover, .rbtn:hover, .rbtn:hover, .accbutton:hover, .fbutton:hover, .subbutton:hover, .XZbutton:hover,
 .rbtn1:hover {
@@ -470,69 +508,74 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 }
 
 #FC {
-  padding: 10px 22px;
-
+  font-size: 10pt;
 }
 
 #IncSet {
-  padding: 10px 8px;
   background-color: #ecd2af;
+  font-size: 5pt;
 }
 
 #AbsSet {
-  padding: 10px 8px;
   background-color: #ecd2af;
+  font-size: 5pt;
 }
 
 #rev {
-    padding: 10px 19px;
+  font-size: 10pt;
 }
 
 #off {
-    padding: 10px 19px;
-    background: #fc494a;
+  font-size: 10pt;
+  background: #fc494a;
 }
 
 #FWD {
-    padding: 6px 21px;
+  font-size: 10pt;
 }
 
 #FS {
-    padding: 6px 21px;
+    font-size: 10pt;
+    width: 33%;
 }
 
 #UP {
-  padding: 6px 12px;
+  width: 33%;
   background-color: #ecd2af;
 }
 
 #DOWN {
-        padding: 6px 16px;
+  width: 33%;
 }
 
+.sbutton img{
+  width: 96%;
+  height: 96%;
+}
 #GO {
-    padding: 10px 23px;
-    width: 50%;
+  width: 48%;
+  font-size: 10pt;
+  height: 100%;
+  text-align: center;
 }
 
 #STOP {
-    padding: 10px 16px;
-    background: #fc494a;
-    width: 50%;
+  background: #fc494a;
+  width: 48%;
+  font-size: 10pt;
+  height: 100%;
 }
 #row1{
   width:20%
 }
 
 #firstrow {
-    width: 60%;
-    margin-right: 72px;
+    width: 65%;
 }
 #SPINDLE{
   font-size: 14px;
   color: white;
   padding-left: 5px;
-  padding-top: 3px;
 }
 
 
@@ -540,13 +583,12 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
   background-color: #657a8f;
   border: none;
   color: white;
-  padding: 10px 28px;
   width: 33.3%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 10pt;
   margin: 2px 5px;
   font-weight: bold;
   cursor: pointer;
@@ -577,7 +619,7 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
   position: fixed;
   z-index: 1;
   top: 0;
-  overflow-x: scroll;
+  /* //overflow-x: scroll; */
 }
 
 /* Control the left side */
