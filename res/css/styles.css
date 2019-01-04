@@ -27,8 +27,9 @@ p {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding-left: 5px;
+  padding-left: 0.5%;
   height: 75%;
+  width: 6%;
 }
 
 .rbtn1 {
