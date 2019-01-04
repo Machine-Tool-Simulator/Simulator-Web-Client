@@ -201,27 +201,44 @@ label {
       /* margin: 0 10% 0; */
 }
 
+p#p0 {
+    width: 40%;
+    margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+}
+
 p#p1 {
     width: 30%;
     margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 
 p#p2 {
-    width: 30%;
-    margin-left: 29px;
+    width: 40%;
+    margin-left: 6.5%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 
 label#tx1 {
-    font-size: 10px;
+    font-size: 7px;
 }
 input#rpm {
-    width: 30%;
+  width: 30%;
+  height: 80%;
 }
 input#overrite {
-    width: 30%;
+    width: 44%;
+    height: 80%;
 }
 input#frate {
   width: 30%;
+  height: 80%;
 }
 .text-field {
   display: flex;
@@ -253,7 +270,7 @@ input#buffer {
     width: 35%;
     height: 4%;
     position: absolute;
-    bottom: 58px;
+    bottom: 11%;
     right: 0;
 }
 
@@ -288,7 +305,7 @@ textarea {
 .xz-input {
   font-size: 14px;
   display: flex;
-  margin-left: 6px;
+  margin-left: 0.3%;
   flex-direction: column;
   align-items: flex-start;
   width: 11%;
@@ -410,7 +427,7 @@ button#Xbutton, #Zbutton {
   height: 90%;
   flex: 2;
   border-radius: 5px;
-  margin-left: 5px;
+  margin-left: 0.3%;
 }
 
 
