@@ -469,8 +469,8 @@ function lathe_engine(delta_x, delta_z) {
 
             var new_pts;
             // Creating array of new points to splice in
-            if (abs_x === max_x || abs_z === min_z) new_pts = [ // TODO: this prevents a cutting problem if at the same height
-                    new BABYLON.Vector3(max_x, min_z, 0)        // TODO: height, could be incorporated better earlier
+            if (Math.abs(abs_x - max_x) < .1 || Math.abs(abs_z - min_z) < .1) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+                    new BABYLON.Vector3(max_x, min_z, 0)        // TODO: or width, could be incorporated better earlier
                 ];
             else new_pts = [
                 new BABYLON.Vector3(abs_x, min_z, 0),
