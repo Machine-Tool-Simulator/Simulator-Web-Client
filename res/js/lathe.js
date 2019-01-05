@@ -54,7 +54,7 @@ let videos = [
         "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -63,7 +63,7 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":7,
@@ -89,7 +89,7 @@ let videos = [
         "title":"Constant SFM",
         "src":"https://drive.google.com/file/d/1jnq_N92G--HP1bjzjdfzLLCaSHbjOfe3/preview",
         "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"Spin Speed\" using the button below the control screen to set RPM <br>2. Enter \"250\" as the value using the numeric keypad.<br>3. Press the \"ABS SET\" button to set constant SFM.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"RPM",
                 "highlight":true
@@ -101,7 +101,7 @@ let videos = [
                 },
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":9,
@@ -119,7 +119,18 @@ let videos = [
         "index":11,
         "title":"Fine and Coarse Control",
         "src":"https://drive.google.com/file/d/1TZXP9VHU0nqVB3r-EOS4hV4QHJY348zE/preview",
-        "text":"Let's talk about the difference between fine mode and coarse mode. We will use the term fine mode for moving slowly and the term coarse mode for moving quickly. Take a look at how fast the cutting tool moves when the control is set to fine mode and you turn the wheel.<br>Now switch to coarse mode and see how quickly the cutting tool moves when you turn the wheel at the same speed. The cutting tool moves much faster when in coarse mode. This is good when you want to quickly move the tool to a certain position. However, coarse mode moves the cutting tool too quickly for actual cutting. When you are cutting metal, be sure to use fine mode so that the cutting tool moves through the metal slowly. Using fine mode during cutting gives you more control over what you are doing and reduces the chance of breaking tools.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Practice switching between fine and coarse control and adjusting the position of the cutting tool using the x and z wheels."
+        "text":"Let's talk about the difference between fine mode and coarse mode. We will use the term fine mode for moving slowly and the term coarse mode for moving quickly. Take a look at how fast the cutting tool moves when the control is set to fine mode and you turn the wheel.<br>Now switch to coarse mode and see how quickly the cutting tool moves when you turn the wheel at the same speed. The cutting tool moves much faster when in coarse mode. This is good when you want to quickly move the tool to a certain position. However, coarse mode moves the cutting tool too quickly for actual cutting. When you are cutting metal, be sure to use fine mode so that the cutting tool moves through the metal slowly. Using fine mode during cutting gives you more control over what you are doing and reduces the chance of breaking tools.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Practice switching between fine and coarse control and adjusting the position of the cutting tool using the x and z wheels.",
+        "tasks":[
+            {
+                "press":"FC",
+                "highlight":true
+            },
+            {
+                "press":"FC",
+                "highlight":true
+            }
+        ]
+
     },
     {
         "index":12,
@@ -150,7 +161,7 @@ let videos = [
         "title":"Do One (Taper)",
         "src":"https://drive.google.com/file/d/1hsq86aOGg1iudqzyXNDVVQl6JtBGRhrB/preview",
         "text":"Do one allows features like tapered angles and corner radii to be machined. When one of the do one options is selected and specified the Z&amp;X wheels are disabled and instead made to control the coarse and fine feed of the path specified by the do one feature.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Select \"DO ONE\" using the button below the control screen.</br>3. Select \"(TAPER)\" using the button below the control screen.</br>4. Select \"ABS SET\" to execute the \"DO ONE\" feature.</br>5. Exit \"DO ONE\" mode by selecting \"TOOL # (RETURN)\" using the button below the control screen.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -175,7 +186,7 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":17,
@@ -213,7 +224,7 @@ let videos = [
         "title":"Return Home",
         "src":"https://drive.google.com/file/d/1zP_OjZrycEvLBUMsyqBJ3aP8Rr2RzORD/preview",
         "text":"Go home returns the machine to the home position, which can be set in the setup menu. Again, the machine door must be closed in order for this feature to function.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"RETURN HOME\" using the button below the control screen.</br>2. Select \"GO\" under feed to return the tool to the home position.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"RETURNHOME",
                 "highlight":true
@@ -222,7 +233,7 @@ let videos = [
                 "press":"GO",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":19,

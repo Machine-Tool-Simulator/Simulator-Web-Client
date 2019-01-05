@@ -23,6 +23,7 @@ let delta = 0.025;
 let home_position_x = 6;
 let home_position_z = 5;
 let stopObserver = 0;
+let spindleSpeedSelected = 0;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -36,13 +37,14 @@ let toolretbutton = getById('f8btn');
 let coarsespeedbutton = getById('FC');
 let taperbutton = getById('f1btn');
 
+
 let canSubmit = true;
 let currentTasks = null;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
 
-let GoTofunction = document.querySelectorAll("#f1btn, #f3btn, #f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
+let GoTofunction = document.querySelectorAll("#f1btn, #f3btn, #f4btn, #f6btn,#f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton,#GO"), i;
 
 /** Initialization */
 window.onload = function () {
@@ -110,6 +112,7 @@ window.onload = function () {
         resetColors();
         rpmbutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 3;
+        spindleSpeedSelected = 1;
         setfunctionbutton();
     });
 
@@ -133,6 +136,7 @@ window.onload = function () {
     // When value entered, want to exit that button's mode
     restorebutton.addEventListener('click', function () {
         resetColors();
+        setfunctionbutton();
 
     });
 
@@ -179,6 +183,7 @@ function resetfunctionbutton() {
     gotoSelected = 0;
     dooneSelected = 0;
     powerfeedSelected = 0;
+    spindleSpeedSelected = 0;
     sequence = [];
     sequenceIdx = 0;
     pressed = "";
@@ -236,7 +241,7 @@ function setAbsPos() {
     // Resetting button colors
     resetColors();
     //gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1
-    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1 && xzButtonsSelected != 1) {
+    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1 && xzButtonsSelected != 1 && spindleSpeedSelected != 1) {
         resetfunctionbutton();
     }
 
@@ -250,7 +255,10 @@ function setAbsPos() {
     let targetVar;
     if (selectedCoord == 1) targetVar = getById('xvar');
     else if (selectedCoord == 2) targetVar = getById('zvar');
-    else if (selectedCoord == 3) targetVar = getById('rpm');
+    else if (selectedCoord == 3){
+      targetVar = getById('rpm');
+      spindleSpeed = parseFloat(buffer.value);
+    }
 
     targetVar.value = buffer.value;
     buffer.value = '';
@@ -478,6 +486,7 @@ function ChangeConstantSFM() {
     //     alert('Have uncompleted tasks');	// bad practice
     //     return;	// task not finished
     // }
+
     if (videoCounter > 0) {
         videoCounter = 5;
     }
@@ -499,7 +508,7 @@ function ChangeConstantSFM() {
     }
 }
 
-
+//===============================================================================================================================================================================
 function switchVideo(action) {
     let title = getById('title');
     let player = getById('player');
@@ -596,6 +605,7 @@ function completeTask(value) {
 
     let task = currentTasks[taskIndex];
     if (task.press) {
+        console.log(value);
         if (task.press === value) {
             if (task.conditions) {
                 if (task.conditions.buffer) {
@@ -644,6 +654,9 @@ function completeTask(value) {
     // }
 }
 
+
+
+//=============================================================================================================================================================================
 // Function to check points between lathe object and true shape from lathe.js file
 // to determine if the user has cut out the right file
 // function compareCoords(obj1, obj2) {
