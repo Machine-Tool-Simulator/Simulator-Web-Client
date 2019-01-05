@@ -360,7 +360,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
                 //Do one, Taper function
                 else if(pressed == "f3btnf1btnAbsSet"){
-                  console.log("Yessssssssssss")
+                   stopObserver = 0;
                    var frameRate = 10;
                    var xSlide = new BABYLON.Animation("xSlide", "position.x", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
                    var keyFramesX= [];
@@ -404,25 +404,25 @@ window.addEventListener('DOMContentLoaded', function () {
                    var currentPositionZ = box.position.z;
                    scene.beginAnimation(box,0,2*frameRate,true);
                    var observer = scene.onBeforeRenderObservable.add(function () {
-                     console.log(box.position);
-                     if (box.position.z > currentPositionZ){
-                       lathe_engine_anim(0,delta);
-                       currentPositionZ= box.position.z;
-                     }
-                     else{
-                       lathe_engine_anim(0,-delta);
-                       currentPositionZ= box.position.z;
-                     }
-
-                     if (box.position.x> currentPositionX){
-                       lathe_engine_anim(delta,0);
-                     }
-                     else{
-                       lathe_engine_anim(-delta,0);
-                     }
+                     // if (box.position.z > currentPositionZ){
+                     //   lathe_engine_anim(0,delta);
+                     //   currentPositionZ= box.position.z;
+                     // }
+                     // else{
+                     //   lathe_engine_anim(0,-delta);
+                     //   currentPositionZ= box.position.z;
+                     // }
+                     //
+                     // if (box.position.x> currentPositionX){
+                     //   lathe_engine_anim(delta,0);
+                     // }
+                     // else{
+                     //   lathe_engine_anim(-delta,0);
+                     // }
+                     lathe_engine_anim1();
                      if(stopObserver == 1){
                        scene.onBeforeRenderObservable.remove(observer);
-                       stopObserver = 0;
+
                      }
                    });
 
@@ -494,13 +494,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
-function lathe_engine_anim(delta_x, delta_z) {
+function lathe_engine_anim1() {
 
     var x = box.position.x - 3;
     var z = box.position.z - 3;
 
     // If within range to cut and moving in the proper direction
-    if (x < 4 && z < 0 && (delta_x < 0 || delta_z < 0)) {
+    if (x < 4 && z < 0) {
         var abs_x = Math.abs(x);
         var abs_z = Math.abs(z);
 
@@ -560,6 +560,8 @@ function lathe_engine_anim(delta_x, delta_z) {
 
     completeTask(null); // Need to check shape cut out
 }
+
+
 
 /**
  * Code for making cutting tool movements in x and z directions
