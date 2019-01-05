@@ -14,14 +14,8 @@ let gotoLimitx = 1000;
 let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
-let finecoarse = 0.0025;
 let spindleSpeed = 100;
-let zOrigin = 0;
-let xOrigin = 0;
 let xzButtonsSelected = 0;
-let delta = 0.025;
-let home_position_x = 6;
-let home_position_z = 5;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');

@@ -1,3 +1,10 @@
+let delta = 0.025; // how much box moves when command it to move
+let xOrigin = 6; // x home position for cutting tool
+let zOrigin = 5; // z home position for cutting tool
+let box_size = 6; // length of one side of the box
+let bound_limit_z = -15.6; // limit to how far box can go in the z direction
+let bound_limit_x = -0.025; // limit to how far box can go in the x direction
+
 /**
  * BabylonJS code
  */
@@ -21,10 +28,8 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.clearColor = new BABYLON.Color3.White();
 
 
-        box = BABYLON.Mesh.CreateBox("Box", 6, scene);
-        box.position = new BABYLON.Vector3(6, -3, 5);
-        zOrigin = box.position.z;
-        xOrigin = box.position.x;
+        box = BABYLON.Mesh.CreateBox("Box", box_size, scene);
+        box.position = new BABYLON.Vector3(xOrigin, -3, zOrigin);
         xCoordinate.value = parseFloat(xOrigin);
         zCoordinate.value = parseFloat(zOrigin);
 
@@ -201,30 +206,24 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
-                    // console.log(box.position);
-                    // console.log('box------------limitx')
-                    if (currentMesh.rotation.x > currentMeshX) {
-                          if (currentMesh == wheel && xOrigin < gotoLimitx) {
-                              box.position.x += finecoarse;
-                              xCoordinate.value = parseFloat(xOrigin += finecoarse);
-                              //xCoordinate.value = parseFloat(box.position.x);
-                          } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
-                              box.position.z -= finecoarse;
-                              zCoordinate.value = parseFloat(zOrigin -= finecoarse);
-                              //zCoordinate.value = parseFloat(box.position.z);
-                          }
 
-                      } else if (currentMesh.rotation.x < currentMeshX) {
-                          if (currentMesh == wheel && xOrigin > gotoLimitNx) {
-                              box.position.x -= finecoarse;
-                              xCoordinate.value = parseFloat(xOrigin -= finecoarse);
-                              //xCoordinate.value = parseFloat(box.position.x);
-                          } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
-                              box.position.z += finecoarse;
-                              zCoordinate.value = parseFloat(zOrigin += finecoarse);
-                              //zCoordinate.value = parseFloat(box.position.z);
-                          }
-                      }
+
+                    console.log(box.position);
+                    console.log('box------------limitx')
+                    if (currentMesh.rotation.x > currentMeshX) {
+                        if (currentMesh == wheel && box.position.x < gotoLimitx) {
+                            lathe_engine(delta,0);
+                        } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
+                            lathe_engine(0,-delta);
+                        }
+
+                    } else if (currentMesh.rotation.x < currentMeshX) {
+                        if (currentMesh == wheel && box.position.x > gotoLimitNx) {
+                            lathe_engine(-delta,0);
+                        } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
+                            lathe_engine(0,delta);
+                        }
+                    }
 
                     return true;
                 }
@@ -374,12 +373,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames.push({
                     frame: 2 * frameRate1,
-                    value: home_position_z
+                    value: zOrigin
                 });
 
                 var itHasStopped = function () {
                     //alert('itHasStopped func reports the animation stopped');
-                    box.position.z = home_position_z;
+                    box.position.z = zOrigin;
                     zCoordinate.value = parseFloat(box.position.z);
                 }
 
@@ -395,11 +394,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 keyFrames2.push({
                     frame: 2 * frameRate1,
-                    value: home_position_x
+                    value: xOrigin
                 });
 
                 var itHasStopped2 = function () {
-                    box.position.x = home_position_x;
+                    box.position.x = xOrigin;
                     xCoordinate.value = parseFloat(box.position.x);
                     scene.beginDirectAnimation(box, [GoToAnimationX], 0, 2 * frameRate, false, 1, itHasStopped);
                 }
@@ -432,8 +431,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
 function lathe_engine(delta_x, delta_z) {
 
-    var x = box.position.x - 3;
-    var z = box.position.z - 3;
+    var x = box.position.x - box_size/2;
+    var z = box.position.z - box_size/2;
 
     // If within range to cut and moving in the proper direction
     if (x < 4 && z < 0 && (delta_x < 0 || delta_z < 0)) {
@@ -489,24 +488,24 @@ function lathe_engine(delta_x, delta_z) {
             lathe.rotation.x = -Math.PI / 2;
 
             // TODO: When move the x coordinate back, do not want to spew z points
-            // console.log(lathe_pts);
+            console.log(lathe_pts);
         }
     }
 
     var tmp1 = x + delta_x;
     var tmp2 = z + delta_z;
 
-    console.log(tmp1 + " | " + tmp2);
-    console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
+    // console.log(tmp1 + " | " + tmp2);
+    // console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
 
     // These are set nicely to keep the box within a desired range
-    if (x + delta_x >=-0.025 &&
+    if (x + delta_x >=bound_limit_x &&
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
     }
 
-    if (z + delta_z >=-15.6 &&
+    if (z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
         box.position.z += delta_z;
@@ -517,6 +516,8 @@ function lathe_engine(delta_x, delta_z) {
 
     completeTask(null); // Need to check shape cut out
 }
+
+
 
 
 /**
@@ -645,15 +646,16 @@ function dragOne() {
 
     var rect_xfr = spin_speed * (rot_one * Math.PI + rad_adj);
 
-    var calc = (rot_one * Math.PI + rad_adj);
 
-    lathe_engine(0, -(box.position.z - rect_xfr)+5);
+    lathe_engine(0, -(box.position.z - rect_xfr)+zOrigin);
 }
 
 var rot_two = 0;
 var rad_prev_two = 0;
 
 function dragTwo() {
+    if (box.position.x < bound_limit_x) return;
+
     // calculate delta for mouse coordinates
     var deltaX = d3.event.x - pos_wheel_2;
     var deltaY = d3.event.y - y_pos;
@@ -689,9 +691,9 @@ function dragTwo() {
 
     var rect_xfr = -spin_speed * (rot_two * Math.PI + rad_adj);
 
-    var calc = (rot_two * Math.PI + rad_adj);
+    console.log(-(box.position.x - rect_xfr)+xOrigin);
 
-    lathe_engine(-(box.position.x - rect_xfr)+6, 0);
+    lathe_engine(-(box.position.x - rect_xfr)+xOrigin, 0);
 }
 
 // function for playlist og
