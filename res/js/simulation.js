@@ -449,8 +449,11 @@ function lathe_engine(delta_x, delta_z) {
             var item = lathe_pts[i];
 
             if (item.x >= abs_x && item.y <= abs_z) {
+
                 max_x = Math.max(max_x, item.x);
                 min_z = Math.min(min_z, item.y);
+
+                if (abs_x !== max_x && abs_z !== min_z) {}
 
                 lathe_pts.splice(i, 1);
                 i--;
@@ -459,10 +462,17 @@ function lathe_engine(delta_x, delta_z) {
             }
         }
 
+
+
         // Only do these if need to cut out shape
         if (pt_fnd) {
+
+            var new_pts;
             // Creating array of new points to splice in
-            var new_pts = [
+            if (abs_x === max_x || abs_z === min_z) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+                    new BABYLON.Vector3(max_x, min_z, 0)        // TODO: height, could be incorporated better earlier
+                ];
+            else new_pts = [
                 new BABYLON.Vector3(abs_x, min_z, 0),
                 new BABYLON.Vector3(abs_x, abs_z, 0),
                 new BABYLON.Vector3(max_x, abs_z, 0),
@@ -473,7 +483,6 @@ function lathe_engine(delta_x, delta_z) {
                 item = lathe_pts[i];
                 if (item.x >= abs_x && item.y >= abs_z) {
                     lathe_pts.splice(i, 0, ...new_pts);
-                    found = true;
                     break;
                 }
             }
