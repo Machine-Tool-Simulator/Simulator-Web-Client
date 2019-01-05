@@ -22,6 +22,7 @@ let xzButtonsSelected = 0;
 let delta = 0.025;
 let home_position_x = 6;
 let home_position_z = 5;
+let stopObserver = 0;
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -33,6 +34,7 @@ let restorebutton = getById('f6btn');
 let rpmbutton = getById('f7btn');
 let toolretbutton = getById('f8btn');
 let coarsespeedbutton = getById('FC');
+let taperbutton = getById('f1btn');
 
 let canSubmit = true;
 let currentTasks = null;
@@ -40,7 +42,7 @@ let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
 
-let GoTofunction = document.querySelectorAll("#f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
+let GoTofunction = document.querySelectorAll("#f1btn, #f3btn, #f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
 
 /** Initialization */
 window.onload = function () {
@@ -85,6 +87,14 @@ window.onload = function () {
         document.getElementById('f7').value = '';
         document.getElementById('f8').value = 'RETURN';
         dooneSelected = 1;
+    });
+
+    taperbutton.addEventListener('click', function () {
+        resetColors();
+        if(dooneSelected == 1){
+          buffer.value = '45';
+          setfunctionbutton();
+        }
     });
 
     gotobutton.addEventListener('click', function () {
@@ -165,6 +175,7 @@ function resetfunctionbutton() {
     document.getElementById('f6').value = 'RETURN HOME';
     document.getElementById('f7').value = 'SPIN SPEED';
     document.getElementById('f8').value = 'TOOL #';
+    buffer.value = '';
     gotoSelected = 0;
     dooneSelected = 0;
     powerfeedSelected = 0;
@@ -175,6 +186,8 @@ function resetfunctionbutton() {
     gotoLimitz = 1000;
     gotoLimitNx = -1000;
     gotoLimitNz = -1000;
+    scene.stopAnimation(box);
+    stopObserver = 1;
 
 }
 

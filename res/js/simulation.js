@@ -75,8 +75,6 @@ window.addEventListener('DOMContentLoaded', function () {
         var ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene, false);
         ground.position.y = -6;
 
-        ground.receiveShadows = true;
-
         var camera = new BABYLON.ArcRotateCamera("arcCam",
             0,
             BABYLON.Tools.ToRadians(55),
@@ -300,6 +298,8 @@ window.addEventListener('DOMContentLoaded', function () {
             fwdOn = 0;
         });
 
+
+
 // Implement GOTO;
         for (i = 0; i < GoTofunction.length; i++) {
             GoTofunction[i].addEventListener('click', function () {
@@ -333,7 +333,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                 }
                 //spindle speed: constant rpm
-                else if(pressed == "f7btnnumButtonIncSet"){
+                else if(pressed == "f7btnnumButtonIncSet" || pressed == "f7btnnumButtonAbsSet"){
                   scene.stopAnimation(Chuck1);
                   scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
                   resetfunctionbutton();
@@ -357,6 +357,75 @@ window.addEventListener('DOMContentLoaded', function () {
                   sequence = [];
                   sequenceIdx = 0;
                   pressed = "";
+                }
+                //Do one, Taper function
+                else if(pressed == "f3btnf1btnAbsSet"){
+                  console.log("Yessssssssssss")
+                   var frameRate = 10;
+                   var xSlide = new BABYLON.Animation("xSlide", "position.x", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+                   var keyFramesX= [];
+                   var keyFramesZ= [];
+                   var startingPositionX = box.position.x;
+                   var startingPositionZ = box.position.z;
+                   var  boxAttr =  box.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+                   console.log(boxAttr);
+                   keyFramesX.push({
+                       frame: 0,
+                       value: startingPositionX
+                   });
+                   keyFramesX.push({
+                       frame: frameRate,
+                       value:  startingPositionX+1
+                   });
+                   keyFramesX.push({
+                       frame: 2 * frameRate,
+                       value: startingPositionX
+                   });
+                   xSlide.setKeys(keyFramesX);
+                   //Rotation Animation
+                   var zSlide = new BABYLON.Animation("zSlide", "position.z", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+                   keyFramesZ.push({
+                       frame: 0,
+                       value: startingPositionZ
+                   });
+                   keyFramesZ.push({
+                       frame: frameRate,
+                       value:  startingPositionZ-1
+                   });
+                   keyFramesZ.push({
+                       frame: 2 * frameRate,
+                       value: startingPositionZ
+                   });
+                   zSlide.setKeys(keyFramesZ);
+                   box.animations.push(zSlide);
+                   box.animations.push(xSlide);
+                   // scene.beginDirectAnimation(box, [zSlide, xSlide], 0, 2 * frameRate, true);
+                   var currentPositionX = box.position.x;
+                   var currentPositionZ = box.position.z;
+                   scene.beginAnimation(box,0,2*frameRate,true);
+                   var observer = scene.onBeforeRenderObservable.add(function () {
+                     console.log(box.position);
+                     if (box.position.z > currentPositionZ){
+                       lathe_engine_anim(0,delta);
+                       currentPositionZ= box.position.z;
+                     }
+                     else{
+                       lathe_engine_anim(0,-delta);
+                       currentPositionZ= box.position.z;
+                     }
+
+                     if (box.position.x> currentPositionX){
+                       lathe_engine_anim(delta,0);
+                     }
+                     else{
+                       lathe_engine_anim(-delta,0);
+                     }
+                     if(stopObserver == 1){
+                       scene.onBeforeRenderObservable.remove(observer);
+                       stopObserver = 0;
+                     }
+                   });
+
                 }
             }, false);
 
@@ -425,6 +494,72 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function lathe_engine_anim(delta_x, delta_z) {
+
+    var x = box.position.x - 3;
+    var z = box.position.z - 3;
+
+    // If within range to cut and moving in the proper direction
+    if (x < 4 && z < 0 && (delta_x < 0 || delta_z < 0)) {
+        var abs_x = Math.abs(x);
+        var abs_z = Math.abs(z);
+
+        var max_x = -1000;
+        var min_z = 1000;
+
+        var pt_fnd = false;
+
+        // Removing points that are cut off by box
+        for (var i = 0; i < lathe_pts.length; i++) {
+            var item = lathe_pts[i];
+
+            if (item.x >= abs_x && item.y <= abs_z) {
+                max_x = Math.max(max_x, item.x);
+                min_z = Math.min(min_z, item.y);
+
+                lathe_pts.splice(i, 1);
+                i--;
+
+                pt_fnd = true;
+            }
+        }
+
+        // Only do these if need to cut out shape
+        if (pt_fnd) {
+            // Creating array of new points to splice in
+            var new_pts = [
+                new BABYLON.Vector3(abs_x, min_z, 0),
+                new BABYLON.Vector3(abs_x, abs_z, 0),
+                new BABYLON.Vector3(max_x, abs_z, 0),
+            ];
+
+            // Splicing in these pts and breaking when done
+            for (var i = 0; i < lathe_pts.length; i++) {
+                item = lathe_pts[i];
+                if (item.x >= abs_x && item.y >= abs_z) {
+                    lathe_pts.splice(i, 0, ...new_pts);
+                    found = true;
+                    break;
+                }
+            }
+
+            // Rebuild lathe model based no new points
+            lathe.dispose();
+            lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
+                shape: lathe_pts,
+                cap: Mesh.CAP_ALL,
+                updateable: true
+            }, scene);
+            lathe.rotation.x = -Math.PI / 2;
+
+            // TODO: When move the x coordinate back, do not want to spew z points
+            // console.log(lathe_pts);
+        }
+    }
+
+
+    completeTask(null); // Need to check shape cut out
+}
 
 /**
  * Code for making cutting tool movements in x and z directions
