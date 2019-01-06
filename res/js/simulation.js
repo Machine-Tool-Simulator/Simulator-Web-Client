@@ -440,7 +440,6 @@ window.addEventListener('DOMContentLoaded', function () {
 function lathe_engine(delta_x, delta_z) {
 
     var bad_cut = false;
-    var cut_made = false;
 
     var x = box.position.x - box_size/2;
     var z = box.position.z - box_size/2;
@@ -461,7 +460,7 @@ function lathe_engine(delta_x, delta_z) {
         var pt_fnd = false;
 
         // Removing points that are cut off by box
-        for (var i = 0; i < lathe_pts.length; i++) {
+        for (var i = 0; i < lathe_pts.length && ! bad_cut; i++) {
             var item = lathe_pts[i];
 
             if (item.x >= abs_x && item.y <= abs_z) {
@@ -469,10 +468,21 @@ function lathe_engine(delta_x, delta_z) {
                 max_x = Math.max(max_x, item.x);
                 min_z = Math.min(min_z, item.y);
 
-                lathe_pts.splice(i, 1);
-                i--;
+                var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
+                var depth_z = Math.abs(abs_z - min_z);
 
-                pt_fnd = true;
+                if ((depth_x > 2 && delta_z < 0) || (depth_z > 2 && delta_x < 0)) {
+                    console.log("cut too deep");
+                    bad_cut = true;
+                    // TODO: can add a better warning here!!!
+                } else {
+                    lathe_pts.splice(i, 1);
+                    i--;
+
+                    pt_fnd = true;
+                }
+
+
             }
         }
 
@@ -483,19 +493,12 @@ function lathe_engine(delta_x, delta_z) {
 
             var new_pts;
 
-            var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
-            var depth_z = Math.abs(abs_z - min_z);
 
-            if ((depth_x > 2 && delta_z < 0) || (depth_z > 2 && delta_x < 0)) {
-                console.log("cut too deep");
-                bad_cut = true;
-                // TODO: can add a better warning here!!!
-            }
 
             if (Math.abs(abs_x - max_x) < .05 || Math.abs(abs_z - min_z) < .05) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
-            else if (x <= .1) {
+            else if (x <= .25) {
                 new_pts = [    // If cutting tool has completely gone through the material
                     new BABYLON.Vector3(max_x, abs_z, 0),
                 ];
@@ -533,8 +536,6 @@ function lathe_engine(delta_x, delta_z) {
     }
 
     // These are set nicely to keep the box within a desired range
-
-    console.log(box.position.x + " | " + box.position.z);
 
     // if x is not less than 0
     if (!bad_cut && delta_x !== 0 &&
@@ -710,10 +711,14 @@ function dragOne() {
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
     var xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
 
+    console.log(rot);
+    console.log(xfr_delta);
+
     // Need to deal with case when stuck at edge and keep rotating
     // the wheel so does not keep registering the user's movements
     if (Math.abs(xfr_delta) > (2*Math.PI)) {
-        rot = rot < 0 ? rot + 2 : rot -2;
+        if (rot === -1) rot = 0;
+        else rot = rot < 0 ? rot + 2 : rot - 2;
 
         rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
         xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
@@ -749,8 +754,7 @@ function dragTwo() {
 
     var rad = Math.atan2(deltaY, deltaX);
 
-    console.log(rad + " | " + rad_prev_two + " | " + (rad-rad_prev_two));
-    console.log((box.position.x - box_size/2));
+    console.log(rad + " | " + rad_prev_two + " | " + (rad - rad_prev_two));
 
     // Only allow wheels to turn and box to move if not going to send box out of bounds
     var rot = rot_two;
@@ -773,21 +777,23 @@ function dragTwo() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-
-
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
-    var xfr_delta = -(box.position.x - rect_xfr)+xOrigin;
+    var xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
+
+    console.log(rot);
+    console.log("xfr before" + " | " + xfr_delta);
 
     // Need to deal with case when stuck at edge and keep rotating
     // the wheel so does not keep registering the user's movements
-    if (Math.abs(xfr_delta) > (2*Math.PI)) {
-        rot = rot < 0 ? rot + 2 : rot -2;
+    if (Math.abs(xfr_delta) > (2 * Math.PI)) {
+        if (rot === -1) rot = 0;
+        else rot = rot < 0 ? rot + 2 : rot - 2;
 
         rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
-        xfr_delta = -(box.position.x - rect_xfr)+xOrigin;
+        xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
     }
 
-    console.log(xfr_delta);
+    console.log("xfr after" + " | " + xfr_delta);
 
     if (lathe_engine(xfr_delta, 0)) {
 
@@ -801,25 +807,8 @@ function dragTwo() {
         console.log("bad turn!");
     }
 
+    console.log(box.position.x);
+
     rad_prev_two = rad;
     rot_two = rot;
 }
-
-
-// function for playlist og
-// (function() {
-//
-// 	var hamburger = {
-// 		navToggle: document.querySelector('.nav-toggle'),
-// 		nav: document.querySelector('nav'),
-//
-// 		doToggle: function(e) {
-// 			e.preventDefault();
-// 			this.navToggle.classList.toggle('expanded');
-// 			this.nav.classList.toggle('expanded');
-// 		}
-// 	};
-//
-// 	hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
-//
-// }());
