@@ -4,7 +4,7 @@ let zOrigin = 5; // z home position for cutting tool
 let box_size = 6; // length of one side of the box
 let bound_limit_z = -15.6; // limit to how far box can go in the z direction
 let bound_limit_x = -20; // limit to how far box can go in the x direction
-
+let depth_set = 1;
 
 /**
  * BabylonJS code
@@ -20,7 +20,7 @@ var lathe_pts_init = [
     new BABYLON.Vector3(4, 0, 0),
     new BABYLON.Vector3(4, 16, 0),
 ];
-// lathe_pts_init = [  // This shape is better if want to have a more obscure shape to begin with ...
+// var lathe_pts_init = [  // This shape is better if want to have a more obscure shape to begin with ...
 //     new BABYLON.Vector3(2, 0, 0),
 //     new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
 //     new BABYLON.Vector3(4, 8, 0),
@@ -473,24 +473,24 @@ function lathe_engine(delta_x, delta_z) {
                 var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
                 var depth_z = Math.abs(abs_z - min_z);
 
-                if ((depth_x > 2 && delta_z < 0) || (depth_z > 2 && delta_x < 0)) {
+                if ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0)) {
                     console.log("cut too deep");
                     bad_cut = true;
                     // TODO: can add a better warning here!!!
-                } else {
-                    pt_fnd = true;
-
-                    bad_pts.push(i);
                 }
+                pt_fnd = true;
+
+                bad_pts.push(i);
             }
         }
 
 
 
         // Only do these if need to cut out shape
-        if (!bad_cut && pt_fnd) {
+        if ( pt_fnd) {
 
             var new_pts;
+
 
             var adj = 0;
             for (var i = 0; i < bad_pts.length; i++) {
@@ -498,8 +498,7 @@ function lathe_engine(delta_x, delta_z) {
                 adj++;
             }
 
-
-            if (Math.abs(abs_x - max_x) < .05 || Math.abs(abs_z - min_z) < .05) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+            if (Math.abs(abs_x - max_x) <= 0 || Math.abs(abs_z - min_z) <= 0) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
             else if (x <= .25) {
