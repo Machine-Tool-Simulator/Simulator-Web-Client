@@ -42,6 +42,8 @@ let zCoordinate = getById('zvar');
 
 let GoTofunction = document.querySelectorAll("#f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
 
+let completedPages = [];    // Records pages where user has gone past before (Tasks done)
+
 /** Initialization */
 window.onload = function () {
 
@@ -499,14 +501,17 @@ function switchVideo(action) {
             description.innerHTML = "";
             return;
         }
-        // TODO: end of videos stuff
 
         if (currentTasks) {
             alert('Have uncompleted tasks');	// bad practice
             return;	// task not finished
         }
 
-        if (videoCounter++ == -1) {
+        if (!completedPages.includes(videoCounter)) {   // record visited/completed pages
+            completedPages.push(videoCounter);
+        }
+
+        if (videoCounter++ == -1) { // currently on intro page, hide everything that's not used in other pages
             getById('cover').style.display = 'none';
             player.style.display = 'block';
         }
@@ -529,45 +534,6 @@ function switchVideo(action) {
             currentTasks = null;
         }
     }
-}
-
-function backCoverPage() {
-    let title = getById('title');
-    let player = getById('player');
-    let description = getById('description');
-
-    if (videoCounter >= videos.length) {	// end of videos
-        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
-        player.style.display = "none";
-        description.innerHTML = "";
-        return;
-    }
-    // TODO: if end of videos, submit a feedback to server
-    currentTasks = null
-    // if (currentTasks) {
-    //     alert('Have uncompleted tasks');	// bad practice
-    //     return;	// task not finished
-    // }
-    if (videoCounter > 0) {
-        videoCounter -= 1
-    }
-
-    console.log("Now the videoCounter is: ", videoCounter)
-    if (videoCounter == 0) {
-        getById('cover').style.display = 'flex';
-        player.style.display = 'block';
-    } else {
-      let video = videos[videoCounter];
-      console.log("Now the video is: ", video)
-      title.innerHTML = video.title;
-      player.src = video.src;
-      description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
-    }
-
 }
 
 function nextTask() {
