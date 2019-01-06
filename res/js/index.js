@@ -558,8 +558,8 @@ function completeTask(value) {
             }
             console.log("Step completed!");
             nextTask();
-            console.log(currentTasks);
-            console.log(taskIndex);
+            console.log(`Current tasks: ${currentTasks}`);
+            console.log(`Task index: ${taskIndex}`);
         }
     }
     else if (task.shape) { // If shape
@@ -567,9 +567,6 @@ function completeTask(value) {
 
         let i = 0;
         let j = 0;
-
-        // console.log(lathe_pts);
-        // console.log(task.shape);
 
         while (j < lathe_pts.length) {
             // console.log(lathe_pts[j].x);
@@ -588,13 +585,17 @@ function completeTask(value) {
         if (i === task.shape.length) {
             console.log("Step completed!");
             nextTask();
-            console.log(currentTasks);
-            console.log(taskIndex);
+            console.log(`Current tasks: ${currentTasks}`);
+            console.log(`Task index: ${taskIndex}`);
+        }
+    } else if (task.click) { // If want to check certain shapes clicked
+        if (value === task.click) {
+            console.log("Step completed!");
+            nextTask();
+            console.log(`Current tasks: ${currentTasks}`);
+            console.log(`Task index: ${taskIndex}`);
         }
     }
-    // else if (task.click) { // If want to check certain shapes clicked
-    //
-    // }
 }
 
 // Function to check points between lathe object and true shape from lathe.js file

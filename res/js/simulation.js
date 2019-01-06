@@ -84,12 +84,10 @@ window.addEventListener('DOMContentLoaded', function () {
         camera.attachControl(canvas, true);
 
         // Keyboard events
-        var clickedObject = 'box';
-        console.log(clickedObject);
         box.actionManager = new BABYLON.ActionManager(scene);
         box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
-            clickedObject = 'box';
-            console.log(clickedObject);
+            console.log('box clicked');
+            completeTask('box');
         }));
 
         var inputMap = {};
@@ -245,6 +243,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 tailstock.scaling.x = tailstock_scale;
                 tailstock.scaling.y = tailstock_scale;
                 tailstock.scaling.z = tailstock_scale;
+
+                tailstock.actionManager = new BABYLON.ActionManager(scene);
+                tailstock.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                    console.log('tailstock clicked');
+                    completeTask('tailstock');
+                }));
             });
 
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.stl",
@@ -257,6 +261,11 @@ window.addEventListener('DOMContentLoaded', function () {
                     Chuck1.scaling.y = Chuck1_scale;
                     Chuck1.scaling.z = Chuck1_scale;
 
+                    Chuck1.actionManager = new BABYLON.ActionManager(scene);
+                    Chuck1.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                        console.log('chuck clicked');
+                        completeTask('chuck');
+                    }));
                 });
           //  0, 0, -17
 
