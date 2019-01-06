@@ -28,6 +28,14 @@ window.addEventListener('DOMContentLoaded', function () {
         xCoordinate.value = parseFloat(xOrigin);
         zCoordinate.value = parseFloat(zOrigin);
 
+        // lathe_pts = [
+        //     // new BABYLON.Vector3(4, 0, 0),
+        //     new BABYLON.Vector3(2, 0, 0),
+        //     new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
+        //     new BABYLON.Vector3(4, 8, 0),
+        //     new BABYLON.Vector3(4, 16, 0),
+        // ];
+
         lathe_pts = [
             // new BABYLON.Vector3(4, 0, 0),
             new BABYLON.Vector3(2, 0, 0),
@@ -104,15 +112,19 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.onBeforeRenderObservable.add(() => {
             if (inputMap["d"] || inputMap["ArrowRight"]) {
                 lathe_engine(0, delta);
+                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["w"] || inputMap["ArrowUp"]) {
                 lathe_engine(-delta, 0);
+                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["a"] || inputMap["ArrowLeft"]) {
                 lathe_engine(0, -delta);
+                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["s"] || inputMap["ArrowDown"]) {
                 lathe_engine(delta, 0);
+                completeTask([box.position.x,box.position.z]);
             }
         });
 
@@ -199,17 +211,17 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
-                    // console.log(box.position);
-                    // console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && xOrigin < gotoLimitx) {
                               box.position.x += finecoarse;
                               lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
                               xCoordinate.value = parseFloat(xOrigin += finecoarse);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
                               box.position.z -= finecoarse;
                               lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
                               zCoordinate.value = parseFloat(zOrigin -= finecoarse);
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
@@ -218,11 +230,13 @@ window.addEventListener('DOMContentLoaded', function () {
                           if (currentMesh == wheel && xOrigin > gotoLimitNx) {
                               box.position.x -= finecoarse;
                               lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
                               xCoordinate.value = parseFloat(xOrigin -= finecoarse);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
                               box.position.z += finecoarse;
                               lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
                               zCoordinate.value = parseFloat(zOrigin += finecoarse);
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
@@ -291,7 +305,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (fwdOn == 0){
               Chuck1.animations.push(yRot);
               var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
-              console.log(Chuck1.position);
+              //console.log(Chuck1.position);
               music.play();
               fwdOn = 1;
             }
@@ -461,7 +475,6 @@ window.addEventListener('DOMContentLoaded', function () {
                   GoToAnimationZ.setKeys(keyFrames2);
 
                   box.animations.push(GoToAnimationZ);
-                  // var animatable = scene.beginAnimation(box, 0, 2 * frameRate1, false, 1, itHasStopped2);
                   scene.beginDirectAnimation(box, [GoToAnimationZ], 0, 2 * 10, false, 1, itHasStopped2);
 
                 }
@@ -538,7 +551,7 @@ function lathe_engine_anim1() {
             lathe.rotation.x = -Math.PI / 2;
 
             // TODO: When move the x coordinate back, do not want to spew z points
-            // console.log(lathe_pts);
+            //console.log(lathe_pts);
         }
     }
 
@@ -609,15 +622,15 @@ function lathe_engine(delta_x, delta_z) {
             lathe.rotation.x = -Math.PI / 2;
 
             // TODO: When move the x coordinate back, do not want to spew z points
-            // console.log(lathe_pts);
+            //console.log(lathe_pts);
         }
     }
 
     var tmp1 = x + delta_x;
     var tmp2 = z + delta_z;
 
-    console.log(tmp1 + " | " + tmp2);
-    console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
+    // console.log(tmp1 + " | " + tmp2);
+    // console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
 
     // These are set nicely to keep the box within a desired range
     if (x + delta_x >=-0.025 &&
@@ -768,6 +781,7 @@ function dragOne() {
     var calc = (rot_one * Math.PI + rad_adj);
 
     lathe_engine(0, -(box.position.z - rect_xfr)+5);
+    completeTask([box.position.x,box.position.z]);
 }
 
 var rot_two = 0;
@@ -812,6 +826,7 @@ function dragTwo() {
     var calc = (rot_two * Math.PI + rad_adj);
 
     lathe_engine(-(box.position.x - rect_xfr)+6, 0);
+    completeTask([box.position.x,box.position.z]);
 }
 
 // function for playlist og

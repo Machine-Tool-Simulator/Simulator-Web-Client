@@ -40,6 +40,7 @@ let taperbutton = getById('f1btn');
 
 let canSubmit = true;
 let currentTasks = null;
+let jsonIdx = 0;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
@@ -540,6 +541,7 @@ function switchVideo(action) {
 
         if (video.tasks) {
             currentTasks = video.tasks;
+            jsonIdx = video.index;
         }
     } else if (action === 'back') {
         if (videoCounter > 0) {        // defaulted to -1
@@ -604,6 +606,7 @@ function completeTask(value) {
     if (!currentTasks) return;	// no current tasks
 
     let task = currentTasks[taskIndex];
+    console.log(jsonIdx);
     if (task.press) {
         console.log(value);
         if (task.press === value) {
@@ -615,8 +618,25 @@ function completeTask(value) {
             }
             console.log("Step completed!");
             nextTask();
-            console.log(currentTasks);
-            console.log(taskIndex);
+            // console.log(currentTasks);
+            // console.log(taskIndex);
+        }
+    }
+    else if (task.position){
+        if (value != null){
+          if (jsonIdx == 13){
+            if(value[0]<=task.position[0] && value[1] <= task.position[1]){
+              console.log("Step completed!");
+              nextTask();
+            }
+          }
+          else{
+            console.log("Enter task..")
+            if((task.position[0]-0.5 <= value[0] && value[0] <= task.position[0]+0.5) && (task.position[1]-0.5 <= value[1] && value[1] <= task.position[1]+0.5)){
+                console.log("Step completed!");
+                nextTask();
+            }
+          }
         }
     }
     else if (task.shape) { // If shape

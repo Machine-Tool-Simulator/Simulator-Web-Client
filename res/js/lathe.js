@@ -54,16 +54,16 @@ let videos = [
         "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.",
-        "tasks":[
-            {
-                "press":"FWD",
-                "highlight":true
-            },
-            {
-                "press":"OFF",
-                "highlight":true
-            }
-        ]
+        // "tasks":[
+        //     {
+        //         "press":"FWD",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"OFF",
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":7,
@@ -136,13 +136,92 @@ let videos = [
         "index":12,
         "title":"Cutting and Setting Z Coordinate System",
         "src":"https://drive.google.com/file/d/1dDJ7XO4W8aN-Pj1l3LGL1pc-x0nCljBI/preview",
-        "text":"You are now ready to cut some metal. We will start by doing a process called facing off the part. This is how you assemble where z equals 0. Position the cutting tool slightly towards you from the diameter of the part and slightly to the left of the edge of the part.<br>Turn on the spindle.<br>Use the x wheel to move the cutting wheel into the part. Keep moving x wheel until it is no longer making chips, this should be towards the center of the part.<br>Turn the x wheel the other way to move the cutting tool back outside the diameter of the part.<br>Establish this position as the z origin by pressing z, 0, ABS SET.<br>Turn off the spindle.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Face off the part to set the z coordinate system by:<br>1. Positioning the cutting tool slightly towards you from the diameter of teh part and slightly to hte left of the edge of the part.<br>2. Turning on the spindle to cut out a piece of the material.<br>3. Using the x wheel to move the x wheel through to the center of the part (so that you completely remove a section of the material).<br>4. Using the x wheel to move the cutting tool outside the diameter of the wheel.<br>5. Establishing a new z = 0 coordinate system by pressing z, 0, ABS SET.<br>6. Turn off the spindle.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system."
+        "text":"You are now ready to cut some metal. We will start by doing a process called facing off the part. This is how you assemble where z equals 0. Position the cutting tool slightly towards you from the diameter of the part and slightly to the left of the edge of the part.<br>Turn on the spindle.<br>Use the x wheel to move the cutting wheel into the part. Keep moving x wheel until it is no longer making chips, this should be towards the center of the part.<br>Turn the x wheel the other way to move the cutting tool back outside the diameter of the part.<br>Establish this position as the z origin by pressing z, 0, ABS SET.<br>Turn off the spindle.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Face off the part to set the z coordinate system by:<br>1. Positioning the cutting tool slightly towards you from the diameter of teh part and slightly to hte left of the edge of the part.<br>2. Turning on the spindle to cut out a piece of the material.<br>3. Using the x wheel to move the x wheel through to the center of the part (so that you completely remove a section of the material).<br>4. Using the x wheel to move the cutting tool outside the diameter of the wheel.<br>5. Establishing a new z = 0 coordinate system by pressing z, 0, ABS SET.<br>6. Turn off the spindle.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system.",
+        "tasks":[
+            {
+                // +- 0.5
+                "position":[5.2, 2.8],
+                "highlight":true
+            },
+            {
+                "press":"FWD",
+                "highlight":true
+            },
+            {
+                // +- 0.5
+                "position":[3, 2.8],
+                "highlight":true
+            },
+            // {
+            //   //0.27500000000000924
+            //   "shape":[
+            //     {
+            //       "x":2,"y":0.275,"z":0
+            //     },
+            //     {
+            //       "x":2,"y":8,"z":0
+            //     },
+            //     {
+            //       "x":4,"y":8,"z":0
+            //     },
+            //     {
+            //       "x":4,"y":16,"z":0
+            //     }
+            //     ]
+            // },
+            {
+                "press":"Z",
+                "highlight":true
+            },
+            {
+                "press":"ABS_SET",
+                "conditions":{
+                    "buffer":0
+                },
+                "highlight":true
+            },
+            {
+                "press":"OFF",
+                "highlight":true
+            }
+        ]
     },
     {
         "index":13,
         "title":"Setting X Coordinate System",
         "src":"https://drive.google.com/file/d/1mQvL8J2SCZp_3jK0jatF4MdY9ZFBpCGV/preview",
-        "text":"To measure the dimensions of the part that you have been working on, you can use a tool called calipers. Calipers represent the distance between two points with a very high level of precision. When you move the calipers apart, the distance increases. When you move the calipers closer together, the distance decreases.<br>You are now ready to establish the x coordinate system. Position the cutting tool slightly to the right of z 0 and slightly to the inside of the part's diameter.<br>Turn on the spindle.<br>Use the z wheel to move the cutting tool into the part, making a smaller outside diameter than the rest of the raw material.<br>Reverse the z wheel to bring the cutting tool off of the part.<br>Turn off the spindle.<br>Now you will use the calipers to measure the diameter that you just cut. Open up the calipers and press them onto the outside diameter. Press them together and try to find the smallest number that you can find. In this case, the diameter is reading at about 0.412 inches.<br>To complete the process of establishing the x coordinate system, type in the number that you measured into the control. Press x, then type in the diameter, and then press ABS SET.<br>Now that the coordinate system is established, z 0 represents that far right edge of the part and the x coordinate represents the actual diameter at the position of the cutting tool.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter.<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material.<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the sipndle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system."
+        "text":"To measure the dimensions of the part that you have been working on, you can use a tool called calipers. Calipers represent the distance between two points with a very high level of precision. When you move the calipers apart, the distance increases. When you move the calipers closer together, the distance decreases.<br>You are now ready to establish the x coordinate system. Position the cutting tool slightly to the right of z 0 and slightly to the inside of the part's diameter.<br>Turn on the spindle.<br>Use the z wheel to move the cutting tool into the part, making a smaller outside diameter than the rest of the raw material.<br>Reverse the z wheel to bring the cutting tool off of the part.<br>Turn off the spindle.<br>Now you will use the calipers to measure the diameter that you just cut. Open up the calipers and press them onto the outside diameter. Press them together and try to find the smallest number that you can find. In this case, the diameter is reading at about 0.412 inches.<br>To complete the process of establishing the x coordinate system, type in the number that you measured into the control. Press x, then type in the diameter, and then press ABS SET.<br>Now that the coordinate system is established, z 0 represents that far right edge of the part and the x coordinate represents the actual diameter at the position of the cutting tool.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter.<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material.<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the sipndle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system.",
+        "tasks":[
+            {
+                  // >5,>3
+                "position":[5, 4.5],
+                "highlight":true
+            },
+            {
+                "press":"FWD",
+                "highlight":true
+            },
+            {
+                  // >5,>3
+                "position":[5, 3],
+                "highlight":true
+            },
+            {
+                "press":"OFF",
+                "highlight":true
+            },
+            {
+                "press":"X",
+                "highlight":true
+            },
+            {
+                "press":"ABS_SET",
+                "conditions":{
+                    "buffer":0.412
+                },
+                "highlight":true
+            }
+        ]
     },
     {
         "index":14,
