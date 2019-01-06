@@ -433,6 +433,14 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+
+// For timing whether the person has stopped cutting
+var xtimer;
+var ztimer;
+var x_active = false;
+var z_active = false;
+
 /**
  * Code for making cutting tool movements in x and z directions
  */
@@ -469,8 +477,6 @@ function lathe_engine(delta_x, delta_z) {
 
                 max_x = Math.max(max_x, item.x);
                 min_z = Math.min(min_z, item.y);
-
-                if (abs_x !== max_x && abs_z !== min_z) {}
 
                 lathe_pts.splice(i, 1);
                 i--;
@@ -551,8 +557,6 @@ function lathe_engine(delta_x, delta_z) {
 
     return true;
 }
-
-
 
 
 /**
