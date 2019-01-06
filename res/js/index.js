@@ -320,11 +320,9 @@ function ChangeVideoMainLatheFeatures() {
       title.innerHTML = video.title;
       player.src = video.src;
       description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
     }
+
+
 }
 
 function ChangeDigitalReadout() {
@@ -358,11 +356,8 @@ function ChangeDigitalReadout() {
       title.innerHTML = video.title;
       player.src = video.src;
       description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
     }
+
 }
 
 function ChangeSpindle() {
@@ -521,6 +516,17 @@ function switchVideo(action) {
             description.innerHTML = video.text;
             currentTasks = null;
         }
+    }
+
+    console.log("VIDEO: " + videoCounter);
+
+    if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
+        reset(); // reset the shape
+        depth_set = 1;
+    }
+    else if (videoCounter === 14) {
+        reset(); // reset the shape
+        depth_set = 3;
     }
 }
 

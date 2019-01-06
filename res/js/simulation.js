@@ -446,8 +446,6 @@ function lathe_engine(delta_x, delta_z) {
 
 
 
-
-
     // If within range to cut and moving in the proper direction
     if (x <= 4 && z <= 0 && (delta_x < 0 || delta_z < 0)) {
 
@@ -477,6 +475,7 @@ function lathe_engine(delta_x, delta_z) {
                     console.log("cut too deep");
                     bad_cut = true;
                     // TODO: can add a better warning here!!!
+                    if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
                 }
                 pt_fnd = true;
 
@@ -487,7 +486,7 @@ function lathe_engine(delta_x, delta_z) {
 
 
         // Only do these if need to cut out shape
-        if ( pt_fnd) {
+        if (pt_fnd) {
 
             var new_pts;
 
@@ -498,15 +497,13 @@ function lathe_engine(delta_x, delta_z) {
                 adj++;
             }
 
-            if (Math.abs(abs_x - max_x) <= 0 || Math.abs(abs_z - min_z) <= 0) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+            if (Math.abs(abs_x - max_x) <= 0.02 || Math.abs(abs_z - min_z) <= 0.02) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
             else if (x <= .25) {
                 new_pts = [    // If cutting tool has completely gone through the material
                     new BABYLON.Vector3(max_x, abs_z, 0),
                 ];
-
-                bad_cut = true;
             }
             else {
                 new_pts = [
@@ -668,12 +665,8 @@ function reset() {
             cy: yInit2
         });
 
-    rec.attr({
-        x: rec_init_x,
-        y: rec_init_y
-    })
-
     // TODO: also want to reset the 3D buttons here, or do they need to be reset ???
+    // TODO: @YUTENG: please add stuff here to reset stuff related to your functions, thanks!
 }
 
 
