@@ -12,9 +12,20 @@ let bound_limit_x = -0.025; // limit to how far box can go in the x direction
 var box;
 var lathe;
 var scene;
-var lathe_pts;
 var tailstock;
 var Chuck1;
+
+var lathe_pts_init = [
+    new BABYLON.Vector3(4, 0, 0),
+    new BABYLON.Vector3(4, 16, 0),
+];
+// lathe_pts_init = [  // This shape is better if want to have a more obscure shape to begin with ...
+//     new BABYLON.Vector3(2, 0, 0),
+//     new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
+//     new BABYLON.Vector3(4, 8, 0),
+//     new BABYLON.Vector3(4, 16, 0),
+// ];
+var lathe_pts = lathe_pts_init.slice(0);
 
 var Mesh = BABYLON.Mesh; // Shortform for BABYLON.Mesh
 
@@ -33,18 +44,8 @@ window.addEventListener('DOMContentLoaded', function () {
         xCoordinate.value = parseFloat(xOrigin);
         zCoordinate.value = parseFloat(zOrigin);
 
-        // lathe_pts = [  // This shape is better if want to have a more obscure shape to begin with ...
-        //     new BABYLON.Vector3(2, 0, 0),
-        //     new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
-        //     new BABYLON.Vector3(4, 8, 0),
-        //     new BABYLON.Vector3(4, 16, 0),
-        // ];
 
 
-        lathe_pts = [
-            new BABYLON.Vector3(4, 0, 0),
-            new BABYLON.Vector3(4, 16, 0),
-        ];
 
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
             shape: lathe_pts,
@@ -501,16 +502,9 @@ function lathe_engine(delta_x, delta_z) {
             }, scene);
             lathe.rotation.x = -Math.PI / 2;
 
-            // TODO: When move the x coordinate back, do not want to spew z points
-            console.log(lathe_pts);
+            // console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
-
-    var tmp1 = x + delta_x;
-    var tmp2 = z + delta_z;
-
-    // console.log(tmp1 + " | " + tmp2);
-    // console.log(gotoLimitNx + " | " + gotoLimitx + " | " + gotoLimitNz + " | " + gotoLimitz);
 
     // These are set nicely to keep the box within a desired range
     if (x + delta_x >=bound_limit_x &&
@@ -600,8 +594,22 @@ var xInit2 = d3.select('.rotatable2').attr('cx');
 var yInit2 = d3.select('.rotatable2').attr('cy');
 
 
-// reset location of rotatable circle
+// function to reset the shape, wheel positions, etc.
 function reset() {
+    // Resetting lathe shape
+    lathe.dispose();
+    lathe_pts = lathe_pts_init.slice(0);
+    lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
+        shape: lathe_pts,
+        cap: Mesh.CAP_ALL,
+        updateable: true
+    }, scene);
+    lathe.rotation.x = -Math.PI / 2;
+
+    box.position.x = xOrigin;
+    box.position.z = zOrigin;
+
+    // Resetting D3 wheels
     d3.select('.rotatable1')
         .attr({
             cx: xInit1,
@@ -618,6 +626,8 @@ function reset() {
         x: rec_init_x,
         y: rec_init_y
     })
+
+    // TODO: also want to reset the 3D buttons here, or do they need to be reset ???
 }
 
 

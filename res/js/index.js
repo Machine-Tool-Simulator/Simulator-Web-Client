@@ -28,7 +28,6 @@ let rpmbutton = getById('f7btn');
 let toolretbutton = getById('f8btn');
 let coarsespeedbutton = getById('FC');
 
-let canSubmit = true;
 let currentTasks = null;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
