@@ -33,11 +33,16 @@ window.addEventListener('DOMContentLoaded', function () {
         xCoordinate.value = parseFloat(xOrigin);
         zCoordinate.value = parseFloat(zOrigin);
 
+        // lathe_pts = [  // This shape is better if want to have a more obscure shape to begin with ...
+        //     new BABYLON.Vector3(2, 0, 0),
+        //     new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
+        //     new BABYLON.Vector3(4, 8, 0),
+        //     new BABYLON.Vector3(4, 16, 0),
+        // ];
+
+
         lathe_pts = [
-            // new BABYLON.Vector3(4, 0, 0),
-            new BABYLON.Vector3(2, 0, 0),
-            new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
-            new BABYLON.Vector3(4, 8, 0),
+            new BABYLON.Vector3(4, 0, 0),
             new BABYLON.Vector3(4, 16, 0),
         ];
 
