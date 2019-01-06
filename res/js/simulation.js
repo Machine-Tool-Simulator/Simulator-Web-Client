@@ -1,9 +1,10 @@
 let delta = 0.025; // how much box moves when command it to move
-let xOrigin = 6; // x home position for cutting tool
+let xOrigin = 8; // x home position for cutting tool
 let zOrigin = 5; // z home position for cutting tool
 let box_size = 6; // length of one side of the box
 let bound_limit_z = -15.6; // limit to how far box can go in the z direction
-let bound_limit_x = -0.025; // limit to how far box can go in the x direction
+let bound_limit_x = -20; // limit to how far box can go in the x direction
+
 
 /**
  * BabylonJS code
@@ -54,8 +55,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 7, diameter: 8}, scene);
-        cyl.position=new BABYLON.Vector3(0,0,-19.5);
+        // Back of material that is in the chuck
+        cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 6.3, diameter: 8}, scene);
+        cyl.position=new BABYLON.Vector3(0,0,-19.15);
         cyl.rotation.x=Math.PI/2;
 
 // light
@@ -255,7 +257,7 @@ window.addEventListener('DOMContentLoaded', function () {
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.stl",
                 scene, function (newMeshes) {
                     Chuck1 = newMeshes[0];
-                    Chuck1.position = new BABYLON.Vector3(0, 0, -23);
+                    Chuck1.position = new BABYLON.Vector3(0, 0, -22.3);
                     Chuck1.rotation.y = Math.PI/2;
                     var Chuck1_scale = .025;
                     Chuck1.scaling.x = Chuck1_scale;
@@ -441,7 +443,7 @@ function lathe_engine(delta_x, delta_z) {
     var z = box.position.z - box_size/2;
 
     // If within range to cut and moving in the proper direction
-    if (x < 4 && z < 0 && (delta_x < 0 || delta_z < 0)) {
+    if (x <= 4 && z <= 0 && (delta_x < 0 || delta_z < 0)) {
         var abs_x = Math.abs(x);
         var abs_z = Math.abs(z);
 
@@ -478,6 +480,9 @@ function lathe_engine(delta_x, delta_z) {
             if (Math.abs(abs_x - max_x) < .1 || Math.abs(abs_z - min_z) < .1) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
+            else if (x <= 0) new_pts = [    // If cutting tool has completely gone through the material
+                new BABYLON.Vector3(max_x, abs_z, 0),
+            ];
             else new_pts = [
                 new BABYLON.Vector3(abs_x, min_z, 0),
                 new BABYLON.Vector3(abs_x, abs_z, 0),
@@ -502,27 +507,33 @@ function lathe_engine(delta_x, delta_z) {
             }, scene);
             lathe.rotation.x = -Math.PI / 2;
 
-            // console.log(lathe_pts); // if want to see points that lathe is registering
+            console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
 
     // These are set nicely to keep the box within a desired range
-    if (x + delta_x >=bound_limit_x &&
+
+    // console.log(delta_x + " | " + delta_z);
+    if (delta_x !== 0 &&
+        x + delta_x >=bound_limit_x &&
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
-    }
-
-    if (z + delta_z >=bound_limit_z &&
+    } else if (delta_z !== 0 &&
+        z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
         box.position.z += delta_z;
+    } else {
+        return false;
     }
 
     xCoordinate.value = parseFloat(box.position.x);
     zCoordinate.value = parseFloat(box.position.z);
 
     completeTask(null); // Need to check shape cut out
+
+    return true;
 }
 
 
@@ -641,84 +652,101 @@ function dragOne() {
 
     var rad = Math.atan2(deltaY, deltaX);
 
+    // if (rad-rad_prev_one > 5) return;
+
+    console.log(rad + " | " + rad_prev_one + " | " + (rad-rad_prev_one));
+
+    // Only allow wheels to turn and box to move if not going to send box out of bounds
+    var rot = rot_one;
+
     if (rad_prev_one >= 2.7) {
         if (rad < -2.7) {
-            if (rot_one === -1) rot_one = 0;
-            else rot_one = rot_one !== 0 ? rot_one + 2 : rot_one + 1;
+            if (rot_one === -1) rot = 0;
+            else rot = rot_one !== 0 ? rot_one + 2 : rot_one + 1;
         }
     } else if (rad_prev_one <= -2.7) {
         if (rad > 2.7) {
-            if (rot_one === 1) rot_one = 0;
-            else rot_one = rot_one !== 0 ? rot_one - 2 : rot_one - 1;
+            if (rot_one === 1) rot = 0;
+            else rot = rot_one !== 0 ? rot_one - 2 : rot_one - 1;
         }
     }
 
     var rad_adj;
 
-    if (rot_one > 0) rad_adj = Math.PI + rad;
-    else if (rot_one < 0) rad_adj = rad - Math.PI;
+    if (rot > 0) rad_adj = Math.PI + rad;
+    else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    rad_prev_one = rad;
 
 
-    d3.select(this)
-        .attr({
-            cx: inset * r * Math.cos(rad),
-            cy: y_pos + inset * r * Math.sin(rad)
-        });
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
 
-    var rect_xfr = spin_speed * (rot_one * Math.PI + rad_adj);
+    if (lathe_engine(0, -(box.position.z - rect_xfr)+zOrigin)) {
+        rad_prev_one = rad;
+        rot_one = rot;
 
-
-    lathe_engine(0, -(box.position.z - rect_xfr)+zOrigin);
+        d3.select(this)
+            .attr({
+                cx: inset * r * Math.cos(rad),
+                cy: y_pos + inset * r * Math.sin(rad)
+            });
+    } else {
+        console.log("here");
+    }
 }
 
 var rot_two = 0;
 var rad_prev_two = 0;
 
 function dragTwo() {
-    if (box.position.x < bound_limit_x) return;
-
     // calculate delta for mouse coordinates
     var deltaX = d3.event.x - pos_wheel_2;
     var deltaY = d3.event.y - y_pos;
 
     var rad = Math.atan2(deltaY, deltaX);
 
+    console.log(rad + " | " + rad_prev_two + " | " + (rad-rad_prev_two));
+    console.log((box.position.x - box_size/2));
+
+    // Only allow wheels to turn and box to move if not going to send box out of bounds
+    var rot = rot_two;
+
     if (rad_prev_two >= 2.7) {
         if (rad < -2.7) {
-            if (rot_two === -1) rot_two = 0;
-            else rot_two = rot_two !== 0 ? rot_two + 2 : rot_two + 1;
+            if (rot_two === -1) rot = 0;
+            else rot = rot_two !== 0 ? rot_two + 2 : rot_two + 1;
         }
     } else if (rad_prev_two <= -2.7) {
         if (rad > 2.7) {
-            if (rot_two === 1) rot_two = 0;
-            else rot_two = rot_two !== 0 ? rot_two - 2 : rot_two - 1;
+            if (rot_two === 1) rot = 0;
+            else rot = rot_two !== 0 ? rot_two - 2 : rot_two - 1;
         }
     }
 
     var rad_adj;
 
-    if (rot_two > 0) rad_adj = Math.PI + rad;
-    else if (rot_two < 0) rad_adj = rad - Math.PI;
+    if (rot > 0) rad_adj = Math.PI + rad;
+    else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    rad_prev_two = rad;
 
 
-    d3.select(this)
-        .attr({
-            cx: pos_wheel_2 + inset * r * Math.cos(rad),
-            cy: y_pos + inset * r * Math.sin(rad)
-        });
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
 
-    var rect_xfr = -spin_speed * (rot_two * Math.PI + rad_adj);
+    if (lathe_engine(-(box.position.x - rect_xfr)+xOrigin, 0)) {
+        rad_prev_two = rad;
+        rot_two = rot;
 
-    console.log(-(box.position.x - rect_xfr)+xOrigin);
-
-    lathe_engine(-(box.position.x - rect_xfr)+xOrigin, 0);
+        d3.select(this)
+            .attr({
+                cx: inset * r * Math.cos(rad) + pos_wheel_2,
+                cy: y_pos + inset * r * Math.sin(rad)
+            });
+    } else {
+        console.log("here");
+    }
 }
+
 
 // function for playlist og
 // (function() {
