@@ -121,6 +121,32 @@ let videos = [
         "text":"Now you can work on cutting the part to a particular diameter. Let's say for example that the part is supposed to have 0.41 inches diameter and 0.5 inches long. You can use the GoTo function to prepare the lathe for making this.<br>Press GoTo. Press z -0.5 ABS SET. Press x 0.41 ABS SET.<br>The cutting tool now won't move any further than the points you have programmed using GoTo. You will make several small cuts in order to reduce the diameter until it reaches the desired diameter. The amount of diameter that you cut off at once is called a depth of cut. A relatively conservative depth of cut is something like 0.03 inches of diameter at a time, whereas a relatively aggressive depth of cut is something like 0.1 inches of diameter at a time.<br>The steps for making a cut are position the cutting tool to the right of z 0 and one depth of cut inside the part. In this case, the diameter of the raw material is 0.5 inches. In order to make a cut with a depth of 0.03 inches, you will position the cutting tool at an x value of 0.47.<br>Verify that the machine is in fine mode. This is necessary for when you are cutting material.<br>Turn on the spindle.<br>Turn the z wheel counter-clockwise until the tool reaches the programmed GoTo position.<br>Turn the x wheel the same way to move the cutting tool to move the cutting tool away from the spindle axis.<br>Turn the z wheel clockwise until the cutting tool is to the right of z 0 again.<br>Turn the x wheel clockwise until the cutting tool is at a position of 0.03 inches smaller than the existing diameter.<br>Repeat this process, cutting of 0.03 inches of diameter at a time, until the final diameter is reached.<br>The part now has the desired geometry.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%><br>1. Set a GoTo position of x = 5 in. and z = -5 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool.<br>4. You will not be able to make a depth of cut greater than 1 due to constraints.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
         "tasks":[
             {
+                "press":"GOTO",
+                "highlight":true
+            },
+            {
+                "press":"X",
+                "highlight":true
+            },
+            {
+                "press":"ABS_SET",
+                "conditions":{
+                    "buffer":5
+                },
+                "highlight":true
+            },
+            {
+                "press":"Z",
+                "highlight":true
+            },
+            {
+                "press":"ABS_SET",
+                "conditions":{
+                    "buffer":-5
+                },
+                "highlight":true
+            },
+            {
                 "shape":[
                     {
                         "x":2,"y":0,"z":0
@@ -144,7 +170,7 @@ let videos = [
         "src":"https://drive.google.com/file/d/1Kl8mL5F-WPkJprA1jA3pvK8afVBku-50/preview",
         "text":"The previous section demonstrated a few conservative cuts using a depth of cut of 0.03 inches. If you need to remove a lot of material, it can go faster if you use a more aggressive depth of cut, like 0.1 inches. Let's take a look at a depth of cut of 0.1 inches to see what it looks like.<br>It seemed to work fine without any problems. However, keep in mind that if you use a depth of cut that is too deep, there is a risk of breaking the cutting tool. For this reason, the largest depth of cut that you should ever use is 0.1 inches of diameter at once.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%>1. Set a GoTo position of x = 5 in. and z = -5 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool.<br>4. You will now be able to make a depth of cut of 3. Notice how much faster you are able to cut out the material with an aggressive cut.  Note that too aggressive of a depth of cut can potentially damage the material.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
         "tasks":[
-            {
+            {   // TODO: Possibly add GoTo checks like in previous here as well
                 "shape":[
                     {
                         "x":2,"y":0,"z":0
@@ -159,7 +185,7 @@ let videos = [
                         "x":4,"y":16,"z":0
                     }
                 ]
-            }
+            },
         ]
     },
     {
