@@ -439,8 +439,17 @@ window.addEventListener('DOMContentLoaded', function () {
 
 function lathe_engine(delta_x, delta_z) {
 
+    var bad_cut = false;
+
     var x = box.position.x - box_size/2;
     var z = box.position.z - box_size/2;
+
+    // These are set nicely to keep the box within a desired range
+
+
+
+    xCoordinate.value = parseFloat(box.position.x);
+    zCoordinate.value = parseFloat(box.position.z);
 
     // If within range to cut and moving in the proper direction
     if (x <= 4 && z <= 0 && (delta_x < 0 || delta_z < 0)) {
@@ -477,7 +486,18 @@ function lathe_engine(delta_x, delta_z) {
 
             var new_pts;
             // Creating array of new points to splice in
-            if (Math.abs(abs_x - max_x) < .1 || Math.abs(abs_z - min_z) < .1) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+            console.log(Math.abs(abs_x - max_x));
+            console.log(Math.abs(abs_z - min_z));
+
+            var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
+            var depth_z = Math.abs(abs_z - min_z);
+
+            if (depth_x > 2 || depth_z > 2) {
+                console.log("cut too deep");
+                bad_cut = true;
+            }
+
+            if (Math.abs(abs_x - max_x) < .025 || Math.abs(abs_z - min_z) < .025) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
             else if (x <= 0) new_pts = [    // If cutting tool has completely gone through the material
@@ -511,15 +531,13 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
-    // These are set nicely to keep the box within a desired range
-
-    // console.log(delta_x + " | " + delta_z);
-    if (delta_x !== 0 &&
+    console.log(delta_x + " | " + delta_z);
+    if (!bad_cut && delta_x !== 0 &&
         x + delta_x >=bound_limit_x &&
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
-    } else if (delta_z !== 0 &&
+    } else if (!bad_cut && delta_z !== 0 &&
         z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
@@ -528,8 +546,6 @@ function lathe_engine(delta_x, delta_z) {
         return false;
     }
 
-    xCoordinate.value = parseFloat(box.position.x);
-    zCoordinate.value = parseFloat(box.position.z);
 
     completeTask(null); // Need to check shape cut out
 
@@ -691,7 +707,7 @@ function dragOne() {
                 cy: y_pos + inset * r * Math.sin(rad)
             });
     } else {
-        console.log("here");
+        console.log("bad turn!");
     }
 }
 
@@ -743,7 +759,7 @@ function dragTwo() {
                 cy: y_pos + inset * r * Math.sin(rad)
             });
     } else {
-        console.log("here");
+        console.log("bad turn!");
     }
 }
 
