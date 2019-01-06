@@ -495,7 +495,7 @@ function lathe_engine(delta_x, delta_z) {
             if (Math.abs(abs_x - max_x) < .05 || Math.abs(abs_z - min_z) < .05) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
-            else if (x <= 0) {
+            else if (x <= .1) {
                 new_pts = [    // If cutting tool has completely gone through the material
                     new BABYLON.Vector3(max_x, abs_z, 0),
                 ];
@@ -534,6 +534,8 @@ function lathe_engine(delta_x, delta_z) {
 
     // These are set nicely to keep the box within a desired range
 
+    console.log(box.position.x + " | " + box.position.z);
+
     // if x is not less than 0
     if (!bad_cut && delta_x !== 0 &&
         x + delta_x >=bound_limit_x &&
@@ -545,8 +547,10 @@ function lathe_engine(delta_x, delta_z) {
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
 
+        console.log("special: " + (box.position.x - box_size/2));
+
         // If past the origin
-        if (box.position.x - box_size/2 <= -delta) {
+        if (box.position.x - box_size/2 <= 0) {
             box.position.z = Math.max(-lathe_pts[0].y+box_size/2, box.position.z + delta_z);
         } else { // otherwise
             box.position.z += delta_z;
