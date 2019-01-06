@@ -707,10 +707,12 @@ function dragOne() {
 
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
+    var xfr_delta = -(box.position.z - rect_xfr)+zOrigin
 
-    if (lathe_engine(0, -(box.position.z - rect_xfr)+zOrigin)) {
-        rad_prev_one = rad;
-        rot_one = rot;
+    console.log(xfr_delta);
+
+    if (lathe_engine(0, xfr_delta)) {
+
 
         d3.select(this)
             .attr({
@@ -720,6 +722,9 @@ function dragOne() {
     } else {
         console.log("bad turn!");
     }
+
+    rad_prev_one = rad;
+    rot_one = rot;
 }
 
 var rot_two = 0;
@@ -759,10 +764,12 @@ function dragTwo() {
 
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
+    var xfr_delta = -(box.position.x - rect_xfr)+xOrigin;
 
-    if (lathe_engine(-(box.position.x - rect_xfr)+xOrigin, 0)) {
-        rad_prev_two = rad;
-        rot_two = rot;
+    console.log(xfr_delta);
+
+    if (lathe_engine(xfr_delta, 0)) {
+
 
         d3.select(this)
             .attr({
@@ -772,6 +779,9 @@ function dragTwo() {
     } else {
         console.log("bad turn!");
     }
+
+    rad_prev_two = rad;
+    rot_two = rot;
 }
 
 
