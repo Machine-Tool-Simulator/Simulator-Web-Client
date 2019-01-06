@@ -436,10 +436,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 // For timing whether the person has stopped cutting
-var xtimer;
-var ztimer;
 var x_active = false;
 var z_active = false;
+var box_moved = false;
 
 /**
  * Code for making cutting tool movements in x and z directions
@@ -447,7 +446,14 @@ var z_active = false;
 
 function lathe_engine(delta_x, delta_z) {
 
+    console.log(box_moved + " | " + z_active + " | " + x_active);
+    // if (box_moved) {
+    //     if (delta_x !== 0 && z_active) z_active = false;
+    //     if (delta_z !== 0 && x_active) x_active = false;
+    // }
+
     var bad_cut = false;
+    var cut_made = false;
 
     var x = box.position.x - box_size/2;
     var z = box.position.z - box_size/2;
@@ -492,16 +498,18 @@ function lathe_engine(delta_x, delta_z) {
 
             var new_pts;
             // Creating array of new points to splice in
-            console.log(Math.abs(abs_x - max_x));
-            console.log(Math.abs(abs_z - min_z));
+            // console.log(Math.abs(abs_x - max_x));
+            // console.log(Math.abs(abs_z - min_z));
 
             var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
             var depth_z = Math.abs(abs_z - min_z);
 
-            if (depth_x > 2 || depth_z > 2) {
+            if ((depth_x > 2 && !x_active) || (depth_z > 2 && !z_active)) {
                 console.log("cut too deep");
                 bad_cut = true;
             }
+
+
 
             if (Math.abs(abs_x - max_x) < .025 || Math.abs(abs_z - min_z) < .025) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
@@ -509,11 +517,14 @@ function lathe_engine(delta_x, delta_z) {
             else if (x <= 0) new_pts = [    // If cutting tool has completely gone through the material
                 new BABYLON.Vector3(max_x, abs_z, 0),
             ];
-            else new_pts = [
-                new BABYLON.Vector3(abs_x, min_z, 0),
-                new BABYLON.Vector3(abs_x, abs_z, 0),
-                new BABYLON.Vector3(max_x, abs_z, 0),
-            ];
+            else {
+                new_pts = [
+                    new BABYLON.Vector3(abs_x, min_z, 0),
+                    new BABYLON.Vector3(abs_x, abs_z, 0),
+                    new BABYLON.Vector3(max_x, abs_z, 0),
+                ];
+                cut_made = true;
+            }
 
             // Splicing in these pts and breaking when done
             for (var i = 0; i < lathe_pts.length; i++) {
@@ -537,19 +548,35 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
-    console.log(delta_x + " | " + delta_z);
+
     if (!bad_cut && delta_x !== 0 &&
         x + delta_x >=bound_limit_x &&
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
+        box_moved = true;
     } else if (!bad_cut && delta_z !== 0 &&
         z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
         box.position.z += delta_z;
+        box_moved = true;
     } else {
+        box_moved = false;
         return false;
+    }
+
+    if (cut_made) {
+        // console.log("HEREE")
+        if (pt_fnd && delta_x !== 0) {
+            x_active = true;
+            z_active = false;
+        }
+
+        if (pt_fnd && delta_z !== 0) {
+            z_active = true;
+            x_active = false;
+        }
     }
 
 
