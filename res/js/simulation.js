@@ -495,6 +495,7 @@ function lathe_engine(delta_x, delta_z) {
             if ((depth_x > 2 && delta_z < 0) || (depth_z > 2 && delta_x < 0)) {
                 console.log("cut too deep");
                 bad_cut = true;
+                // TODO: can add a better warning here!!!
             }
 
 
@@ -502,9 +503,13 @@ function lathe_engine(delta_x, delta_z) {
             if (Math.abs(abs_x - max_x) < .025 || Math.abs(abs_z - min_z) < .025) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
-            else if (x <= 0) new_pts = [    // If cutting tool has completely gone through the material
-                new BABYLON.Vector3(max_x, abs_z, 0),
-            ];
+            else if (x <= 0) {
+                new_pts = [    // If cutting tool has completely gone through the material
+                    new BABYLON.Vector3(max_x, abs_z, 0),
+                ];
+
+                bad_cut = true;
+            }
             else {
                 new_pts = [
                     new BABYLON.Vector3(abs_x, min_z, 0),
@@ -536,7 +541,7 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
-
+    // if x is not less than 0
     if (!bad_cut && delta_x !== 0 &&
         x + delta_x >=bound_limit_x &&
         box.position.x + delta_x >= gotoLimitNx &&
@@ -546,7 +551,15 @@ function lathe_engine(delta_x, delta_z) {
         z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
-        box.position.z += delta_z;
+
+        // If past the origin
+        if (box.position.x - box_size/2 < 0) {
+            box.position.z = Math.max(-lathe_pts[0].y+box_size/2, box.position.z + delta_z);
+        } else { // otherwise
+            box.position.z += delta_z;
+        }
+
+
     } else {
         return false;
     }
