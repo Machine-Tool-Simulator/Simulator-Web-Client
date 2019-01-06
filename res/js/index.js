@@ -503,8 +503,16 @@ function switchVideo(action) {
         }
 
         if (currentTasks) {
-            alert('Have uncompleted tasks');	// bad practice
-            return;	// task not finished
+            let task = currentTasks[taskIndex]
+            if (task.coord) {
+                if (Math.abs(xCoordinate.value - task.coord.x) > 0.1 || Math.abs(zCoordinate.value - task.coord.z) > 0.1) {
+                    alert('Have uncompleted tasks');	// bad practice
+                    return;	// task not finished
+                }
+            } else {
+                alert('Have uncompleted tasks');	// bad practice
+                return;	// task not finished
+            }
         }
 
         if (!completedPages.includes(videoCounter)) {   // record visited/completed pages
@@ -518,11 +526,18 @@ function switchVideo(action) {
 
         let video = videos[videoCounter];
         title.innerHTML = video.title;
-        player.src = video.src;
+        if (video.src) {
+            player.style.display = 'block';
+            player.src = video.src;
+        } else {
+            player.style.display = 'none';
+            player.src = null;
+        }
         description.innerHTML = video.text;
         
         if (!completedPages.includes(videoCounter) && video.tasks) {    // tasks have not been completed yet
             currentTasks = video.tasks;
+            taskIndex = 0;
         }
     } else if (action === 'back') {
         if (videoCounter > 0) {        // defaulted to -1
@@ -532,6 +547,7 @@ function switchVideo(action) {
             player.src = video.src;
             description.innerHTML = video.text;
             currentTasks = null;
+            taskIndex = 0;
         }
     }
 }

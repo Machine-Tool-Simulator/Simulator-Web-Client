@@ -440,7 +440,6 @@ window.addEventListener('DOMContentLoaded', function () {
  */
 
 function lathe_engine(delta_x, delta_z) {
-
     var x = box.position.x - 3;
     var z = box.position.z - 3;
 
@@ -524,7 +523,7 @@ function lathe_engine(delta_x, delta_z) {
     xCoordinate.value = parseFloat(box.position.x);
     zCoordinate.value = parseFloat(box.position.z);
 
-    completeTask(null); // Need to check shape cut out
+    // completeTask('drag'); // Need to check shape cut out
 }
 
 

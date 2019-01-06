@@ -65,7 +65,7 @@ let videos = [
         "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
+        "tasks":[
             {
                 "press":"FWD",
                 "highlight":true
@@ -74,26 +74,26 @@ let videos = [
                 "press":"OFF",
                 "highlight":true
             }
-        ]*/
+        ]
     },
     {
         "index":7,
         "title":"Constant RPM",
         "src":"https://drive.google.com/file/d/1SmuPAJPo4dQPUxLYRslcIwyyc7k5JbUD/preview",
         "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>2. Enter \"500\" as the value using the numeric keypad.<br>3. Press the \"INC SET\" button to set constant RPM.",
-        /*"tasks":[
-            {
-                "press":"RPM",
-                "highlight":true
-            },
-            {
-                "press":"INC_SET",
-                "conditions":{
-                    "buffer":500
-                },
-                "highlight":true
-            }
-        ]*/
+        // "tasks":[
+        //     {
+        //         "press":"RPM",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"INC_SET",
+        //         "conditions":{
+        //             "buffer":500
+        //         },
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":8,
@@ -124,7 +124,15 @@ let videos = [
         "index":10,
         "title":"X and Z Wheels",
         "src":"https://drive.google.com/file/d/1FEJn5YMX92adnGUo_1J9pwTq7wtuexuF/preview",
-        "text":"You can manually move the cutting tool by rotating the z wheel and the x wheel.<br>When you rotate the x wheel clockwise, the cutting tool moves closer to the spindle axis, resulting in a smaller x position for a smaller diameter. When you rotate the x wheel counter-clockwise, the cutting tool moves away from the spindle axis resulting in a larger x position or larger diameter.<br>When you rotate the z wheel clockwise, the cutting tool moves to the right, resulting in a greater z position. When you rotate the z wheel counter-clockwise, the cutting tool moves to the left resulting in a lesser z position.<br>You can also move a joystick to move the cutting tool. This is not recommended, since the joystick makes the cutting tool moves so fast that it can be difficult to react if you accidently move the cutting tool into the chuck or into the part.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Using the x and z wheels, move the cutting tool to a position of x = 8 in, z = -2 in."
+        "text":"You can manually move the cutting tool by rotating the z wheel and the x wheel.<br>When you rotate the x wheel clockwise, the cutting tool moves closer to the spindle axis, resulting in a smaller x position for a smaller diameter. When you rotate the x wheel counter-clockwise, the cutting tool moves away from the spindle axis resulting in a larger x position or larger diameter.<br>When you rotate the z wheel clockwise, the cutting tool moves to the right, resulting in a greater z position. When you rotate the z wheel counter-clockwise, the cutting tool moves to the left resulting in a lesser z position.<br>You can also move a joystick to move the cutting tool. This is not recommended, since the joystick makes the cutting tool moves so fast that it can be difficult to react if you accidently move the cutting tool into the chuck or into the part.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Using the x and z wheels, move the cutting tool to a position of x = 8 in, z = -2 in.",
+        "tasks": [
+            {
+                "coord": {
+                    "x": 8,
+                    "z": -2
+                }
+            }
+        ]
     },
     {
         "index":11,
@@ -240,28 +248,23 @@ let videos = [
         "title":"Set Tool Number",
         "src":"https://drive.google.com/file/d/1DSntmr1vDUYpFi8cDyWbpc2DSOLgIKiw/preview",
         "text":"Tool number allows you to switch between the various tools that you have programmed into the tool table. Since each tool has a different size you will have different x and z values for a given carriage position.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"TOOL\" using the button below the control screen.</br>2. Select tool 1 by entering \"1\" on the keypad.</br>Select \"ABS SET\" to enter the tool.",
-        /*"tasks":[
-            {
-                "press":"TOOLRET",
-                "highlight":true
-            },
-            {
-                "press":"ABS_SET",
-                "conditions":{
-                    "buffer":1
-                },
-                "highlight":true
-            }
-        ]*/
+        // "tasks":[
+        //     {
+        //         "press":"TOOLRET",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"ABS_SET",
+        //         "conditions":{
+        //             "buffer":1
+        //         },
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":20,
         "title":"Conclusion",
-        "text":"[Insert conclusion]",
-    },
-    {
-        "index":21,
-        "title":"Advanced Practice",
-        "text":"[Insert instructions]",
+        "text":"Congratulations! You have completed the lathe tutorial course!"
     }
 ];
