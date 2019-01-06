@@ -433,24 +433,11 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-// For timing whether the person has stopped cutting
-var x_active = false;
-var z_active = false;
-var box_moved = false;
-
 /**
  * Code for making cutting tool movements in x and z directions
  */
 
 function lathe_engine(delta_x, delta_z) {
-
-    console.log(box_moved + " | " + z_active + " | " + x_active);
-    // if (box_moved) {
-    //     if (delta_x !== 0 && z_active) z_active = false;
-    //     if (delta_z !== 0 && x_active) x_active = false;
-    // }
 
     var bad_cut = false;
     var cut_made = false;
@@ -467,6 +454,7 @@ function lathe_engine(delta_x, delta_z) {
 
     // If within range to cut and moving in the proper direction
     if (x <= 4 && z <= 0 && (delta_x < 0 || delta_z < 0)) {
+
         var abs_x = Math.abs(x);
         var abs_z = Math.abs(z);
 
@@ -504,7 +492,7 @@ function lathe_engine(delta_x, delta_z) {
             var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
             var depth_z = Math.abs(abs_z - min_z);
 
-            if ((depth_x > 2 && !x_active) || (depth_z > 2 && !z_active)) {
+            if ((depth_x > 2 && delta_z < 0) || (depth_z > 2 && delta_x < 0)) {
                 console.log("cut too deep");
                 bad_cut = true;
             }
@@ -554,31 +542,14 @@ function lathe_engine(delta_x, delta_z) {
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
-        box_moved = true;
     } else if (!bad_cut && delta_z !== 0 &&
         z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
         box.position.z += delta_z;
-        box_moved = true;
     } else {
-        box_moved = false;
         return false;
     }
-
-    if (cut_made) {
-        // console.log("HEREE")
-        if (pt_fnd && delta_x !== 0) {
-            x_active = true;
-            z_active = false;
-        }
-
-        if (pt_fnd && delta_z !== 0) {
-            z_active = true;
-            x_active = false;
-        }
-    }
-
 
     completeTask(null); // Need to check shape cut out
 
