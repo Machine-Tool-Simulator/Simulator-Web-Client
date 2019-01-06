@@ -520,8 +520,8 @@ function switchVideo(action) {
         title.innerHTML = video.title;
         player.src = video.src;
         description.innerHTML = video.text;
-
-        if (video.tasks) {
+        
+        if (!completedPages.includes(videoCounter) && video.tasks) {    // tasks have not been completed yet
             currentTasks = video.tasks;
         }
     } else if (action === 'back') {
