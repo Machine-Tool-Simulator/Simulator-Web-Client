@@ -445,12 +445,9 @@ function lathe_engine(delta_x, delta_z) {
     var x = box.position.x - box_size/2;
     var z = box.position.z - box_size/2;
 
-    // These are set nicely to keep the box within a desired range
 
 
 
-    xCoordinate.value = parseFloat(box.position.x);
-    zCoordinate.value = parseFloat(box.position.z);
 
     // If within range to cut and moving in the proper direction
     if (x <= 4 && z <= 0 && (delta_x < 0 || delta_z < 0)) {
@@ -485,9 +482,6 @@ function lathe_engine(delta_x, delta_z) {
         if (pt_fnd) {
 
             var new_pts;
-            // Creating array of new points to splice in
-            // console.log(Math.abs(abs_x - max_x));
-            // console.log(Math.abs(abs_z - min_z));
 
             var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
             var depth_z = Math.abs(abs_z - min_z);
@@ -514,7 +508,6 @@ function lathe_engine(delta_x, delta_z) {
                     new BABYLON.Vector3(abs_x, abs_z, 0),
                     new BABYLON.Vector3(max_x, abs_z, 0),
                 ];
-                cut_made = true;
             }
 
             // Splicing in these pts and breaking when done
@@ -539,6 +532,8 @@ function lathe_engine(delta_x, delta_z) {
         }
     }
 
+    // These are set nicely to keep the box within a desired range
+
     // if x is not less than 0
     if (!bad_cut && delta_x !== 0 &&
         x + delta_x >=bound_limit_x &&
@@ -561,8 +556,9 @@ function lathe_engine(delta_x, delta_z) {
         return false;
     }
 
-    console.log(box.position.x);
-    console.log(box.position.z);
+    xCoordinate.value = parseFloat(box.position.x);
+    zCoordinate.value = parseFloat(box.position.z);
+
 
     completeTask(null); // Need to check shape cut out
 
