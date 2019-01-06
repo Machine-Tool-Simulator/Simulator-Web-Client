@@ -459,6 +459,8 @@ function lathe_engine(delta_x, delta_z) {
 
         var pt_fnd = false;
 
+        var bad_pts = [];
+
         // Removing points that are cut off by box
         for (var i = 0; i < lathe_pts.length && ! bad_cut; i++) {
             var item = lathe_pts[i];
@@ -476,23 +478,25 @@ function lathe_engine(delta_x, delta_z) {
                     bad_cut = true;
                     // TODO: can add a better warning here!!!
                 } else {
-                    lathe_pts.splice(i, 1);
-                    i--;
-
                     pt_fnd = true;
+
+                    bad_pts.push(i);
                 }
-
-
             }
         }
 
 
 
         // Only do these if need to cut out shape
-        if (pt_fnd) {
+        if (!bad_cut && pt_fnd) {
 
             var new_pts;
 
+            var adj = 0;
+            for (var i = 0; i < bad_pts.length; i++) {
+                lathe_pts.splice(bad_pts[i]-adj,1);
+                adj++;
+            }
 
 
             if (Math.abs(abs_x - max_x) < .05 || Math.abs(abs_z - min_z) < .05) new_pts = [ // TODO: this prevents a cutting problem if at the same height
@@ -708,7 +712,7 @@ function dragOne() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj) * delta*8; // last factor deals with fine / coarse
     var xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
 
     console.log(rot);
@@ -720,15 +724,13 @@ function dragOne() {
         if (rot === -1) rot = 0;
         else rot = rot < 0 ? rot + 2 : rot - 2;
 
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
+        rect_xfr = spin_speed * (rot * Math.PI + rad_adj) * delta*8; // last factor deals with fine / coarse
         xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
     }
 
-    // console.log(xfr_delta);
+    console.log(xfr_delta);
 
     if (lathe_engine(0, xfr_delta)) {
-
-
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad),
@@ -777,7 +779,7 @@ function dragTwo() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj)  * delta*8; // last factor deals with fine / coarse
     var xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
 
     console.log(rot);
@@ -789,15 +791,13 @@ function dragTwo() {
         if (rot === -1) rot = 0;
         else rot = rot < 0 ? rot + 2 : rot - 2;
 
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj);
+        rect_xfr = spin_speed * (rot * Math.PI + rad_adj)  * delta*8; // last factor deals with fine / coarse
         xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
     }
 
     console.log("xfr after" + " | " + xfr_delta);
 
     if (lathe_engine(xfr_delta, 0)) {
-
-
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad) + pos_wheel_2,
