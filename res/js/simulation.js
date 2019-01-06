@@ -498,8 +498,6 @@ function lathe_engine(delta_x, delta_z) {
                 // TODO: can add a better warning here!!!
             }
 
-
-
             if (Math.abs(abs_x - max_x) < .025 || Math.abs(abs_z - min_z) < .025) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
@@ -553,16 +551,18 @@ function lathe_engine(delta_x, delta_z) {
         box.position.z + delta_z <= gotoLimitz) {
 
         // If past the origin
-        if (box.position.x - box_size/2 < 0) {
+        if (box.position.x - box_size/2 <= 0) {
             box.position.z = Math.max(-lathe_pts[0].y+box_size/2, box.position.z + delta_z);
         } else { // otherwise
             box.position.z += delta_z;
         }
 
-
     } else {
         return false;
     }
+
+    console.log(box.position.x);
+    console.log(box.position.z);
 
     completeTask(null); // Need to check shape cut out
 
