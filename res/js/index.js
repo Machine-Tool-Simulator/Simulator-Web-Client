@@ -45,6 +45,8 @@ let zCoordinate = getById('zvar');
 
 let GoTofunction = document.querySelectorAll("#f1btn, #f3btn, #f4btn, #f6btn,#f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton,#GO"), i;
 
+let pageHead = -1;    // Records pages where user has gone past before (Tasks done)
+
 /** Initialization */
 window.onload = function () {
 
@@ -515,25 +517,41 @@ function switchVideo(action) {
             description.innerHTML = "";
             return;
         }
-        // TODO: end of videos stuff
 
         if (currentTasks) {
-            alert('Have uncompleted tasks');	// bad practice
-            return;	// task not finished
+            let task = currentTasks[taskIndex];
+            if (task.coord) {
+                if (Math.abs(xCoordinate.value - task.coord.x) > 0.1 || Math.abs(zCoordinate.value - task.coord.z) > 0.1) {
+                    alert('Have uncompleted tasks');	// bad practice
+                    return;	// task not finished
+                }
+            } else {
+                alert('Have uncompleted tasks');	// bad practice
+                return;	// task not finished
+            }
         }
 
-        if (videoCounter++ == -1) {
+        pageHead = Math.max(videoCounter, pageHead);
+
+        if (videoCounter++ == -1) { // currently on intro page, hide everything that's not used in other pages
             getById('cover').style.display = 'none';
             player.style.display = 'block';
         }
 
         let video = videos[videoCounter];
         title.innerHTML = video.title;
-        player.src = video.src;
+        if (video.src) {
+            player.style.display = 'block';
+            player.src = video.src;
+        } else {
+            player.style.display = 'none';
+            player.src = null;
+        }
         description.innerHTML = video.text;
 
-        if (video.tasks) {
+        if (pageHead < videoCounter && video.tasks) {    // tasks have not been completed yet
             currentTasks = video.tasks;
+            taskIndex = 0;
             jsonIdx = video.index;
         }
     } else if (action === 'back') {
@@ -544,6 +562,7 @@ function switchVideo(action) {
             player.src = video.src;
             description.innerHTML = video.text;
             currentTasks = null;
+            taskIndex = 0;
         }
     }
 
@@ -557,45 +576,6 @@ function switchVideo(action) {
         reset(); // reset the shape
         depth_set = 3;
     }
-}
-
-function backCoverPage() {
-    let title = getById('title');
-    let player = getById('player');
-    let description = getById('description');
-
-    if (videoCounter >= videos.length) {	// end of videos
-        title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
-        player.style.display = "none";
-        description.innerHTML = "";
-        return;
-    }
-    // TODO: if end of videos, submit a feedback to server
-    currentTasks = null
-    // if (currentTasks) {
-    //     alert('Have uncompleted tasks');	// bad practice
-    //     return;	// task not finished
-    // }
-    if (videoCounter > 0) {
-        videoCounter -= 1
-    }
-
-    console.log("Now the videoCounter is: ", videoCounter)
-    if (videoCounter == 0) {
-        getById('cover').style.display = 'flex';
-        player.style.display = 'block';
-    } else {
-      let video = videos[videoCounter];
-      console.log("Now the video is: ", video)
-      title.innerHTML = video.title;
-      player.src = video.src;
-      description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
-    }
-
 }
 
 function nextTask() {
@@ -622,8 +602,8 @@ function completeTask(value) {
             }
             console.log("Step completed!");
             nextTask();
-            // console.log(currentTasks);
-            // console.log(taskIndex);
+            console.log(`Current tasks: ${currentTasks}`);
+            console.log(`Task index: ${taskIndex}`);
         }
     }
     else if (task.position){
@@ -649,9 +629,6 @@ function completeTask(value) {
         let i = 0;
         let j = 0;
 
-        // console.log(lathe_pts);
-        // console.log(task.shape);
-
         while (j < lathe_pts.length) {
             // console.log(lathe_pts[j].x);
             // console.log(task.shape[i].x);
@@ -669,13 +646,17 @@ function completeTask(value) {
         if (i === task.shape.length) {
             console.log("Step completed!");
             nextTask();
-            console.log(currentTasks);
-            console.log(taskIndex);
+            console.log(`Current tasks: ${currentTasks}`);
+            console.log(`Task index: ${taskIndex}`);
+        }
+    } else if (task.click) { // If want to check certain shapes clicked
+        if (value === task.click) {
+            console.log("Step completed!");
+            nextTask();
+            console.log(`Current tasks: ${currentTasks}`);
+            console.log(`Task index: ${taskIndex}`);
         }
     }
-    // else if (task.click) { // If want to check certain shapes clicked
-    //
-    // }
 }
 
 
