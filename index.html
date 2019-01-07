@@ -16,12 +16,35 @@
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
       <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
       <div class="btn-group">
-        <button>Introduction</button>
-        <button onclick="ChangeVideoMainLatheFeatures()">Main Lathe Features</button>
-        <button onclick="ChangeDigitalReadout()">Digital Readout</button>
-        <button onclick="ChangeSpindle()">Turning on Spindle</button>
-        <button onclick="ChangeConstantRPM()">Constant RPM</button>
-        <button onclick="ChangeConstantSFM()">Constant SFM</button>
+          <button onclick="PlaylistVideo('Introduction')"> Introduction</button>
+          <button onclick="PlaylistVideo('Timelapse')" /> Timelapse</button>
+          <button onclick="PlaylistVideo('Safety')" /> Safety</button>
+          <button onclick="PlaylistVideo('LatheParts')" />LatheParts</button>
+          <button onclick="PlaylistVideo('LoadingChuck')" />LoadingChuck</button>
+          <button onclick="PlaylistVideo('TurnOnSpindle')" />TurnOnSpindle</button>
+          <button onclick="PlaylistVideo('ConstantRPM')" />ConstantRPM</button>
+          <button onclick="PlaylistVideo('ConstantSFM')" />ConstantSFM</button>
+          <button onclick="PlaylistVideo('XZCoordinate')" />XZCoordinate</button>
+          <button onclick="PlaylistVideo('XZWheels')" />XZWheels</button>
+          <button onclick="PlaylistVideo('FineCoarseControl')" />FineCoarseControl</button>
+          <button onclick="PlaylistVideo('ZCoordinate')" />ZCoordinate</button>
+          <button onclick="PlaylistVideo('XCoordinate')" />XCoordinate</button>
+          <button onclick="PlaylistVideo('AggressiveCut')" />AggressiveCut</button>
+          <button onclick="PlaylistVideo('GoToPosition')" />GoToPosition</button>
+
+
+        <!--<button onclick="ChangeVideoMainLatheFeatures()">Timelapse</button>-->
+        <!--<button onclick="ChangeDigitalReadout()">Safety</button>-->
+        <!--<button onclick="ChangeSpindle()">Parts of the Lathe</button>-->
+        <!--<button onclick="ChangeConstantRPM()">Loading the Chuck</button>-->
+        <!--<button onclick="ChangeConstantSFM()">Turning on the Spindle</button>-->
+          <!--<button onclick="ChangeConstantSFM()">Constant RPM</button>-->
+          <!--<button onclick="ChangeConstantSFM()">Constant SFM</button>-->
+          <!--<button onclick="ChangeConstantSFM()">X and Z Coordinate System</button>-->
+          <!--<button onclick="ChangeConstantSFM()">X and Z Wheels</button>-->
+          <!--<button onclick="ChangeConstantSFM()">Fine and Coarse Control</button>-->
+          <!--<button onclick="ChangeConstantSFM()">Cutting and Setting Z Coordinate System</button>-->
+
       </div>
         <!-- <a href="#" class="w3-bar-item w3-button ">Introduction</a>
         <a href="#" class="w3-bar-item w3-button">Main Lathe Features</a>
@@ -54,6 +77,8 @@
     <div class="split mid">
 
         <canvas id="canvas"></canvas>
+
+
 
         <figure>
             <svg></svg>
@@ -156,18 +181,18 @@
 
             <div class = "xz-input">
                 <div class = "accessory" id = "firtbtn">
-                    <label id = "button-header"><strong>ACCESSORY</strong></label>
+                    <label id = "button-header"><btn_text>ACCESSORY</btn_text></label>
                     <button class = "accbutton" id = "acc"></button>
                 </div>
                 <button class = "XZbutton" id = "Xbutton">X</button>
 
                 <div class = "accessory">
-                    <label id = "button-header1"><strong>inc/abs</strong></label>
+                    <label id = "button-header1"><btn_text>inc/abs</btn_text></label>
                     <button class = "accbutton" id = "inc-abs"></button>
                 </div>
 
                 <div class = "accessory">
-                    <label id = "button-header1"><strong>in/mm</strong></label>
+                    <label id = "button-header1"><btn_text>in/mm</btn_text></label>
                     <button class = "accbutton" id = "in-mm"></button>
                 </div>
 
@@ -175,7 +200,7 @@
                 <button class = "XZbutton" id = "Zbutton">Z</button>
 
                 <div class = "accessory" id = "lookdiv">
-                    <label id = "button-header1"><strong>LOOK</strong></label>
+                    <label id = "button-header1"><btn_text>LOOK</btn_text></label>
                     <button class = "accbutton" id = "look"></button>
                 </div>
 
@@ -186,7 +211,7 @@
 
                 <div class = "row3" id= "firstrow">
 
-                    <label id =  "SPINDLE"><strong>FEED</strong></label>
+                    <label id =  "SPINDLE"><btn_text>FEED</btn_text></label>
                     <div class = "btn">
 
                         <input type="button" class="sbutton" value="GO" id = "GO" onclick='controlPressed("GO");'/>
@@ -195,7 +220,7 @@
                 </div>
 
                 <div class = "row3">
-                    <label id =  "SPINDLE"><strong>OVERRIDE</strong></label>
+                    <label id =  "SPINDLE"><btn_text>OVERRIDE</btn_text></label>
                     <div class = "btn">
                         <input type="button" class="sbutton" value="F/S" id = "FS"  onclick="setAbsPos()" />
                         <button class = "sbutton" id = "UP">  <img src="res/imgs/UA.png"> </button>
@@ -204,7 +229,7 @@
                 </div>
 
                 <div class = "row3">
-                    <label id =  "SPINDLE"><strong>SPINDLE</strong></label>
+                    <label id =  "SPINDLE"><btn_text>SPINDLE</btn_text></label>
                     <div class = "btn">
                         <input type="button" class="sbutton" value="REV" id = "rev"  onclick="spindle(this)"/>
                         <input type="button" class="sbutton" value="OFF" id = "off"  onclick="spindle(this)" />
