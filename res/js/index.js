@@ -42,7 +42,7 @@ let zCoordinate = getById('zvar');
 
 let GoTofunction = document.querySelectorAll("#f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
 
-let completedPages = [];    // Records pages where user has gone past before (Tasks done)
+let pageHead = -1;    // Records pages where user has gone past before (Tasks done)
 
 /** Initialization */
 window.onload = function () {
@@ -515,9 +515,7 @@ function switchVideo(action) {
             }
         }
 
-        if (!completedPages.includes(videoCounter)) {   // record visited/completed pages
-            completedPages.push(videoCounter);
-        }
+        pageHead = Math.max(videoCounter, pageHead);
 
         if (videoCounter++ == -1) { // currently on intro page, hide everything that's not used in other pages
             getById('cover').style.display = 'none';
@@ -534,8 +532,8 @@ function switchVideo(action) {
             player.src = null;
         }
         description.innerHTML = video.text;
-        
-        if (!completedPages.includes(videoCounter) && video.tasks) {    // tasks have not been completed yet
+
+        if (pageHead < videoCounter && video.tasks) {    // tasks have not been completed yet
             currentTasks = video.tasks;
             taskIndex = 0;
         }
