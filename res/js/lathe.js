@@ -5,25 +5,6 @@ let videos = [
         "title":"Introduction",
         "src":"https://drive.google.com/file/d/170xPqHaD2Rx57sdlq5Stm0qS5uytzwKI/preview",
         "text":"Welcome to the lathe. The lathe is a machine that we can use to make metal parts that have a cylindrical shape. It works by spinning around a piece of metal and cutting away material from it.<br>For example, a lathe was used to make several of the parts of this model sterling engine, such as this part called a flywheel, this part called an axel, and this part called a bushing.<br>Let's look at the process for making a bushing.",
-        // Uncomment for shape checking
-        // "tasks":[
-        //     {
-        //         "shape":[
-        //             {
-        //                 "x":2,"y":0,"z":0
-        //             },
-        //             {
-        //                 "x":2,"y":8,"z":0
-        //             },
-        //             {
-        //                 "x":4,"y":8,"z":0
-        //             },
-        //             {
-        //                 "x":4,"y":16,"z":0
-        //             }
-        //         ]
-        //     }
-        // ]
     },
     {
         "index":2,
@@ -140,7 +121,7 @@ let videos = [
         "tasks":[
             {
                 // +- 0.5
-                "position":[5.2, 2.8],
+                "position":[7.5, 2.8],
                 "highlight":true
             },
             {
@@ -178,7 +159,7 @@ let videos = [
         "tasks":[
             {
                   // >5,>3
-                "position":[5, 4.5],
+                "position":[8, 4.5],
                 "highlight":true
             },
             {
@@ -187,7 +168,7 @@ let videos = [
             },
             {
                   // >5,>3
-                "position":[5, 3],
+                "position":[7, 3],
                 "highlight":true
             },
             {
@@ -209,60 +190,23 @@ let videos = [
     },
     {
         "index":14,
-        "title":"Making an Aggressive Cut",
-        "src":"https://drive.google.com/file/d/1Kl8mL5F-WPkJprA1jA3pvK8afVBku-50/preview",
-        "text":"The previous section demonstrated a few conservative cuts using a depth of cut of 0.03 inches. If you need to remove a lot of material, it can go faster if you use a more aggressive depth of cut, like 0.1 inches. Let's take a look at a depth of cut of 0.1 inches to see what it looks like.<br>It seemed to work fine without any problems. However, keep in mind that if you use a depth of cut that is too deep, there is a risk of breaking the cutting tool. For this reason, the largest depth of cut that you should ever use is 0.1 inches of diameter at once.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Make an aggressive cut by making a depth of cut of approximately 0.1 inches (as opposed to about 0.03 inches)."
-    },
-    {
-        "index":15,
         "title":"Setting a GoTo Position",
         "src":"https://drive.google.com/file/d/11gcfT-G8VW5DYYKOnr7Gkb_U9WXfTPDL/preview",
-        "text":"Now you can work on cutting the part to a particular diameter. Let's say for example that the part is supposed to have 0.41 inches diameter and 0.5 inches long. You can use the GoTo function to prepare the lathe for making this.<br>Press GoTo. Press z -0.5 ABS SET. Press x 0.41 ABS SET.<br>The cutting tool now won't move any further than the points you have programmed using GoTo. You will make several small cuts in order to reduce the diameter until it reaches the desired diameter. The amount of diameter that you cut off at once is called a depth of cut. A relatively conservative depth of cut is something like 0.03 inches of diameter at a time, whereas a relatively aggressive depth of cut is something like 0.1 inches of diameter at a time.<br>The steps for making a cut are position the cutting tool to the right of z 0 and one depth of cut inside the part. In this case, the diameter of the raw material is 0.5 inches. In order to make a cut with a depth of 0.03 inches, you will position the cutting tool at an x value of 0.47.<br>Verify that the machine is in fine mode. This is necessary for when you are cutting material.<br>Turn on the spindle.<br>Turn the z wheel counter-clockwise until the tool reaches the programmed GoTo position.<br>Turn the x wheel the same way to move the cutting tool to move the cutting tool away from the spindle axis.<br>Turn the z wheel clockwise until the cutting tool is to the right of z 0 again.<br>Turn the x wheel clockwise until the cutting tool is at a position of 0.03 inches smaller than the existing diameter.<br>Repeat this process, cutting of 0.03 inches of diameter at a time, until the final diameter is reached.<br>The part now has the desired geometry.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Set a GoTo position of x = 1 in. and z = -4 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool. Use the x and z wheels to make the cuts and do not cut out too much material at a time (use a conservative depth of cut, ex. .05 in at a time).<br>4. Position the cutting tool at the proper depth in the x direction and slightly outside the material in the z direction.<br>5. When ready, move the cutting tool into the material using the z wheel.<br>6. Move the cutting tool out of the material in the x direction.<br>7. Move the cutting tool back to a z position to the right of the material<br>8. Move the cutting tool a little further depth of cut in (about .05 more than the previous time).<br>9. Repeat this process until the material has been cut off until the final desired diameter is reached (you have reached the GoTo position and cannot go any further).<br>10. The part should now have the desired geometry. The webpage checks to see that the material is cut with the correct dimensions before you can proceed. If you make a mistake, use the reset button to reset the material and start again."
-    },
-    {
-        "index":16,
-        "title":"Do One (Taper)",
-        "src":"https://drive.google.com/file/d/1hsq86aOGg1iudqzyXNDVVQl6JtBGRhrB/preview",
-        "text":"Do one allows features like tapered angles and corner radii to be machined. When one of the do one options is selected and specified the Z&amp;X wheels are disabled and instead made to control the coarse and fine feed of the path specified by the do one feature.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Select \"DO ONE\" using the button below the control screen.</br>3. Select \"(TAPER)\" using the button below the control screen.</br>4. Select \"ABS SET\" to execute the \"DO ONE\" feature.</br>5. Exit \"DO ONE\" mode by selecting \"TOOL # (RETURN)\" using the button below the control screen.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
+        "text":"Now you can work on cutting the part to a particular diameter. Let's say for example that the part is supposed to have 0.41 inches diameter and 0.5 inches long. You can use the GoTo function to prepare the lathe for making this.<br>Press GoTo. Press z -0.5 ABS SET. Press x 0.41 ABS SET.<br>The cutting tool now won't move any further than the points you have programmed using GoTo. You will make several small cuts in order to reduce the diameter until it reaches the desired diameter. The amount of diameter that you cut off at once is called a depth of cut. A relatively conservative depth of cut is something like 0.03 inches of diameter at a time, whereas a relatively aggressive depth of cut is something like 0.1 inches of diameter at a time.<br>The steps for making a cut are position the cutting tool to the right of z 0 and one depth of cut inside the part. In this case, the diameter of the raw material is 0.5 inches. In order to make a cut with a depth of 0.03 inches, you will position the cutting tool at an x value of 0.47.<br>Verify that the machine is in fine mode. This is necessary for when you are cutting material.<br>Turn on the spindle.<br>Turn the z wheel counter-clockwise until the tool reaches the programmed GoTo position.<br>Turn the x wheel the same way to move the cutting tool to move the cutting tool away from the spindle axis.<br>Turn the z wheel clockwise until the cutting tool is to the right of z 0 again.<br>Turn the x wheel clockwise until the cutting tool is at a position of 0.03 inches smaller than the existing diameter.<br>Repeat this process, cutting of 0.03 inches of diameter at a time, until the final diameter is reached.<br>The part now has the desired geometry.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%><br>1. Set a GoTo position of x = 5 in. and z = -5 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool.<br>4. You will not be able to make a depth of cut greater than 1 due to constraints.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
         "tasks":[
             {
-                "press":"FWD",
+                "press":"GOTO",
                 "highlight":true
             },
             {
-                "press":"DOONE",
-                "highlight":true
-            },
-            {
-                "press":"TAPER",
+                "press":"X",
                 "highlight":true
             },
             {
                 "press":"ABS_SET",
-                "highlight":true
-            },
-            {
-                "press":"TOOLRET",
-                "highlight":true
-            },
-            {
-                "press":"OFF",
-                "highlight":true
-            }
-        ]
-    },
-    {
-        "index":17,
-        "title":"Power Feed",
-        "src":"https://drive.google.com/file/d/1tWIUTssDx2n-iAmm5j608SQRxRY96Ii6/preview",
-        "text":"Power feed can be used to move the carriage at a constant rate in one direction. The direction and distance of motion is specified with the inc key while the speed can be set in inches per minute or inches per revolution with the feed speed arrows. Note that the machine door must be closed to engage the power feed, as it must be during any operation where the carriage will be moved under computer control.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.</br>2. Select \"POWER FEED\" using the button below the control screen.</br>3. Select the \"Z\" button to indicate that the power feed will be in the z-direction.</br>4. Enter \"-1\" as the value for the power feed (click the number 1 and then use the \"+/-\" button to enter a negative value).</br>5. Select \"INC SET\" to set the power feed.</br>6. Press the \"OFF\" button on the control to turn off the spindle.",
-        /*"tasks":[
-            {
-                "press":"FWD",
-                "highlight":true
-            },
-            {
-                "press":"POWERFEED",
+                "conditions":{
+                    "buffer":5
+                },
                 "highlight":true
             },
             {
@@ -270,61 +214,57 @@ let videos = [
                 "highlight":true
             },
             {
-                "press":"INC_SET",
+                "press":"ABS_SET",
                 "conditions":{
-                    "buffer":-1
+                    "buffer":-5
                 },
                 "highlight":true
             },
             {
-                "press":"OFF",
-                "highlight":true
-            }
-        ]*/
-    },
-    {
-        "index":18,
-        "title":"Return Home",
-        "src":"https://drive.google.com/file/d/1zP_OjZrycEvLBUMsyqBJ3aP8Rr2RzORD/preview",
-        "text":"Go home returns the machine to the home position, which can be set in the setup menu. Again, the machine door must be closed in order for this feature to function.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"RETURN HOME\" using the button below the control screen.</br>2. Select \"GO\" under feed to return the tool to the home position.",
-        "tasks":[
-            {
-                "press":"RETURNHOME",
-                "highlight":true
-            },
-            {
-                "press":"GO",
-                "highlight":true
+                "shape":[
+                    {
+                        "x":2,"y":0,"z":0
+                    },
+                    {
+                        "x":2,"y":8,"z":0
+                    },
+                    {
+                        "x":4,"y":8,"z":0
+                    },
+                    {
+                        "x":4,"y":16,"z":0
+                    }
+                ]
             }
         ]
     },
     {
-        "index":19,
-        "title":"Set Tool Number",
-        "src":"https://drive.google.com/file/d/1DSntmr1vDUYpFi8cDyWbpc2DSOLgIKiw/preview",
-        "text":"Tool number allows you to switch between the various tools that you have programmed into the tool table. Since each tool has a different size you will have different x and z values for a given carriage position.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"TOOL\" using the button below the control screen.</br>2. Select tool 1 by entering \"1\" on the keypad.</br>Select \"ABS SET\" to enter the tool.",
-        /*"tasks":[
-            {
-                "press":"TOOLRET",
-                "highlight":true
+        "index":15,
+        "title":"Making an Aggressive Cut",
+        "src":"https://drive.google.com/file/d/1Kl8mL5F-WPkJprA1jA3pvK8afVBku-50/preview",
+        "text":"The previous section demonstrated a few conservative cuts using a depth of cut of 0.03 inches. If you need to remove a lot of material, it can go faster if you use a more aggressive depth of cut, like 0.1 inches. Let's take a look at a depth of cut of 0.1 inches to see what it looks like.<br>It seemed to work fine without any problems. However, keep in mind that if you use a depth of cut that is too deep, there is a risk of breaking the cutting tool. For this reason, the largest depth of cut that you should ever use is 0.1 inches of diameter at once.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%>1. Set a GoTo position of x = 5 in. and z = -5 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool.<br>4. You will now be able to make a depth of cut of 3. Notice how much faster you are able to cut out the material with an aggressive cut.  Note that too aggressive of a depth of cut can potentially damage the material.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
+        "tasks":[
+            {   // TODO: Possibly add GoTo checks like in previous here as well
+                "shape":[
+                    {
+                        "x":2,"y":0,"z":0
+                    },
+                    {
+                        "x":2,"y":8,"z":0
+                    },
+                    {
+                        "x":4,"y":8,"z":0
+                    },
+                    {
+                        "x":4,"y":16,"z":0
+                    }
+                ]
             },
-            {
-                "press":"ABS_SET",
-                "conditions":{
-                    "buffer":1
-                },
-                "highlight":true
-            }
-        ]*/
+        ]
     },
     {
-        "index":20,
+        "index":16,
         "title":"Conclusion",
         "text":"[Insert conclusion]",
     },
-    {
-        "index":21,
-        "title":"Advanced Practice",
-        "text":"[Insert instructions]",
-    }
 ];

@@ -14,16 +14,15 @@ let gotoLimitx = 1000;
 let gotoLimitz = 1000;
 let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
-let finecoarse = 0.0025;
 let spindleSpeed = 100;
-let zOrigin = 0;
-let xOrigin = 0;
 let xzButtonsSelected = 0;
+
 let delta = 0.025;
 let home_position_x = 6;
 let home_position_z = 5;
 let stopObserver = 0;
 let spindleSpeedSelected = 0;
+
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -38,7 +37,6 @@ let coarsespeedbutton = getById('FC');
 let taperbutton = getById('f1btn');
 
 
-let canSubmit = true;
 let currentTasks = null;
 let jsonIdx = 0;
 let taskIndex = 0;
@@ -349,11 +347,9 @@ function ChangeVideoMainLatheFeatures() {
       title.innerHTML = video.title;
       player.src = video.src;
       description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
     }
+
+
 }
 
 function ChangeDigitalReadout() {
@@ -387,11 +383,8 @@ function ChangeDigitalReadout() {
       title.innerHTML = video.title;
       player.src = video.src;
       description.innerHTML = video.text;
-
-      // if (video.tasks) {
-      //     currentTasks = video.tasks;
-      // }
     }
+
 }
 
 function ChangeSpindle() {
@@ -553,6 +546,17 @@ function switchVideo(action) {
             currentTasks = null;
         }
     }
+
+    console.log("VIDEO: " + videoCounter);
+
+    if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
+        reset(); // reset the shape
+        depth_set = 1;
+    }
+    else if (videoCounter === 14) {
+        reset(); // reset the shape
+        depth_set = 3;
+    }
 }
 
 function backCoverPage() {
@@ -676,7 +680,7 @@ function completeTask(value) {
 
 
 
-//=============================================================================================================================================================================
+
 // Function to check points between lathe object and true shape from lathe.js file
 // to determine if the user has cut out the right file
 // function compareCoords(obj1, obj2) {
