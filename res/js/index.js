@@ -16,6 +16,13 @@ let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
 let spindleSpeed = 100;
 let xzButtonsSelected = 0;
+let finecoarse = 0.025;
+// let delta = 0.025;
+// let home_position_x = 6;
+// let home_position_z = 5;
+let stopObserver = 0;
+let spindleSpeedSelected = 0;
+
 
 let xbutton = getById('Xbutton');
 let zbutton = getById('Zbutton');
@@ -27,13 +34,16 @@ let restorebutton = getById('f6btn');
 let rpmbutton = getById('f7btn');
 let toolretbutton = getById('f8btn');
 let coarsespeedbutton = getById('FC');
+let taperbutton = getById('f1btn');
+
 
 let currentTasks = null;
+let jsonIdx = 0;
 let taskIndex = 0;
 let xCoordinate = getById('xvar');
 let zCoordinate = getById('zvar');
 
-let GoTofunction = document.querySelectorAll("#f4btn, #f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton"), i;
+let GoTofunction = document.querySelectorAll("#f1btn, #f3btn, #f4btn, #f6btn,#f7btn, #Xbutton, #numButton, #AbsSet, #IncSet, #Zbutton,#GO"), i;
 
 let pageHead = -1;    // Records pages where user has gone past before (Tasks done)
 
@@ -82,6 +92,14 @@ window.onload = function () {
         dooneSelected = 1;
     });
 
+    taperbutton.addEventListener('click', function () {
+        resetColors();
+        if(dooneSelected == 1){
+          buffer.value = '45';
+          setfunctionbutton();
+        }
+    });
+
     gotobutton.addEventListener('click', function () {
         resetColors();
         setfunctionbutton();
@@ -95,6 +113,7 @@ window.onload = function () {
         resetColors();
         rpmbutton.style.backgroundColor = 'rgb(135,206,250)';
         selectedCoord = 3;
+        spindleSpeedSelected = 1;
         setfunctionbutton();
     });
 
@@ -118,6 +137,7 @@ window.onload = function () {
     // When value entered, want to exit that button's mode
     restorebutton.addEventListener('click', function () {
         resetColors();
+        setfunctionbutton();
 
     });
 
@@ -160,9 +180,11 @@ function resetfunctionbutton() {
     document.getElementById('f6').value = 'RETURN HOME';
     document.getElementById('f7').value = 'SPIN SPEED';
     document.getElementById('f8').value = 'TOOL #';
+    buffer.value = '';
     gotoSelected = 0;
     dooneSelected = 0;
     powerfeedSelected = 0;
+    spindleSpeedSelected = 0;
     sequence = [];
     sequenceIdx = 0;
     pressed = "";
@@ -170,6 +192,8 @@ function resetfunctionbutton() {
     gotoLimitz = 1000;
     gotoLimitNx = -1000;
     gotoLimitNz = -1000;
+    scene.stopAnimation(box);
+    stopObserver = 1;
 
 }
 
@@ -218,7 +242,7 @@ function setAbsPos() {
     // Resetting button colors
     resetColors();
     //gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1
-    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1 && xzButtonsSelected != 1) {
+    if (gotoSelected != 1 && dooneSelected != 1 && powerfeedSelected != 1 && xzButtonsSelected != 1 && spindleSpeedSelected != 1) {
         resetfunctionbutton();
     }
 
@@ -232,7 +256,10 @@ function setAbsPos() {
     let targetVar;
     if (selectedCoord == 1) targetVar = getById('xvar');
     else if (selectedCoord == 2) targetVar = getById('zvar');
-    else if (selectedCoord == 3) targetVar = getById('rpm');
+    else if (selectedCoord == 3){
+      targetVar = getById('rpm');
+      spindleSpeed = parseFloat(buffer.value);
+    }
 
     targetVar.value = buffer.value;
     buffer.value = '';
@@ -455,6 +482,7 @@ function ChangeConstantSFM() {
     //     alert('Have uncompleted tasks');	// bad practice
     //     return;	// task not finished
     // }
+
     if (videoCounter > 0) {
         videoCounter = 5;
     }
@@ -476,7 +504,7 @@ function ChangeConstantSFM() {
     }
 }
 
-
+//===============================================================================================================================================================================
 function switchVideo(action) {
     let title = getById('title');
     let player = getById('player');
@@ -491,7 +519,7 @@ function switchVideo(action) {
         }
 
         if (currentTasks) {
-            let task = currentTasks[taskIndex]
+            let task = currentTasks[taskIndex];
             if (task.coord) {
                 if (Math.abs(xCoordinate.value - task.coord.x) > 0.1 || Math.abs(zCoordinate.value - task.coord.z) > 0.1) {
                     alert('Have uncompleted tasks');	// bad practice
@@ -524,6 +552,7 @@ function switchVideo(action) {
         if (pageHead < videoCounter && video.tasks) {    // tasks have not been completed yet
             currentTasks = video.tasks;
             taskIndex = 0;
+            jsonIdx = video.index;
         }
     } else if (action === 'back') {
         if (videoCounter > 0) {        // defaulted to -1
@@ -561,7 +590,9 @@ function completeTask(value) {
     if (!currentTasks) return;	// no current tasks
 
     let task = currentTasks[taskIndex];
+    console.log(jsonIdx);
     if (task.press) {
+        console.log(value);
         if (task.press === value) {
             if (task.conditions) {
                 if (task.conditions.buffer) {
@@ -573,6 +604,23 @@ function completeTask(value) {
             nextTask();
             console.log(`Current tasks: ${currentTasks}`);
             console.log(`Task index: ${taskIndex}`);
+        }
+    }
+    else if (task.position){
+        if (value != null){
+          if (jsonIdx == 13){
+            if(value[0]<=task.position[0] && value[1] <= task.position[1]){
+              console.log("Step completed!");
+              nextTask();
+            }
+          }
+          else{
+            console.log("Enter task..")
+            if((task.position[0]-0.5 <= value[0] && value[0] <= task.position[0]+0.5) && (task.position[1]-0.5 <= value[1] && value[1] <= task.position[1]+0.5)){
+                console.log("Step completed!");
+                nextTask();
+            }
+          }
         }
     }
     else if (task.shape) { // If shape
@@ -610,6 +658,9 @@ function completeTask(value) {
         }
     }
 }
+
+
+
 
 // Function to check points between lathe object and true shape from lathe.js file
 // to determine if the user has cut out the right file

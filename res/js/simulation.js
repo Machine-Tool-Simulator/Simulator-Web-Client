@@ -46,8 +46,6 @@ window.addEventListener('DOMContentLoaded', function () {
         zCoordinate.value = parseFloat(zOrigin);
 
 
-
-
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
             shape: lathe_pts,
             cap: Mesh.CAP_ALL,
@@ -88,8 +86,6 @@ window.addEventListener('DOMContentLoaded', function () {
         var ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene, false);
         ground.position.y = -6;
 
-        ground.receiveShadows = true;
-
         var camera = new BABYLON.ArcRotateCamera("arcCam",
             0,
             BABYLON.Tools.ToRadians(55),
@@ -117,15 +113,19 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.onBeforeRenderObservable.add(() => {
             if (inputMap["d"] || inputMap["ArrowRight"]) {
                 lathe_engine(0, delta);
+                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["w"] || inputMap["ArrowUp"]) {
                 lathe_engine(-delta, 0);
+                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["a"] || inputMap["ArrowLeft"]) {
                 lathe_engine(0, -delta);
+                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["s"] || inputMap["ArrowDown"]) {
                 lathe_engine(delta, 0);
+                completeTask([box.position.x,box.position.z]);
             }
         });
 
@@ -213,24 +213,36 @@ window.addEventListener('DOMContentLoaded', function () {
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
 
-
-                    console.log(box.position);
-                    console.log('box------------limitx')
                     if (currentMesh.rotation.x > currentMeshX) {
-                        if (currentMesh == wheel && box.position.x < gotoLimitx) {
-                            lathe_engine(delta,0);
-                        } else if (currentMesh == wheel2 && box.position.z > gotoLimitNz) {
-                            lathe_engine(0,-delta);
-                        }
+                          if (currentMesh == wheel && xOrigin < gotoLimitx) {
+                              box.position.x += finecoarse;
+                              lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
+                              xCoordinate.value = parseFloat(xOrigin += finecoarse);
+                              //xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
+                              box.position.z -= finecoarse;
+                              lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
+                              zCoordinate.value = parseFloat(zOrigin -= finecoarse);
+                              //zCoordinate.value = parseFloat(box.position.z);
+                          }
 
-                    } else if (currentMesh.rotation.x < currentMeshX) {
-                        if (currentMesh == wheel && box.position.x > gotoLimitNx) {
-                            lathe_engine(-delta,0);
-                        } else if (currentMesh == wheel2 && box.position.z < gotoLimitz) {
-                            lathe_engine(0,delta);
-                        }
-                    }
-
+                      } else if (currentMesh.rotation.x < currentMeshX) {
+                          if (currentMesh == wheel && xOrigin > gotoLimitNx) {
+                              box.position.x -= finecoarse;
+                              lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
+                              xCoordinate.value = parseFloat(xOrigin -= finecoarse);
+                              //xCoordinate.value = parseFloat(box.position.x);
+                          } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
+                              box.position.z += finecoarse;
+                              lathe_engine_anim1();
+                              completeTask([box.position.x,box.position.z]);
+                              zCoordinate.value = parseFloat(zOrigin += finecoarse);
+                              //zCoordinate.value = parseFloat(box.position.z);
+                          }
+                      }
                     return true;
                 }
                 // ----------------------------------------------------------------------------
@@ -305,6 +317,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (fwdOn == 0){
               Chuck1.animations.push(yRot);
               var chuckAnim = scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
+              //console.log(Chuck1.position);
               music.play();
               fwdOn = 1;
             }
@@ -316,7 +329,7 @@ window.addEventListener('DOMContentLoaded', function () {
             fwdOn = 0;
         });
 
-// Implement GOTO;
+
         for (i = 0; i < GoTofunction.length; i++) {
             GoTofunction[i].addEventListener('click', function () {
 
@@ -326,7 +339,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     sequenceIdx += 1;
                     console.log(sequence);
                 }
-                //gotofucntion
+                //Implement GOTO;
                 if (pressed == "f4btnXbuttonnumButtonAbsSetZbuttonnumButtonAbsSet"
                     || pressed == "f4btnZbuttonnumButtonAbsSetXbuttonnumButtonAbsSet") {
                     sequence = [];
@@ -349,9 +362,10 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                 }
                 //spindle speed: constant rpm
-                else if(pressed == "f7btnnumButtonIncSet"){
+                else if(pressed == "f7btnnumButtonIncSet" || pressed == "f7btnnumButtonAbsSet"){
                   scene.stopAnimation(Chuck1);
-                  scene.beginAnimation(Chuck1,0,2*frameRate,true,spindleSpeed*0.005);
+                  console.log(spindleSpeed);
+                  scene.beginAnimation(Chuck1,0,2*10,true,spindleSpeed*0.005);
                   resetfunctionbutton();
                 }
 
@@ -374,60 +388,108 @@ window.addEventListener('DOMContentLoaded', function () {
                   sequenceIdx = 0;
                   pressed = "";
                 }
+                //Do one, Taper function
+                else if(pressed == "f3btnf1btnAbsSet"){
+                   stopObserver = 0;
+                   var frameRate = 10;
+                   var xSlide = new BABYLON.Animation("xSlide", "position.x", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+                   var keyFramesX= [];
+                   var keyFramesZ= [];
+                   var startingPositionX = box.position.x;
+                   var startingPositionZ = box.position.z;
+                   var  boxAttr =  box.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+                   console.log(boxAttr);
+                   keyFramesX.push({
+                       frame: 0,
+                       value: startingPositionX
+                   });
+                   keyFramesX.push({
+                       frame: frameRate,
+                       value:  startingPositionX+1
+                   });
+                   keyFramesX.push({
+                       frame: 2 * frameRate,
+                       value: startingPositionX
+                   });
+                   xSlide.setKeys(keyFramesX);
+                   //Rotation Animation
+                   var zSlide = new BABYLON.Animation("zSlide", "position.z", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+                   keyFramesZ.push({
+                       frame: 0,
+                       value: startingPositionZ
+                   });
+                   keyFramesZ.push({
+                       frame: frameRate,
+                       value:  startingPositionZ-1
+                   });
+                   keyFramesZ.push({
+                       frame: 2 * frameRate,
+                       value: startingPositionZ
+                   });
+                   zSlide.setKeys(keyFramesZ);
+                   box.animations.push(zSlide);
+                   box.animations.push(xSlide);
+                   var currentPositionX = box.position.x;
+                   var currentPositionZ = box.position.z;
+                   scene.beginAnimation(box,0,2*frameRate,true);
+                   var observer = scene.onBeforeRenderObservable.add(function () {
+                     lathe_engine_anim1();
+                     if(stopObserver == 1){
+                       scene.onBeforeRenderObservable.remove(observer);
+
+                     }
+                   });
+                }
+
+                // Implement ReturnHome function
+                else if(pressed == "f6btnGO"){
+                  var frameRate1 = 10;
+                  var GoToAnimationX = new BABYLON.Animation('GotoAnimation', 'position.z', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+                  console.log(box.position.z);
+                  var keyFrames = [];
+                  keyFrames.push({
+                      frame: 0,
+                      value: box.position.z
+                  });
+
+                  keyFrames.push({
+                      frame: 2 * frameRate1,
+                      value: home_position_z
+                  });
+
+                  var itHasStopped = function () {
+                      box.position.z = home_position_z;
+                      zCoordinate.value = parseFloat(box.position.z);
+                  }
+
+                  GoToAnimationX.setKeys(keyFrames);
+
+                  var GoToAnimationZ = new BABYLON.Animation('GotoAnimation', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+                  console.log(box.position.x);
+                  var keyFrames2 = [];
+                  keyFrames2.push({
+                      frame: 0,
+                      value: box.position.x
+                  });
+
+                  keyFrames2.push({
+                      frame: 2 * frameRate1,
+                      value: home_position_x
+                  });
+
+                  var itHasStopped2 = function () {
+                      box.position.x = home_position_x;
+                      xCoordinate.value = parseFloat(box.position.x);
+                      scene.beginDirectAnimation(box, [GoToAnimationX], 0, 2 * 10, false, 1, itHasStopped);
+                  }
+
+                  GoToAnimationZ.setKeys(keyFrames2);
+
+                  box.animations.push(GoToAnimationZ);
+                  scene.beginDirectAnimation(box, [GoToAnimationZ], 0, 2 * 10, false, 1, itHasStopped2);
+
+                }
             }, false);
-
-            //Implementation of Return Home funciton.
-            document.getElementById("f6btn").addEventListener("click", function () {
-                console.log("return home clicked");
-                var frameRate1 = 10;
-                var GoToAnimationX = new BABYLON.Animation('GotoAnimation', 'position.z', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                console.log(box.position.z);
-                var keyFrames = [];
-                keyFrames.push({
-                    frame: 0,
-                    value: box.position.z
-                });
-
-                keyFrames.push({
-                    frame: 2 * frameRate1,
-                    value: zOrigin
-                });
-
-                var itHasStopped = function () {
-                    //alert('itHasStopped func reports the animation stopped');
-                    box.position.z = zOrigin;
-                    zCoordinate.value = parseFloat(box.position.z);
-                }
-
-                GoToAnimationX.setKeys(keyFrames);
-
-                var GoToAnimationZ = new BABYLON.Animation('GotoAnimation', 'position.x', frameRate1, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                console.log(box.position.x);
-                var keyFrames2 = [];
-                keyFrames2.push({
-                    frame: 0,
-                    value: box.position.x
-                });
-
-                keyFrames2.push({
-                    frame: 2 * frameRate1,
-                    value: xOrigin
-                });
-
-                var itHasStopped2 = function () {
-                    box.position.x = xOrigin;
-                    xCoordinate.value = parseFloat(box.position.x);
-                    scene.beginDirectAnimation(box, [GoToAnimationX], 0, 2 * frameRate, false, 1, itHasStopped);
-                }
-
-                GoToAnimationZ.setKeys(keyFrames2);
-
-                box.animations.push(GoToAnimationZ);
-                // var animatable = scene.beginAnimation(box, 0, 2 * frameRate1, false, 1, itHasStopped2);
-                scene.beginDirectAnimation(box, [GoToAnimationZ], 0, 2 * frameRate, false, 1, itHasStopped2);
-
-
-            });
         }
 
         return scene;
@@ -440,6 +502,72 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+function lathe_engine_anim1() {
+
+    var x = box.position.x - 3;
+    var z = box.position.z - 3;
+
+    // If within range to cut and moving in the proper direction
+    if (x < 4 && z < 0) {
+        var abs_x = Math.abs(x);
+        var abs_z = Math.abs(z);
+
+        var max_x = -1000;
+        var min_z = 1000;
+
+        var pt_fnd = false;
+
+        // Removing points that are cut off by box
+        for (var i = 0; i < lathe_pts.length; i++) {
+            var item = lathe_pts[i];
+
+            if (item.x >= abs_x && item.y <= abs_z) {
+                max_x = Math.max(max_x, item.x);
+                min_z = Math.min(min_z, item.y);
+
+                lathe_pts.splice(i, 1);
+                i--;
+
+                pt_fnd = true;
+            }
+        }
+
+        // Only do these if need to cut out shape
+        if (pt_fnd) {
+            // Creating array of new points to splice in
+            var new_pts = [
+                new BABYLON.Vector3(abs_x, min_z, 0),
+                new BABYLON.Vector3(abs_x, abs_z, 0),
+                new BABYLON.Vector3(max_x, abs_z, 0),
+            ];
+
+            // Splicing in these pts and breaking when done
+            for (var i = 0; i < lathe_pts.length; i++) {
+                item = lathe_pts[i];
+                if (item.x >= abs_x && item.y >= abs_z) {
+                    lathe_pts.splice(i, 0, ...new_pts);
+                    found = true;
+                    break;
+                }
+            }
+
+            // Rebuild lathe model based no new points
+            lathe.dispose();
+            lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
+                shape: lathe_pts,
+                cap: Mesh.CAP_ALL,
+                updateable: true
+            }, scene);
+            lathe.rotation.x = -Math.PI / 2;
+
+            // TODO: When move the x coordinate back, do not want to spew z points
+            //console.log(lathe_pts);
+        }
+    }
+
+}
+
 
 
 /**
@@ -540,9 +668,11 @@ function lathe_engine(delta_x, delta_z) {
             }, scene);
             lathe.rotation.x = -Math.PI / 2;
 
+
             console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
+
 
     // These are set nicely to keep the box within a desired range
 
@@ -745,6 +875,7 @@ function dragOne() {
 
     rad_prev_one = rad;
     rot_one = rot;
+
 }
 
 var rot_two = 0;
@@ -797,6 +928,7 @@ function dragTwo() {
     }
 
     console.log("xfr after" + " | " + xfr_delta);
+
 
     if (lathe_engine(xfr_delta, 0)) {
         d3.select(this)
