@@ -16,7 +16,7 @@ let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
 let spindleSpeed = 100;
 let xzButtonsSelected = 0;
-
+let finecoarse = 0.025;
 // let delta = 0.025;
 // let home_position_x = 6;
 // let home_position_z = 5;
