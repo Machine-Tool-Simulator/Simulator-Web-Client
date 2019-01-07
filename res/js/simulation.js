@@ -42,8 +42,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
         box = BABYLON.Mesh.CreateBox("Box", box_size, scene);
         box.position = new BABYLON.Vector3(xOrigin, -3, zOrigin);
-        xCoordinate.value = parseFloat(xOrigin);
-        zCoordinate.value = parseFloat(zOrigin);
+        xCoordinate.value = parseFloat(xOrigin).toFixed(4);;
+        zCoordinate.value = parseFloat(zOrigin).toFixed(4);;
 
 
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
@@ -218,13 +218,13 @@ window.addEventListener('DOMContentLoaded', function () {
                               box.position.x += finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = parseFloat(xOrigin += finecoarse);
+                              xCoordinate.value = parseFloat(xOrigin += finecoarse).toFixed(4);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
                               box.position.z -= finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = parseFloat(zOrigin -= finecoarse);
+                              zCoordinate.value = parseFloat(zOrigin -= finecoarse).toFixed(4);;
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
 
@@ -233,13 +233,13 @@ window.addEventListener('DOMContentLoaded', function () {
                               box.position.x -= finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = parseFloat(xOrigin -= finecoarse);
+                              xCoordinate.value = parseFloat(xOrigin -= finecoarse).toFixed(4);;
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
                               box.position.z += finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = parseFloat(zOrigin += finecoarse);
+                              zCoordinate.value = parseFloat(zOrigin += finecoarse).toFixed(4);;
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
                       }
@@ -363,10 +363,11 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
                 //spindle speed: constant rpm
                 else if(pressed == "f7btnnumButtonIncSet" || pressed == "f7btnnumButtonAbsSet"){
-                  scene.stopAnimation(Chuck1);
-                  console.log(spindleSpeed);
-                  scene.beginAnimation(Chuck1,0,2*10,true,spindleSpeed*0.005);
-                  resetfunctionbutton();
+                  if (fwdOn == 1){
+                    scene.stopAnimation(Chuck1);
+                    scene.beginAnimation(Chuck1,0,2*10,true,spindleSpeed*0.005);
+                    resetfunctionbutton();
+                  }
                 }
 
                 else if(pressed == "XbuttonnumButtonAbsSet"){
@@ -700,8 +701,8 @@ function lathe_engine(delta_x, delta_z) {
         return false;
     }
 
-    xCoordinate.value = parseFloat(box.position.x);
-    zCoordinate.value = parseFloat(box.position.z);
+    xCoordinate.value = parseFloat(box.position.x).toFixed(4);;
+    zCoordinate.value = parseFloat(box.position.z).toFixed(4);;
 
 
     completeTask(null); // Need to check shape cut out
