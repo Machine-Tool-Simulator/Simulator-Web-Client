@@ -45,14 +45,6 @@ window.addEventListener('DOMContentLoaded', function () {
         xCoordinate.value = parseFloat(xOrigin);
         zCoordinate.value = parseFloat(zOrigin);
 
-        lathe_pts = [
-            // new BABYLON.Vector3(4, 0, 0),
-            new BABYLON.Vector3(2, 0, 0),
-            new BABYLON.Vector3(2, 8, 0), // to check pts along lathe
-            new BABYLON.Vector3(4, 8, 0),
-            new BABYLON.Vector3(4, 16, 0),
-        ];
-
 
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
             shape: lathe_pts,
@@ -222,7 +214,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     currentMeshX = currentMesh.rotation.x;
                     var newRotation = rotationInit - dragDiff.x / 170;
                     currentMesh.rotation.x = newRotation;
-                    
+
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && xOrigin < gotoLimitx) {
                               box.position.x += finecoarse;
