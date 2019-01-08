@@ -15,6 +15,7 @@ var lathe;
 var scene;
 var tailstock;
 var Chuck1;
+var fwdOn = 0;
 
 var lathe_pts_init = [
     new BABYLON.Vector3(4, 0, 0),
@@ -311,7 +312,6 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         yRot.setKeys(keyFramesR);
 
-        var fwdOn = 0;
         var music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
             if (fwdOn == 0){
@@ -577,7 +577,10 @@ function lathe_engine_anim1() {
 
 function lathe_engine(delta_x, delta_z) {
 
+
     var bad_cut = false;
+
+    // if (fwdOn === 0) bad_cut = true;
 
     var x = box.position.x - box_size/2;
     var z = box.position.z - box_size/2;
