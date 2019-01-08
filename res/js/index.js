@@ -227,10 +227,15 @@ function addNumber(current, digit) {
         else return digit;
     }
     if (digit === '+/-') {
-        if (current.length <= 0) return current;
+        if (current.length <= 0) {
+            return '-0';
+        }
         if (current.charAt(0) === '-') current = current.substring(1);
         else current = '-' + current;
         return current;
+    }
+    if (current === '-0' && digit !== '.') {
+        return '-' + digit;
     }
 
     return current + digit;
@@ -789,12 +794,6 @@ function completeTask(value) {
 var tolerance = .2; // Tolerance for how different the cut out shape can be from the true version (in lathe.js)
 function compareCoords(obj1, obj2) {
     return Math.abs(obj1.x - obj2.x) < tolerance && Math.abs(obj1.y - obj2.y) < tolerance && Math.abs(obj1.z - obj2.z) < tolerance;
-}
-
-function negBuffer() {
-    let buffer = getById('buffer');
-
-    buffer.value = -buffer.value;
 }
 
 /** Helpers */
