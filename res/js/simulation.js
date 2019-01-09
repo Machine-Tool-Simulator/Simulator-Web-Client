@@ -617,10 +617,13 @@ function lathe_engine(delta_x, delta_z) {
                     bad_cut = true;
                     // TODO: can add a better warning here!!!
                     if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
-                }
-                pt_fnd = true;
+                } else if (fwdOn !== 0) {
+                    pt_fnd = true;
 
-                bad_pts.push(i);
+                    bad_pts.push(i);
+                } else {
+                    bad_cut = true;
+                }
             }
         }
 
