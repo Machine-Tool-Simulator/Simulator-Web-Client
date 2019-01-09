@@ -627,8 +627,6 @@ function lathe_engine(delta_x, delta_z) {
             }
         }
 
-
-
         // Only do these if need to cut out shape
         if (pt_fnd) {
 
