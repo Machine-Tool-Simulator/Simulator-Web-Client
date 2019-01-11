@@ -526,7 +526,7 @@ function switchVideo(action) {
         if (currentTasks) {
             let task = currentTasks[taskIndex];
             if (task.coord) {
-                if (Math.abs(xCoordinate.value - task.coord.x) > 0.1 || Math.abs(zCoordinate.value - task.coord.z) > 0.1) {
+                if (Math.abs(xCoordinate.value*10 - task.coord.x) > 0.1 || Math.abs(zCoordinate.value*10 - task.coord.z) > 0.1) {
                     alert('Have uncompleted tasks');	// bad practice
                     return;	// task not finished
                 }
