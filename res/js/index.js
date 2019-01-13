@@ -399,114 +399,23 @@ function PlaylistVideo(action) {
     let player = getById('player');
     let description = getById('description');
 
-    if (action == "Introduction") {
-        videoCounter = 0;
-    } else if (action == "Timelapse") {
-        if (pageHead >= 1) {
-            videoCounter = 1;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-    } else if (action == "Safety") {
-        if (pageHead >= 2) {
-            videoCounter = 2;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-    } else if (action == "LatheParts") {
-        if (pageHead >= 3) {
-            videoCounter = 3;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-    } else if (action == "LoadingChuck") {
-        if (pageHead >= 4) {
-            videoCounter = 4;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "TurnOnSpindle") {
-        if (pageHead >= 5) {
-            videoCounter = 5;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "ConstantRPM") {
-        if (pageHead >= 6) {
-            videoCounter = 6;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "ConstantSFM") {
-        if (pageHead >= 7) {
-            videoCounter = 7;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "XZCoordinate") {
-        if (pageHead >= 8) {
-            videoCounter = 8;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-    } else if (action == "XZWheels") {
-        if (pageHead >= 9) {
-            videoCounter = 9;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-    } else if (action == "FineCoarseControl") {
-        if (pageHead >= 10) {
-            videoCounter = 10;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "ZCoordinate") {
-        if (pageHead >= 11) {
-            videoCounter = 11;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "XCoordinate") {
-        if (pageHead >= 12) {
-            videoCounter = 12;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "AggressiveCut") {
-        if (pageHead >= 13) {
-            videoCounter = 13;
-        } else {
-            alert('Can\'t jump to the next task unless you finish all the previous ones')
-        }
-
-    } else if (action == "GoToPosition") {
-        if (pageHead >= 14) {
-            videoCounter = 14;
-        } else {
-            alert('Can\'t jump to the next task unlexss you finish all the previous ones')
-        }
-
+    if (pageHead > action) {
+        videoCounter = action;
+    } else {
+        alert('Can\'t jump to the next task unless you finish all the previous ones');
+        return;
     }
-
 
     let video = videos[videoCounter];
     title.innerHTML = video.title;
     player.src = video.src;
     description.innerHTML = video.text;
 
-    if (video.tasks) {
+    if (video.tasks && action <= pageHead) {
         currentTasks = video.tasks;
+    } else {
+        currentTasks = null;
     }
-
-
 }
 
 function backCoverPage() {
