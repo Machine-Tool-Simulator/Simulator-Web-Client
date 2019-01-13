@@ -1,1 +1,1 @@
-const SERVER_URL = 'http://35.235.120.240:3001/submit';
+const SERVER_URL = 'http://35.236.84.27:3001/submit';
