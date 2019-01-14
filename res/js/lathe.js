@@ -9,7 +9,7 @@ let videos = [
     {
         "index":2,
         "title":"Timelapse",
-        "src":"https://drive.google.com/file/d/17_yJl_WwA8M96-jbezJe4RkUmAfHhblS/preview",
+        "src":"https://drive.google.com/file/d/1JV9DmG4C4S6a08dzDU2LeAuVXEgGSO_n/preview",
         "text":"[Insert text for timelapse once voiceover]"
     },  // TODO: Insert text for timelapse when have Nicks
     {
