@@ -115,19 +115,15 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.onBeforeRenderObservable.add(() => {
             if (inputMap["d"] || inputMap["ArrowRight"]) {
                 lathe_engine(0, delta);
-                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["w"] || inputMap["ArrowUp"]) {
                 lathe_engine(-delta, 0);
-                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["a"] || inputMap["ArrowLeft"]) {
                 lathe_engine(0, -delta);
-                completeTask([box.position.x,box.position.z]);
             }
             if (inputMap["s"] || inputMap["ArrowDown"]) {
                 lathe_engine(delta, 0);
-                completeTask([box.position.x,box.position.z]);
             }
         });
 
@@ -710,7 +706,7 @@ function lathe_engine(delta_x, delta_z) {
     zCoordinate.value = (parseFloat(box.position.z)/10).toFixed(4);
 
 
-    completeTask(null); // Need to check shape cut out
+    completeTask([box.position.x,box.position.z]);
 
     return true;
 }
