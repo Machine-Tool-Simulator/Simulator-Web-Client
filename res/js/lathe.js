@@ -10,8 +10,8 @@ let videos = [
         "index":2,
         "title":"Timelapse",
         "src":"https://drive.google.com/file/d/1JV9DmG4C4S6a08dzDU2LeAuVXEgGSO_n/preview",
-        "text":"[Insert text for timelapse once voiceover]"
-    },  // TODO: Insert text for timelapse when have Nicks
+        "text":"Here we are turning on the spindle and cutting a little bit of the material off of the part.  We are using that to set to z coordinate system, which describes to the lathe how it moves left to right.  Then we also need to do the same for the radial direction, which is x.  We need to cut a little bit of the material off of the outside, measure it, and then tell the machine that it is at that position.<br>Here, we are using something called a GoTo function, which allows you to make the cutting tool move to a certain palce, which allows us to cut really precise dimensions.  In this case, we are cutting some material away from it until it is at just the perfect size.<br>Next step, we are going to drill a hole in it.  The first step involves center drilling.  The tool that we are about to drill into it is called the center drill.  It will make a small hole that will guide a regular drillbit right through the center.  Once that's done, we can use a process called reaming to make the hole have a really precise size.<br>Next step is going to be to cut off the piece that we want from the rest of the material stock.  This tool is called the cutoff tool.  We need to do a little bit of math to figure out how far left we want to place the cutoff tool.  Then we can use the GoTo function to put it in exaclty the right place.<br>From there, we can put some coolant on it.  That keeps everything from getting too hot.  From there, we can move the cutoff tool into the part, which cuts it off from the rest of the material stock.  Then, we need to find the part, which has fallen into the bottom of the lathe.<br>There it is!  There is the bushing!"
+    },
     {
         "index":3,
         "title":"Safety",
