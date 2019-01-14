@@ -16,42 +16,22 @@
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
       <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
       <div class="btn-group">
-          <button onclick="PlaylistVideo('Introduction')"> Introduction</button>
-          <button onclick="PlaylistVideo('Timelapse')" /> Timelapse</button>
-          <button onclick="PlaylistVideo('Safety')" /> Safety</button>
-          <button onclick="PlaylistVideo('LatheParts')" />LatheParts</button>
-          <button onclick="PlaylistVideo('LoadingChuck')" />LoadingChuck</button>
-          <button onclick="PlaylistVideo('TurnOnSpindle')" />TurnOnSpindle</button>
-          <button onclick="PlaylistVideo('ConstantRPM')" />ConstantRPM</button>
-          <button onclick="PlaylistVideo('ConstantSFM')" />ConstantSFM</button>
-          <button onclick="PlaylistVideo('XZCoordinate')" />XZCoordinate</button>
-          <button onclick="PlaylistVideo('XZWheels')" />XZWheels</button>
-          <button onclick="PlaylistVideo('FineCoarseControl')" />FineCoarseControl</button>
-          <button onclick="PlaylistVideo('ZCoordinate')" />ZCoordinate</button>
-          <button onclick="PlaylistVideo('XCoordinate')" />XCoordinate</button>
-          <button onclick="PlaylistVideo('AggressiveCut')" />AggressiveCut</button>
-          <button onclick="PlaylistVideo('GoToPosition')" />GoToPosition</button>
-
-
-        <!--<button onclick="ChangeVideoMainLatheFeatures()">Timelapse</button>-->
-        <!--<button onclick="ChangeDigitalReadout()">Safety</button>-->
-        <!--<button onclick="ChangeSpindle()">Parts of the Lathe</button>-->
-        <!--<button onclick="ChangeConstantRPM()">Loading the Chuck</button>-->
-        <!--<button onclick="ChangeConstantSFM()">Turning on the Spindle</button>-->
-          <!--<button onclick="ChangeConstantSFM()">Constant RPM</button>-->
-          <!--<button onclick="ChangeConstantSFM()">Constant SFM</button>-->
-          <!--<button onclick="ChangeConstantSFM()">X and Z Coordinate System</button>-->
-          <!--<button onclick="ChangeConstantSFM()">X and Z Wheels</button>-->
-          <!--<button onclick="ChangeConstantSFM()">Fine and Coarse Control</button>-->
-          <!--<button onclick="ChangeConstantSFM()">Cutting and Setting Z Coordinate System</button>-->
-
+          <button onclick="PlaylistVideo(0)"> Introduction</button>
+          <button onclick="PlaylistVideo(1)"> Timelapse</button>
+          <button onclick="PlaylistVideo(2)"> Safety</button>
+          <button onclick="PlaylistVideo(3)">LatheParts</button>
+          <button onclick="PlaylistVideo(4)">LoadingChuck</button>
+          <button onclick="PlaylistVideo(5)">TurnOnSpindle</button>
+          <button onclick="PlaylistVideo(6)">ConstantRPM</button>
+          <button onclick="PlaylistVideo(7)">ConstantSFM</button>
+          <button onclick="PlaylistVideo(8)">XZCoordinate</button>
+          <button onclick="PlaylistVideo(9)">XZWheels</button>
+          <button onclick="PlaylistVideo(10)">FineCoarseControl</button>
+          <button onclick="PlaylistVideo(11)">ZCoordinate</button>
+          <button onclick="PlaylistVideo(12)">XCoordinate</button>
+          <button onclick="PlaylistVideo(13)">GoToPosition</button>
+          <button onclick="PlaylistVideo(14)">AggressiveCut</button>
       </div>
-        <!-- <a href="#" class="w3-bar-item w3-button ">Introduction</a>
-        <a href="#" class="w3-bar-item w3-button">Main Lathe Features</a>
-        <a href="#" class="w3-bar-item w3-button">Digital Readout</a>
-        <a href="#" class="w3-bar-item w3-button">Turning on Spindle</a>
-        <a href="#" class="w3-bar-item w3-button">Constant RPM</a>
-        <a href="#" class="w3-bar-item w3-button">Constant SFM</a> -->
 
     </div>
 
@@ -293,8 +273,10 @@ function w3_close() {
 }
 </script>
 
+<script type="text/javascript" src="res/js/secret.js"></script>
 <script type="text/javascript" src="res/js/lathe.js"></script>
 <script type="text/javascript" src="res/js/index.js"></script>
+<script type="text/javascript" src="res/js/timer.js"></script>
 <script type="text/javascript" src="res/js/simulation.js" defer></script>
 </body>
 
