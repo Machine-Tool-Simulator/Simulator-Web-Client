@@ -23,17 +23,17 @@ let videos = [
         "title":"Parts of the Lathe",
         "src":"https://drive.google.com/file/d/11ap4hcucbOaNVDCbi0sh59OPCUD9Yr6o/preview",
         "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The chuck holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>In order, select the following parts (ON THE 3D MODEL):<br>1. The tailstock<br>2. The carriage and cutting tool<br>3. The chuck",
-        "tasks": [
-            {
-                "click": "tailstock"
-            },
-            {
-                "click": "box"
-            },
-            {
-                "click": "chuck"
-            }
-        ]
+        // "tasks": [
+        //     {
+        //         "click": "tailstock"
+        //     },
+        //     {
+        //         "click": "box"
+        //     },
+        //     {
+        //         "click": "chuck"
+        //     }
+        // ]
     },
     {
         "index":5,
@@ -46,70 +46,70 @@ let videos = [
         "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.<br><strong>NOTE:</strong>For the next sessions, the lathe must be turned on before you will be able to cut out a shape.",
-        "tasks":[
-            {
-                "press":"FWD",
-                "highlight":true
-            },
-            {
-                "press":"OFF",
-                "highlight":true
-            }
-        ]
+        // "tasks":[
+        //     {
+        //         "press":"FWD",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"OFF",
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":7,
         "title":"Constant RPM",
         "src":"https://drive.google.com/file/d/1SmuPAJPo4dQPUxLYRslcIwyyc7k5JbUD/preview",
         "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>2. Enter \"500\" as the value using the numeric keypad.<br>3. Press the \"INC SET\" button to set constant RPM.<br>4. Turn the spindle on.<br>5. Turn the spindle off.",
-        "tasks":[
-            {
-                "press":"RPM",
-                "highlight":true
-            },
-            {
-                "press":"INC_SET",
-                "conditions":{
-                    "buffer":500
-                },
-                "highlight":true
-            },
-            {
-                "press":"FWD",
-                "highlight":true
-            },
-            {
-                "press":"OFF",
-                "highlight":true
-            }
-        ]
+        // "tasks":[
+        //     {
+        //         "press":"RPM",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"INC_SET",
+        //         "conditions":{
+        //             "buffer":500
+        //         },
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"FWD",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"OFF",
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":8,
         "title":"Constant SFM",
         "src":"https://drive.google.com/file/d/1jnq_N92G--HP1bjzjdfzLLCaSHbjOfe3/preview",
         "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"Spin Speed\" using the button below the control screen to set RPM <br>2. Enter \"250\" as the value using the numeric keypad.<br>3. Press the \"ABS SET\" button to set constant SFM.<br>4. Turn the spindle on.<br>5. Turn the spindle off.",
-        "tasks":[
-            {
-                "press":"RPM",
-                "highlight":true
-            },
-            {
-                "press":"ABS_SET",
-                "conditions":{
-                    "buffer":250
-                },
-                "highlight":true
-            },
-            {
-                "press":"FWD",
-                "highlight":true
-            },
-            {
-                "press":"OFF",
-                "highlight":true
-            }
-        ]
+        // "tasks":[
+        //     {
+        //         "press":"RPM",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"ABS_SET",
+        //         "conditions":{
+        //             "buffer":250
+        //         },
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"FWD",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"OFF",
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":9,
@@ -122,30 +122,30 @@ let videos = [
         "title":"X and Z Wheels",
         "src":"https://drive.google.com/file/d/1FEJn5YMX92adnGUo_1J9pwTq7wtuexuF/preview",
         "text":"You can manually move the cutting tool by rotating the z wheel and the x wheel.<br>When you rotate the x wheel clockwise, the cutting tool moves closer to the spindle axis, resulting in a smaller x position for a smaller diameter. When you rotate the x wheel counter-clockwise, the cutting tool moves away from the spindle axis resulting in a larger x position or larger diameter.<br>When you rotate the z wheel clockwise, the cutting tool moves to the right, resulting in a greater z position. When you rotate the z wheel counter-clockwise, the cutting tool moves to the left resulting in a lesser z position.<br>You can also move a joystick to move the cutting tool. This is not recommended, since the joystick makes the cutting tool moves so fast that it can be difficult to react if you accidently move the cutting tool into the chuck or into the part.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Using the x and z wheels, move the cutting tool to a position of x = 0.8 in, z = -0.2 in.",
-        "tasks": [
-            {
-                "coord": {
-                    "x": 8,
-                    "z": -2
-                }
-            }
-        ]
+        // "tasks": [
+        //     {
+        //         "coord": {
+        //             "x": 8,
+        //             "z": -2
+        //         }
+        //     }
+        // ]
     },
     {
         "index":11,
         "title":"Fine and Coarse Control",
         "src":"https://drive.google.com/file/d/1TZXP9VHU0nqVB3r-EOS4hV4QHJY348zE/preview",
         "text":"Let's talk about the difference between fine mode and coarse mode. We will use the term fine mode for moving slowly and the term coarse mode for moving quickly. Take a look at how fast the cutting tool moves when the control is set to fine mode and you turn the wheel.<br>Now switch to coarse mode and see how quickly the cutting tool moves when you turn the wheel at the same speed. The cutting tool moves much faster when in coarse mode. This is good when you want to quickly move the tool to a certain position. However, coarse mode moves the cutting tool too quickly for actual cutting. When you are cutting metal, be sure to use fine mode so that the cutting tool moves through the metal slowly. Using fine mode during cutting gives you more control over what you are doing and reduces the chance of breaking tools.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>Practice switching between fine and coarse control and adjusting the position of the cutting tool using the x and z wheels.",
-        "tasks":[
-            {
-                "press":"FC",
-                "highlight":true
-            },
-            {
-                "press":"FC",
-                "highlight":true
-            }
-        ]
+        // "tasks":[
+        //     {
+        //         "press":"FC",
+        //         "highlight":true
+        //     },
+        //     {
+        //         "press":"FC",
+        //         "highlight":true
+        //     }
+        // ]
     },
     {
         "index":12,
@@ -188,7 +188,7 @@ let videos = [
         "index":13,
         "title":"Setting X Coordinate System",
         "src":"https://drive.google.com/file/d/1mQvL8J2SCZp_3jK0jatF4MdY9ZFBpCGV/preview",
-        "text":"To measure the dimensions of the part that you have been working on, you can use a tool called calipers. Calipers represent the distance between two points with a very high level of precision. When you move the calipers apart, the distance increases. When you move the calipers closer together, the distance decreases.<br>You are now ready to establish the x coordinate system. Position the cutting tool slightly to the right of z 0 and slightly to the inside of the part's diameter .<br>Turn on the spindle.<br>Use the z wheel to move the cutting tool into the part, making a smaller outside diameter than the rest of the raw material.<br>Reverse the z wheel to bring the cutting tool off of the part.<br>Turn off the spindle.<br>Now you will use the calipers to measure the diameter that you just cut. Open up the calipers and press them onto the outside diameter. Press them together and try to find the smallest number that you can find. In this case, the diameter is reading at about 0.412 inches.<br>To complete the process of establishing the x coordinate system, type in the number that you measured into the control. Press x, then type in the diameter, and then press ABS SET.<br>Now that the coordinate system is established, z 0 represents that far right edge of the part and the x coordinate represents the actual diameter at the position of the cutting tool.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter (past X=0.8 and Z=0.45).<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material (past X=0.7, Z=0.3).<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the sipndle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system.<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system.",
+        "text":"To measure the dimensions of the part that you have been working on, you can use a tool called calipers. Calipers represent the distance between two points with a very high level of precision. When you move the calipers apart, the distance increases. When you move the calipers closer together, the distance decreases.<br>You are now ready to establish the x coordinate system. Position the cutting tool slightly to the right of z 0 and slightly to the inside of the part's diameter .<br>Turn on the spindle.<br>Use the z wheel to move the cutting tool into the part, making a smaller outside diameter than the rest of the raw material.<br>Reverse the z wheel to bring the cutting tool off of the part.<br>Turn off the spindle.<br>Now you will use the calipers to measure the diameter that you just cut. Open up the calipers and press them onto the outside diameter. Press them together and try to find the smallest number that you can find. In this case, the diameter is reading at about 0.412 inches.<br>To complete the process of establishing the x coordinate system, type in the number that you measured into the control. Press x, then type in the diameter, and then press ABS SET.<br>Now that the coordinate system is established, z 0 represents that far right edge of the part and the x coordinate represents the actual diameter at the position of the cutting tool.<br><hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter (Around X=0.6 and Z=0.25).<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material (Around X=0.6, Z=-0.2).<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the sipndle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system. (Press the X button and enter 0.412, then press ABS SET)<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system.",
         "tasks":[
             {
                   // >5,>3
