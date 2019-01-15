@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="res/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='https://d3js.org/d3.v3.min.js'></script>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <title>Lathe</title>
+
+</head>
+
+<body>
+
+  <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+      <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+      <div class="btn-group">
+          <button onclick="PlaylistVideo(0)"> Introduction</button>
+          <button onclick="PlaylistVideo(1)"> Timelapse</button>
+          <button onclick="PlaylistVideo(2)"> Safety</button>
+          <button onclick="PlaylistVideo(3)">LatheParts</button>
+          <button onclick="PlaylistVideo(4)">LoadingChuck</button>
+          <button onclick="PlaylistVideo(5)">TurnOnSpindle</button>
+          <button onclick="PlaylistVideo(6)">ConstantRPM</button>
+          <button onclick="PlaylistVideo(7)">ConstantSFM</button>
+          <button onclick="PlaylistVideo(8)">XZCoordinate</button>
+          <button onclick="PlaylistVideo(9)">XZWheels</button>
+          <button onclick="PlaylistVideo(10)">FineCoarseControl</button>
+          <button onclick="PlaylistVideo(11)">ZCoordinate</button>
+          <button onclick="PlaylistVideo(12)">XCoordinate</button>
+          <button onclick="PlaylistVideo(13)">GoToPosition</button>
+          <button onclick="PlaylistVideo(14)">AggressiveCut</button>
+      </div>
+
+    </div>
+
+  <div id="main">
+
+    <div class="w3-teal">
+        <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+      </div>
+
+    <div>
+          <div style="text-align:center">
+            <div id="title">Welcome to Dartmouth Machine Shop Simulation</div>
+            <img id="cover" src="res/imgs/img_test1.jpg" />
+            <iframe id="player" style="display:none" frameborder="0"></iframe>
+            
+            <p id="description" >Watch each video, read the description, and complete any tasks written in bold. After completing the task, click the Submit button to continue. If there is no task written in bold, you can click the Submit button to continue anytime. You will be asked to complete these tasks on the actual machine.</p>
+            
+            <div id='button-container'>
+                <input type="button" class="button" value="Back" onclick="switchVideo('back')" style="left:50%" />
+                <input type="button" class="button" value="Next" onclick="switchVideo('next')" />
+            </div>
+          </div>
+    </div>
+  </div>
+
+<script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+</script>
+
+<script type="text/javascript" src="res/js/secret.js"></script>
+<script type="text/javascript" src="res/js/lathe.js"></script>
+<script type="text/javascript" src="res/js/group1.js"></script>
+<script type="text/javascript" src="res/js/timer.js"></script>
+<script type="text/javascript" src="res/js/simulation.js" defer></script>
+</body>
+
+</html>
