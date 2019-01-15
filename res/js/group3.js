@@ -326,9 +326,6 @@ function switchVideo(action) {
     let title = getById('title');
     let player = getById('player');
     let description = getById('description');
-    let todo = getById('todo');
-
-    console.log('Hello world');
 
     if (action === 'next') {
         // prompt for user id
@@ -341,7 +338,6 @@ function switchVideo(action) {
             title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
             player.style.display = "none";
             description.innerHTML = "";
-            todo.innerHTML = "";
             return;
         }
 
@@ -375,12 +371,6 @@ function switchVideo(action) {
             player.src = null;
         }
         description.innerHTML = video.text;
-        console.log(video);
-        if (video.todo) {
-            todo.innerHTML = video.todo;
-        } else {
-            todo.innerHTML = "";
-        }
 
         if (pageHead < videoCounter && video.tasks) {    // tasks have not been completed yet
             currentTasks = video.tasks;
@@ -394,12 +384,6 @@ function switchVideo(action) {
             title.innerHTML = video.title;
             player.src = video.src;
             description.innerHTML = video.text;
-            console.log(video);
-            if (video.todo) {
-                todo.innerHTML = video.todo;
-            } else {
-                todo.innerHTML = "";
-            }
             currentTasks = null;
             taskIndex = 0;
         }
@@ -414,7 +398,6 @@ function PlaylistVideo(action) {
     let title = getById('title');
     let player = getById('player');
     let description = getById('description');
-    let todo = getById('todo');
 
     if (pageHead > action) {
         videoCounter = action;
@@ -427,11 +410,6 @@ function PlaylistVideo(action) {
     title.innerHTML = video.title;
     player.src = video.src;
     description.innerHTML = video.text;
-    if (video.todo) {
-        todo.innerHTML = video.todo;
-    } else {
-        todo.innerHTML = "";
-    }
 
     if (video.tasks && action <= pageHead) {
         currentTasks = video.tasks;
