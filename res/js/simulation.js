@@ -99,7 +99,6 @@ window.addEventListener('DOMContentLoaded', function () {
         box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
             console.log('box clicked');
             completeTask('box');
-
         }));
 
         var inputMap = {};
@@ -218,12 +217,14 @@ window.addEventListener('DOMContentLoaded', function () {
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
                               xCoordinate.value = (parseFloat(xOrigin += finecoarse)/10).toFixed(4);
+                              console.log(xOrigin);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
                               box.position.z -= finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin -= finecoarse)/10).toFixed(4);;
+                              zCoordinate.value = (parseFloat(zOrigin -= finecoarse)/10).toFixed(4);
+                              console.log(zOrigin);
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
 
@@ -232,13 +233,15 @@ window.addEventListener('DOMContentLoaded', function () {
                               box.position.x -= finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin -= finecoarse)/10).toFixed(4);;
+                              xCoordinate.value = (parseFloat(xOrigin -= finecoarse)/10).toFixed(4);
+                              console.log(xOrigin);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
                               box.position.z += finecoarse;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin += finecoarse)/10).toFixed(4);;
+                              zCoordinate.value = (parseFloat(zOrigin += finecoarse)/10).toFixed(4);
+                              console.log(zOrigin);
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
                       }
@@ -342,22 +345,35 @@ window.addEventListener('DOMContentLoaded', function () {
                     || pressed == "f4btnZbuttonnumButtonAbsSetXbuttonnumButtonAbsSet") {
                     sequence = [];
                     sequenceIdx = 0;
-                    var GoToXPosition = parseFloat(xCoordinate.value);
-                    var GoToZPosition = parseFloat(zCoordinate.value);
+                    var GoToXPosition = parseFloat(xCoordinate.value)*10;
+                    var GoToZPosition = parseFloat(zCoordinate.value)*10;
 
                     if(GoToZPosition>zOrigin){
-                      gotoLimitz = GoToZPosition*10;
+                      gotoLimitz = GoToZPosition;
                     }
                     else{
-                      gotoLimitNz = GoToZPosition*10;
+                      gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition>xOrigin){
-                      gotoLimitx = GoToXPosition*10;
+                    if(GoToXPosition*10>xOrigin){
+                      gotoLimitx = GoToXPosition;
                     }
                     else{
-                      gotoLimitNx = GoToXPosition*10;
+                      gotoLimitNx = GoToXPosition;
                     }
+                    // console.log("gotoLimitx");
+                    // console.log(gotoLimitx);
+                    // console.log("gotoLimitNx");
+                    // console.log(gotoLimitNx);
+                    // console.log("gotoLimitz");
+                    // console.log(gotoLimitz);
+                    // console.log("gotoLimitNz");
+                    // console.log(gotoLimitNz);
+                    // console.log("xOrigin");
+                    // console.log(xOrigin);
+                    // console.log("zOrigin");
+                    // console.log(zOrigin);
+
                 }
                 //spindle speed: constant rpm
                 else if(pressed == "f7btnnumButtonIncSet" || pressed == "f7btnnumButtonAbsSet"){
