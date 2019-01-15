@@ -99,6 +99,7 @@ window.addEventListener('DOMContentLoaded', function () {
         box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
             console.log('box clicked');
             completeTask('box');
+
         }));
 
         var inputMap = {};
