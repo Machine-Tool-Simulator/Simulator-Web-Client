@@ -47,7 +47,7 @@ let videos = [
         "title":"Turning on the Spindle",
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.",
-        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.<br><strong>NOTE:</strong>For the next sessions, the lathe must be turned on before you will be able to cut out a shape.",
+        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.<br><strong>NOTE:</strong> For the next sessions, the lathe must be turned on before you will be able to cut out a shape.",
         "tasks":[
             {
                 "press":"FWD",
@@ -196,7 +196,7 @@ let videos = [
         "title":"Setting X Coordinate System",
         "src":"https://drive.google.com/file/d/1mQvL8J2SCZp_3jK0jatF4MdY9ZFBpCGV/preview",
         "text":"To measure the dimensions of the part that you have been working on, you can use a tool called calipers. Calipers represent the distance between two points with a very high level of precision. When you move the calipers apart, the distance increases. When you move the calipers closer together, the distance decreases.<br>You are now ready to establish the x coordinate system. Position the cutting tool slightly to the right of z 0 and slightly to the inside of the part's diameter .<br>Turn on the spindle.<br>Use the z wheel to move the cutting tool into the part, making a smaller outside diameter than the rest of the raw material.<br>Reverse the z wheel to bring the cutting tool off of the part.<br>Turn off the spindle.<br>Now you will use the calipers to measure the diameter that you just cut. Open up the calipers and press them onto the outside diameter. Press them together and try to find the smallest number that you can find. In this case, the diameter is reading at about 0.412 inches.<br>To complete the process of establishing the x coordinate system, type in the number that you measured into the control. Press x, then type in the diameter, and then press ABS SET.<br>Now that the coordinate system is established, z 0 represents that far right edge of the part and the x coordinate represents the actual diameter at the position of the cutting tool.",
-        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter (Around X=0.6 and Z=0.25).<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material (Around X=0.6, Z=-0.2).<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the sipndle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system. (Press the X button and enter 0.412, then press ABS SET)<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system.",
+        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Position the cutting tool slightly to the right of z 0 and lsightly to the inside of the part's diameter (Around X=0.6 and Z=0.25).<br>2. Turn on the spindle.<br>3. Use the z wheel to slightly cut into the material, making a smaller diameter than the rest of the material (Around X=0.6, Z=-0.2).<br>4. Reversing the z wheel to bring the cutting tool off of the part.<br>5. Turn off the spindle.<br>6. Assume that the distance that you measure using calipers is 0.412 inches like in the video. Type the number into the control and press ABS SET to set the x coordinate system. (Press the X button and enter 0.412, then press ABS SET)<br>7. Practice moving the cutting tool around with the new x coordinate system and note the differences from the previous coordinate system.",
         "tasks":[
             {
                   // >5,>3
@@ -308,6 +308,6 @@ let videos = [
     {
         "index":16,
         "title":"Conclusion",
-        "text":"Congratulations! You have completed the lathe tutorial course!"
+        "text":"Congratulations! You have completed the lathe tutorial course!<br>Whether or not you volunteered, we would appreciate if you could provide your feedback on <a href='https://docs.google.com/forms/d/e/1FAIpQLSd7YOejuvFjP7pxIvA_i-j8kWUNpIDM1tpud0qlDMSnQFILrw/viewform?usp=sf_link'>THIS SURVEY</a> (click link, it is only one question)."
     }
 ];
