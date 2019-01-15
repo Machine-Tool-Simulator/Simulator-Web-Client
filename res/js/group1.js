@@ -332,7 +332,7 @@ function switchVideo(action) {
 
     if (action === 'next') {
         // prompt for user id
-        if (!userId) userId = prompt('Please enter your ID');
+        if (!userId) userId = prompt('Please enter your ID (same as used on previous page)');
         if (!userId) {
             return;
         }
