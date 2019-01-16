@@ -867,7 +867,7 @@ function dragOne() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj) * delta*8; // last factor deals with fine / coarse
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
     var xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
 
     console.log(rot);
@@ -879,7 +879,7 @@ function dragOne() {
         if (rot === -1) rot = 0;
         else rot = rot < 0 ? rot + 2 : rot - 2;
 
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj) * delta*8; // last factor deals with fine / coarse
+        rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
         xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
     }
 
@@ -899,7 +899,6 @@ function dragOne() {
 
     rad_prev_one = rad;
     rot_one = rot;
-
 }
 
 var rot_two = 0;
@@ -935,7 +934,7 @@ function dragTwo() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj)  * delta*8; // last factor deals with fine / coarse
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
     var xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
 
     console.log(rot);
@@ -947,7 +946,7 @@ function dragTwo() {
         if (rot === -1) rot = 0;
         else rot = rot < 0 ? rot + 2 : rot - 2;
 
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj)  * delta*8; // last factor deals with fine / coarse
+        rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
         xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
     }
 
