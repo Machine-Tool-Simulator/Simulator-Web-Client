@@ -8,6 +8,8 @@ let bound_limit_z = -15.6; // limit to how far box can go in the z direction
 let bound_limit_x = -20; // limit to how far box can go in the x direction
 let depth_set = 1;
 
+
+
 /**
  * BabylonJS code
  */
@@ -18,7 +20,6 @@ var scene;
 var tailstock;
 var Chuck1;
 var fwdOn = 0;
-var box1;
 var toolpost;
 
 var lathe_pts_init = [
@@ -48,10 +49,8 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.clearColor = new BABYLON.Color3.White();
 
 
-        // box1 = BABYLON.Mesh.CreateBox("Box", box_size, scene);
-        // box1.position = new BABYLON.Vector3(xOrigin, -3, zOrigin);
-        xCoordinate.value = parseFloat(xOrigin).toFixed(4);;
-        zCoordinate.value = parseFloat(zOrigin).toFixed(4);;
+        xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);
+        zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);
 
 
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
@@ -61,12 +60,18 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
-        BABYLON.SceneLoader.ImportMesh("", "", "res/models/Cuttingtool.STL",
+        camera = new BABYLON.ArcRotateCamera("arcCam",
+            0,
+            BABYLON.Tools.ToRadians(50),
+            50, new BABYLON.Vector3(xOrigin, -3, zOrigin), scene);
+        camera.attachControl(canvas, true);
+
+        BABYLON.SceneLoader.ImportMesh("", "", "res/models/cutting_tool.STL",
           scene, function (newMeshes) {
               box = newMeshes[0];
 
               box.position = new BABYLON.Vector3(xOrigin, -1.1, zOrigin);
-              //box.rotation.y = Math.PI/2;
+              // box.rotation.y = Math.PI/2;
               box.rotation.z = Math.PI/2;
               box.rotation.x = -Math.PI/2;
               var Chuck2_scale = .1;
@@ -80,19 +85,38 @@ window.addEventListener('DOMContentLoaded', function () {
                   console.log('chuck clicked');
                   completeTask('chuck');
               }));
+
+                var material = new BABYLON.StandardMaterial("std", scene);
+                material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+
+                box.material = material;
+
+                camera.target = box;
+
+                box.actionManager = new BABYLON.ActionManager(scene);
+                box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                    completeTask('box');
+                }));
           });
 
           BABYLON.SceneLoader.ImportMesh("", "", "res/models/Toolpost.stl",
             scene, function (newMeshes) {
                 toolpost = newMeshes[0];
-                //toolpost.rotation.z = Math.PI/8;
-                //11, 5.8
-                //15, 1.9
-                toolpost.position = new BABYLON.Vector3(xOrigin-3.9, -4.6, zOrigin+3.6);
+                toolpost.position = new BABYLON.Vector3(xOrigin-3.9, -5, zOrigin+3.4);
                 var toolpost_scale = .5;
                 toolpost.scaling.x = toolpost_scale;
                 toolpost.scaling.y = toolpost_scale;
                 toolpost.scaling.z = toolpost_scale;
+
+                  var material = new BABYLON.StandardMaterial("std", scene);
+                  material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                  toolpost.material = material;
+
+                toolpost.actionManager = new BABYLON.ActionManager(scene);
+                  toolpost.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                      completeTask('box');
+                  }));
             });
 
         // Back of material that is in the chuck
@@ -102,7 +126,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
-        light.position = new BABYLON.Vector3(20, 40, 20);
+        light.position = new BABYLON.Vector3(50, 60, 40);
 
 // sphere for positioning properly
         var lightSphere = BABYLON.Mesh.CreateSphere("sphere", 10, 2, scene);
@@ -112,10 +136,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         light.intensity = 1;
 
-        var material2 = new BABYLON.StandardMaterial("std", scene);
-        material2.diffuseColor = new BABYLON.Color3(0.5, 1, 0.5);
 
-        box.material = material2;
 
 // Shadows
         var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
@@ -128,17 +149,10 @@ window.addEventListener('DOMContentLoaded', function () {
         var ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene, false);
         ground.position.y = -6;
 
-        camera = new BABYLON.ArcRotateCamera("arcCam",
-            0,
-            BABYLON.Tools.ToRadians(55),
-            50, box.position, scene);
-        camera.attachControl(canvas, true);
+
 
         // Keyboard events
-        // box.actionManager = new BABYLON.ActionManager(scene);
-        // box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
-        //     completeTask('box');
-        // }));
+
 
         var inputMap = {};
         scene.actionManager = new BABYLON.ActionManager(scene);
@@ -169,7 +183,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/untitled.babylon",
             scene, function (newMeshes) {
                 wheel2 = newMeshes[0];
-                wheel2.position = new BABYLON.Vector3(25, 1, 2.5);
+                wheel2.position = new BABYLON.Vector3(28, 1, 2.5);
                 wheel2.rotation.y = Math.PI;
             });
 
@@ -181,7 +195,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dragInit;
                 var dragDiff;
                 var rotationInit;
-                wheel.position = new BABYLON.Vector3(25, 1, 7.5);
+                wheel.position = new BABYLON.Vector3(28, 1, 7.5);
                 wheel.rotation.y = Math.PI;
                 var getGroundPosition = function () {
                     // Use a predicate to get position on the ground
@@ -289,6 +303,11 @@ window.addEventListener('DOMContentLoaded', function () {
                     console.log('tailstock clicked');
                     completeTask('tailstock');
                 }));
+
+                var material = new BABYLON.StandardMaterial("std", scene);
+                material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                tailstock.material = material;
             });
 
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.stl",
@@ -306,6 +325,11 @@ window.addEventListener('DOMContentLoaded', function () {
                         console.log('chuck clicked');
                         completeTask('chuck');
                     }));
+
+                    var material = new BABYLON.StandardMaterial("std", scene);
+                    material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                    Chuck1.material = material;
                 });
           //  0, 0, -17
 
@@ -374,7 +398,7 @@ window.addEventListener('DOMContentLoaded', function () {
                       gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition*10>xOrigin){
+                    if(GoToXPosition>xOrigin){
                       gotoLimitx = GoToXPosition;
                     }
                     else{
@@ -585,7 +609,7 @@ function lathe_engine_anim1() {
             lathe.rotation.x = -Math.PI / 2;
 
             // TODO: When move the x coordinate back, do not want to spew z points
-            //console.log(lathe_pts);
+            // console.log(lathe_pts);
         }
     }
 
@@ -604,12 +628,8 @@ function lathe_engine(delta_x, delta_z) {
 
     // if (fwdOn === 0) bad_cut = true;
 
-    var x = box.position.x - 11.05;
-    var z = box.position.z - 1.25;
-
-    console.log(x);
-    console.log(z);
-
+    var x = box.position.x - 9.7;
+    var z = box.position.z - 2;
 
 
     // If within range to cut and moving in the proper direction
@@ -637,16 +657,21 @@ function lathe_engine(delta_x, delta_z) {
                 var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
                 var depth_z = Math.abs(abs_z - min_z); // Depth of cut in z direction
 
-                console.log("depths" + depth_x + " | " + depth_z);
-                console.log("deltas" + delta_x + " | " + delta_z);
+                // console.log("depths" + depth_x + " | " + depth_z);
+                // console.log("deltas" + delta_x + " | " + delta_z);
+                //
+                // console.log("check1" + (depth_x > .01 && delta_z < 0));
+                // console.log("check2" + (depth_z > .01 && delta_x < 0));
 
-
-                 if (!fwdOn && ((depth_x > .005 && delta_z < 0) || (depth_z > .005 && delta_x < 0)) // This now allows for gliding along shape
+                 if (!fwdOn && ((depth_x > delta && delta_z < 0) || (depth_z > delta && delta_x < 0)) // This now allows for gliding along shape
                     || fwdOn && ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0))) {
                     console.log("cut too deep");
                     bad_cut = true;
                     // TODO: can add a better warning here!!!
-                    if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
+                    if (delta_x !== 0) {
+                        console.log("IN HERE")
+                        return;
+                    } // This line prevents a rendering glitch in the x direction
                 } else if (fwdOn !== 0) {
                     pt_fnd = true;
 
@@ -667,15 +692,16 @@ function lathe_engine(delta_x, delta_z) {
                 adj++;
             }
 
-            if (Math.abs(abs_x - max_x) <= 0.02 || Math.abs(abs_z - min_z) <= 0.02) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+            if (Math.abs(abs_x - max_x) <= 0.1 || Math.abs(abs_z - min_z) <= 0.1) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
-            else if (x <= .25) {
+            else if (x <= delta) {
                 new_pts = [    // If cutting tool has completely gone through the material
                     new BABYLON.Vector3(max_x, abs_z, 0),
                 ];
             }
             else {
+                console.log("HERE");
                 new_pts = [
                     new BABYLON.Vector3(abs_x, min_z, 0),
                     new BABYLON.Vector3(abs_x, abs_z, 0),
@@ -702,12 +728,18 @@ function lathe_engine(delta_x, delta_z) {
             lathe.rotation.x = -Math.PI / 2;
 
 
-            // console.log(lathe_pts); // if want to see points that lathe is registering
+            console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
 
 
     // These are set nicely to keep the box within a desired range
+
+    console.log(box.position.x);
+    console.log(box.position.z);
+
+    console.log("gtNx " + gotoLimitNx);
+    console.log("gtNz " + gotoLimitNz);
 
     // if x is not less than 0
     if (!bad_cut && delta_x !== 0 &&
@@ -822,10 +854,12 @@ function reset() {
     lathe.rotation.x = -Math.PI / 2;
 
     // Resetting box to original origin
-    xOrigin = 8;
-    zOrigin = 5;
-    box.position.x = xOrigin;
-    box.position.z = zOrigin;
+    xOrigin = 15;
+    zOrigin = 3;
+
+    box.position = new BABYLON.Vector3(xOrigin, -1.1, zOrigin);
+    toolpost.position = new BABYLON.Vector3(xOrigin-3.9, -5, zOrigin+3.4);
+
     xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);
     zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);
 
@@ -848,9 +882,10 @@ function reset() {
     fwdOn = 0;
 
     camera.alpha = 0;
-    camera.beta = BABYLON.Tools.ToRadians(55);
+    camera.beta = BABYLON.Tools.ToRadians(50);
     camera.radius = 50;
-    camera.target = box.position;
+    camera.target = box.position; // TODO: fix this
+    // camera.attachControl(canvas, true);
 }
 
 

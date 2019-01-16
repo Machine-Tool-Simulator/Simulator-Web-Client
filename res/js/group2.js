@@ -374,6 +374,18 @@ function switchVideo(action) {
         }
     }
 
+    if (videoCounter === 11 || videoCounter === 12) {
+        reset();
+    }
+    if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
+        reset(); // reset the shape
+        depth_set = 1;
+    }
+    else if (videoCounter === 14) {
+        reset(); // reset the shape
+        depth_set = 3;
+    }
+
     if (videoCounter === videos.length - 1) {
         sendReport();
     }
@@ -398,20 +410,6 @@ function PlaylistVideo(action) {
         currentTasks = video.tasks;
     } else {
         currentTasks = null;
-    }
-}
-
-function backCoverPage() {
-    let title = getById('title');
-    let description = getById('description');
-
-    if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
-        reset(); // reset the shape
-        depth_set = 1;
-    }
-    else if (videoCounter === 14) {
-        reset(); // reset the shape
-        depth_set = 3;
     }
 }
 
