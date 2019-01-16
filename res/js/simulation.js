@@ -1,10 +1,14 @@
 let delta = 0.025; // how much box moves when command it to move
-let xOrigin = 8; // x home position for cutting tool
-let zOrigin = 5; // z home position for cutting tool
+let xOrigin = 15; // x home position for cutting tool
+let zOrigin = 3; // z home position for cutting tool
+// let xOrigin = 15; // x home position for cutting tool
+// let zOrigin = 1.9; // z home position for cutting tool
 let box_size = 6; // length of one side of the box
 let bound_limit_z = -15.6; // limit to how far box can go in the z direction
 let bound_limit_x = -20; // limit to how far box can go in the x direction
 let depth_set = 1;
+
+
 
 /**
  * BabylonJS code
@@ -16,6 +20,7 @@ var scene;
 var tailstock;
 var Chuck1;
 var fwdOn = 0;
+var toolpost;
 
 var lathe_pts_init = [
     new BABYLON.Vector3(4, 0, 0),
@@ -31,6 +36,9 @@ var lathe_pts = lathe_pts_init.slice(0);
 
 var Mesh = BABYLON.Mesh; // Shortform for BABYLON.Mesh
 
+var music; // need this external
+var camera;
+
 window.addEventListener('DOMContentLoaded', function () {
     var canvas = document.getElementById('canvas');
     var engine = new BABYLON.Engine(canvas, true);
@@ -41,11 +49,8 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.clearColor = new BABYLON.Color3.White();
 
 
-        box = BABYLON.Mesh.CreateBox("Box", box_size, scene);
-        box.position = new BABYLON.Vector3(xOrigin, -3, zOrigin);
-        xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);;
-        zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);;
-
+        xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);
+        zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);
 
 
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
@@ -55,6 +60,65 @@ window.addEventListener('DOMContentLoaded', function () {
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
 
+        camera = new BABYLON.ArcRotateCamera("arcCam",
+            0,
+            BABYLON.Tools.ToRadians(50),
+            50, new BABYLON.Vector3(xOrigin, -3, zOrigin), scene);
+        camera.attachControl(canvas, true);
+
+        BABYLON.SceneLoader.ImportMesh("", "", "res/models/cutting_tool.STL",
+          scene, function (newMeshes) {
+              box = newMeshes[0];
+
+              box.position = new BABYLON.Vector3(xOrigin, -1.1, zOrigin);
+              // box.rotation.y = Math.PI/2;
+              box.rotation.z = Math.PI/2;
+              box.rotation.x = -Math.PI/2;
+              var Chuck2_scale = .1;
+              box.scaling.x = Chuck2_scale*.9;
+              box.scaling.y = Chuck2_scale*.9;
+              box.scaling.z = Chuck2_scale*.9;// +0.14;
+              console.log(box.position);
+
+              box.actionManager = new BABYLON.ActionManager(scene);
+              box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                  console.log('chuck clicked');
+                  completeTask('chuck');
+              }));
+
+                var material = new BABYLON.StandardMaterial("std", scene);
+                material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+
+                box.material = material;
+
+                camera.target = box;
+
+                box.actionManager = new BABYLON.ActionManager(scene);
+                box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                    completeTask('box');
+                }));
+          });
+
+          BABYLON.SceneLoader.ImportMesh("", "", "res/models/Toolpost.stl",
+            scene, function (newMeshes) {
+                toolpost = newMeshes[0];
+                toolpost.position = new BABYLON.Vector3(xOrigin-3.9, -5, zOrigin+3.4);
+                var toolpost_scale = .5;
+                toolpost.scaling.x = toolpost_scale;
+                toolpost.scaling.y = toolpost_scale;
+                toolpost.scaling.z = toolpost_scale;
+
+                  var material = new BABYLON.StandardMaterial("std", scene);
+                  material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                  toolpost.material = material;
+
+                toolpost.actionManager = new BABYLON.ActionManager(scene);
+                  toolpost.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                      completeTask('box');
+                  }));
+            });
+
         // Back of material that is in the chuck
         cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 6.3, diameter: 8}, scene);
         cyl.position=new BABYLON.Vector3(0,0,-19.15);
@@ -62,7 +126,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 // light
         var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-1, -1, -1), scene);
-        light.position = new BABYLON.Vector3(20, 40, 20);
+        light.position = new BABYLON.Vector3(50, 60, 40);
 
 // sphere for positioning properly
         var lightSphere = BABYLON.Mesh.CreateSphere("sphere", 10, 2, scene);
@@ -72,10 +136,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         light.intensity = 1;
 
-        var material2 = new BABYLON.StandardMaterial("std", scene);
-        material2.diffuseColor = new BABYLON.Color3(0.5, 1, 0.5);
 
-        box.material = material2;
 
 // Shadows
         var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
@@ -88,18 +149,10 @@ window.addEventListener('DOMContentLoaded', function () {
         var ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene, false);
         ground.position.y = -6;
 
-        var camera = new BABYLON.ArcRotateCamera("arcCam",
-            0,
-            BABYLON.Tools.ToRadians(55),
-            50, box.position, scene);
-        camera.attachControl(canvas, true);
+
 
         // Keyboard events
-        box.actionManager = new BABYLON.ActionManager(scene);
-        box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
-            console.log('box clicked');
-            completeTask('box');
-        }));
+
 
         var inputMap = {};
         scene.actionManager = new BABYLON.ActionManager(scene);
@@ -130,7 +183,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/untitled.babylon",
             scene, function (newMeshes) {
                 wheel2 = newMeshes[0];
-                wheel2.position = new BABYLON.Vector3(20, 1, 2.5);
+                wheel2.position = new BABYLON.Vector3(28, 1, 2.5);
                 wheel2.rotation.y = Math.PI;
             });
 
@@ -142,7 +195,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dragInit;
                 var dragDiff;
                 var rotationInit;
-                wheel.position = new BABYLON.Vector3(20, 1, 7.5);
+                wheel.position = new BABYLON.Vector3(28, 1, 7.5);
                 wheel.rotation.y = Math.PI;
                 var getGroundPosition = function () {
                     // Use a predicate to get position on the ground
@@ -213,36 +266,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && xOrigin < gotoLimitx) {
-                              box.position.x += finecoarse;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin += finecoarse)/10).toFixed(4);
-                              console.log(xOrigin);
-                              //xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(delta,0);
                           } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
-                              box.position.z -= finecoarse;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin -= finecoarse)/10).toFixed(4);
-                              console.log(zOrigin);
-                              //zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,-delta);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
                           if (currentMesh == wheel && xOrigin > gotoLimitNx) {
-                              box.position.x -= finecoarse;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin -= finecoarse)/10).toFixed(4);
-                              console.log(xOrigin);
-                              //xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(-delta,0);
                           } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
-                              box.position.z += finecoarse;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin += finecoarse)/10).toFixed(4);
-                              console.log(zOrigin);
-                              //zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,delta);
                           }
                       }
                     return true;
@@ -270,6 +303,11 @@ window.addEventListener('DOMContentLoaded', function () {
                     console.log('tailstock clicked');
                     completeTask('tailstock');
                 }));
+
+                var material = new BABYLON.StandardMaterial("std", scene);
+                material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                tailstock.material = material;
             });
 
             BABYLON.SceneLoader.ImportMesh("", "", "res/models/Chuck.stl",
@@ -287,6 +325,11 @@ window.addEventListener('DOMContentLoaded', function () {
                         console.log('chuck clicked');
                         completeTask('chuck');
                     }));
+
+                    var material = new BABYLON.StandardMaterial("std", scene);
+                    material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                    Chuck1.material = material;
                 });
           //  0, 0, -17
 
@@ -313,7 +356,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         yRot.setKeys(keyFramesR);
 
-        var music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
+        music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
             if (fwdOn == 0){
               Chuck1.animations.push(yRot);
@@ -355,24 +398,12 @@ window.addEventListener('DOMContentLoaded', function () {
                       gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition*10>xOrigin){
+                    if(GoToXPosition>xOrigin){
                       gotoLimitx = GoToXPosition;
                     }
                     else{
                       gotoLimitNx = GoToXPosition;
                     }
-                    // console.log("gotoLimitx");
-                    // console.log(gotoLimitx);
-                    // console.log("gotoLimitNx");
-                    // console.log(gotoLimitNx);
-                    // console.log("gotoLimitz");
-                    // console.log(gotoLimitz);
-                    // console.log("gotoLimitNz");
-                    // console.log(gotoLimitNz);
-                    // console.log("xOrigin");
-                    // console.log(xOrigin);
-                    // console.log("zOrigin");
-                    // console.log(zOrigin);
 
                 }
                 //spindle speed: constant rpm
@@ -518,6 +549,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// Didn't delete this yet because it is in taper, which I want to explore more
 function lathe_engine_anim1() {
 
     var x = box.position.x - 3;
@@ -577,7 +609,7 @@ function lathe_engine_anim1() {
             lathe.rotation.x = -Math.PI / 2;
 
             // TODO: When move the x coordinate back, do not want to spew z points
-            //console.log(lathe_pts);
+            // console.log(lathe_pts);
         }
     }
 
@@ -591,14 +623,12 @@ function lathe_engine_anim1() {
 
 function lathe_engine(delta_x, delta_z) {
 
-
     var bad_cut = false;
 
     // if (fwdOn === 0) bad_cut = true;
 
-    var x = box.position.x - box_size/2;
-    var z = box.position.z - box_size/2;
-
+    var x = box.position.x - 9.7;
+    var z = box.position.z - 2;
 
 
     // If within range to cut and moving in the proper direction
@@ -626,23 +656,34 @@ function lathe_engine(delta_x, delta_z) {
                 var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
                 var depth_z = Math.abs(abs_z - min_z);
 
-                if ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0)) {
-                    console.log("cut too deep");
-                    bad_cut = true;
-                    // TODO: can add a better warning here!!!
-                    if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
-                } else if (fwdOn !== 0) {
+                if (fwdOn === 1) {
+                    if ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0)) {
+                        console.log("cut too deep");
+                        bad_cut = true;
+                        // TODO: can add a better warning here!!!
+                        if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
+                    }
                     pt_fnd = true;
 
                     bad_pts.push(i);
                 } else {
-                    bad_cut = true;
+                    if ((depth_x > delta && delta_z < 0) || (depth_z > delta && delta_x < 0)) {
+                        console.log("cut too deep");
+                        bad_cut = true;
+                        // TODO: can add a better warning here!!!
+                        if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
+                    }
+                    pt_fnd = true;
+
+                    bad_pts.push(i);
                 }
             }
         }
 
+
+
         // Only do these if need to cut out shape
-        if (pt_fnd) {
+        if (fwdOn === 1 && pt_fnd) {
 
             var new_pts;
 
@@ -687,11 +728,9 @@ function lathe_engine(delta_x, delta_z) {
             }, scene);
             lathe.rotation.x = -Math.PI / 2;
 
-
             console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
-
 
     // These are set nicely to keep the box within a desired range
 
@@ -701,26 +740,26 @@ function lathe_engine(delta_x, delta_z) {
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
+        toolpost.position.x += delta_x;
     } else if (!bad_cut && delta_z !== 0 &&
         z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
-
-        console.log("special: " + (box.position.x - box_size/2));
 
         // If past the origin
         if (box.position.x - box_size/2 <= 0) {
             box.position.z = Math.max(-lathe_pts[0].y+box_size/2, box.position.z + delta_z);
         } else { // otherwise
             box.position.z += delta_z;
+            toolpost.position.z += delta_z;
         }
 
     } else {
         return false;
     }
 
-    xCoordinate.value = (parseFloat(box.position.x)/10).toFixed(4);
-    zCoordinate.value = (parseFloat(box.position.z)/10).toFixed(4);
+    xCoordinate.value = (parseFloat(xOrigin += delta_x)/10).toFixed(4);
+    zCoordinate.value = (parseFloat(zOrigin += delta_z)/10).toFixed(4);
 
 
     completeTask([box.position.x,box.position.z]);
@@ -807,11 +846,13 @@ function reset() {
     }, scene);
     lathe.rotation.x = -Math.PI / 2;
 
-    // Resetting box to origin
-    xOrigin = 8;
-    zOrigin = 5;
-    box.position.x = xOrigin;
-    box.position.z = zOrigin;
+    // Resetting box to original origin
+    xOrigin = 15;
+    zOrigin = 3;
+
+    box.position = new BABYLON.Vector3(xOrigin, -1.1, zOrigin);
+    toolpost.position = new BABYLON.Vector3(xOrigin-3.9, -5, zOrigin+3.4);
+
     xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);
     zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);
 
@@ -828,14 +869,22 @@ function reset() {
             cy: yInit2
         });
 
-    // TODO: also want to reset the 3D buttons here, or do they need to be reset ???
-    // TODO: @YUTENG: please add stuff here to reset stuff related to your functions, thanks!
+    // Stop lathe from spinning
+    scene.stopAnimation(Chuck1);
+    music.stop();
+    fwdOn = 0;
+
+    camera.alpha = 0;
+    camera.beta = BABYLON.Tools.ToRadians(50);
+    camera.radius = 50;
+    camera.target = box.position; // TODO: fix this
+    // camera.attachControl(canvas, true);
 }
 
 
 var rot_one = 0;
 var rad_prev_one = 0;
-var box_unmoved = false;
+var rect_xfr_prev_one = 0;
 
 function dragOne() {
     // calculate delta for mouse coordinates
@@ -843,8 +892,6 @@ function dragOne() {
     var deltaY = d3.event.y - y_pos;
 
     var rad = Math.atan2(deltaY, deltaX);
-
-    // console.log(rad + " | " + rad_prev_one + " | " + (rad-rad_prev_one));
 
     // Only allow wheels to turn and box to move if not going to send box out of bounds
     var rot = rot_one;
@@ -867,43 +914,27 @@ function dragOne() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj) * delta*8; // last factor deals with fine / coarse
-    var xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
 
-    console.log(rot);
-    console.log(xfr_delta);
-
-    // Need to deal with case when stuck at edge and keep rotating
-    // the wheel so does not keep registering the user's movements
-    if (Math.abs(xfr_delta) > (2*Math.PI)) {
-        if (rot === -1) rot = 0;
-        else rot = rot < 0 ? rot + 2 : rot - 2;
-
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj) * delta*8; // last factor deals with fine / coarse
-        xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
-    }
-
-    console.log(xfr_delta);
-
-    if (lathe_engine(0, xfr_delta)) {
+    if (Math.abs(rect_xfr-rect_xfr_prev_one) > .01 && lathe_engine(0, rect_xfr >= rect_xfr_prev_one ? delta : -delta)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad),
                 cy: y_pos + inset * r * Math.sin(rad)
             });
-        box_unmoved = false;
+
     } else {
         console.log("bad turn!");
-        box_unmoved = true;
     }
 
+    rect_xfr_prev_one = rect_xfr;
     rad_prev_one = rad;
     rot_one = rot;
-
 }
 
 var rot_two = 0;
 var rad_prev_two = 0;
+var rect_xfr_prev_two = 0;
 
 function dragTwo() {
     // calculate delta for mouse coordinates
@@ -911,8 +942,6 @@ function dragTwo() {
     var deltaY = d3.event.y - y_pos;
 
     var rad = Math.atan2(deltaY, deltaX);
-
-    console.log(rad + " | " + rad_prev_two + " | " + (rad - rad_prev_two));
 
     // Only allow wheels to turn and box to move if not going to send box out of bounds
     var rot = rot_two;
@@ -935,37 +964,21 @@ function dragTwo() {
     else if (rot < 0) rad_adj = rad - Math.PI;
     else rad_adj = rad;
 
-    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj)  * delta*8; // last factor deals with fine / coarse
-    var xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
+    var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
 
-    console.log(rot);
-    console.log("xfr before" + " | " + xfr_delta);
-
-    // Need to deal with case when stuck at edge and keep rotating
-    // the wheel so does not keep registering the user's movements
-    if (Math.abs(xfr_delta) > (2 * Math.PI)) {
-        if (rot === -1) rot = 0;
-        else rot = rot < 0 ? rot + 2 : rot - 2;
-
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj)  * delta*8; // last factor deals with fine / coarse
-        xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
-    }
-
-    console.log("xfr after" + " | " + xfr_delta);
-
-
-    if (lathe_engine(xfr_delta, 0)) {
+    // debounced
+    if (Math.abs(rect_xfr-rect_xfr_prev_two) > .01 && lathe_engine(rect_xfr >= rect_xfr_prev_two ? -delta : delta, 0)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad) + pos_wheel_2,
                 cy: y_pos + inset * r * Math.sin(rad)
             });
+
     } else {
         console.log("bad turn!");
     }
 
-    console.log(box.position.x);
-
+    rect_xfr_prev_two = rect_xfr;
     rad_prev_two = rad;
     rot_two = rot;
 }

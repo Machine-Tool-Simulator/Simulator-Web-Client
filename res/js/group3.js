@@ -16,10 +16,6 @@ let gotoLimitNx = -1000;
 let gotoLimitNz = -1000;
 let spindleSpeed = 100;
 let xzButtonsSelected = 0;
-let finecoarse = 0.025;
-// let delta = 0.025;
-// let home_position_x = 6;
-// let home_position_z = 5;
 let stopObserver = 0;
 let spindleSpeedSelected = 0;
 
@@ -144,7 +140,7 @@ window.onload = function () {
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
-            delta = 0.025 * 4;
+            delta = 0.025 * 6;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
             delta = 0.025;
@@ -389,6 +385,18 @@ function switchVideo(action) {
         }
     }
 
+    if (videoCounter === 11 || videoCounter === 12) {
+        reset();
+    }
+    if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
+        reset(); // reset the shape
+        depth_set = 1;
+    }
+    else if (videoCounter === 14) {
+        reset(); // reset the shape
+        depth_set = 3;
+    }
+
     if (videoCounter === videos.length - 1) {
         sendReport();
     }
@@ -415,17 +423,6 @@ function PlaylistVideo(action) {
         currentTasks = video.tasks;
     } else {
         currentTasks = null;
-    }
-}
-
-function backCoverPage() {
-    if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
-        reset(); // reset the shape
-        depth_set = 1;
-    }
-    else if (videoCounter === 14) {
-        reset(); // reset the shape
-        depth_set = 3;
     }
 }
 
@@ -518,7 +515,7 @@ function completeTask(value) {
 // function compareCoords(obj1, obj2) {
 //     return obj1.x === obj2.x && obj1.y === obj2.y && obj1.z === obj2.z;
 // }
-var tolerance = .2; // Tolerance for how different the cut out shape can be from the true version (in lathe.js)
+var tolerance = .3; // Tolerance for how different the cut out shape can be from the true version (in lathe.js)
 function compareCoords(obj1, obj2) {
     return Math.abs(obj1.x - obj2.x) < tolerance && Math.abs(obj1.y - obj2.y) < tolerance && Math.abs(obj1.z - obj2.z) < tolerance;
 }
