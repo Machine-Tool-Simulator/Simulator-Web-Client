@@ -706,8 +706,6 @@ function lathe_engine(delta_x, delta_z) {
         box.position.z + delta_z >= gotoLimitNz &&
         box.position.z + delta_z <= gotoLimitz) {
 
-        console.log("special: " + (box.position.x - box_size/2));
-
         // If past the origin
         if (box.position.x - box_size/2 <= 0) {
             box.position.z = Math.max(-lathe_pts[0].y+box_size/2, box.position.z + delta_z);
@@ -835,7 +833,7 @@ function reset() {
 
 var rot_one = 0;
 var rad_prev_one = 0;
-var box_unmoved = false;
+var rect_xfr_prev_one = 0;
 
 function dragOne() {
     // calculate delta for mouse coordinates
@@ -843,8 +841,6 @@ function dragOne() {
     var deltaY = d3.event.y - y_pos;
 
     var rad = Math.atan2(deltaY, deltaX);
-
-    // console.log(rad + " | " + rad_prev_one + " | " + (rad-rad_prev_one));
 
     // Only allow wheels to turn and box to move if not going to send box out of bounds
     var rot = rot_one;
@@ -868,33 +864,16 @@ function dragOne() {
     else rad_adj = rad;
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
-    var xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
 
-    console.log(rot);
-    console.log(xfr_delta);
-
-    // Need to deal with case when stuck at edge and keep rotating
-    // the wheel so does not keep registering the user's movements
-    if (Math.abs(xfr_delta) > (2*Math.PI)) {
-        if (rot === -1) rot = 0;
-        else rot = rot < 0 ? rot + 2 : rot - 2;
-
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
-        xfr_delta = -(box.position.z - rect_xfr)+zOrigin;
-    }
-
-    console.log(xfr_delta);
-
-    if (lathe_engine(0, xfr_delta)) {
+    if (lathe_engine(0, rect_xfr >= rect_xfr_prev_one ? delta : -delta)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad),
                 cy: y_pos + inset * r * Math.sin(rad)
             });
-        box_unmoved = false;
+        rect_xfr_prev_one = rect_xfr;
     } else {
         console.log("bad turn!");
-        box_unmoved = true;
     }
 
     rad_prev_one = rad;
@@ -903,6 +882,7 @@ function dragOne() {
 
 var rot_two = 0;
 var rad_prev_two = 0;
+var rect_xfr_prev_two = 0;
 
 function dragTwo() {
     // calculate delta for mouse coordinates
@@ -910,8 +890,6 @@ function dragTwo() {
     var deltaY = d3.event.y - y_pos;
 
     var rad = Math.atan2(deltaY, deltaX);
-
-    console.log(rad + " | " + rad_prev_two + " | " + (rad - rad_prev_two));
 
     // Only allow wheels to turn and box to move if not going to send box out of bounds
     var rot = rot_two;
@@ -935,35 +913,17 @@ function dragTwo() {
     else rad_adj = rad;
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
-    var xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
 
-    console.log(rot);
-    console.log("xfr before" + " | " + xfr_delta);
-
-    // Need to deal with case when stuck at edge and keep rotating
-    // the wheel so does not keep registering the user's movements
-    if (Math.abs(xfr_delta) > (2 * Math.PI)) {
-        if (rot === -1) rot = 0;
-        else rot = rot < 0 ? rot + 2 : rot - 2;
-
-        rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
-        xfr_delta = -(box.position.x - rect_xfr) + xOrigin;
-    }
-
-    console.log("xfr after" + " | " + xfr_delta);
-
-
-    if (lathe_engine(xfr_delta, 0)) {
+    if (lathe_engine(rect_xfr >= rect_xfr_prev_two ? delta : -delta, 0)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad) + pos_wheel_2,
                 cy: y_pos + inset * r * Math.sin(rad)
             });
+        rect_xfr_prev_two = rect_xfr;
     } else {
         console.log("bad turn!");
     }
-
-    console.log(box.position.x);
 
     rad_prev_two = rad;
     rot_two = rot;
