@@ -213,36 +213,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && xOrigin < gotoLimitx) {
-                              box.position.x += delta;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin += delta)/10).toFixed(4);
-                              console.log(xOrigin);
-                              //xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(delta,0);
                           } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
-                              box.position.z -= delta;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin -= delta)/10).toFixed(4);
-                              console.log(zOrigin);
-                              //zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,-delta);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
                           if (currentMesh == wheel && xOrigin > gotoLimitNx) {
-                              box.position.x -= delta;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin -= delta)/10).toFixed(4);
-                              console.log(xOrigin);
-                              //xCoordinate.value = parseFloat(box.position.x);
+                              lathe_engine(-delta,0);
                           } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
-                              box.position.z += delta;
-                              lathe_engine_anim1();
-                              completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin += delta)/10).toFixed(4);
-                              console.log(zOrigin);
-                              //zCoordinate.value = parseFloat(box.position.z);
+                              lathe_engine(0,delta);
                           }
                       }
                     return true;
@@ -805,7 +785,7 @@ function reset() {
     }, scene);
     lathe.rotation.x = -Math.PI / 2;
 
-    // Resetting box to origin
+    // Resetting box to original origin
     xOrigin = 8;
     zOrigin = 5;
     box.position.x = xOrigin;
@@ -914,7 +894,7 @@ function dragTwo() {
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
 
-    if (lathe_engine(rect_xfr >= rect_xfr_prev_two ? delta : -delta, 0)) {
+    if (lathe_engine(rect_xfr >= rect_xfr_prev_two ? -delta : delta, 0)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad) + pos_wheel_2,

@@ -140,7 +140,7 @@ window.onload = function () {
     coarsespeedbutton.addEventListener('click', function () {
         if (coarsespeedbutton.value == 'F') {
             coarsespeedbutton.value = 'C'
-            delta = 0.025 * 4;
+            delta = 0.025 * 6;
         } else if (coarsespeedbutton.value == 'C') {
             coarsespeedbutton.value = 'F'
             delta = 0.025;
