@@ -213,34 +213,34 @@ window.addEventListener('DOMContentLoaded', function () {
 
                     if (currentMesh.rotation.x > currentMeshX) {
                           if (currentMesh == wheel && xOrigin < gotoLimitx) {
-                              box.position.x += finecoarse;
+                              box.position.x += delta;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin += finecoarse)/10).toFixed(4);
+                              xCoordinate.value = (parseFloat(xOrigin += delta)/10).toFixed(4);
                               console.log(xOrigin);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin > gotoLimitNz) {
-                              box.position.z -= finecoarse;
+                              box.position.z -= delta;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin -= finecoarse)/10).toFixed(4);
+                              zCoordinate.value = (parseFloat(zOrigin -= delta)/10).toFixed(4);
                               console.log(zOrigin);
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
 
                       } else if (currentMesh.rotation.x < currentMeshX) {
                           if (currentMesh == wheel && xOrigin > gotoLimitNx) {
-                              box.position.x -= finecoarse;
+                              box.position.x -= delta;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              xCoordinate.value = (parseFloat(xOrigin -= finecoarse)/10).toFixed(4);
+                              xCoordinate.value = (parseFloat(xOrigin -= delta)/10).toFixed(4);
                               console.log(xOrigin);
                               //xCoordinate.value = parseFloat(box.position.x);
                           } else if (currentMesh == wheel2 && zOrigin < gotoLimitz) {
-                              box.position.z += finecoarse;
+                              box.position.z += delta;
                               lathe_engine_anim1();
                               completeTask([box.position.x,box.position.z]);
-                              zCoordinate.value = (parseFloat(zOrigin += finecoarse)/10).toFixed(4);
+                              zCoordinate.value = (parseFloat(zOrigin += delta)/10).toFixed(4);
                               console.log(zOrigin);
                               //zCoordinate.value = parseFloat(box.position.z);
                           }
@@ -717,8 +717,8 @@ function lathe_engine(delta_x, delta_z) {
         return false;
     }
 
-    xCoordinate.value = (parseFloat(box.position.x)/10).toFixed(4);
-    zCoordinate.value = (parseFloat(box.position.z)/10).toFixed(4);
+    xCoordinate.value = (parseFloat(xOrigin += delta_x)/10).toFixed(4);
+    zCoordinate.value = (parseFloat(zOrigin += delta_z)/10).toFixed(4);
 
 
     completeTask([box.position.x,box.position.z]);
