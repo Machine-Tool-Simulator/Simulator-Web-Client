@@ -623,7 +623,6 @@ function lathe_engine_anim1() {
 
 function lathe_engine(delta_x, delta_z) {
 
-
     var bad_cut = false;
 
     // if (fwdOn === 0) bad_cut = true;
@@ -655,24 +654,25 @@ function lathe_engine(delta_x, delta_z) {
                 min_z = Math.min(min_z, item.y);
 
                 var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
-                var depth_z = Math.abs(abs_z - min_z); // Depth of cut in z direction
+                var depth_z = Math.abs(abs_z - min_z);
 
-                // console.log("depths" + depth_x + " | " + depth_z);
-                // console.log("deltas" + delta_x + " | " + delta_z);
-                //
-                // console.log("check1" + (depth_x > .01 && delta_z < 0));
-                // console.log("check2" + (depth_z > .01 && delta_x < 0));
+                if (fwdOn === 1) {
+                    if ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0)) {
+                        console.log("cut too deep");
+                        bad_cut = true;
+                        // TODO: can add a better warning here!!!
+                        if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
+                    }
+                    pt_fnd = true;
 
-                 if (!fwdOn && ((depth_x > delta && delta_z < 0) || (depth_z > delta && delta_x < 0)) // This now allows for gliding along shape
-                    || fwdOn && ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0))) {
-                    console.log("cut too deep");
-                    bad_cut = true;
-                    // TODO: can add a better warning here!!!
-                    if (delta_x !== 0) {
-                        console.log("IN HERE")
-                        return;
-                    } // This line prevents a rendering glitch in the x direction
-                } else if (fwdOn !== 0) {
+                    bad_pts.push(i);
+                } else {
+                    if ((depth_x > delta && delta_z < 0) || (depth_z > delta && delta_x < 0)) {
+                        console.log("cut too deep");
+                        bad_cut = true;
+                        // TODO: can add a better warning here!!!
+                        if (delta_x !== 0) return; // This line prevents a rendering glitch in the x direction
+                    }
                     pt_fnd = true;
 
                     bad_pts.push(i);
@@ -680,8 +680,10 @@ function lathe_engine(delta_x, delta_z) {
             }
         }
 
+
+
         // Only do these if need to cut out shape
-        if (pt_fnd) {
+        if (fwdOn === 1 && pt_fnd) {
 
             var new_pts;
 
@@ -692,16 +694,15 @@ function lathe_engine(delta_x, delta_z) {
                 adj++;
             }
 
-            if (Math.abs(abs_x - max_x) <= 0.1 || Math.abs(abs_z - min_z) <= 0.1) new_pts = [ // TODO: this prevents a cutting problem if at the same height
+            if (Math.abs(abs_x - max_x) <= 0.02 || Math.abs(abs_z - min_z) <= 0.02) new_pts = [ // TODO: this prevents a cutting problem if at the same height
                     new BABYLON.Vector3(max_x, min_z, 0)                                         // TODO: or width, could be incorporated better earlier
                 ];
-            else if (x <= delta) {
+            else if (x <= .25) {
                 new_pts = [    // If cutting tool has completely gone through the material
                     new BABYLON.Vector3(max_x, abs_z, 0),
                 ];
             }
             else {
-                console.log("HERE");
                 new_pts = [
                     new BABYLON.Vector3(abs_x, min_z, 0),
                     new BABYLON.Vector3(abs_x, abs_z, 0),
@@ -727,19 +728,11 @@ function lathe_engine(delta_x, delta_z) {
             }, scene);
             lathe.rotation.x = -Math.PI / 2;
 
-
             console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
 
-
     // These are set nicely to keep the box within a desired range
-
-    console.log(box.position.x);
-    console.log(box.position.z);
-
-    console.log("gtNx " + gotoLimitNx);
-    console.log("gtNz " + gotoLimitNz);
 
     // if x is not less than 0
     if (!bad_cut && delta_x !== 0 &&
