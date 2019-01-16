@@ -807,12 +807,13 @@ function reset() {
     }, scene);
     lathe.rotation.x = -Math.PI / 2;
 
+    // Resetting box to origin
     xOrigin = 8;
     zOrigin = 5;
     box.position.x = xOrigin;
     box.position.z = zOrigin;
-    xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);;
-    zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);;
+    xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);
+    zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);
 
     // Resetting D3 wheels
     d3.select('.rotatable1')
