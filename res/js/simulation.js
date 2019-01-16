@@ -31,6 +31,8 @@ var lathe_pts = lathe_pts_init.slice(0);
 
 var Mesh = BABYLON.Mesh; // Shortform for BABYLON.Mesh
 
+var music; // need this external
+
 window.addEventListener('DOMContentLoaded', function () {
     var canvas = document.getElementById('canvas');
     var engine = new BABYLON.Engine(canvas, true);
@@ -130,7 +132,7 @@ window.addEventListener('DOMContentLoaded', function () {
         BABYLON.SceneLoader.ImportMesh("", "", "res/models/untitled.babylon",
             scene, function (newMeshes) {
                 wheel2 = newMeshes[0];
-                wheel2.position = new BABYLON.Vector3(20, 1, 2.5);
+                wheel2.position = new BABYLON.Vector3(25, 1, 2.5);
                 wheel2.rotation.y = Math.PI;
             });
 
@@ -142,7 +144,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dragInit;
                 var dragDiff;
                 var rotationInit;
-                wheel.position = new BABYLON.Vector3(20, 1, 7.5);
+                wheel.position = new BABYLON.Vector3(25, 1, 7.5);
                 wheel.rotation.y = Math.PI;
                 var getGroundPosition = function () {
                     // Use a predicate to get position on the ground
@@ -293,7 +295,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
         yRot.setKeys(keyFramesR);
 
-        var music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
+        music = new BABYLON.Sound("FWDSound", "res/sounds/lathe_sound_effect.mp3", scene, null, {loop: true, autoplay: false});
         document.getElementById("FWD").addEventListener("click", function () {
             if (fwdOn == 0){
               Chuck1.animations.push(yRot);
@@ -341,18 +343,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     else{
                       gotoLimitNx = GoToXPosition;
                     }
-                    // console.log("gotoLimitx");
-                    // console.log(gotoLimitx);
-                    // console.log("gotoLimitNx");
-                    // console.log(gotoLimitNx);
-                    // console.log("gotoLimitz");
-                    // console.log(gotoLimitz);
-                    // console.log("gotoLimitNz");
-                    // console.log(gotoLimitNz);
-                    // console.log("xOrigin");
-                    // console.log(xOrigin);
-                    // console.log("zOrigin");
-                    // console.log(zOrigin);
 
                 }
                 //spindle speed: constant rpm
@@ -498,6 +488,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// Didn't delete this yet because it is in taper, which I want to explore more
 function lathe_engine_anim1() {
 
     var x = box.position.x - 3;
@@ -604,9 +595,14 @@ function lathe_engine(delta_x, delta_z) {
                 min_z = Math.min(min_z, item.y);
 
                 var depth_x = Math.abs(abs_x - max_x); // Depth of cut in x direction
-                var depth_z = Math.abs(abs_z - min_z);
+                var depth_z = Math.abs(abs_z - min_z); // Depth of cut in z direction
 
-                if ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0)) {
+                console.log("depths" + depth_x + " | " + depth_z);
+                console.log("deltas" + delta_x + " | " + delta_z);
+
+
+                 if (!fwdOn && ((depth_x > .001 && delta_z < 0) || (depth_z > .001 && delta_x < 0)) // This now allows for gliding along shape
+                    || fwdOn && ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0))) {
                     console.log("cut too deep");
                     bad_cut = true;
                     // TODO: can add a better warning here!!!
@@ -615,8 +611,6 @@ function lathe_engine(delta_x, delta_z) {
                     pt_fnd = true;
 
                     bad_pts.push(i);
-                } else {
-                    bad_cut = true;
                 }
             }
         }
@@ -668,7 +662,7 @@ function lathe_engine(delta_x, delta_z) {
             lathe.rotation.x = -Math.PI / 2;
 
 
-            console.log(lathe_pts); // if want to see points that lathe is registering
+            // console.log(lathe_pts); // if want to see points that lathe is registering
         }
     }
 
@@ -805,6 +799,18 @@ function reset() {
             cx: xInit2,
             cy: yInit2
         });
+
+    // Stop lathe from spinning
+    scene.stopAnimation(Chuck1);
+    music.stop();
+    fwdOn = 0;
+
+    // Reset camera
+    var camera = new BABYLON.ArcRotateCamera("arcCam",
+        0,
+        BABYLON.Tools.ToRadians(55),
+        50, box.position, scene);
+    camera.attachControl(canvas, true);
 
     // TODO: also want to reset the 3D buttons here, or do they need to be reset ???
     // TODO: @YUTENG: please add stuff here to reset stuff related to your functions, thanks!
