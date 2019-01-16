@@ -24,17 +24,17 @@ let videos = [
         "src":"https://drive.google.com/file/d/11ap4hcucbOaNVDCbi0sh59OPCUD9Yr6o/preview",
         "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The chuck holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.",
         "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>In order, select the following parts (ON THE 3D MODEL):<br>1. The tailstock<br>2. The carriage and cutting tool<br>3. The chuck",
-        // "tasks": [
-        //     {
-        //         "click": "tailstock"
-        //     },
-        //     {
-        //         "click": "box"
-        //     },
-        //     {
-        //         "click": "chuck"
-        //     }
-        // ]
+        "tasks": [
+            {
+                "click": "tailstock"
+            },
+            {
+                "click": "box"
+            },
+            {
+                "click": "chuck"
+            }
+        ]
     },
     {
         "index":5,
@@ -48,16 +48,16 @@ let videos = [
         "src":"https://drive.google.com/file/d/1XJ0k4MLwRJvKNz54EUKnh9AzjP2tWtzI/preview",
         "text":"To turn the spindle on, press the forward button on the spindle control. The speed can be controlled with the spindle speed button.",
         "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Press the \"FWD\" button on the control to turn on the spindle.<br>2. Press the \"OFF\" button on the control to turn off the spindle.<br><strong>NOTE:</strong> For the next sessions, the lathe must be turned on before you will be able to cut out a shape.",
-        // "tasks":[
-        //     {
-        //         "press":"FWD",
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"OFF",
-        //         "highlight":true
-        //     }
-        // ]
+        "tasks":[
+            {
+                "press":"FWD",
+                "highlight":true
+            },
+            {
+                "press":"OFF",
+                "highlight":true
+            }
+        ]
     },
     {
         "index":7,
@@ -65,27 +65,27 @@ let videos = [
         "src":"https://drive.google.com/file/d/1SmuPAJPo4dQPUxLYRslcIwyyc7k5JbUD/preview",
         "text":"There are two ways to specify the spindle speed. Pressing \"INC SET\" will specify a constant RPM and pressing \"ABS SET\" will specify a constant SFM. Constant RPM will spin the spindle at a constant number of revolutions per minute no matter where the tool is.",
         "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"SPIN SPEED\" using the button below the control screen to set RPM.<br>2. Enter \"500\" as the value using the numeric keypad.<br>3. Press the \"INC SET\" button to set constant RPM.<br>4. Turn the spindle on.<br>5. Turn the spindle off.",
-        // "tasks":[
-        //     {
-        //         "press":"RPM",
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"INC_SET",
-        //         "conditions":{
-        //             "buffer":500
-        //         },
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"FWD",
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"OFF",
-        //         "highlight":true
-        //     }
-        // ]
+        "tasks":[
+            {
+                "press":"RPM",
+                "highlight":true
+            },
+            {
+                "press":"INC_SET",
+                "conditions":{
+                    "buffer":500
+                },
+                "highlight":true
+            },
+            {
+                "press":"FWD",
+                "highlight":true
+            },
+            {
+                "press":"OFF",
+                "highlight":true
+            }
+        ]
     },
     {
         "index":8,
@@ -93,27 +93,27 @@ let videos = [
         "src":"https://drive.google.com/file/d/1jnq_N92G--HP1bjzjdfzLLCaSHbjOfe3/preview",
         "text":"Constant SFM will adjust the RPM of the spindle depending on the tools radial position to maintain a constant linear velocity of the tool relative to the surface of the material. This puts less stress on the tool and leaves a nicer finish.",
         "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>1. Select \"Spin Speed\" using the button below the control screen to set RPM <br>2. Enter \"250\" as the value using the numeric keypad.<br>3. Press the \"ABS SET\" button to set constant SFM.<br>4. Turn the spindle on.<br>5. Turn the spindle off.",
-        // "tasks":[
-        //     {
-        //         "press":"RPM",
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"ABS_SET",
-        //         "conditions":{
-        //             "buffer":250
-        //         },
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"FWD",
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"OFF",
-        //         "highlight":true
-        //     }
-        // ]
+        "tasks":[
+            {
+                "press":"RPM",
+                "highlight":true
+            },
+            {
+                "press":"ABS_SET",
+                "conditions":{
+                    "buffer":250
+                },
+                "highlight":true
+            },
+            {
+                "press":"FWD",
+                "highlight":true
+            },
+            {
+                "press":"OFF",
+                "highlight":true
+            }
+        ]
     },
     {
         "index":9,
@@ -127,14 +127,14 @@ let videos = [
         "src":"https://drive.google.com/file/d/1FEJn5YMX92adnGUo_1J9pwTq7wtuexuF/preview",
         "text":"You can manually move the cutting tool by rotating the z wheel and the x wheel.<br>When you rotate the x wheel clockwise, the cutting tool moves closer to the spindle axis, resulting in a smaller x position for a smaller diameter. When you rotate the x wheel counter-clockwise, the cutting tool moves away from the spindle axis resulting in a larger x position or larger diameter.<br>When you rotate the z wheel clockwise, the cutting tool moves to the right, resulting in a greater z position. When you rotate the z wheel counter-clockwise, the cutting tool moves to the left resulting in a lesser z position.<br>You can also move a joystick to move the cutting tool. This is not recommended, since the joystick makes the cutting tool moves so fast that it can be difficult to react if you accidently move the cutting tool into the chuck or into the part.",
         "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>Using the x and z wheels, move the cutting tool to a position of x = 1.6 in, z = -0.2 in.",
-        // "tasks": [
-        //     {
-        //         "coord": {
-        //             "x": 16,
-        //             "z": -2
-        //         }
-        //     }
-        // ]
+        "tasks": [
+            {
+                "coord": {
+                    "x": 16,
+                    "z": -2
+                }
+            }
+        ]
     },
     {
         "index":11,
@@ -142,16 +142,16 @@ let videos = [
         "src":"https://drive.google.com/file/d/1TZXP9VHU0nqVB3r-EOS4hV4QHJY348zE/preview",
         "text":"Let's talk about the difference between fine mode and coarse mode. We will use the term fine mode for moving slowly and the term coarse mode for moving quickly. Take a look at how fast the cutting tool moves when the control is set to fine mode and you turn the wheel.<br>Now switch to coarse mode and see how quickly the cutting tool moves when you turn the wheel at the same speed. The cutting tool moves much faster when in coarse mode. This is good when you want to quickly move the tool to a certain position. However, coarse mode moves the cutting tool too quickly for actual cutting. When you are cutting metal, be sure to use fine mode so that the cutting tool moves through the metal slowly. Using fine mode during cutting gives you more control over what you are doing and reduces the chance of breaking tools.",
         "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>Practice switching between fine and coarse control and adjusting the position of the cutting tool using the x and z wheels.",
-        // "tasks":[
-        //     {
-        //         "press":"FC",
-        //         "highlight":true
-        //     },
-        //     {
-        //         "press":"FC",
-        //         "highlight":true
-        //     }
-        // ]
+        "tasks":[
+            {
+                "press":"FC",
+                "highlight":true
+            },
+            {
+                "press":"FC",
+                "highlight":true
+            }
+        ]
     },
     {
         "index":12,
@@ -234,7 +234,7 @@ let videos = [
         "title":"Setting a GoTo Position",
         "src":"https://drive.google.com/file/d/11gcfT-G8VW5DYYKOnr7Gkb_U9WXfTPDL/preview",
         "text":"Now you can work on cutting the part to a particular diameter. Let's say for example that the part is supposed to have 0.41 inches diameter and 0.5 inches long. You can use the GoTo function to prepare the lathe for making this.<br>Press GoTo. Press z -0.5 ABS SET. Press x 0.41 ABS SET.<br>The cutting tool now won't move any further than the points you have programmed using GoTo. You will make several small cuts in order to reduce the diameter until it reaches the desired diameter. The amount of diameter that you cut off at once is called a depth of cut. A relatively conservative depth of cut is something like 0.03 inches of diameter at a time, whereas a relatively aggressive depth of cut is something like 0.1 inches of diameter at a time.<br>The steps for making a cut are position the cutting tool to the right of z 0 and one depth of cut inside the part. In this case, the diameter of the raw material is 0.5 inches. In order to make a cut with a depth of 0.03 inches, you will position the cutting tool at an x value of 0.47.<br>Verify that the machine is in fine mode. This is necessary for when you are cutting material.<br>Turn on the spindle.<br>Turn the z wheel counter-clockwise until the tool reaches the programmed GoTo position.<br>Turn the x wheel the same way to move the cutting tool to move the cutting tool away from the spindle axis.<br>Turn the z wheel clockwise until the cutting tool is to the right of z 0 again.<br>Turn the x wheel clockwise until the cutting tool is at a position of 0.03 inches smaller than the existing diameter.<br>Repeat this process, cutting of 0.03 inches of diameter at a time, until the final diameter is reached.<br>The part now has the desired geometry.",
-        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%><br>1. Set a GoTo position of x = 1.185 in. and z = -0.6 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool. The lathe must be turned on before cutting, which can be done by pressing the FWD button.<br>4. You will not be able to make a depth of cut greater than 1 due to constraints.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
+        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%><br>1. Set a GoTo position of x = 1.18 in. and z = -0.6 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool. The lathe must be turned on before cutting, which can be done by pressing the FWD button.<br>4. You will not be able to make a depth of cut greater than 1 due to constraints.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
         "tasks":[
             {
                 "press":"GOTO",
@@ -247,7 +247,7 @@ let videos = [
             {
                 "press":"ABS_SET",
                 "conditions":{
-                    "buffer":1.185
+                    "buffer":1.18
                 },
                 "highlight":true
             },
@@ -285,7 +285,7 @@ let videos = [
         "title":"Making an Aggressive Cut",
         "src":"https://drive.google.com/file/d/1Kl8mL5F-WPkJprA1jA3pvK8afVBku-50/preview",
         "text":"The previous section demonstrated a few conservative cuts using a depth of cut of 0.03 inches. If you need to remove a lot of material, it can go faster if you use a more aggressive depth of cut, like 0.1 inches. Let's take a look at a depth of cut of 0.1 inches to see what it looks like.<br>It seemed to work fine without any problems. However, keep in mind that if you use a depth of cut that is too deep, there is a risk of breaking the cutting tool. For this reason, the largest depth of cut that you should ever use is 0.1 inches of diameter at once.",
-        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%>1. Set a GoTo position of x = 1.185 in. and z = -0.6 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool. The lathe must be turned on before cutting, which can be done by pressing the FWD button.<br>4. You will now be able to make a depth of cut of 3. Notice how much faster you are able to cut out the material with an aggressive cut.  Note that too aggressive of a depth of cut can potentially damage the material.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
+        "todo":"<hr><strong>Your turn. On the simulation to the right:</strong><br>Cut out the following shape:<br><img src='res/imgs/goto_shape.png' width=100%>1. Set a GoTo position of x = 1.18 in. and z = -0.6 in. The cutting tool will not be able to move further than these coordinates.<br>2. Do NOT exit the GoTo function interface or the desired GoTo position will no longer be held and you will have to rest.<br>3. As shown in the video, progressively cut out the material up to this position by moving the cutting tool. The lathe must be turned on before cutting, which can be done by pressing the FWD button.<br>4. You will now be able to make a depth of cut of 3. Notice how much faster you are able to cut out the material with an aggressive cut.  Note that too aggressive of a depth of cut can potentially damage the material.<br>5. Press submit (you will only be able to proceed once the proper shape has been cut out).",
         "tasks":[
             {
                 "press":"GOTO",
@@ -298,7 +298,7 @@ let videos = [
             {
                 "press":"ABS_SET",
                 "conditions":{
-                    "buffer":1.185
+                    "buffer":1.18
                 },
                 "highlight":true
             },
