@@ -1,6 +1,8 @@
 let delta = 0.025; // how much box moves when command it to move
-let xOrigin = 8; // x home position for cutting tool
-let zOrigin = 5; // z home position for cutting tool
+let xOrigin = 15; // x home position for cutting tool
+let zOrigin = 3; // z home position for cutting tool
+// let xOrigin = 15; // x home position for cutting tool
+// let zOrigin = 1.9; // z home position for cutting tool
 let box_size = 6; // length of one side of the box
 let bound_limit_z = -15.6; // limit to how far box can go in the z direction
 let bound_limit_x = -20; // limit to how far box can go in the x direction
@@ -16,6 +18,8 @@ var scene;
 var tailstock;
 var Chuck1;
 var fwdOn = 0;
+var box1;
+var toolpost;
 
 var lathe_pts_init = [
     new BABYLON.Vector3(4, 0, 0),
@@ -44,11 +48,10 @@ window.addEventListener('DOMContentLoaded', function () {
         scene.clearColor = new BABYLON.Color3.White();
 
 
-        box = BABYLON.Mesh.CreateBox("Box", box_size, scene);
-        box.position = new BABYLON.Vector3(xOrigin, -3, zOrigin);
-        xCoordinate.value = (parseFloat(xOrigin)/10).toFixed(4);;
-        zCoordinate.value = (parseFloat(zOrigin)/10).toFixed(4);;
-
+        // box1 = BABYLON.Mesh.CreateBox("Box", box_size, scene);
+        // box1.position = new BABYLON.Vector3(xOrigin, -3, zOrigin);
+        xCoordinate.value = parseFloat(xOrigin).toFixed(4);;
+        zCoordinate.value = parseFloat(zOrigin).toFixed(4);;
 
 
         lathe = BABYLON.MeshBuilder.CreateLathe("lathe", {
@@ -57,6 +60,40 @@ window.addEventListener('DOMContentLoaded', function () {
             updateable: true
         }, scene);
         lathe.rotation.x = -Math.PI / 2;
+
+        BABYLON.SceneLoader.ImportMesh("", "", "res/models/Cuttingtool.STL",
+          scene, function (newMeshes) {
+              box = newMeshes[0];
+
+              box.position = new BABYLON.Vector3(xOrigin, -1.1, zOrigin);
+              //box.rotation.y = Math.PI/2;
+              box.rotation.z = Math.PI/2;
+              box.rotation.x = -Math.PI/2;
+              var Chuck2_scale = .1;
+              box.scaling.x = Chuck2_scale*.9;
+              box.scaling.y = Chuck2_scale*.9;
+              box.scaling.z = Chuck2_scale*.9;// +0.14;
+              console.log(box.position);
+
+              box.actionManager = new BABYLON.ActionManager(scene);
+              box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                  console.log('chuck clicked');
+                  completeTask('chuck');
+              }));
+          });
+
+          BABYLON.SceneLoader.ImportMesh("", "", "res/models/Toolpost.stl",
+            scene, function (newMeshes) {
+                toolpost = newMeshes[0];
+                //toolpost.rotation.z = Math.PI/8;
+                //11, 5.8
+                //15, 1.9
+                toolpost.position = new BABYLON.Vector3(xOrigin-3.9, -4.6, zOrigin+3.6);
+                var toolpost_scale = .5;
+                toolpost.scaling.x = toolpost_scale;
+                toolpost.scaling.y = toolpost_scale;
+                toolpost.scaling.z = toolpost_scale;
+            });
 
         // Back of material that is in the chuck
         cyl = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 6.3, diameter: 8}, scene);
@@ -98,11 +135,10 @@ window.addEventListener('DOMContentLoaded', function () {
         camera.attachControl(canvas, true);
 
         // Keyboard events
-        box.actionManager = new BABYLON.ActionManager(scene);
-        box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
-            console.log('box clicked');
-            completeTask('box');
-        }));
+        // box.actionManager = new BABYLON.ActionManager(scene);
+        // box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+        //     completeTask('box');
+        // }));
 
         var inputMap = {};
         scene.actionManager = new BABYLON.ActionManager(scene);
@@ -568,8 +604,11 @@ function lathe_engine(delta_x, delta_z) {
 
     // if (fwdOn === 0) bad_cut = true;
 
-    var x = box.position.x - box_size/2;
-    var z = box.position.z - box_size/2;
+    var x = box.position.x - 11.05;
+    var z = box.position.z - 1.25;
+
+    console.log(x);
+    console.log(z);
 
 
 
@@ -676,6 +715,7 @@ function lathe_engine(delta_x, delta_z) {
         box.position.x + delta_x >= gotoLimitNx &&
         box.position.x + delta_x <= gotoLimitx) {
         box.position.x += delta_x;
+        toolpost.position.x += delta_x;
     } else if (!bad_cut && delta_z !== 0 &&
         z + delta_z >=bound_limit_z &&
         box.position.z + delta_z >= gotoLimitNz &&
@@ -686,6 +726,7 @@ function lathe_engine(delta_x, delta_z) {
             box.position.z = Math.max(-lathe_pts[0].y+box_size/2, box.position.z + delta_z);
         } else { // otherwise
             box.position.z += delta_z;
+            toolpost.position.z += delta_z;
         }
 
     } else {
