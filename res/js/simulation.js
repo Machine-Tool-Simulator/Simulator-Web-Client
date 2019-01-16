@@ -32,6 +32,7 @@ var lathe_pts = lathe_pts_init.slice(0);
 var Mesh = BABYLON.Mesh; // Shortform for BABYLON.Mesh
 
 var music; // need this external
+var camera;
 
 window.addEventListener('DOMContentLoaded', function () {
     var canvas = document.getElementById('canvas');
@@ -90,7 +91,7 @@ window.addEventListener('DOMContentLoaded', function () {
         var ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 1, scene, false);
         ground.position.y = -6;
 
-        var camera = new BABYLON.ArcRotateCamera("arcCam",
+        camera = new BABYLON.ArcRotateCamera("arcCam",
             0,
             BABYLON.Tools.ToRadians(55),
             50, box.position, scene);
@@ -601,7 +602,7 @@ function lathe_engine(delta_x, delta_z) {
                 console.log("deltas" + delta_x + " | " + delta_z);
 
 
-                 if (!fwdOn && ((depth_x > .001 && delta_z < 0) || (depth_z > .001 && delta_x < 0)) // This now allows for gliding along shape
+                 if (!fwdOn && ((depth_x > .005 && delta_z < 0) || (depth_z > .005 && delta_x < 0)) // This now allows for gliding along shape
                     || fwdOn && ((depth_x > depth_set && delta_z < 0) || (depth_z > depth_set && delta_x < 0))) {
                     console.log("cut too deep");
                     bad_cut = true;
@@ -805,15 +806,10 @@ function reset() {
     music.stop();
     fwdOn = 0;
 
-    // Reset camera
-    var camera = new BABYLON.ArcRotateCamera("arcCam",
-        0,
-        BABYLON.Tools.ToRadians(55),
-        50, box.position, scene);
-    camera.attachControl(canvas, true);
-
-    // TODO: also want to reset the 3D buttons here, or do they need to be reset ???
-    // TODO: @YUTENG: please add stuff here to reset stuff related to your functions, thanks!
+    camera.alpha = 0;
+    camera.beta = BABYLON.Tools.ToRadians(55);
+    camera.radius = 50;
+    camera.target = box.position;
 }
 
 
