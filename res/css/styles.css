@@ -665,7 +665,7 @@ clip-path: polygon(47% 0, 56% 15%, 100% 14%, 100% 100%, 0 100%, 0 0); */
 #player {
     /* display property set programmatically */
     margin: auto;
-    width: 90%;
+    width: 30em;
     height: 20em;
 }
 

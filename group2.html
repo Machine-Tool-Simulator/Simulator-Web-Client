@@ -43,13 +43,13 @@
 
     <div class="split left">
           <div>
-            <div id="title">Welcome to Dartmouth Machine Shop Simulation</div>
-            <img id="cover" src="res/imgs/img_test1.jpg" />
-            <!-- <iframe id="player" style="display:none" frameborder="0"></iframe> -->
-            <p id="description" >Watch each video, read the description, and complete any tasks written in bold. After completing the task, click the Submit button to continue. If there is no task written in bold, you can click the Submit button to continue anytime. You will be asked to complete these tasks on the actual machine.</p>
-            <input type="button" class="button" value="Back" onclick="switchVideo('back')" />
-            <!-- <input type="button" class="button" value="PlayList" onclick="" /> -->
-            <input type="button" class="button" value="Next" onclick="switchVideo('next')" />
+              <div id="title">Welcome to Dartmouth Machine Shop Simulation</div>
+              <img id="cover" src="res/imgs/img_test1.jpg" />
+              <!--<iframe id="player" style="display:none" frameborder="0"></iframe>-->
+              <p id="description" class="description">Read the description and complete any tasks written in bold. After completing the task, click the Submit button to continue. If there is no task written in bold, you can click the Submit button to continue anytime. You will be asked to complete these tasks on the actual machine.</p>
+              <p id="todo" class="description"></p>
+              <input type="button" class="button" value="Back" onclick="switchVideo('back')" />
+              <input type="button" class="button" value="Next" onclick="switchVideo('next')" />
           </div>
 
     </div>
@@ -65,6 +65,8 @@
         </figure>
 
         <input type="button" class="button" value="Reset" onclick="reset()"/>
+
+        <p class="description" style="text-align:center;color:gray"><strong>Tips:</strong> Select the RESET button above to reset any progress you have made on a page. Select the button at the top left to navigate quickly between pages. Contact <a href="mailto:mtoolsim@gmail.com">mtoolsim@gmail.com</a> for any support with this tool.</p>
 
 
     </div>

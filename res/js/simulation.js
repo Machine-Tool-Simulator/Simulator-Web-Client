@@ -916,17 +916,18 @@ function dragOne() {
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
 
-    if (lathe_engine(0, rect_xfr >= rect_xfr_prev_one ? delta : -delta)) {
+    if (Math.abs(rect_xfr-rect_xfr_prev_one) > .01 && lathe_engine(0, rect_xfr >= rect_xfr_prev_one ? delta : -delta)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad),
                 cy: y_pos + inset * r * Math.sin(rad)
             });
-        rect_xfr_prev_one = rect_xfr;
+
     } else {
         console.log("bad turn!");
     }
 
+    rect_xfr_prev_one = rect_xfr;
     rad_prev_one = rad;
     rot_one = rot;
 }
@@ -965,17 +966,19 @@ function dragTwo() {
 
     var rect_xfr = spin_speed * (rot * Math.PI + rad_adj); // last factor deals with fine / coarse
 
-    if (lathe_engine(rect_xfr >= rect_xfr_prev_two ? -delta : delta, 0)) {
+    // debounced
+    if (Math.abs(rect_xfr-rect_xfr_prev_two) > .01 && lathe_engine(rect_xfr >= rect_xfr_prev_two ? -delta : delta, 0)) {
         d3.select(this)
             .attr({
                 cx: inset * r * Math.cos(rad) + pos_wheel_2,
                 cy: y_pos + inset * r * Math.sin(rad)
             });
-        rect_xfr_prev_two = rect_xfr;
+
     } else {
         console.log("bad turn!");
     }
 
+    rect_xfr_prev_two = rect_xfr;
     rad_prev_two = rad;
     rot_two = rot;
 }
