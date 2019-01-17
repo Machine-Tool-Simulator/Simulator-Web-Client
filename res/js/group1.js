@@ -324,8 +324,6 @@ function switchVideo(action) {
     let description = getById('description');
     let todo = getById('todo');
 
-    console.log('Hello world');
-
     if (action === 'next') {
         // prompt for user id
         if (!userId) userId = prompt('Please enter your ID (same as used on previous page)');
@@ -371,7 +369,6 @@ function switchVideo(action) {
             player.src = null;
         }
         description.innerHTML = video.text;
-        console.log(video);
         if (video.todo) {
             todo.innerHTML = video.todo;
         } else {
@@ -425,7 +422,7 @@ function PlaylistVideo(action) {
     let description = getById('description');
     let todo = getById('todo');
 
-    if (pageHead > action) {
+    if (pageHead >= action) {
         videoCounter = action;
     } else {
         alert('Can\'t jump to the next task unless you finish all the previous ones');
@@ -461,9 +458,7 @@ function completeTask(value) {
     if (!currentTasks) return;	// no current tasks
 
     let task = currentTasks[taskIndex];
-    console.log(jsonIdx);
     if (task.press) {
-        console.log(value);
         if (task.press === value) {
             if (task.conditions) {
                 if (task.conditions.buffer) {
@@ -495,15 +490,10 @@ function completeTask(value) {
         }
     }
     else if (task.shape) { // If shape
-        console.log("in here");
-
         let i = 0;
         let j = 0;
 
         while (j < lathe_pts.length) {
-            // console.log(lathe_pts[j].x);
-            // console.log(task.shape[i].x);
-
             // Calls function to check each of points to determine if right shape cut out
             if (compareCoords(lathe_pts[j], task.shape[i])) { // If pts match, continue
                 i++;
