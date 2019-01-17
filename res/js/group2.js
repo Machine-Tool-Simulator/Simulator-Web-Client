@@ -323,8 +323,6 @@ function switchVideo(action) {
     let description = getById('description');
     let todo = getById('todo');
 
-    console.log('Hello world');
-
     if (action === 'next') {
         // prompt for user id
         if (!userId) userId = prompt('Please enter your ID (same as used on previous page)');
@@ -411,7 +409,7 @@ function PlaylistVideo(action) {
     let description = getById('description');
     let todo = getById('todo');
 
-    if (pageHead > action) {
+    if (pageHead >= action) {
         videoCounter = action;
     } else {
         alert('Can\'t jump to the next task unless you finish all the previous ones');
