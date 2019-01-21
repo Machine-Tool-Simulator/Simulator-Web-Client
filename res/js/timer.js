@@ -11,7 +11,7 @@ function sendReport() {
     if (hasSentReport) return;
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", SERVER_URL, true);
+    xhr.open("POST", SERVER_URL + RT_SUBMIT, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
     	id: userId,
@@ -19,4 +19,13 @@ function sendReport() {
     }));
 
     hasSentReport = true;
+}
+
+function userBegin(id) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", SERVER_URL + RT_BEGIN, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        id: id,
+    }));
 }

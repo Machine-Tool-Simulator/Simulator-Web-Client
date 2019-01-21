@@ -329,6 +329,7 @@ function switchVideo(action) {
         if (!userId) {
             return;
         }
+        userBegin(userId);
 
         if (videoCounter >= videos.length) {	// end of videos
             title.innerHTML = "You are done!\nRefresh the page and practice each again until you are comfortable with each.";
