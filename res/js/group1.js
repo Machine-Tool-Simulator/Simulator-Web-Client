@@ -519,6 +519,12 @@ function completeTask(value) {
     }
 }
 
+function skipTask() {
+    console.log('Skip');
+    currentTasks = null;
+    switchVideo('next');
+}
+
 
 
 
