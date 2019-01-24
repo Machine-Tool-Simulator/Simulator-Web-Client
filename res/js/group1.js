@@ -188,6 +188,8 @@ function resetfunctionbutton() {
     gotoLimitNz = -1000;
     scene.stopAnimation(box);
     stopObserver = 1;
+    XGoTo = 0;
+    ZGoTo = 0;
 }
 
 
