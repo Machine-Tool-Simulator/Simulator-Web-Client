@@ -7,7 +7,8 @@ let box_size = 6; // length of one side of the box
 let bound_limit_z = -15.6; // limit to how far box can go in the z direction
 let bound_limit_x = -20; // limit to how far box can go in the x direction
 let depth_set = 1;
-
+let XGoTo = 0;
+let ZGoTo = 0;
 
 
 /**
@@ -383,6 +384,27 @@ window.addEventListener('DOMContentLoaded', function () {
                     sequenceIdx += 1;
                     console.log(sequence);
                 }
+                if (pressed == "f4btnXbuttonnumButtonAbsSet"){
+
+                    var GoToXPosition = parseFloat(xCoordinate.value)*10;
+                    XGoTo = 1;
+                    if(GoToXPosition>xOrigin){
+                      gotoLimitx = GoToXPosition;
+                    }
+                    else{
+                      gotoLimitNx = GoToXPosition;
+                    }
+                }
+                else if (pressed == "f4btnZbuttonnumButtonAbsSet") {
+                    var GoToZPosition = parseFloat(zCoordinate.value)*10;
+                    ZGoTo =1;
+                    if(GoToZPosition>zOrigin){
+                      gotoLimitz = GoToZPosition;
+                    }
+                    else{
+                      gotoLimitNz = GoToZPosition;
+                    }
+                }
                 //Implement GOTO;
                 if (pressed == "f4btnXbuttonnumButtonAbsSetZbuttonnumButtonAbsSet"
                     || pressed == "f4btnZbuttonnumButtonAbsSetXbuttonnumButtonAbsSet") {
@@ -391,17 +413,17 @@ window.addEventListener('DOMContentLoaded', function () {
                     var GoToXPosition = parseFloat(xCoordinate.value)*10;
                     var GoToZPosition = parseFloat(zCoordinate.value)*10;
 
-                    if(GoToZPosition>zOrigin){
+                    if(GoToZPosition>zOrigin && ZGoTo == 0){
                       gotoLimitz = GoToZPosition;
                     }
-                    else{
+                    else if (GoToZPosition<=zOrigin && ZGoTo == 0){
                       gotoLimitNz = GoToZPosition;
                     }
 
-                    if(GoToXPosition>xOrigin){
+                    if(GoToXPosition>xOrigin && XGoTo == 0){
                       gotoLimitx = GoToXPosition;
                     }
-                    else{
+                    else if (GoToXPosition<=xOrigin && XGoTo == 0){
                       gotoLimitNx = GoToXPosition;
                     }
 
