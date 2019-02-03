@@ -50,6 +50,7 @@
             <p id="todo" class="description"></p>
             <input type="button" class="button" value="Back" onclick="switchVideo('back')" />
             <input type="button" class="button" value="Next" onclick="switchVideo('next')" />
+            <input id="skip" type="button" class="button" value="Skip" onclick="skipTask()"/>
           </div>
 
     </div>
@@ -58,14 +59,12 @@
 
         <canvas id="canvas"></canvas>
 
-        <figure>
-            <svg></svg>
-        </figure>
+        <svg class="svg-container"></svg>
 
         <input type="button" class="button" value="Reset" onclick="reset()"/>
 
-        <input type="button" class="button" value="Skip" onclick="skipTask()"/>
-        <p class="description" style="text-align:center;color:gray;font-size:x-small"><strong>Tips:</strong><br>Select the RESET button above to reset any progress you have made on a page.<br>Click on the simulation and use the WASD keys as the joystick.<br>Drag and scroll on the simulation to adjust the camera.<br>Select the button at the top left to navigate quickly between pages.<br>Contact <a href="mailto:mtoolsim@gmail.com">mtoolsim@gmail.com</a> for any support with this tool.</p>
+
+        <p class="description" style="text-align:center;color:gray;font-size:x-small"><strong>Tips:</strong><br>Select the RESET button above to reset page progress.<br>Click on the simulation and use the WASD keys as the joystick.<br>Drag and scroll on the simulation to adjust the camera.<br>Select the button at the top left to navigate quickly between pages.<br>Contact <a href="mailto:mtoolsim@gmail.com">mtoolsim@gmail.com</a> for any support with this tool.</p>
 
     </div>
 
