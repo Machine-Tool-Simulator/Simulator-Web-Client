@@ -47,6 +47,10 @@ let userId = undefined; // User ID
 /** Initialization */
 window.onload = function () {
 
+    if (mobileOS()) {
+        getById('hamburger').style.visibility = 'hidden';
+    }
+
     xbutton.addEventListener('click', function () {
         resetColors();
         xbutton.style.backgroundColor = 'rgb(0,0,0)';
@@ -527,6 +531,18 @@ function skipTask() {
     switchVideo('next');
 }
 
+function openSidebar() {
+    document.getElementById("main").style.marginLeft = "0%";
+    document.getElementById("mySidebar").style.width = "25%";
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("openNav").style.display = 'none';
+}
+function closeSidebar() {
+    document.getElementById("main").style.marginLeft = "0%";
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("openNav").style.display = "inline-block";
+}
+
 
 
 
@@ -543,4 +559,28 @@ function compareCoords(obj1, obj2) {
 /** Helpers */
 function getById(id) {
     return document.getElementById(id);
+}
+
+function mobileOS() {
+    var useragent = navigator.userAgent;
+
+    if (useragent.match(/Android/i)) {
+        return 'android';
+    } else if (useragent.match(/webOS/i)) {
+        return 'webos';
+    } else if (useragent.match(/iPhone/i)) {
+        return 'iphone';
+    } else if (useragent.match(/iPod/i)) {
+        return 'ipod';
+    } else if (useragent.match(/iPad/i)) {
+        return 'ipad';
+    } else if (useragent.match(/Windows Phone/i)) {
+        return 'windows phone';
+    } else if (useragent.match(/SymbianOS/i)) {
+        return 'symbian';
+    } else if (useragent.match(/RIM/i) || useragent.match(/BB/i)) {
+        return 'blackberry';
+    } else {
+        return false;
+    }
 }
