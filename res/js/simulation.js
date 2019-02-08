@@ -96,6 +96,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 box.actionManager = new BABYLON.ActionManager(scene);
                 box.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                  if (jsonIdx == 4 && currentTasks[taskIndex].click == "box"){
+                    box.material.diffuseColor = BABYLON.Color3.Green();
+                    toolpost.material.diffuseColor = BABYLON.Color3.Green();
+                    tailstock.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                    Chuck1.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+
+                  }
+                  else if (jsonIdx == 4 && currentTasks[taskIndex].click != "box") {
+                    box.material.diffuseColor = BABYLON.Color3.Red();
+                    toolpost.material.diffuseColor = BABYLON.Color3.Red();
+                    tailstock.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                    Chuck1.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                  }
                     completeTask('box');
                 }));
           });
@@ -116,6 +129,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 toolpost.actionManager = new BABYLON.ActionManager(scene);
                   toolpost.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                    if (jsonIdx == 4 && currentTasks[taskIndex].click == "box"){
+                      box.material.diffuseColor = BABYLON.Color3.Green();
+                      toolpost.material.diffuseColor = BABYLON.Color3.Green();
+                      tailstock.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                      Chuck1.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                    }
+                    else if (jsonIdx == 4 && currentTasks[taskIndex].click != "box") {
+                      box.material.diffuseColor = BABYLON.Color3.Red();
+                      toolpost.material.diffuseColor = BABYLON.Color3.Red();
+                      tailstock.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                      Chuck1.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                    }
                       completeTask('box');
                   }));
             });
@@ -301,11 +326,26 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 tailstock.actionManager = new BABYLON.ActionManager(scene);
                 tailstock.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                    if (jsonIdx == 4 && currentTasks[taskIndex].click == "tailstock"){
+                      tailstock.material.diffuseColor = BABYLON.Color3.Green();
+                      Chuck1.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                      toolpost.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                      box.material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+
+                    }
+                    else if (jsonIdx == 4 && currentTasks[taskIndex].click != "tailstock") {
+                      tailstock.material.diffuseColor = BABYLON.Color3.Red();
+                      Chuck1.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                      toolpost.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                      box.material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+                    }
+
                     console.log('tailstock clicked');
                     completeTask('tailstock');
                 }));
 
                 var material = new BABYLON.StandardMaterial("std", scene);
+                //(0.75, 0.75, 0.75)
                 material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
 
                 tailstock.material = material;
@@ -323,6 +363,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
                     Chuck1.actionManager = new BABYLON.ActionManager(scene);
                     Chuck1.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+                      if (jsonIdx == 4 && currentTasks[taskIndex].click == "chuck"){
+                        Chuck1.material.diffuseColor = BABYLON.Color3.Green();
+                        tailstock.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                        toolpost.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                        box.material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+
+                      }
+                      else if (jsonIdx == 4 && currentTasks[taskIndex].click != "chuck") {
+                        Chuck1.material.diffuseColor = BABYLON.Color3.Red();
+                        tailstock.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+                        toolpost.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+                        box.material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+                      }
                         console.log('chuck clicked');
                         completeTask('chuck');
                     }));

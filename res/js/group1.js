@@ -402,6 +402,12 @@ function switchVideo(action) {
     if (videoCounter === 11 || videoCounter === 12) {
         reset();
     }
+    else if (videoCounter ===2 || videoCounter ===4) {
+      Chuck1.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+      tailstock.material.diffuseColor=new BABYLON.Color3(0.75, 0.75, 0.75);
+      toolpost.material.diffuseColor = new BABYLON.Color3(0.75, 0.75, 0.75);
+      box.material.diffuseColor = new BABYLON.Color3(0.8, 1, 0.2);
+    }
     else if (videoCounter === 13) { // this corresponds to the 14th index for the first goto video
         reset(); // reset the shape
         depth_set = 1;
