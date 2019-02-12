@@ -847,12 +847,7 @@ function lathe_engine(delta_x, delta_z) {
  * Code for the D3 wheels
  */
 
-var r = 80;
-var padding = 5;
-var inset = .7;
-var pos_wheel_2 = 200;
-var y_pos = 10;
-var spin_speed = 1;
+
 
 var dragOne = d3.behavior.drag()
     .on('drag', dragOne);
@@ -860,26 +855,41 @@ var dragOne = d3.behavior.drag()
 var dragTwo = d3.behavior.drag()
     .on('drag', dragTwo);
 
+var $container = $('.svg-container'),
+    width = $container.width(),
+    height = $container.height();
+
+var handle_size = width*.025;
+
+var r = height*.48;
+var inset = .7;
+var y_pos = 0;
+var spin_speed = 1;
+
+var pos_wheel_1 = (width*.25-r);
+var pos_wheel_2 = (width*.75-r);
+
+var handle_size = r*.2;
+
 var g = d3.select('svg')
-    .attr({
-        width: 370,
-        height: 190
-    })
-    .append('g')
-    .attr('transform', 'translate(' + (r + padding) + ',' + (r + padding) + ')');
+    .attr('viewBox','0 0 '+width +' '+height )
+    .attr('preserveAspectRatio','xMinYMin')
+    .append("g")
+    .attr('transform', 'translate(' + r + ',' + r + ')');
 
 g.append('circle')
     .attr({
         class: 'outer1',
         r: r,
+        cx: pos_wheel_1,
         cy: y_pos
     });
 
 g.append('circle')
     .attr({
         class: 'rotatable1',
-        r: 15,
-        cx: inset * r * Math.cos(0),
+        r: handle_size,
+        cx: pos_wheel_1 + inset * r * Math.cos(0),
         cy: y_pos + inset * r * Math.sin(0),
     })
     .call(dragOne);
@@ -895,7 +905,7 @@ g.append('circle')
 g.append('circle')
     .attr({
         class: 'rotatable2',
-        r: 15,
+        r: handle_size,
         cx: pos_wheel_2 + inset * r * Math.cos(0),
         cy: y_pos + inset * r * Math.sin(0),
     })
@@ -963,7 +973,7 @@ var rect_xfr_prev_one = 0;
 
 function dragOne() {
     // calculate delta for mouse coordinates
-    var deltaX = d3.event.x;
+    var deltaX = d3.event.x - pos_wheel_1;
     var deltaY = d3.event.y - y_pos;
 
     var rad = Math.atan2(deltaY, deltaX);
@@ -994,7 +1004,7 @@ function dragOne() {
     if (Math.abs(rect_xfr-rect_xfr_prev_one) > .01 && lathe_engine(0, rect_xfr >= rect_xfr_prev_one ? delta : -delta)) {
         d3.select(this)
             .attr({
-                cx: inset * r * Math.cos(rad),
+                cx: inset * r * Math.cos(rad) + pos_wheel_1,
                 cy: y_pos + inset * r * Math.sin(rad)
             });
 
