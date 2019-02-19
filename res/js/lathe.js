@@ -22,8 +22,8 @@ let videos = [
         "index":4,
         "title":"Parts of the Lathe",
         "src":"https://drive.google.com/file/d/11ap4hcucbOaNVDCbi0sh59OPCUD9Yr6o/preview",
-        "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The chuck holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.",
-        "todo":"<hr><strong>Your turn. On the simulation to the right (follow each instruction in order, as written to proceed):</strong><br>In order, select the following parts (ON THE 3D MODEL):<br>1. The tailstock<br>2. The carriage and cutting tool<br>3. The chuck",
+        "text":"The spindle extends into the back of the machine and is what generates the spinning motion. The chuck is attached to the spindle. The chuck is what holds onto the part so that when the spindle spins, the part spins as well. The carriage / toolpost holds onto a cutting tool and allows the cutting tool to move. The tailstock holds onto tools that go along the center axis, such as drill bits, and allows you to drill into the center of the part.",
+        "todo":"<hr><strong>Your turn. On the simulation to the right (follow each instruction in order, as written to proceed):</strong><br>In order, select the following parts (ON THE 3D MODEL):<br>1. The tailstock<br>2. The carriage / toolpost and cutting tool<br>3. The chuck",
         "tasks": [
             {
                 "click": "tailstock"
