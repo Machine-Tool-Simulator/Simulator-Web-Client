@@ -139,6 +139,7 @@ img#redbtn {
       justify-content: space-between;
       /* margin: 4px; */
       margin-bottom: 6%;
+      min-width: 0;
 }
 .readou-button {
   height: 8%;
@@ -152,7 +153,13 @@ img#redbtn {
 
 img#rbtnimg {
     height: 38px;
+    min-width: 0;
 }
+
+button, input {
+    overflow: hidden;
+}
+
 .rbtn{
   background: black;
   border: none;
@@ -169,7 +176,7 @@ input#xvar {
   border-radius: 5px;
   height: 50px;
   width:120px;
-    margin:40% 0 0 0;
+  margin:40% 0 0 0;
 }
 
 input#zvar {
