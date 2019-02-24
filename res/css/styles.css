@@ -98,6 +98,7 @@ img#blogo {
   height: 63%;
   background: black;
   border-radius: 5px;
+  min-width: 0;
 }
 
 img#readout-logo {
@@ -146,7 +147,7 @@ img#redbtn {
   display: flex;
   align-items: center;
   flex-direction: row;
-
+  min-width: 0;
 }
 
 img#rbtnimg {
@@ -160,6 +161,7 @@ img#rbtnimg {
   display: inline-block;
   border-radius: 7px;
   cursor: pointer;
+  min-width: 0;
 }
 
 input#xvar {
