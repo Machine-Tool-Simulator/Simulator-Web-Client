@@ -214,10 +214,6 @@ https://doc.babylonjs.com/how_to/webvr_camera
 In addition, a list of feedback from users has been compiled into the following possible improvements for the web page in the future:
 
 ***High priority***
-* Part highlighting
-    
-    * Make it so the user can click all the parts
-
 * Add alerts for if user does something wrong
     * Want to do more display for when things go wrong
 * Fix grammar in text; split up into sections with better formatting
