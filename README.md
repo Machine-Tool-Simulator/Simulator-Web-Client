@@ -1,4 +1,10 @@
 # Machine Tool Simulator
+
+Final executive summary is [here](https://drive.google.com/file/d/1asjiHTip52URC1OtZtzfzYedl_TPoRtv/view?usp=sharing)
+Final presentation is [here](https://drive.google.com/file/d/1Gqapg8BMfww7YmNsWn6B0FYmWXulgj9G/view?usp=sharing)
+Final report is [here](https://drive.google.com/file/d/1krl80qIfl8FWIimWT900HsaqoJIlVctc/view?usp=sharing)
+
+
 This code repository contains the client codes for the Machine Tool Simulator, which is an interactive learning tool to help the users to learn how to operate the lathe in the Machine Shop in order to be prepared for their future engineering projects.
 
 The learning tool has three parts: (1) a series of videos taken by the team with the Thayer School Machine Shop manager Nicolas Edwards; (2) a 3D interactive simulated lathe which mimics the movement of the real lathe in the machine shop; (3) a controller which allows the users to input different parameters and commands to operate the simulated lathe.
