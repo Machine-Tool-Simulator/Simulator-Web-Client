@@ -10,9 +10,9 @@ iPad Video Demonstration
 Reports
 ----
 
-Final presentation is [here](https://drive.google.com/file/d/1Gqapg8BMfww7YmNsWn6B0FYmWXulgj9G/view?usp=sharing).
+Presentation is [here](https://drive.google.com/file/d/1Gqapg8BMfww7YmNsWn6B0FYmWXulgj9G/view?usp=sharing).
 
-Final report is [here](https://drive.google.com/file/d/1krl80qIfl8FWIimWT900HsaqoJIlVctc/view?usp=sharing).
+Report is [here](https://drive.google.com/file/d/1krl80qIfl8FWIimWT900HsaqoJIlVctc/view?usp=sharing).
 
 Introduction
 ----
