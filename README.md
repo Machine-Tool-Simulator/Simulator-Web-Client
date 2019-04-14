@@ -31,7 +31,7 @@ Usage
 
 Implementation Notes
 ----
-The following image shows an overview of the general structure of our code and the different directories that each of the components fal lunder.  The main webpage can be accessed using the index.html.  Below this image of the directories, another image is shown that displays the dependencies of the different code files on each other.
+The following image shows an overview of the general structure of our code and the different directories that each of the components fall under.  The main webpage can be accessed using the index.html.  Below this image of the directories, another image is shown that displays the dependencies of the different code files on each other.
 
 This image shows the directory structure:
 
@@ -62,7 +62,7 @@ A major part of the course provided by this software is instructional videos and
 
 The 3D simulator is implemented using BabylonJS (see references for more information).  Before choosing BabylonJS, the team had already developed many components in HTML and Javascript.  Using BabylonJS, the team was able to leverage the existing work with the 3D simulation.  In addition, BabylonJS is compatible across browsers and requires minimal overhead for the user.  The 2D wheels for movement were created using D3.
 
-The main files related to the 3D simulation can be found in the js and models folder.  Under the “res” folder, “simulation.js” contains the code that is related to rendering the 3D model, as well as how the different 3D components are to interact with each other.
+The main files related to the 3D simulation can be found in the JS and models folder.  Under the “res” folder, “simulation.js” contains the code that is related to rendering the 3D model, as well as how the different 3D components are to interact with each other.
 
 *BabylonJS Setup*
 
@@ -127,10 +127,10 @@ The HTML codes related to the control simulator are inside the file index.html. 
 </div>
 ```
 
-The CSS code that describes the style of the control simulator are in the style.css file under the Simulator-Web-Client\res\css directory. The Javascript codes that enable interaction between the control simulator and 3D simulator are in the simulation.js file under the Simulator-Web-Client\res\js directory. 
+The CSS code that describes the style of the control simulator are in the style.css file under the Simulator-Web-Client\res\css directory. The Javascript codes that enable interaction between the control simulator and 3D simulator are in the simulation.js file under the Simulator-Web-Client\res\JS directory. 
 
 *Images folder*
-The images that are used to create the control simulator, such as the Proto TrakSLX logo, are inside the Simulator-Web-Client\res\images folder. All of these images are in the PNG format. The PNG format is superior for images with text, such as buttons, icon, logos, and webcomics.
+The images that are used to create the control simulator, such as the Proto TrakSLX logo, are inside the Simulator-Web-Client\res\images folder. All of these images are in the PNG format. The PNG format is superior for images with text, such as buttons, icon, logos, and web comics.
 
 
 *Functions*
@@ -182,7 +182,7 @@ let videos = [
     },
 ];
 ```
-Users’ activity and interaction on screen are tracked and used to determined whether the tasks are completed. Moreover, a “Skip” button is added for users to skip over tasks with which they have difficulties.
+Users’ activity and interaction on screen are tracked and used to determine whether the tasks are completed. Moreover, a “Skip” button is added for users to skip over tasks with which they have difficulties.
 
 Maintenance Steps
 
