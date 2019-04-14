@@ -1,5 +1,7 @@
 # Machine Shop Instruction Tool
 
+![Image](res/imgs/readme/final_screenshot.png)
+
 iPad Video Demonstration
 ----
 
