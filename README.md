@@ -2,9 +2,7 @@
 
 ## iPad Video Demonstration
 
-<figure class="video_container">
-  <iframe src="https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/view" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+<iframe src="https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/preview" width="640" height="480"></iframe>
 
 ## Reports
 
