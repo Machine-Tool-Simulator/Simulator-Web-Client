@@ -24,7 +24,7 @@ The learning tool has three parts: (1) a series of videos taken by the team with
 
 In addition, the learning tool was deliberately designed with gamification mechanism. The users will be prompted with challenges with different difficulty levels and would only processed to the next level if he/ she completes the previous challenge successfully. While the 3D simulated lathe gives the users the freedom to try different cuttings, it also has certain failure states which address the safety concern. For example, the user would not be able to cut the object into half if the cutting edge is too close to the chuck.
 
-However, it is important to know that this learning tool only provides basic knowledge about the lathe for the users. It is only a supplement of the in-shop teaching of the human being instructors, but not a replacement. [license here.] It is the user’s responsibility to follow different Machine Shop’s rules and ensure his/ her safety.
+However, it is important to know that this learning tool only provides basic knowledge about the lathe for the users. It is only a supplement of the in-shop teaching of the human being instructors, but not a replacement. It is the user’s responsibility to follow different Machine Shop’s rules and ensure safety.
 
 
 
