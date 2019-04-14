@@ -34,9 +34,11 @@ Implementation Notes
 The following image shows an overview of the general structure of our code and the different directories that each of the components fal lunder.  The main webpage can be accessed using the index.html.  Below this image of the directories, another image is shown that displays the dependencies of the different code files on each other.
 
 This image shows the directory structure:
+
 ![Image](res/imgs/readme/image5.png)
 
 This image shows a brief overview of the files that index.html (the top level page) depends on.
+
 ![Image](res/imgs/readme/image8.png)
 
 How does this structure implement the picture
