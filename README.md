@@ -1,4 +1,4 @@
-# Machine Tool Simulator
+# Machine Shop Instruction Tool
 
 Final executive summary is [here](https://drive.google.com/file/d/1asjiHTip52URC1OtZtzfzYedl_TPoRtv/view?usp=sharing).
 
