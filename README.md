@@ -1,4 +1,5 @@
 # Machine Shop Instruction Tool
+*by Yuteng Mei, John Sullivan, Tao Wang, and Junfei Yu*
 
 ![Image](res/imgs/readme/final_screenshot.png)
 
