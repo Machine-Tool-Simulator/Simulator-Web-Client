@@ -2,7 +2,7 @@
 
 ## iPad Video Demonstration
 
-[Demeonstration Videoe](https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/veiw)
+[Demonstration Videoe](https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/veiw)
 
 ## Reports
 
