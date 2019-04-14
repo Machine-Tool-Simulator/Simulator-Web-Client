@@ -1,10 +1,12 @@
 # Machine Shop Instruction Tool
 
-## iPad Video Demonstration
+iPad Video Demonstration
+----
 
 [Demonstration Video](https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/view)
 
-## Reports
+Reports
+----
 
 Final presentation is [here](https://drive.google.com/file/d/1Gqapg8BMfww7YmNsWn6B0FYmWXulgj9G/view?usp=sharing).
 
