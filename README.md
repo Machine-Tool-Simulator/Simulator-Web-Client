@@ -2,7 +2,7 @@
 
 ## iPad Video Demonstration
 
-<iframe src="https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/preview" width="640" height="480"></iframe>
+[![Demeonstration Videoe](https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/0.jpg)](https://drive.google.com/file/d/1wyF8H9GCstwyCUIIQnRwZCqioPLVMXhw/preview)
 
 ## Reports
 
