@@ -8,8 +8,6 @@
 
 Final presentation is [here](https://drive.google.com/file/d/1Gqapg8BMfww7YmNsWn6B0FYmWXulgj9G/view?usp=sharing).
 
-Final executive summary is [here](https://drive.google.com/file/d/1asjiHTip52URC1OtZtzfzYedl_TPoRtv/view?usp=sharing).
-
 Final report is [here](https://drive.google.com/file/d/1krl80qIfl8FWIimWT900HsaqoJIlVctc/view?usp=sharing).
 
 Introduction
